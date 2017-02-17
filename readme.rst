@@ -1,4 +1,5 @@
-# CDI Linker Library
+CDI Linker Library
+==================
 
 The **CDI Linker** python library is aimed to identify and link records that belong to the same entity(individual)
 within a single or multiple file. The process is called de-duplication if it is only applied to a single data file.
@@ -10,7 +11,8 @@ The input of the linking code is a linking/de-duplication project which, is defi
 linking/de-duplication steps. De-duplication/Linking projects are defined by json files.
 Below are samples of de-duplication and linking projects :
 
-## De-Duplication Project
+De-Duplication Project
+----------------------
 
 .. code:: JSON
 
@@ -121,16 +123,17 @@ id and the records will be removed from the input file.
 
 The outputs of a de-duplication project are :
 
--  De-duplicated output file with the new ENTITY_ID column. All the records that belong to the same entity will be
+*   De-duplicated output file with the new ENTITY_ID column. All the records that belong to the same entity will be
 assigned same entity id. The file is sorted by entity id.
 
--  De-duplication summary report as a pdf file.
+*   De-duplication summary report as a pdf file.
 
--  De-duplication detailed output that indicates the records are linked and the first step at which they are linked.
+*   De-duplication detailed output that indicates the records are linked and the first step at which they are linked.
 
 
 
-## Linking Project Project
+Linking Project Project
+-----------------------
 
 .. code:: JSON
 
@@ -243,23 +246,25 @@ assigned same entity id. The file is sorted by entity id.
 
 A linking project is defined by:
 
--  Datasets. These are the files to be linked.
+*   Datasets. These are the files to be linked.
 
--  Type of entity relationship. This defines how entities relate to each other:
+*   Type of entity relationship. This defines how entities relate to each other:
 
-  +  1T1 : one-to-one
-  +  1TM: One-to-many
-  +  MT1: many-to-one
+    1. 1T1 : one-to-one
+    2. 1TM: One-to-many
+    3. MT1: many-to-one
 
--  Linking steps
+
+*   Linking steps
 
 Each linking step is defined by:
 
--  Selection of blocking variables. This defines the size of the search space
--  Selection of linking variables. This defines the comparison space
--  Selection of comparison operations to be performed on blocking and linking variables.
+*   Selection of blocking variables. This defines the size of the search space
+*   Selection of linking variables. This defines the comparison space
+*   Selection of comparison operations to be performed on blocking and linking variables.
 
-## Blocking and Linking variables
+Blocking and Linking variables
+------------------------------
 
 In general, a variable could function as a blocking or linking variable or both; this functionality may change from one
 step to another. In order words, a variable could be a blocking variable or a linking variable or both
@@ -270,16 +275,17 @@ a different linking step.
 
 The linking process generates the following output files:
 
--  Linking summary pdf report.
+*   Linking summary pdf report.
 
--  Linked output file. This file contains information about linked entities.
+*   Linked output file. This file contains information about linked entities.
 it also describes the linking step where said entities were linked.
 
--  Matched_but_not_linked file. This file contains information about matched entities that were not linked due to
+*   Matched_but_not_linked file. This file contains information about matched entities that were not linked due to
 conflicts on the type-of-relationship.
 
 
-## Installation and Dependencies
+Installation and Dependencies
+-----------------------------
 
 The **CDI Linker** library depends on NumPy_ (>=1.11.2), Pandas_ (>=0.19.2), jellyfish_ (>=0.5.6), xhtml2pdf_ (>=0.0.6)
 and jinja2_ (>=2.8.1).
@@ -291,7 +297,8 @@ To install the library simply use:
     pip install -e data-linking
 
 
-## How to use
+How to use
+----------
 
 To use the library and run a linking/de-duplication project, you need to create your project json file.
 Having a json project, you can apply the library by :
