@@ -261,16 +261,16 @@ Blocking and Linking variables
 ------------------------------
 
 In general, a variable could function as a blocking or linking variable or both; this functionality may change from one
- step to another; in order words, a variable could be a blocking variable or a linking variable or both
- (e.g., blocking: Soundex of first name; linking: jaro-winkler of first name) within a step
- and this might change in a different linking step.
+step to another. In order words, a variable could be a blocking variable or a linking variable or both
+(e.g., blocking: Soundex of first name; linking: jaro-winkler of first name) within a step and this might change in
+a different linking step.
 
 
 
 The linking process generates the following output files:
 
 -  Linking summary pdf report.
--  Linked output file. This file contains information about linked entities;
+-  Linked output file. This file contains information about linked entities.
 it also describes the linking step where said entities were linked.
 -  Matched_but_not_linked file. This file contains information about matched entities that were not linked due to
 conflicts on the type-of-relationship.
