@@ -125,7 +125,9 @@ The outputs of a de-duplication project are :
 
 -  De-duplicated output file with the new ENTITY_ID column. All the records that belong to the same entity will be
 assigned same entity id. The file is sorted by entity id.
+
 -  De-duplication summary report as a pdf file.
+
 -  De-duplication detailed output that indicates the records are linked and the first step at which they are linked.
 
 
@@ -272,8 +274,10 @@ a different linking step.
 The linking process generates the following output files:
 
 -  Linking summary pdf report.
+
 -  Linked output file. This file contains information about linked entities.
 it also describes the linking step where said entities were linked.
+
 -  Matched_but_not_linked file. This file contains information about matched entities that were not linked due to
 conflicts on the type-of-relationship.
 
