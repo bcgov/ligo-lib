@@ -1,5 +1,4 @@
-import environ
-from jinja2 import Environment, FileSystemLoader, PackageLoader
+from jinja2 import Environment, PackageLoader
 from cdilinker.linker.base import LINKING_RELATIONSHIPS
 
 from xhtml2pdf import pisa
@@ -11,7 +10,6 @@ def generate_linking_summary(data, dest_dir='.'):
     jenv = Environment(loader=PackageLoader('cdilinker.reports', 'templates'))
 
     template = jenv.get_template("linking_summary.html")
-
 
     datasets = [dataset['name'] for dataset in project['datasets']]
     relationship = None
@@ -51,10 +49,9 @@ def generate_linking_summary(data, dest_dir='.'):
 
     html_out = template.render(template_vars)
 
-    report_file = dest_dir + "/" + project['name'] + "_summary.pdf"
+    report_file_name = dest_dir + "/" + project['name'] + "_summary.pdf"
 
-    file = open(report_file, "w+b")
-    pisaStatus = pisa.CreatePDF(html_out.encode('utf-8'), dest=file,
-                                encoding='utf-8')
+    report_file = open(report_file_name, "w+b")
+    pisa.CreatePDF(html_out.encode('utf-8'), dest=report_file, encoding='utf-8')
 
     return project['name'] + "_summary.pdf"

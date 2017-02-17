@@ -1,8 +1,3 @@
-'''
-Inspired by and part of the code is taken from Python Record Linkage repository at:
-https://github.com/J535D165/recordlinkage
-'''
-
 from __future__ import absolute_import
 
 import json
@@ -16,7 +11,6 @@ from cdilinker.reports.report import generate_linking_summary
 
 
 class Step(object):
-
     def __init__(self, seq, left_data, link_method='DTR', output_root='.'):
 
         self.seq = seq
@@ -114,37 +108,19 @@ class Step(object):
                 )
 
                 block_pairs.rename(columns=index_cols, inplace=True)
-                if (self.right_data is None):
+                if self.right_data is None:
                     block_pairs = block_pairs.loc[block_pairs[LinkBase.LEFT_INDEX] < block_pairs[LinkBase.RIGHT_INDEX]]
                 block_pairs = block_pairs.set_index([LinkBase.LEFT_INDEX, LinkBase.RIGHT_INDEX])
 
                 total_pairs += len(block_pairs.index)
                 print "Total record pairs: {0}".format(total_pairs)
-                if (total_pairs > MAX_PAIRS_SIZE):
+                if total_pairs > MAX_PAIRS_SIZE:
                     raise MemoryError(
-                        'Record pairs size is too large. Please revise the blocking rules in step {0}.'.format(self.seq))
+                        'Record pairs size is too large. Please revise the blocking rules in step {0}.'.format(
+                            self.seq))
 
                 _save_pairs(file_path, block_pairs, append)
                 append = True
-                # pairs_list.append(block_pairs)
-
-        # Pair the records in two datasets based on the blocking variables
-        '''
-        pairs = left_df.reset_index().merge(
-            right_df.reset_index(),
-            how='inner',
-            left_on=left_on,
-            right_on=right_on,
-            suffixes=suffixes
-        )
-
-        pairs.rename(columns=index_cols, inplace=True)
-        if (self.right_data is None):
-            pairs = pairs.loc[pairs[LinkBase.LEFT_INDEX] < pairs[LinkBase.RIGHT_INDEX]]
-        pairs = pairs.set_index([LinkBase.LEFT_INDEX, LinkBase.RIGHT_INDEX])
-
-        '''
-
 
     def _compare(self, left, right, compare_fn, **args):
 
@@ -204,8 +180,8 @@ class Step(object):
     def link(self):
         NotImplemented
 
-class LinkStep(Step):
 
+class LinkStep(Step):
     def __init__(self, seq, left_data, right_data, link_method='DTR', output_root='.'):
         super(LinkStep, self).__init__(seq, left_data, link_method=link_method, output_root=output_root)
         self.right_data = right_data
@@ -246,7 +222,6 @@ class LinkStep(Step):
 
 
 class DeDupStep(Step):
-
     def __init__(self, seq, left_data, link_method='DTR', output_root='.'):
         super(DeDupStep, self).__init__(seq, left_data, link_method=link_method, output_root=output_root)
 
@@ -327,10 +302,7 @@ class LinkBase(object):
         NotImplemented
 
 
-
-
 class Linker(LinkBase):
-
     def __init__(self, project):
         super(Linker, self).__init__(project)
         self.matched_not_linked = None
@@ -374,7 +346,6 @@ class Linker(LinkBase):
         self.right_dataset = self.right_dataset.set_index(self.right_dataset.index.rename(LinkBase.RIGHT_INDEX))
         self.right_dataset.rename(columns={datasets[1]['entity_field']: LinkBase.RIGHT_ENTITY_ID}, inplace=True)
 
-
     def run(self):
 
         self.steps = {}
@@ -384,7 +355,8 @@ class Linker(LinkBase):
         for step in self.project['steps']:
             self.steps[step['seq']] = {}
             print "Linking Step {0} :".format(step['seq'])
-            link_step = LinkStep(step['seq'], self.left_dataset, self.right_dataset, 'DTR', output_root=self.project['output_root'])
+            link_step = LinkStep(step['seq'], self.left_dataset, self.right_dataset, 'DTR',
+                                 output_root=self.project['output_root'])
 
             print "{0}.1) Finding record pairs satisfying blocking constraints...".format(step['seq'])
             link_step.get_pairs(
@@ -408,7 +380,8 @@ class Linker(LinkBase):
             self.steps[step['seq']]['total_entities'] = len(link_step.linked.groupby(['LEFT_EID', 'RIGHT_EID']))
             self.total_entities += self.steps[step['seq']]['total_entities']
 
-            left_match = self.left_dataset[self.left_dataset[LinkBase.LEFT_ENTITY_ID].isin(link_step.linked[LinkBase.LEFT_ENTITY_ID])]
+            left_match = self.left_dataset[
+                self.left_dataset[LinkBase.LEFT_ENTITY_ID].isin(link_step.linked[LinkBase.LEFT_ENTITY_ID])]
             linked = pd.merge(
                 left_match.reset_index(),
                 link_step.linked.reset_index(),
@@ -420,7 +393,8 @@ class Linker(LinkBase):
             linked.rename(columns={'LEFT_EID_x': 'LEFT_ENTITY_ID'}, inplace=True)
             linked = linked.sort_values(['LEFT_ENTITY_ID'])
 
-            right_match = self.right_dataset[self.right_dataset[LinkBase.RIGHT_ENTITY_ID].isin(link_step.linked[LinkBase.RIGHT_ENTITY_ID])]
+            right_match = self.right_dataset[
+                self.right_dataset[LinkBase.RIGHT_ENTITY_ID].isin(link_step.linked[LinkBase.RIGHT_ENTITY_ID])]
             linked = pd.merge(
                 linked,
                 right_match.reset_index(),
@@ -432,7 +406,6 @@ class Linker(LinkBase):
             linked.rename(columns={'RIGHT_EID_y': 'RIGHT_ENTITY_ID'}, inplace=True)
             linked = linked.sort_values(['RIGHT_ENTITY_ID'])
 
-
             self.linked = linked if self.linked is None else self.linked.append(linked)
 
             self.steps[step['seq']]['total_matched_not_linked'] = len(link_step.matched_not_linked.index.values)
@@ -442,14 +415,16 @@ class Linker(LinkBase):
             else:
                 self.matched_not_linked = self.matched_not_linked.append(link_step.matched_not_linked)
 
-            self.left_dataset = self.left_dataset[~self.left_dataset[LinkBase.LEFT_ENTITY_ID].isin(link_step.linked[LinkBase.LEFT_ENTITY_ID])]
-            self.right_dataset = self.right_dataset[~self.right_dataset[LinkBase.RIGHT_ENTITY_ID].isin(link_step.linked[LinkBase.RIGHT_ENTITY_ID])]
+            self.left_dataset = self.left_dataset[
+                ~self.left_dataset[LinkBase.LEFT_ENTITY_ID].isin(link_step.linked[LinkBase.LEFT_ENTITY_ID])]
+            self.right_dataset = self.right_dataset[
+                ~self.right_dataset[LinkBase.RIGHT_ENTITY_ID].isin(link_step.linked[LinkBase.RIGHT_ENTITY_ID])]
 
             print "Number of records linked : {0}".format(len(self.linked))
 
-
     def save(self):
-        grouped = self.matched_not_linked.reset_index().groupby(['LEFT_ID', 'RIGHT_ID', 'LEFT_EID', 'RIGHT_EID']).agg({'STEP': 'min'})
+        grouped = self.matched_not_linked.reset_index().groupby(['LEFT_ID', 'RIGHT_ID', 'LEFT_EID', 'RIGHT_EID']).agg(
+            {'STEP': 'min'})
 
         self.matched_not_linked = pd.DataFrame(grouped)
 
@@ -463,9 +438,7 @@ class Linker(LinkBase):
         return generate_linking_summary(self, self.project['output_root'])
 
 
-
 class DeDeupProject(LinkBase):
-
     id = 0
 
     @classmethod
@@ -489,7 +462,6 @@ class DeDeupProject(LinkBase):
 
         return json.dumps(data_dict, indent=4)
 
-
     def _save_linked_data(self, data, append=False):
 
         file_path = self.project['output_root'] + "/" + self.out_filename
@@ -508,12 +480,10 @@ class DeDeupProject(LinkBase):
             print "Dataset header {}".format(self.left_columns)
 
             self.left_dataset = pd.read_csv(dataset['url'],
-                                        index_col=dataset['index_field'],
-                                        usecols=self.left_columns,
-                                        skipinitialspace=True)
+                                            index_col=dataset['index_field'],
+                                            usecols=self.left_columns,
+                                            skipinitialspace=True)
             self.left_dataset = self.left_dataset.set_index(self.left_dataset.index.rename(LinkBase.LEFT_INDEX))
-
-
 
     def run(self):
 
@@ -525,7 +495,8 @@ class DeDeupProject(LinkBase):
         for step in self.project['steps']:
             self.steps[step['seq']] = {}
             print "De-duplication Step {0} :".format(step['seq'])
-            dedup_step = DeDupStep(step['seq'], self.left_dataset, link_method='DTR', output_root= self.project['output_root'])
+            dedup_step = DeDupStep(step['seq'], self.left_dataset, link_method='DTR',
+                                   output_root=self.project['output_root'])
 
             print "{0}.1) Finding record pairs satisfying blocking constraints...".format(step['seq'])
             dedup_step.get_pairs(
@@ -543,10 +514,9 @@ class DeDeupProject(LinkBase):
             match_file_path = self.project['output_root'] + "/matched_temp.csv"
             matched = pd.read_csv(match_file_path, index_col=[LinkBase.LEFT_INDEX, LinkBase.RIGHT_INDEX])
             self.matched = matched if self.matched is None else self.matched.append(matched)
-            self.matched = self.matched.groupby(level=[0,1]).min()
+            self.matched = self.matched.groupby(level=[0, 1]).min()
             self.matched = pd.DataFrame(self.matched)
             if step['group']:
-
                 self.total_records_linked += len(self.matched.index)
                 # Group rows that blong to the same entity and assign entity id
                 result, self.matched = dedup_step.link(self.matched)
@@ -554,8 +524,8 @@ class DeDeupProject(LinkBase):
 
                 total_linked = step_group.size()
 
-                self.total_linked = total_linked if self.total_linked is None else self.total_linked.append(total_linked)
-
+                self.total_linked = total_linked if self.total_linked is None else self.total_linked.append(
+                    total_linked)
 
                 left_cols = Step.get_rows_in(
                     self.left_dataset,
@@ -603,7 +573,7 @@ class DeDeupProject(LinkBase):
         :return:
         """
 
-        #Assign entity id to all remaining records.
+        # Assign entity id to all remaining records.
         for rec_id in self.left_dataset.index.values:
             self.left_dataset.set_value(rec_id, 'ENTITY_ID', DeDeupProject.getNextId())
 
