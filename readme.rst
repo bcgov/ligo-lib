@@ -4,7 +4,7 @@ CDI Linker Library
 The **CDI Linker** python library is aimed to identify and link records that belong to the same entity(individual)
 within a single or multiple file. The process is called de-duplication if it is only applied to a single data file.
 
-This library is inspired by `Python Record Linkage Toolkit <https://github.com/J535D165/recordlinkage>.
+This library is inspired by `Python Record Linkage Toolkit <https://github.com/J535D165/recordlinkage>`__.
 Some of the algorithms and functions are taken from Python Record Linkage Toolkit and are adapted to our linking model.
 
 The input of the linking code is a linking/de-duplication project which, is defined as a sequence of
@@ -259,6 +259,7 @@ Each linking step is defined by:
 
 Blocking and Linking variables
 ------------------------------
+
 In general, a variable could function as a blocking or linking variable or both; this functionality may change from one
  step to another; in order words, a variable could be a blocking variable or a linking variable or both
  (e.g., blocking: Soundex of first name; linking: jaro-winkler of first name) within a step
@@ -278,10 +279,11 @@ conflicts on the type-of-relationship.
 Installation and Dependencies
 -----------------------------
 
-The *CDI Linker* library* depends on NumPy_ (>=1.11.2), Pandas_ (>=0.19.2), jellyfish_ (>=0.5.6), xhtml2pdf_ (>=0.0.6)
+The **CDI Linker* library** depends on NumPy_ (>=1.11.2), Pandas_ (>=0.19.2), jellyfish_ (>=0.5.6), xhtml2pdf_ (>=0.0.6)
 and jinja2_ (>=2.8.1).
 
 To install the library simply use:
+
 .. code:: sh
 
     pip install -e data-linking
