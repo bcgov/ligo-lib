@@ -246,9 +246,11 @@ A linking project is defined by:
 
 -  Datasets. These are the files to be linked.
 -  Type of entity relationship. This defines how entities relate to each other:
+
     1. 1T1 : one-to-one
     2. 1TM: One-to-many
     3. MT1: many-to-one
+
 -  Linking steps
 
 Each linking step is defined by:
@@ -279,7 +281,7 @@ conflicts on the type-of-relationship.
 Installation and Dependencies
 -----------------------------
 
-The **CDI Linker* library** depends on NumPy_ (>=1.11.2), Pandas_ (>=0.19.2), jellyfish_ (>=0.5.6), xhtml2pdf_ (>=0.0.6)
+The **CDI Linker** library depends on NumPy_ (>=1.11.2), Pandas_ (>=0.19.2), jellyfish_ (>=0.5.6), xhtml2pdf_ (>=0.0.6)
 and jinja2_ (>=2.8.1).
 
 To install the library simply use:
