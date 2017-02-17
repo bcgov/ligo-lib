@@ -247,9 +247,9 @@ A linking project is defined by:
 -  Datasets. These are the files to be linked.
 -  Type of entity relationship. This defines how entities relate to each other:
 
-    1. 1T1 : one-to-one
-    2. 1TM: One-to-many
-    3. MT1: many-to-one
+  1. 1T1 : one-to-one
+  2. 1TM: One-to-many
+  3. MT1: many-to-one
 
 -  Linking steps
 
