@@ -107,6 +107,50 @@ def exact(s1, s2):
     return x
 
 
+def match_slice(s1, s2, start=0, end=0):
+    """
+    Compares a slice of the values in the two input series and checks if they are equal.
+    The slice is indicated by the start and end index.
+    :param s1: Left input series
+    :param s2: Right input series
+    :param start: Start index of the text slice
+    :param end: End index of the text slice
+    :return: For each (x,y) pair from two input series, return 1 if the two slices are the same
+            and returns 0 otherwise.
+    """
+    s1 = s1.apply(lambda x: x[start:end] if pd.notnull(x) else np.nan)
+    s2 = s2.apply(lambda x: x[start:end] if pd.notnull(x) else np.nan)
+
+    return exact(s1, s2)
+
+
+def match_head(s1, s2, n):
+    """
+    Compares the first n characters of the two input series and checks if they are equal.
+    :param s1: Left input series
+    :param s2: Right input series
+    :param n: Comparison length
+    :return: For each (x,y) pair from two input series, return 1 if their last n characters are the same
+            and returns 0 otherwise.
+    """
+    return match_slice(s1, s2, start=0, end=n)
+
+
+def match_tail(s1, s2, n):
+    """
+    Compares the last n characters of the two input series and checks if they are equal.
+    :param s1: Left input series
+    :param s2: Right input series
+    :param n: Comparison length
+    :return: For each (x,y) pair from two input series, return 1 if their last n characters are the same
+            and returns 0 otherwise.
+    """
+    s1 = s1.apply(lambda x: x[-n:] if pd.notnull(x) else np.nan)
+    s2 = s2.apply(lambda x: x[-n:] if pd.notnull(x) else np.nan)
+
+    return exact(s1, s2)
+
+
 def abs_diff(s1, s2, method='DTR', threshold=0):
 
     d = pd.Series.abs(s1 - s2)
@@ -148,5 +192,8 @@ LINKING_METHODS = {
     'NYSIIS': nysiis_compare,
     'LEVENSHTEIN': levenshtein_similarity,
     'JARO_WINKLER': jaro_winkler_similarity,
+    'SLICE_MATCH': match_slice,
+    'HEAD_MATCH': match_head,
+    'TAIL_MATCH': match_tail,
     'ABS_DIFF': abs_diff
 }
