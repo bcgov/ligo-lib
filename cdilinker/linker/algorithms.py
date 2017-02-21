@@ -22,7 +22,7 @@ def no_encode(s):
 
 BLOCKING_METHODS = {
     'EXACT': no_encode,
-    'SOUNDEX' : soundex,
+    'SOUNDEX': soundex,
     'NYSIIS': nysiis,
     'MRCODEX': match_rating_codex,
     'METAPHN': metaphone
@@ -38,7 +38,6 @@ def utf_encode(col):
 
 
 def apply_encoding(col, method, encoding='utf8', decode_err='strict'):
-
     col = utf_encode(col)
 
     encoding_alg = BLOCKING_METHODS.get(method, no_encode)
@@ -49,7 +48,6 @@ def apply_encoding(col, method, encoding='utf8', decode_err='strict'):
 
 
 def levenshtein_similarity(s1, s2, method='DTR', max_edits=0):
-
     s1 = utf_encode(s1)
     s2 = utf_encode(s2)
 
@@ -72,7 +70,6 @@ def levenshtein_similarity(s1, s2, method='DTR', max_edits=0):
 
 
 def jaro_winkler_similarity(s1, s2, method='DTR', threshold=1.0):
-
     s1 = utf_encode(s1)
     s2 = utf_encode(s2)
 
@@ -126,7 +123,7 @@ def match_slice(s1, s2, start=0, end=0):
 
 def match_head(s1, s2, n):
     """
-    Compares the first n characters of the two input series and checks if they are equal.
+    Compares the first n characters of the entries in two input series and checks if they are equal.
     :param s1: Left input series
     :param s2: Right input series
     :param n: Comparison length
@@ -138,7 +135,7 @@ def match_head(s1, s2, n):
 
 def match_tail(s1, s2, n):
     """
-    Compares the last n characters of the two input series and checks if they are equal.
+    Compares the last n characters of the entries in two input series and checks if they are equal.
     :param s1: Left input series
     :param s2: Right input series
     :param n: Comparison length
@@ -151,8 +148,39 @@ def match_tail(s1, s2, n):
     return exact(s1, s2)
 
 
-def abs_diff(s1, s2, method='DTR', threshold=0):
+def fixed_len(s1, s2, length=0):
+    """
+    Checks the length of characters of the entries in two input series and compares them with n.
+    :param s1: Left input series
+    :param s2: Right input series
+    :param length: Characters length
+    :return: For each (x,y) pair from two input series, return 1 if both x and y have length n
+            and returns 0 otherwise.
+    """
+    s1 = s1.apply(lambda x: len(x) if pd.notnull(x) else np.nan)
+    s2 = s2.apply(lambda x: len(x) if pd.notnull(x) else np.nan)
+    x = pd.Series(0, index=s1.index)
+    x[(s1 == s2) & (s1 == length)] = 1
 
+    return x
+
+
+def fixed_value(s1, s2, value):
+    """
+    Checks if both entries in s1 and s2 have the same value as the input value.
+    :param s1: Left input series
+    :param s2: Right input series
+    :param value: Comparison value
+    :return: For each (x,y) pair from two input series, return 1 if both x and y have the same value as the input value;
+            returns 0 otherwise.
+    """
+    x = pd.Series(0, index=s1.index)
+    x[(s1 == s2) & (s1 == value)] = 1
+
+    return x
+
+
+def abs_diff(s1, s2, method='DTR', threshold=0):
     d = pd.Series.abs(s1 - s2)
 
     def fn(x, t):
@@ -172,6 +200,7 @@ def soundex_compare(s1, s2):
         otherwise returns 0.
     """
     return exact(apply_encoding(s1, 'SOUNDEX'), apply_encoding(s2, 'SOUNDEX'))
+
 
 def nysiis_compare(s1, s2):
     """
@@ -195,5 +224,7 @@ LINKING_METHODS = {
     'SLICE_MATCH': match_slice,
     'HEAD_MATCH': match_head,
     'TAIL_MATCH': match_tail,
+    'FIXED_LEN': fixed_len,
+    'FIXED_VAL': fixed_value,
     'ABS_DIFF': abs_diff
 }
