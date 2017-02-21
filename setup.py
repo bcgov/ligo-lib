@@ -26,7 +26,8 @@ setup(
         "numpy>=1.11.2",
         "pandas>=0.19.2",
         "xhtml2pdf>=0.0.6",
-        "jinja2>=2.8.1"
+        "jinja2>=2.8.1",
+        "html5lib==1.0b8"
     ],
     include_package_data=True,
     packages=[
