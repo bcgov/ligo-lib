@@ -161,7 +161,7 @@ Linking Project Project
       ],
       "description": "Education JTST data linking",
       "linked_url": "",
-      "output_root": "/Users/khalegh/Projects/cdi/src/linkage/linkage/media/linking",
+      "output_root": "/Projects/cdi/linkage/linking",
       "results_file": "education_jtst_summary.pdf",
       "steps": [
         {
