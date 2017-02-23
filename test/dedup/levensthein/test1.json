@@ -1,0 +1,56 @@
+{
+"status": "COMPLETED",
+"matched_url": "",
+"datasets": [
+{
+"description": "",
+"format": "CSV",
+"url": "data-linking/test/dedup/levensthein/test1.csv"
+"title": "Tets dataset 1",
+"index_field": "RECORD_ID",
+"name": "test1"
+}
+],
+"description": "De-Duplication test case 1",
+"linked_url": "",
+"comments": "",
+"output_root": "data-linking/test/dedup/levensthein/
+"results_file": "test1.pdf"
+"steps": [
+{
+"group": true,
+"seq": 1,
+"blocking_schema": {
+"transformations": [
+"EXACT",
+"EXACT",
+"EXACT",
+"EXACT"
+],
+"left": [
+"BIRTH_DATE",
+"PREF_FAMILY_NAME",
+"COMMUNITY_OR_LOCATION",
+"CANADIAN_POSTAL_CODE"
+]
+},
+"linking_schema": {
+"comparisons": [
+{
+"args": {
+"max_edits": 1
+},
+"name": "LEVENSHTEIN"
+}
+],
+"left": [
+"PREF_FIRST_GIVEN_NAME"
+]
+}
+}
+],
+"type": "DEDUP",
+"linking_method": "DTR",
+"name": "DedupTest1"
+}
+
