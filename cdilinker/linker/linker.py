@@ -217,6 +217,12 @@ class LinkStep(Step):
         self.linked = linked
         self.linked['STEP'] = self.seq
 
+        link_index = self.linked.reset_index()[[LinkBase.LEFT_ENTITY_ID, LinkBase.RIGHT_ENTITY_ID]].drop_duplicates()
+        link_index = link_index.set_index([LinkBase.LEFT_ENTITY_ID, LinkBase.RIGHT_ENTITY_ID])
+        link_index['LINK_ID'] = pd.Series([LinkBase.getNextId() for row in link_index.index], index=link_index.index)
+        self.linked = self.linked.join(link_index,
+                         on=[LinkBase.LEFT_ENTITY_ID, LinkBase.RIGHT_ENTITY_ID],
+                         how='inner')
         self.matched_not_linked = Step.get_rows_not_in(matched, self.linked.index)
         self.matched_not_linked['STEP'] = self.seq
 
@@ -235,7 +241,7 @@ class DeDupStep(Step):
         for left, right in matched.index.values:
             entity_id = linked.loc[left]['ENTITY_ID'] or \
                         linked.loc[right]['ENTITY_ID'] or \
-                        DeDeupProject.getNextId()
+                        LinkBase.getNextId()
 
             linked.set_value(left, 'ENTITY_ID', entity_id)
             linked.set_value(right, 'ENTITY_ID', entity_id)
@@ -252,6 +258,13 @@ class LinkBase(object):
     RIGHT_ENTITY_ID = 'RIGHT_EID'
 
     BLOCK_SIZE = 1000000
+
+    id = 0
+
+    @classmethod
+    def getNextId(cls):
+        cls.id += 1
+        return cls.id
 
     def __init__(self, project):
         self.project = project
@@ -380,8 +393,11 @@ class Linker(LinkBase):
             self.steps[step['seq']]['total_entities'] = len(link_step.linked.groupby(['LEFT_EID', 'RIGHT_EID']))
             self.total_entities += self.steps[step['seq']]['total_entities']
 
-            left_match = self.left_dataset[
-                self.left_dataset[LinkBase.LEFT_ENTITY_ID].isin(link_step.linked[LinkBase.LEFT_ENTITY_ID])]
+            # Cretae EntityID - LinkId map
+            left_links = link_step.linked[[LinkBase.LEFT_ENTITY_ID, 'LINK_ID']].drop_duplicates()
+            left_links = left_links.reset_index().set_index(LinkBase.LEFT_ENTITY_ID)['LINK_ID']
+            left_match = self.left_dataset.join(left_links, on=LinkBase.LEFT_ENTITY_ID, how='inner')
+
             linked = pd.merge(
                 left_match.reset_index(),
                 link_step.linked.reset_index(),
@@ -391,10 +407,11 @@ class Linker(LinkBase):
             linked.drop('LEFT_EID_y', axis=1, inplace=True)
 
             linked.rename(columns={'LEFT_EID_x': 'LEFT_ENTITY_ID'}, inplace=True)
-            linked = linked.sort_values(['LEFT_ENTITY_ID'])
 
-            right_match = self.right_dataset[
-                self.right_dataset[LinkBase.RIGHT_ENTITY_ID].isin(link_step.linked[LinkBase.RIGHT_ENTITY_ID])]
+            right_links = link_step.linked[[LinkBase.RIGHT_ENTITY_ID, 'LINK_ID']].drop_duplicates()
+            right_links = right_links.reset_index().set_index(LinkBase.RIGHT_ENTITY_ID)['LINK_ID']
+            right_match = self.right_dataset.join(right_links, on=LinkBase.RIGHT_ENTITY_ID, how='inner')
+
             linked = pd.merge(
                 linked,
                 right_match.reset_index(),
@@ -403,15 +420,15 @@ class Linker(LinkBase):
             )
             linked.drop('RIGHT_EID_x', axis=1, inplace=True)
 
+            linked.drop(['LINK_ID_x', 'LINK_ID_y'], axis=1, inplace=True)
+
             linked.rename(columns={'RIGHT_EID_y': 'RIGHT_ENTITY_ID'}, inplace=True)
-            linked = linked.sort_values(['RIGHT_ENTITY_ID'])
 
             self.linked = linked if self.linked is None else self.linked.append(linked)
 
             self.steps[step['seq']]['total_matched_not_linked'] = len(link_step.matched_not_linked.index.values)
             if self.matched_not_linked is None:
                 self.matched_not_linked = link_step.matched_not_linked
-                print self.matched_not_linked
             else:
                 self.matched_not_linked = self.matched_not_linked.append(link_step.matched_not_linked)
 
@@ -430,7 +447,8 @@ class Linker(LinkBase):
 
         print "Writing results to the output files ..."
         linked_file_path = self.project['output_root'] + "/linked_data.csv"
-        self.linked.to_csv(linked_file_path)
+        self.linked = self.linked.sort_values(['LINK_ID'])
+        self.linked.to_csv(linked_file_path, index=False)
 
         matched_file_path = self.project['output_root'] + "/matched_not_linked_data.csv"
         self.matched_not_linked.to_csv(matched_file_path)
@@ -439,12 +457,6 @@ class Linker(LinkBase):
 
 
 class DeDeupProject(LinkBase):
-    id = 0
-
-    @classmethod
-    def getNextId(cls):
-        cls.id += 1
-        return cls.id
 
     def __init__(self, name):
         super(DeDeupProject, self).__init__(name)
@@ -575,7 +587,7 @@ class DeDeupProject(LinkBase):
 
         # Assign entity id to all remaining records.
         for rec_id in self.left_dataset.index.values:
-            self.left_dataset.set_value(rec_id, 'ENTITY_ID', DeDeupProject.getNextId())
+            self.left_dataset.set_value(rec_id, 'ENTITY_ID', LinkBase.getNextId())
 
         output = self.linked.append(self.left_dataset)
         output = output.sort(['ENTITY_ID'])
