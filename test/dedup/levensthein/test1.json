@@ -5,7 +5,7 @@
 {
 "description": "",
 "format": "CSV",
-"url": "data-linking/test/dedup/levensthein/test1.csv"
+"url": "test/dedup/levensthein/test1.csv",
 "title": "Tets dataset 1",
 "index_field": "RECORD_ID",
 "name": "test1"
@@ -14,8 +14,8 @@
 "description": "De-Duplication test case 1",
 "linked_url": "",
 "comments": "",
-"output_root": "data-linking/test/dedup/levensthein/
-"results_file": "test1.pdf"
+"output_root": "test/dedup/levensthein/",
+"results_file": "test1.pdf",
 "steps": [
 {
 "group": true,
@@ -51,6 +51,6 @@
 ],
 "type": "DEDUP",
 "linking_method": "DTR",
-"name": "DedupTest1"
+"name": "test1"
 }
 
