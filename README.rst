@@ -1,7 +1,7 @@
 Data Linking Framework
 ======================
 
-This framework is used to define and run de-duplication/linking projects to find and link records that belong to the
+**Data Linking** is a framework for defining and running de-duplication/linking projects to find and link records that belong to the
 same individual(entity) in a single or multiple files.
 
 Features
