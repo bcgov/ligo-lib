@@ -1,0 +1,39 @@
+{% load linking_extras %}
+<table class="table table-striped" style="margin-bottom: 0;">
+    <thead>
+    <tr>
+        <th>Left Variable</th>
+        <th>Transformation</th>
+        <th></th>
+    </tr>
+    </thead>
+    <tbody>
+    {% if form.id.value %}
+        {% for left, alg in  blocking_schema|get_item:form.seq.value %}
+            <tr>
+                <td>
+                    <select id="block_id_left_{{ form_index }}_{{ forloop.counter0 }}" class="left-header form-control"
+                            name="block_id_left_{{ form_index }}_{{ forloop.counter0 }}">
+                        <option value="{{ left }}" selected="selected">left</option>
+                    </select>
+                </td>
+                <td>
+                    <select id="block_comp_{{ form_index }}_{{ forloop.counter0 }}" class="alg form-control"
+                            name="block_comp_{{ form_index }}_{{ forloop.counter0 }}">
+                        <option>------------</option>
+                        {% for item in blocking_transformation_choices %}
+                            <option value="{{ item.0 }}" {% if alg == item.0 %}
+                                    selected="selected" {% endif %}>{{ item.1 }}</option>
+                        {% endfor %}
+                    </select>
+                </td>
+                <td>
+                    <button type="button" class="blocking-var-remove btn btn-danger">
+                        <i class="glyphicon glyphicon-remove"></i>
+                    </button>
+                </td>
+            </tr>
+        {% endfor %}
+    {% endif %}
+    </tbody>
+</table>
