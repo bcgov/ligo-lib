@@ -22,9 +22,6 @@ The following environment variables are required for project settings:
     - LINKING_OUTPUT_URL : Path to linking output directory
     - DJANGO_DEBUG : True/False, Toggles debug mode
 
-Moved to settings_.
-
-.. _settings: http://cookiecutter-django.readthedocs.io/en/latest/settings.html
 
 Basic Commands
 --------------
