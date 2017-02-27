@@ -72,7 +72,7 @@ class DatasetUpdateView(LoginRequiredMixin, UpdateView):
             data['data_types'] = self.object.data_types
             data['COPLUMN_TYPES'] = COPLUMN_TYPES
             previewer = get_preview(self.object.url, 'csv')
-            result = previewer.preview('head', 5)
+            result = previewer.preview('head', 4)
             data['columns'] = result['header']
             data['types'] = result['types']
             data['records'] = result['rows']

@@ -51,14 +51,14 @@
                 <div class="col-sm-12">
                     <table id="header-type-table" class="table table-bordered">
                         <thead>
-                            <th>Field Name</th>
+                            <th class="col-md-2">Field Name</th>
                             <th class="col-md-2">Field Type</th>
-                            <th colspan="5">Sample Data</th>
+                            <th colspan="4">Sample Data</th>
                         </thead>
                         <tbody>
                         {% for field in columns %}
                             <tr>
-                                <th>{{ field }}</th>
+                                <th class="col-md-2">{{ field }}</th>
                                 <td>
                                     <select class="data-type form-control" id="{{ field }}_dtype">
                                     <option value=""></option>
