@@ -14,6 +14,14 @@ A web application for linking multiple datasets.
 Settings
 --------
 
+The following environment variables are required for project settings:
+    - DJANGO_SECRET_KEY : Django installation secret key.
+    - DATABASE_URL : postgres://<user>:<password>@<host>:<port>/linkage
+    - CELERY_BROKER_URL : For example, redis://localhost:6379/0
+    - LINKING_DATASTORE_URL : Path to dataset store directory
+    - LINKING_OUTPUT_URL : Path to linking output directory
+    - DJANGO_DEBUG : True/False, Toggles debug mode
+
 Moved to settings_.
 
 .. _settings: http://cookiecutter-django.readthedocs.io/en/latest/settings.html
@@ -59,27 +67,29 @@ Moved to `Live reloading and SASS compilation`_.
 
 
 
-Sentry
-^^^^^^
-
-Sentry is an error logging aggregator service. You can sign up for a free account at  https://sentry.io/signup/?code=cookiecutter  or download and host it yourself.
-The system is setup with reasonable defaults, including 404 logging and integration with the WSGI application.
-
-You must set the DSN url in production.
-
-
 Deployment
 ----------
 
-The following details how to deploy this application.
+Database Migration :
+^^^^^^^^^^^^^^^^^^^^
+
+linking web application uses postgresql linkage database for managing datasets and linking projects.
 
 
+To migrate database, on the application root directory run :
 
-Docker
+.. code:: python
+    python manage.py migrate
+
+
+Celery
 ^^^^^^
 
-See detailed `cookiecutter-django Docker documentation`_.
+The web application uses Celery to run linking jobs asynchronously. You need to setup a Celery broker like Redis or
+RabitMQ and start a Celery worker.
 
-.. _`cookiecutter-django Docker documentation`: http://cookiecutter-django.readthedocs.io/en/latest/deployment-with-docker.html
+The Celery broker is provided by CELERY_BROKER_URL environment variable. To start a Celery worker use:
 
+.. code:: sh
+    celery -A linkage worker --loglevel=INFO
 
