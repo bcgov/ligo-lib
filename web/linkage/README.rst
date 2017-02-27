@@ -56,7 +56,7 @@ Celery
 ^^^^^^
 
 The web application uses Celery to run linking jobs asynchronously. You need to setup a Celery broker like Redis or
-RabitMQ and start a Celery worker.
+RabbitMQ and start a Celery worker.
 
 The Celery broker is provided by CELERY_BROKER_URL environment variable. To start a Celery worker use:
 
