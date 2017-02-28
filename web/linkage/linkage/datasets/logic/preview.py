@@ -80,6 +80,7 @@ class CSV_Previewer(Previewer):
         skip_list = np.asarray(skip_list)
         # MAX >= number of rows in the file
         skip_mask = np.zeros(self.row_count + 1, dtype=bool)
+        skip_mask[skip_list] = skip_mask[skip_list].astype(np.int64)
         skip_mask[skip_list] = True
 
         #result = load_with_buffer(file_path, skip_mask)
