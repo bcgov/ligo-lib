@@ -222,8 +222,8 @@ class LinkStep(Step):
         link_index['LINK_ID'] = pd.Series([LinkBase.getNextId() for row in link_index.index], index=link_index.index)
         link_index['LINK_ID'] = link_index['LINK_ID'].astype(int)
         self.linked = self.linked.join(link_index,
-                         on=[LinkBase.LEFT_ENTITY_ID, LinkBase.RIGHT_ENTITY_ID],
-                         how='inner')
+                                       on=[LinkBase.LEFT_ENTITY_ID, LinkBase.RIGHT_ENTITY_ID],
+                                       how='inner')
         self.matched_not_linked = Step.get_rows_not_in(matched, self.linked.index)
         self.matched_not_linked['STEP'] = self.seq
 
@@ -343,17 +343,23 @@ class Linker(LinkBase):
     def load(self):
         super(Linker, self).load()
         datasets = self.project['datasets']
-        left_dtypes = {}
-        right_dtypes = {}
         if datasets and len(datasets) > 1:
             self.left_columns += [datasets[0]['index_field'], datasets[0]['entity_field']]
             self.right_columns += [datasets[1]['index_field'], datasets[1]['entity_field']]
 
-            for col_name, col_type in datasets[0]["data_types"].iteritems():
-                left_dtypes[col_name] = COLUMN_TYPES[col_type]
+            if 'data_types' in datasets[0]:
+                left_dtypes = {}
+                for col_name, col_type in datasets[0]["data_types"].iteritems():
+                    left_dtypes[col_name] = COLUMN_TYPES[col_type]
+            else:
+                left_dtypes = None
 
-            for col_name, col_type in datasets[1]["data_types"].iteritems():
-                right_dtypes[col_name] = COLUMN_TYPES[col_type]
+            if 'data_types' in datasets[1]:
+                right_dtypes = {}
+                for col_name, col_type in datasets[1]["data_types"].iteritems():
+                    right_dtypes[col_name] = COLUMN_TYPES[col_type]
+            else:
+                right_dtypes = None
 
         self.left_dataset = pd.read_csv(datasets[0]['url'],
                                         index_col=datasets[0]['index_field'],
@@ -486,7 +492,6 @@ class Linker(LinkBase):
 
 
 class DeDeupProject(LinkBase):
-
     def __init__(self, name):
         super(DeDeupProject, self).__init__(name)
         self.matched = None
@@ -514,14 +519,16 @@ class DeDeupProject(LinkBase):
 
     def load(self):
         super(DeDeupProject, self).load()
-        left_dtypes = {}
         if self.project['datasets'] and len(self.project['datasets']) > 0:
             dataset = self.project['datasets'][0]
             self.left_columns.append(dataset['index_field'])
 
-            for col_name, col_type in dataset["data_types"].iteritems():
-                left_dtypes[col_name] = COLUMN_TYPES[col_type]
-
+            if 'data_types' in dataset:
+                left_dtypes = {}
+                for col_name, col_type in dataset["data_types"].iteritems():
+                    left_dtypes[col_name] = COLUMN_TYPES[col_type]
+            else:
+                left_dtypes = None
 
             print "Dataset header {}".format(self.left_columns)
 
