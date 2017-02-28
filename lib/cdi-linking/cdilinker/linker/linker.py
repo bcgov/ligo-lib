@@ -220,7 +220,10 @@ class LinkStep(Step):
         link_index = self.linked.reset_index()[[LinkBase.LEFT_ENTITY_ID, LinkBase.RIGHT_ENTITY_ID]].drop_duplicates()
         link_index = link_index.set_index([LinkBase.LEFT_ENTITY_ID, LinkBase.RIGHT_ENTITY_ID])
         link_index['LINK_ID'] = pd.Series([LinkBase.getNextId() for row in link_index.index], index=link_index.index)
-        link_index['LINK_ID'] = link_index['LINK_ID'].astype(int)
+        link_index['LINK_ID'] = link_index['LINK_ID'].map(
+            lambda x: '{:.0f}'.format(x)
+            if pd.notnull(x)
+            else np.nan)
         self.linked = self.linked.join(link_index,
                                        on=[LinkBase.LEFT_ENTITY_ID, LinkBase.RIGHT_ENTITY_ID],
                                        how='inner')
@@ -238,7 +241,10 @@ class DeDupStep(Step):
         link_index = left_index.union(right_index)
         link_index = link_index.rename('REC_ID')
         linked = pd.DataFrame(columns=['ENTITY_ID'], index=link_index)
-        linked['ENTITY_ID'] = linked['ENTITY_ID'].astype(int)
+        linked['ENTITY_ID'] = linked['ENTITY_ID'].map(
+            lambda x: '{:.0f}'.format(x)
+            if pd.notnull(x)
+            else np.nan)
         linked['ENTITY_ID'].fillna(0, inplace=True)
         for left, right in matched.index.values:
             entity_id = linked.loc[left]['ENTITY_ID'] or \
@@ -645,7 +651,10 @@ class DeDeupProject(LinkBase):
         self.total_entities = len(output.groupby(['ENTITY_ID']))
         file_path = self.project['output_root'] + self.deduped_filename
 
-        result['ENTITY_ID'] = result['ENTITY_ID'].astype(int)
+        result['ENTITY_ID'] = result['ENTITY_ID'].map(
+            lambda x: '{:.0f}'.format(x)
+            if pd.notnull(x)
+            else np.nan)
 
         result.to_csv(file_path, index_label=dataset['index_field'], header=True, index=True)
 
