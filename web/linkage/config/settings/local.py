@@ -25,7 +25,7 @@ TEMPLATES[0]['OPTIONS']['debug'] = DEBUG
 # Note: This key only used for development and testing.
 SECRET_KEY = env('DJANGO_SECRET_KEY', default='vzqpz#bo&^l)=s%9e=%08i(!7v(zswd+0=36%sp#&ftb2jzv2s')
 
-ALLOWED_HOSTS = ['localhost', '127.0.0.1', '[::1]']
+ALLOWED_HOSTS = ['localhost', '127.0.0.1', '[::1]', 'services-secure-area', 'proof-dev-services-secure-area.canadacentral.cloudapp.azure.com']
 
 # Mail settings
 # ------------------------------------------------------------------------------
