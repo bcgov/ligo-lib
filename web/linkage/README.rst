@@ -49,7 +49,9 @@ linking web application uses postgresql linkage database for managing datasets a
 To migrate database, on the application root directory run :
 
 .. code:: python
+
     python manage.py migrate
+
 
 
 Celery
@@ -61,5 +63,6 @@ RabbitMQ and start a Celery worker.
 The Celery broker is provided by CELERY_BROKER_URL environment variable. To start a Celery worker use:
 
 .. code:: sh
+
     celery -A linkage worker --loglevel=INFO
 
