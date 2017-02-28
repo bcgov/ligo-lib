@@ -84,7 +84,7 @@ class CSV_Previewer(Previewer):
 
         #result = load_with_buffer(file_path, skip_mask)
         result = pd.read_csv(file_path, skiprows=skip_list, skipinitialspace=True)
-
+        result = result.replace(np.nan, '', regex=True)
         header_types = {}
 
         for (key, value) in result.dtypes.iteritems():
