@@ -47,37 +47,36 @@
                     <div class="preview col-sm-9">
                         {{ form.entity_field }}
                     </div>
-                {% endif %}
-                <div class="col-sm-12">
-                    <table id="header-type-table" class="table table-bordered">
-                        <thead>
-                            <th class="col-md-2">Field Name</th>
-                            <th class="col-md-2">Field Type</th>
-                            <th colspan="4">Sample Data</th>
-                        </thead>
-                        <tbody>
-                        {% for field in columns %}
-                            <tr>
-                                <th class="col-md-2">{{ field }}</th>
-                                <td>
-                                    <select class="data-type form-control" id="{{ field }}_dtype">
-                                    <option value=""></option>
-                                        {% for type in COPLUMN_TYPES %}
-                                            <option value="{{ type.0 }}">{{ type.1 }}</option>
+                    <div class="col-sm-12">
+                        <table id="header-type-table" class="table table-bordered">
+                            <thead>
+                                <th class="col-md-2">Field Name</th>
+                                <th class="col-md-2">Field Type</th>
+                                <th colspan="4">Sample Data</th>
+                            </thead>
+                            <tbody>
+                            {% for field in columns %}
+                                <tr>
+                                    <th class="col-md-2">{{ field }}</th>
+                                    <td>
+                                        <select class="data-type form-control" id="{{ field }}_dtype">
+                                        <option value=""></option>
+                                            {% for type in COPLUMN_TYPES %}
+                                                <option value="{{ type.0 }}">{{ type.1 }}</option>
+                                            {% endfor %}
+                                        </select>
+                                    </td>
+                                    {%  with index=forloop.counter0 %}
+                                        {% for row in records %}
+                                            <td>{{ row|get_cell:index }}</td>
                                         {% endfor %}
-                                    </select>
-                                </td>
-                                {%  with index=forloop.counter0 %}
-                                    {% for row in records %}
-                                        <td>{{ row|get_cell:index }}</td>
-                                    {% endfor %}
-                                {% endwith %}
-                            </tr>
-                        {% endfor %}
-                        </tbody>
-                    </table>
-                </div>
-
+                                    {% endwith %}
+                                </tr>
+                            {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                {% endif %}
                 <div class="form-group preview col-sm-12">
                     <button type="submit" class="btn btn-primary">Save</button>
                 </div>
