@@ -40,6 +40,22 @@ For convenience, you can keep your normal user logged in on Chrome and your supe
 Deployment
 ----------
 
+Installing dependencies:
+^^^^^^^^^^^^^^^^^^^^^^^
+
+Use the following command in application root directory to install all required python libraries:
+
+.. code:: sh
+
+    pip install -r /requirements/local.txt
+
+For production env use ;
+
+.. code:: sh
+
+    pip install -r /requirements/production.txt
+
+
 Database Migration :
 ^^^^^^^^^^^^^^^^^^^^
 
