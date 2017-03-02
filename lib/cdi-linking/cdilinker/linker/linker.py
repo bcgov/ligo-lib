@@ -418,36 +418,39 @@ class Linker(LinkBase):
             self.steps[step['seq']]['total_entities'] = len(link_step.linked.groupby(['LEFT_EID', 'RIGHT_EID']))
             self.total_entities += self.steps[step['seq']]['total_entities']
 
-            # Cretae EntityID - LinkId map
-            left_links = link_step.linked[[LinkBase.LEFT_ENTITY_ID, 'LINK_ID']].drop_duplicates()
-            left_links = left_links.reset_index().set_index(LinkBase.LEFT_ENTITY_ID)['LINK_ID']
-            left_match = self.left_dataset.join(left_links, on=LinkBase.LEFT_ENTITY_ID, how='inner')
+            if not link_step.linked.empty:
+                # Cretae EntityID - LinkId map
+                left_links = link_step.linked[[LinkBase.LEFT_ENTITY_ID, 'LINK_ID']].drop_duplicates()
+                left_links = left_links.reset_index().set_index(LinkBase.LEFT_ENTITY_ID)['LINK_ID']
+                left_match = self.left_dataset.join(left_links, on=LinkBase.LEFT_ENTITY_ID, how='inner')
 
-            linked = pd.merge(
-                left_match.reset_index(),
-                link_step.linked.reset_index(),
-                on=LinkBase.LEFT_INDEX,
-                how='left'
-            )
-            linked.drop('LEFT_EID_y', axis=1, inplace=True)
+                linked = pd.merge(
+                    left_match.reset_index(),
+                    link_step.linked.reset_index(),
+                    on=LinkBase.LEFT_INDEX,
+                    how='left'
+                )
+                linked.drop('LEFT_EID_y', axis=1, inplace=True)
 
-            linked.rename(columns={'LEFT_EID_x': 'LEFT_ENTITY_ID'}, inplace=True)
+                linked.rename(columns={'LEFT_EID_x': 'LEFT_ENTITY_ID'}, inplace=True)
 
-            right_links = link_step.linked[[LinkBase.RIGHT_ENTITY_ID, 'LINK_ID']].drop_duplicates()
-            right_links = right_links.reset_index().set_index(LinkBase.RIGHT_ENTITY_ID)['LINK_ID']
-            right_match = self.right_dataset.join(right_links, on=LinkBase.RIGHT_ENTITY_ID, how='inner')
+                right_links = link_step.linked[[LinkBase.RIGHT_ENTITY_ID, 'LINK_ID']].drop_duplicates()
+                right_links = right_links.reset_index().set_index(LinkBase.RIGHT_ENTITY_ID)['LINK_ID']
+                right_match = self.right_dataset.join(right_links, on=LinkBase.RIGHT_ENTITY_ID, how='inner')
 
-            linked = pd.merge(
-                linked,
-                right_match.reset_index(),
-                on=LinkBase.RIGHT_INDEX,
-                how='right'
-            )
-            linked.drop('RIGHT_EID_x', axis=1, inplace=True)
+                linked = pd.merge(
+                    linked,
+                    right_match.reset_index(),
+                    on=LinkBase.RIGHT_INDEX,
+                    how='right'
+                )
+                linked.drop('RIGHT_EID_x', axis=1, inplace=True)
 
-            linked.drop(['LINK_ID_x', 'LINK_ID_y'], axis=1, inplace=True)
+                linked.drop(['LINK_ID_x', 'LINK_ID_y'], axis=1, inplace=True)
 
-            linked.rename(columns={'RIGHT_EID_y': 'RIGHT_ENTITY_ID'}, inplace=True)
+                linked.rename(columns={'RIGHT_EID_y': 'RIGHT_ENTITY_ID'}, inplace=True)
+            else:
+                linked = pd.DataFrame()
 
             self.linked = linked if self.linked is None else self.linked.append(linked)
 
