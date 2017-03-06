@@ -1,0 +1,53 @@
+{
+"status": "COMPLETED",
+"matched_url": "",
+"datasets": [
+{
+"description": "",
+"format": "CSV",
+"url": "test/dedup/soundex/test1.csv",
+"title": "Tets dataset 1",
+"index_field": "INGESTION_ID",
+"name": "test1"
+}
+],
+"description": "De-Duplication test case 1",
+"linked_url": "",
+"comments": "",
+"output_root": "test/dedup/soundex/",
+"results_file": "test1.pdf",
+"steps": [
+{
+"group": true,
+"seq": 1,
+"blocking_schema": {
+"transformations": [
+"EXACT",
+"EXACT",
+"EXACT",
+"EXACT"
+],
+"left": [
+"BIRTH_DATE",
+"PREF_FAMILY_NAME",
+"COMMUNITY_OR_LOCATION",
+"CANADIAN_POSTAL_CODE"
+]
+},
+"linking_schema": {
+"comparisons": [
+{
+"name": "SOUNDEX"
+}
+],
+"left": [
+"PREF_FIRST_GIVEN_NAME"
+]
+}
+}
+],
+"type": "DEDUP",
+"linking_method": "DTR",
+"name": "test1"
+}
+
