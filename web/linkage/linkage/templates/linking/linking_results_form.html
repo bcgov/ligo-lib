@@ -1,0 +1,12 @@
+<div id="selected-columns" class="container-fluid">
+    <h4 id="left-columns-title"></h4>
+    {{ form.left_columns }}
+    <div id="selected_left_columns" class="row">
+    </div>
+    {% if type == 'LINK' %}
+        {{ form.right_columns }}
+        <h4 id="right-columns-title"></h4>
+        <div id="selected_right_columns" class="row">
+        </div>
+    {% endif %}
+</div>

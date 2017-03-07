@@ -38,7 +38,9 @@
        var right_data_id = "{{ form.right_data.id_for_label }}";
        var DATASET_COLUMNS_URL = "{% url 'datasets:header' %}";
        var COMPARISON_ARGS = JSON.parse('{{ comparison_args | jsonify }}');
+       var rightColumns = JSON.parse('{{ form.right_columns.value | jsonify }}') || [];
        header_options[right_data_id] = '';
+       var required_right = JSON.parse('{{ required_right  | jsonify }}') || [];
     </script>
     <script src="{% static 'js/linking/link_form.js' %}"></script>
 {% endblock %}
