@@ -59,6 +59,7 @@ COMPARISON_ARGS = {
 
 
 PROJECT_STATUS = (
+    ('DRAFT', 'DRAFT'),
     ('READY', 'Ready'),
     ('RUNNING', 'In Progress'),
     ('COMPLETED', 'Completed'),
@@ -76,7 +77,7 @@ class LinkingProject(models.Model):
     matched_url = models.URLField(_('Matched but not linked records file'))
     results_file = models.CharField(_('Project summary file'), max_length=255, blank=True)
     datasets = models.ManyToManyField(Dataset, through='LinkingDataset')
-    status = models.CharField(_('Project Status'), max_length=10, choices=PROJECT_STATUS, default='READY')
+    status = models.CharField(_('Project Status'), max_length=10, choices=PROJECT_STATUS, default='DRAFT')
     comments = models.TextField(_('Comments'), blank=True)
 
     def __str__(self):
@@ -89,6 +90,7 @@ class LinkingDataset(models.Model):
     dataset = models.ForeignKey(Dataset, on_delete=models.CASCADE)
     link_project = models.ForeignKey(LinkingProject, on_delete=models.CASCADE)
     link_seq = models.IntegerField()
+    columns = JSONField(blank=True, null=True)
 
     class Meta:
         ordering = ['link_seq']

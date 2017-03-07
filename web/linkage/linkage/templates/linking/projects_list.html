@@ -16,7 +16,7 @@
             <td class="type-cell">{{ project.type }}</td>
             <td class="status-cell">{{ project.status }}</td>
             <td class="exec-cell">
-                {% if project.status != 'RUNNING' %}
+                {% if project.status != 'RUNNING' and project.status != 'DRAFT' %}
                     <a class="project-exec" href="{% url 'linking:exec'  project.name %}" data-toggle="tooltip" title="Run Project">
                         <i class="glyphicon glyphicon-play-circle"></i>
                     </a>
@@ -26,9 +26,11 @@
                         <i class="glyphicon glyphicon-equalizer"></i>
                     </a>
                 {% endif %}
-                <a href="{% url 'linking:export'  project.name %}" data-toggle="tooltip" title="Export to JSON">
-                    <i class="glyphicon glyphicon-export"></i>
-                </a>
+                {% if project.status != 'DRAFT' %}
+                    <a href="{% url 'linking:export'  project.name %}" data-toggle="tooltip" title="Export to JSON">
+                        <i class="glyphicon glyphicon-export"></i>
+                    </a>
+                {% endif %}
             </td>
             <td class="action-cell">
                 <a href="{% url 'linking:edit'  project.type project.name %}" data-toggle="tooltip" title="Edit Project">

@@ -1,10 +1,9 @@
 $(function () {
-    getHeader(right_data_id, 'right-header');
-
+    getRightHeader();
 });
 
 $("#" + right_data_id).change(function() {
-    getHeader(right_data_id, 'right-header');
+    getRightHeader();
 });
 
 
