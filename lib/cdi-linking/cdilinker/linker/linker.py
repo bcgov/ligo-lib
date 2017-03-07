@@ -147,6 +147,7 @@ class Step(object):
         match_file_path = self.output_root + "matched_temp.csv"
         for pairs in pd.read_csv(pairs_file_path, index_col=[LinkBase.LEFT_INDEX, LinkBase.RIGHT_INDEX],
                                  chunksize=CHUNK_SIZE):
+
             self.pairs = pairs.index
             if LinkBase.LEFT_ENTITY_ID in pairs.columns and LinkBase.RIGHT_ENTITY_ID in pairs.columns:
                 paired = pairs[[LinkBase.LEFT_ENTITY_ID, LinkBase.RIGHT_ENTITY_ID]]
@@ -327,6 +328,8 @@ class Linker(LinkBase):
     def __init__(self, project):
         super(Linker, self).__init__(project)
         self.matched_not_linked = None
+        self.left_index_type = "object"
+        self.right_index_type = "object"
 
     def __str__(self):
 
@@ -350,6 +353,8 @@ class Linker(LinkBase):
         super(Linker, self).load()
         datasets = self.project['datasets']
         if datasets and len(datasets) > 1:
+
+
             self.left_columns += [datasets[0]['index_field'], datasets[0]['entity_field']]
             self.right_columns += [datasets[1]['index_field'], datasets[1]['entity_field']]
 
@@ -366,6 +371,9 @@ class Linker(LinkBase):
                     right_dtypes[col_name] = COLUMN_TYPES[col_type]
             else:
                 right_dtypes = None
+
+        self.left_index_type = left_dtypes[datasets[0]['index_field']]
+        self.right_index_type = right_dtypes[datasets[1]['index_field']]
 
         self.left_dataset = pd.read_csv(datasets[0]['url'],
                                         index_col=datasets[0]['index_field'],
@@ -444,6 +452,7 @@ class Linker(LinkBase):
                     on=LinkBase.RIGHT_INDEX,
                     how='right'
                 )
+
                 linked.drop('RIGHT_EID_x', axis=1, inplace=True)
 
                 linked.drop(['LINK_ID_x', 'LINK_ID_y'], axis=1, inplace=True)
@@ -490,6 +499,19 @@ class Linker(LinkBase):
             lambda x: '{:.0f}'.format(x)
             if pd.notnull(x)
             else np.nan)
+
+        if np.issubdtype(self.left_index_type, np.integer):
+            self.linked[LinkBase.LEFT_INDEX] = self.linked[LinkBase.LEFT_INDEX].map(
+                lambda x: '{:.0f}'.format(x)
+                if pd.notnull(x)
+                else np.nan)
+
+        if np.issubdtype(self.right_index_type, np.integer):
+            self.linked[LinkBase.RIGHT_INDEX] = self.linked[LinkBase.RIGHT_INDEX].map(
+                lambda x: '{:.0f}'.format(x)
+                if pd.notnull(x)
+                else np.nan)
+
 
         self.linked = self.linked.sort_values(['LINK_ID'])
         self.linked.to_csv(linked_file_path, index=False)
