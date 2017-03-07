@@ -367,14 +367,16 @@ class Linker(LinkBase):
             else:
                 right_dtypes = None
 
+        left_usecols = datasets[0]['columns'] or self.left_columns
         self.left_dataset = pd.read_csv(datasets[0]['url'],
                                         index_col=datasets[0]['index_field'],
-                                        usecols=self.left_columns,
+                                        usecols=left_usecols,
                                         skipinitialspace=True,
                                         dtype=left_dtypes)
+        right_usecols = datasets[1]['columns'] or self.right_columns
         self.right_dataset = pd.read_csv(datasets[1]['url'],
                                          index_col=datasets[1]['index_field'],
-                                         usecols=self.right_columns,
+                                         usecols=right_usecols,
                                          skipinitialspace=True,
                                          dtype=right_dtypes)
 
@@ -541,9 +543,10 @@ class DeDeupProject(LinkBase):
 
             print "Dataset header {}".format(self.left_columns)
 
+            usecols = dataset['columns'] or self.left_columns
             self.left_dataset = pd.read_csv(dataset['url'],
                                             index_col=dataset['index_field'],
-                                            usecols=self.left_columns,
+                                            usecols=usecols,
                                             skipinitialspace=True,
                                             dtype=left_dtypes)
 
@@ -644,9 +647,10 @@ class DeDeupProject(LinkBase):
         output = self.linked.append(self.left_dataset)
         output = output.sort(['ENTITY_ID'])
 
-        dataset = self.project['datasets'][0]
+        dataset = self.project['datasets'][0] or self.left_columns
         self.left_dataset = pd.read_csv(dataset['url'],
                                         index_col=dataset['index_field'],
+                                        usecols=dataset['columns'],
                                         skipinitialspace=True)
 
         result = pd.concat([self.left_dataset, output['ENTITY_ID']], axis=1, join='inner')
