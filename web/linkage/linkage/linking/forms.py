@@ -1,6 +1,8 @@
+import json
 from django import forms
 from django.forms.models import inlineformset_factory
 from django.forms import (ModelForm,
+                          CharField,
                           Textarea,
                           TextInput,
                           Select,
@@ -26,18 +28,20 @@ class ProjectTypeForm(forms.Form):
 class ProjectForm(ModelForm):
     left_data = ModelChoiceField(queryset=Dataset.objects.all(), label='Left',
                                  widget=Select(attrs={'class': 'form-control'}))
+    left_columns = CharField(widget=HiddenInput(), required=False)
 
     class Meta:
         model = LinkingProject
-        fields = ['name', 'description']
+        fields = ['name', 'description', 'status']
 
         labels = {
             'name': _('Project Name'),
-            'description': _('Description'),
+            'description': _('Description')
         }
         widgets = {
             'name': TextInput(attrs={'class': 'form-control'}),
             'description': Textarea(attrs={'rows': 5, 'class': 'form-control'}),
+            'status': HiddenInput()
         }
 
     def __init__(self, *args, **kwargs):
@@ -47,7 +51,18 @@ class ProjectForm(ModelForm):
         if self.instance.pk:
             try:
                 data = LinkingProject.objects.get(pk=self.instance.pk)
-                self.fields['left_data'].initial = data.linkingdataset_set.get(link_seq=1).dataset.pk
+                left_dataset = data.linkingdataset_set.get(link_seq=1)
+                self.fields['left_data'].initial = left_dataset.dataset.pk
+                try:
+                    columns = json.loads(left_dataset.columns) or []
+                except:
+                    columns = []
+                if left_dataset.dataset.index_field is not None and left_dataset.dataset.index_field not in columns:
+                    columns.append(left_dataset.dataset.index_field)
+                if left_dataset.dataset.entity_field is not None and left_dataset.dataset.entity_field not in columns:
+                    columns.append(left_dataset.dataset.entity_field)
+                self.fields['left_columns'].initial = columns
+
             except LinkingProject.DoesNotExist:
                 pass
 
@@ -55,6 +70,8 @@ class ProjectForm(ModelForm):
 class LinkingForm(ProjectForm):
     right_data = ModelChoiceField(queryset=Dataset.objects.all(), label='right',
                                   widget=Select(attrs={'class': 'form-control'}))
+    right_columns = CharField(widget=HiddenInput(), required=False)
+
 
     class Meta(ProjectForm.Meta):
         fields = ProjectForm.Meta.fields + ['relationship_type']
@@ -73,7 +90,17 @@ class LinkingForm(ProjectForm):
         if self.instance.pk:
             try:
                 data = LinkingProject.objects.get(pk=self.instance.pk)
-                self.fields['right_data'].initial = data.linkingdataset_set.get(link_seq=2).dataset.pk
+                right_dataset = data.linkingdataset_set.get(link_seq=2)
+                self.fields['right_data'].initial = right_dataset.dataset.pk
+                try:
+                    columns = json.loads(right_dataset.columns) or []
+                except:
+                    columns = []
+                if right_dataset.dataset.index_field is not None and right_dataset.dataset.index_field not in columns:
+                    columns.append(right_dataset.dataset.index_field)
+                if right_dataset.dataset.entity_field is not None and right_dataset.dataset.entity_field not in columns:
+                    columns.append(right_dataset.dataset.entity_field)
+                self.fields['right_columns'].initial = columns
             except LinkingProject.DoesNotExist:
                 pass
 

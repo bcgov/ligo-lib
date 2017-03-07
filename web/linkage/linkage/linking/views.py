@@ -135,6 +135,26 @@ class ProjectUpdateMixin(object):
             data['linking_comparison_choices'] = LINKING_COMPARISONS
             data['comparison_args'] = COMPARISON_ARGS
             data['type'] = self.object.type
+            left_link = LinkingDataset.objects.get(link_project=self.object, link_seq=1)
+            required_left = []
+            if left_link:
+                required_left.append(left_link.dataset.index_field)
+                entity_id = left_link.dataset.entity_field
+                if entity_id:
+                    required_left.append(entity_id)
+            data['required_left'] = required_left
+
+            if self.object.type == 'LINK':
+                right_link = LinkingDataset.objects.get(link_project=self.object, link_seq=2)
+                required_right = []
+                if right_link:
+                    required_right.append(right_link.dataset.index_field)
+                    entity_id = right_link.dataset.entity_field
+                    if entity_id:
+                        required_right.append(entity_id)
+
+                data['required_right'] = required_right
+
 
         return data
 
@@ -144,6 +164,7 @@ class ProjectUpdateMixin(object):
         linking_step_form = context['linking_step_form']
         if linking_step_form.is_valid():
             self.object = form.save()
+
             self.object.save()
             linking_step_form.instance = self.object
             i = 1
@@ -151,6 +172,17 @@ class ProjectUpdateMixin(object):
                 item['seq'].value = i
                 i += 1
             linking_step_form.save()
+
+            left_link = LinkingDataset.objects.get(link_project=self.object, link_seq=1)
+            if left_link:
+                left_link.columns = form.cleaned_data['left_columns']
+                left_link.save()
+
+            if self.object.type == 'LINK':
+                right_link = LinkingDataset.objects.get(link_project=self.object, link_seq=2)
+                if right_link:
+                    right_link.columns = form.cleaned_data['right_columns']
+                    right_link.save()
 
         return super(ProjectUpdateMixin, self).form_valid(form)
 
