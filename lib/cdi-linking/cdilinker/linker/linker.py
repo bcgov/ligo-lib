@@ -682,7 +682,7 @@ class DeDeupProject(LinkBase):
         output = self.linked.append(self.left_dataset)
         output = output.sort(['ENTITY_ID'])
 
-        dataset = self.project['datasets'][0] or self.left_columns
+        dataset = self.project['datasets'][0]
 
         try:
             usecols = dataset['columns'] or self.left_columns
