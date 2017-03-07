@@ -29,8 +29,15 @@ def project_to_json(name):
         datasets[1]['columns'] = right_columns
     for dataset in project_json.get('datasets', []):
         dataset['url'] = settings.DATASTORE_URL + dataset['url']
+        del dataset['id']
+
+    for step in project_json['steps']:
+        del step['id']
+        del step['linking_project']
+
     project_json['output_root'] = settings.OUTPUT_URL
 
+    del project_json['id']
     if project.type == 'DEDUP':
         del project_json['relationship_type']
 
