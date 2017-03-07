@@ -683,9 +683,15 @@ class DeDeupProject(LinkBase):
         output = output.sort(['ENTITY_ID'])
 
         dataset = self.project['datasets'][0] or self.left_columns
+
+        try:
+            usecols = dataset['columns'] or self.left_columns
+        except KeyError:
+            usecols = self.left_columns
+
         self.left_dataset = pd.read_csv(dataset['url'],
                                         index_col=dataset['index_field'],
-                                        usecols=dataset['columns'],
+                                        usecols=usecols,
                                         skipinitialspace=True)
 
         result = pd.concat([self.left_dataset, output['ENTITY_ID']], axis=1, join='inner')
