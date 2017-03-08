@@ -171,6 +171,18 @@ function linking_json(index) {
 
 }
 
+
+function getSelectedColumns(selector) {
+
+    columns = [];
+    selector.find('input:checkbox').each(function() {
+        if ($(this).prop('checked')) {
+            columns.push($(this).val());
+        }
+    });
+    return columns;
+}
+
 $("#linking-form").submit(function() {
     status = 'READY';
     var count = parseInt($('#id_steps-TOTAL_FORMS').val());
@@ -185,8 +197,11 @@ $("#linking-form").submit(function() {
 
     }
 
+    leftColumns = getSelectedColumns($('#selected_left_columns'));
+
     $('#id_left_columns').val(JSON.stringify(leftColumns));
     if (project_type == 'LINK') {
+        rightColumns = getSelectedColumns($('#selected_right_columns'));
         $('#id_right_columns').val(JSON.stringify(rightColumns));
     }
 
