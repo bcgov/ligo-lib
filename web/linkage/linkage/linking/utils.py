@@ -19,6 +19,13 @@ def project_to_json(name):
 
     if len(datasets) > 0:
         datasets[0]['columns'] = left_columns
+        data_types = datasets[0]['data_types']
+        if data_types:
+            selected_types = {}
+            for (key, value) in data_types.iteritems():
+                if key in left_columns:
+                    selected_types[key] = value
+            datasets[0]['data_types'] = selected_types
 
     if len(datasets) > 1 and project.type == 'LINK':
         right_link = LinkingDataset.objects.get(link_project=project, link_seq=2)
@@ -26,7 +33,16 @@ def project_to_json(name):
             right_columns = json.loads(right_link.columns) or []
         except:
             right_columns = []
+
         datasets[1]['columns'] = right_columns
+        data_types = datasets[1]['data_types']
+        if data_types:
+            selected_types = {}
+            for (key, value) in data_types.iteritems():
+                if key in right_columns:
+                    selected_types[key] = value
+            datasets[1]['data_types'] = selected_types
+
     for dataset in project_json.get('datasets', []):
         dataset['url'] = settings.DATASTORE_URL + dataset['url']
         del dataset['id']

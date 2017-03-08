@@ -50,10 +50,12 @@ class Dataset(models.Model):
         return pd.read_csv(file_path, index_col=self.index_field, usecols=columns, skipinitialspace=True)
 
     def get_fields(self):
-
-        file_path = settings.DATASTORE_URL + self.url
-        df = pd.read_csv(file_path, nrows=1)
-        return list(df)
+        if self.data_types:
+            return self.data_types.keys()
+        else:
+            file_path = settings.DATASTORE_URL + self.url
+            df = pd.read_csv(file_path, nrows=1)
+            return list(df)
 
 
     def get_absolute_url(self):
