@@ -592,7 +592,7 @@ class DeDeupProject(LinkBase):
         append = False
 
         self.steps = {}
-
+        self.linked = pd.DataFrame()
         total_step_entities = None
         for step in self.project['steps']:
             self.steps[step['seq']] = {}
@@ -618,7 +618,7 @@ class DeDeupProject(LinkBase):
             self.matched = matched if self.matched is None else self.matched.append(matched)
             self.matched = self.matched.groupby(level=[0, 1]).min()
             self.matched = pd.DataFrame(self.matched)
-            if step['group']:
+            if step['group'] and not self.matched.empty:
                 self.total_records_linked += len(self.matched.index)
                 # Group rows that blong to the same entity and assign entity id
                 result, self.matched = dedup_step.link(self.matched)
@@ -660,14 +660,14 @@ class DeDeupProject(LinkBase):
                 # Remove grouped records from input dataset
                 linked_data = Step.get_rows_in(self.left_dataset, result.index)
                 linked_data['ENTITY_ID'] = result['ENTITY_ID']
-                self.linked = linked_data if self.linked is None else self.linked.append(linked_data)
+                self.linked = self.linked.append(linked_data)
                 self.left_dataset = Step.get_rows_not_in(self.left_dataset, result.index)
                 self.left_dataset = self.left_dataset.set_index(self.left_dataset.index.rename(LinkBase.LEFT_INDEX))
 
-        linked_stats = self.total_linked.to_dict()
+        linked_stats = self.total_linked.to_dict() if self.total_linked is not None else {}
 
         for step in self.project['steps']:
-            self.steps[step['seq']]['total_records_linked'] = linked_stats[step['seq']]
+            self.steps[step['seq']]['total_records_linked'] = linked_stats.get(step['seq'], 0)
 
     def save(self):
         """
