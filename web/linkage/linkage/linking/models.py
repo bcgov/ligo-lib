@@ -69,7 +69,6 @@ PROJECT_STATUS = (
 class LinkingProject(models.Model):
     name = models.CharField(_('Lnking project name'), unique=True, max_length=255)
     type = models.CharField(_('Project Type'), max_length=10, choices=PROJECT_TYPES, default='LINK')
-    linking_method = models.CharField(_('Linking Method'), max_length=3, choices=LINKING_METHODS, default='DTR')
     description = models.TextField(_('Linking Project description'), blank=True)
     relationship_type = models.CharField(_('Linking Relationship type'), max_length=3, choices=LINKING_RELATIONSHIPS,
                                          default='1T1')
@@ -103,6 +102,7 @@ class LinkingStep(models.Model):
     linking_schema = JSONField()
     group = models.BooleanField(_('Dedup Entity Group Flag'), default=True)
     linking_project = models.ForeignKey(LinkingProject, related_name='steps', on_delete=models.CASCADE)
+    linking_method = models.CharField(_('Linking Method'), max_length=3, choices=LINKING_METHODS, default='DTR')
 
     def __str__(self):
         return 'Linking step {0} of linking project {}.'.format(self.seq, self.linking_project)

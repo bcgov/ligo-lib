@@ -120,16 +120,18 @@ class DedupForm(ProjectForm):
 LinkingStepFormset = inlineformset_factory(
     LinkingProject,
     LinkingStep,
-    fields=('seq', 'blocking_schema', 'linking_schema', 'group'),
+    fields=('seq', 'blocking_schema', 'linking_schema', 'group', 'linking_method'),
     widgets={
         'seq': HiddenInput(attrs={'class': 'step-seq form-control'}),
         'blocking_schema': HiddenInput(),
         'linking_schema': HiddenInput(),
-        'group': CheckboxInput(attrs={'class': 'ios-toggle toggle-info form-control'})
+        'group': CheckboxInput(attrs={'class': 'ios-toggle toggle-info form-control'}),
+        'linking_method': Select(attrs={'class': 'form-control'}),
     },
     labels={
         'seq': _('Sequence'),
         'group': _('Group Records?'),
+        'linking_method': _('Linking Method'),
     },
     extra=0
 )
