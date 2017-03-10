@@ -1,0 +1,122 @@
+{
+"status": "READY",
+"matched_url": "",
+"datasets": [
+{
+"description": "Fake Education data",
+"format": "CSV",
+"url": "test/dedup/combination/test1.csv",
+"title": "Education data",
+"entity_field": "REC_ID",
+"data_types": {
+"FAMILY_NAME": "object",
+"CANADIAN_POSTAL_CODE": "object",
+"FIRST_GIVEN_NAME": "object",
+"COUNTRY": "object",
+"REC_ID": "object",
+"PREF_FIRST_GIVEN_NAME": "object",
+"STREET_LINE_1": "object",
+"PREF_SECOND_GIVEN_NAME": "object",
+"PROVINCE_OR_STATE": "object",
+"BIRTH_DATE": "object",
+"PREF_FAMILY_NAME": "object",
+"SECOND_GIVEN_NAME": "object",
+"COMMUNITY_OR_LOCATION": "object"
+},
+"index_field": "REC_ID",
+"columns": [
+"CANADIAN_POSTAL_CODE",
+"FIRST_GIVEN_NAME",
+"COUNTRY",
+"PREF_FAMILY_NAME",
+"PREF_FIRST_GIVEN_NAME",
+"STREET_LINE_1",
+"PROVINCE_OR_STATE",
+"BIRTH_DATE",
+"FAMILY_NAME",
+"REC_ID",
+"PREF_SECOND_GIVEN_NAME",
+"SECOND_GIVEN_NAME",
+"COMMUNITY_OR_LOCATION"
+],
+"name": "EDUCATION"
+}
+],
+"description": "Education dedup",
+"linked_url": "",
+"comments": "",
+"output_root": "test/dedup/combination/",
+"results_file": "educ_dedup_summary.pdf",
+"steps": [
+{
+"group": true,
+"seq": 1,
+"blocking_schema": {
+"right": [],
+"transformations": [
+"EXACT",
+"EXACT",
+"EXACT",
+"EXACT"
+],
+"left": [
+"BIRTH_DATE",
+"FAMILY_NAME",
+"CANADIAN_POSTAL_CODE",
+"COMMUNITY_OR_LOCATION"
+]
+},
+"linking_schema": {
+"comparisons": [
+{
+"name": "NYSIIS"
+}
+],
+"right": [],
+"left": [
+"FIRST_GIVEN_NAME"
+]
+},
+"linking_method": "DTR"
+},
+{
+"group": true,
+"seq": 2,
+"blocking_schema": {
+"right": [],
+"transformations": [
+"EXACT",
+"EXACT"
+],
+"left": [
+"BIRTH_DATE",
+"CANADIAN_POSTAL_CODE"
+]
+},
+"linking_schema": {
+"comparisons": [
+{
+"args": {
+"n": 4
+},
+"name": "HEAD_MATCH"
+},
+{
+"args": {
+"n": 4
+},
+"name": "HEAD_MATCH"
+}
+],
+"right": [],
+"left": [
+"PREF_SECOND_GIVEN_NAME"
+]
+},
+"linking_method": "DTR"
+}
+],
+"type": "DEDUP",
+"name": "educ_dedup"
+}
+
