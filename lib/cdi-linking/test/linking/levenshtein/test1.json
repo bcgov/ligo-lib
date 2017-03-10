@@ -46,7 +46,7 @@
    "description":"",
    "linked_url":"",
    "comments":"cannot insert LEFT_EID, already exists",
-   "output_root":"test/linking/levenshtein",
+   "output_root":"test/linking/levenshtein/",
    "results_file":"results",
    "steps":[  
       {  
