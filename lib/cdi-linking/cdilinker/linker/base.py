@@ -19,6 +19,10 @@ COLUMN_TYPES = {
     "int8": np.int8
 }
 
+LINKING_METHODS = {
+    'DTR': 'Deterministic',
+    'PRB': 'Probabilistic',
+}
 
 def _save_pairs(file_path, data, append=False):
     if not append:
