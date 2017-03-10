@@ -1,5 +1,5 @@
 from jinja2 import Environment, PackageLoader
-from cdilinker.linker.base import LINKING_RELATIONSHIPS
+from cdilinker.linker.base import LINKING_RELATIONSHIPS, LINKING_METHODS
 
 from xhtml2pdf import pisa
 
@@ -22,7 +22,7 @@ def generate_linking_summary(data, dest_dir='.'):
     for step in data.project['steps']:
         step = {
             "seq": step['seq'],
-            "linking_method": "Deterministic",
+            "linking_method": LINKING_METHODS.get(step['linking_method'], "Deterministic"),
             "blocking_schema": step['blocking_schema'],
             "linking_schema": step['linking_schema'],
             "total_records_linked": data.steps[step['seq']].get('total_records_linked', None),
