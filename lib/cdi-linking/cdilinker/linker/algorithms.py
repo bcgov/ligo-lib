@@ -10,7 +10,7 @@ from jellyfish import (
 )
 
 
-def get_algorithms(type='DTR'):
+def get_algorithms(types=[None]):
     """
     Returns the list of provided algorithms of a given type.
     :param type: Type of the algorithms
@@ -20,7 +20,7 @@ def get_algorithms(type='DTR'):
 
     algorithms = {}
     for alg in all_alg:
-        if alg.type == type:
+        if alg.type in types:
             algorithms[alg.name] = alg
 
     return algorithms
@@ -66,7 +66,7 @@ class NyiisEncoding(AlgorithmProvider):
         return s.apply(lambda x: nysiis(x) if pd.notnull(x) else np.nan)
 
 
-TRANSFORMATIONS = get_algorithms(type='TSF')
+TRANSFORMATIONS = get_algorithms(types=['TSF'])
 
 
 def apply_encoding(s, method='EXACT'):
@@ -78,7 +78,7 @@ def apply_encoding(s, method='EXACT'):
 class ExactComparsion(AlgorithmProvider):
     name = 'EXACT'
     title = 'Exact matching'
-    type = 'DTR'
+    type = None
     args = []
 
     def apply(self, s1, s2):
@@ -97,7 +97,7 @@ class ExactComparsion(AlgorithmProvider):
 class SoundexComparison(AlgorithmProvider):
     name = 'SOUNDEX'
     title = 'Soundex'
-    type = 'DTR'
+    type = None
     args = []
 
     def apply(self, s1, s2):
@@ -123,7 +123,7 @@ class SoundexComparison(AlgorithmProvider):
 class NYIISComparison(AlgorithmProvider):
     name = 'NYSIIS'
     title = 'New York State Identification and Intelligence System'
-    type = 'DTR'
+    type = None
     args = []
 
     def apply(self, s1, s2):
@@ -149,7 +149,7 @@ class NYIISComparison(AlgorithmProvider):
 class MatchSlice(AlgorithmProvider):
     name = 'SLICE_MATCH'
     title = 'Substring match'
-    type = 'DTR'
+    type = None
     args = ['start', 'end']
 
     def apply(self, s1, s2, start=0, end=0):
@@ -175,7 +175,7 @@ class MatchSlice(AlgorithmProvider):
 class MatchHead(AlgorithmProvider):
     name = 'HEAD_MATCH'
     title = 'First n characters'
-    type = 'DTR'
+    type = None
     args = ['n']
 
     def apply(self, s1, s2, n=0):
@@ -199,7 +199,7 @@ class MatchHead(AlgorithmProvider):
 class MatchTail(AlgorithmProvider):
     name = 'TAIL_MATCH'
     title = 'Last n characters'
-    type = 'DTR'
+    type = None
     args = ['n']
 
     def apply(self, s1, s2, n=0):
@@ -223,7 +223,7 @@ class MatchTail(AlgorithmProvider):
 class FixedLength(AlgorithmProvider):
     name = 'FIXED_LEN'
     title = 'Exact string-length'
-    type = 'DTR'
+    type = None
     args = ['length']
 
     def apply(self, s1, s2, length=0):
@@ -246,7 +246,7 @@ class FixedLength(AlgorithmProvider):
 class FixedValue(AlgorithmProvider):
     name = 'FIXED_VAL'
     title = 'Field Specific Value'
-    type = 'DTR'
+    type = None
     args = ['value']
 
     def apply(self, s1, s2, value):
@@ -264,10 +264,11 @@ class FixedValue(AlgorithmProvider):
         return x
 
 
+
 class AbsoluteDifference(AlgorithmProvider):
     name = 'ABS_DIFF'
     title = 'Absolute difference'
-    type = 'DTR'
+    type = None
     args = ['threshold']
 
     def apply(self, s1, s2, threshold=0):
@@ -279,7 +280,7 @@ class AbsoluteDifference(AlgorithmProvider):
         return d.apply(fn, args=(threshold,))
 
 
-DETERMINISTIC_COMPARISONS = get_algorithms(type='DTR')
+DETERMINISTIC_COMPARISONS = get_algorithms(types=['DTR', None])
 
 
 def apply_comparison(s1, s2, method='EXACT', **args):

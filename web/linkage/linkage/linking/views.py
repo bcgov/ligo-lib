@@ -17,8 +17,8 @@ from linkage.datasets.models import Dataset
 from .tasks import run_task
 from utils import project_to_json
 
-tsf_alg = get_algorithms(type='TSF')
-dtr_alg = get_algorithms(type='DTR')
+tsf_alg = get_algorithms(types=['TSF'])
+dtr_alg = get_algorithms(types=['DTR', None])
 
 BLOKING_COMPARISONS = tuple((k, v.title) for k, v in tsf_alg.iteritems())
 COMPARISON_ARGS = dict((k, v.args) for k, v in dtr_alg.iteritems())
