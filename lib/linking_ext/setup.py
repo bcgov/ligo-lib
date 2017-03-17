@@ -34,6 +34,7 @@ setup(
         [bcgov.linking.plugins]
         lev_alg = bcgov_linkext.algorithms:Levenshtein
         jaro_alg = bcgov_linkext.algorithms:Jaro_Winkler
-
+        lev_sm = bcgov_linkext.algorithms:LevenshteinSimilarity
+        jaro_sm = bcgov_linkext.algorithms:JaroWinklerSimilarity
     """,
 )

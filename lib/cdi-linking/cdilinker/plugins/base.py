@@ -27,7 +27,7 @@ class PluginMount(type):
             # This must be a plugin implementation, which should be registered.
             # Simply appending it to the list is all that's needed to keep
             # track of it later.
-            print 'Adding new plugin class: ' + cls.name
+            print 'Adding new plugin class: {0} type: {1}.'.format(cls.name , cls.type)
             cls.plugins.append(cls)
 
 
