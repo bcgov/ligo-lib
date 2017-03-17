@@ -2,31 +2,28 @@ import sys
 import pandas as pd
 import numpy as np
 
+from ..plugins.base import AlgorithmProvider
+
 from jellyfish import (
     soundex,
-    nysiis,
-    match_rating_codex,
-    metaphone,
-    levenshtein_distance,
-    damerau_levenshtein_distance,
-    jaro_distance,
-    jaro_winkler,
-    match_rating_comparison,
-    hamming_distance,
+    nysiis
 )
 
 
-def no_encode(s):
-    return s
+def get_algorithms(types=[None]):
+    """
+    Returns the list of provided algorithms of a given type.
+    :param type: Type of the algorithms
+    :return: List of available algorithms of the given type.
+    """
+    all_alg = [alg() for alg in AlgorithmProvider.plugins]
 
+    algorithms = {}
+    for alg in all_alg:
+        if alg.type in types:
+            algorithms[alg.name] = alg
 
-BLOCKING_METHODS = {
-    'EXACT': no_encode,
-    'SOUNDEX': soundex,
-    'NYSIIS': nysiis,
-    'MRCODEX': match_rating_codex,
-    'METAPHN': metaphone
-}
+    return algorithms
 
 
 def utf_encode(col):
@@ -37,194 +34,256 @@ def utf_encode(col):
     return col
 
 
-def apply_encoding(col, method, encoding='utf8', decode_err='strict'):
-    col = utf_encode(col)
+class NoEncoding(AlgorithmProvider):
+    name = 'EXACT'
+    title = 'Exact'
+    type = 'TSF'
+    args = []
 
-    encoding_alg = BLOCKING_METHODS.get(method, no_encode)
-
-    return col.apply(
-        lambda s: encoding_alg(s) if pd.notnull(s) else np.nan
-    )
-
-
-def levenshtein_similarity(s1, s2, method='DTR', max_edits=0):
-    s1 = utf_encode(s1)
-    s2 = utf_encode(s2)
-
-    conc = pd.concat([s1, s2], axis=1, ignore_index=True)
-
-    def levenshtein_alg(x, method='DTR', max_edits=0):
-        try:
-            y = levenshtein_distance(x[0], x[1])
-            if method == 'DTR':
-                return 1 if y <= max_edits else 0
-            else:
-                return 1 - y / np.max([len(x[0]), len(x[1])])
-        except Exception as err:
-            if pd.isnull(x[0]) or pd.isnull(x[1]):
-                return np.nan
-            else:
-                raise err
-
-    return conc.apply(levenshtein_alg, axis=1, method=method, max_edits=max_edits)
+    def apply(self, s):
+        return s
 
 
-def jaro_winkler_similarity(s1, s2, method='DTR', threshold=1.0):
-    s1 = utf_encode(s1)
-    s2 = utf_encode(s2)
+class SoundexEncoding(AlgorithmProvider):
+    name = 'SOUNDEX'
+    title = 'Soundex Encoding'
+    type = 'TSF'
+    args = []
 
-    conc = pd.concat([s1, s2], axis=1, ignore_index=True)
-
-    def jaro_winkler_alg(x, method='DTR', threshold=1.0):
-        try:
-            y = jaro_winkler(x[0], x[1])
-            if method == 'DTR':
-                return 1 if y >= threshold else 0
-            else:
-                y
-        except Exception as err:
-            if pd.isnull(x[0]) or pd.isnull(x[1]):
-                return np.nan
-            else:
-                raise err
-
-    return conc.apply(jaro_winkler_alg, axis=1, method=method, threshold=threshold)
+    def apply(self, s):
+        s = utf_encode(s)
+        return s.apply(lambda x: soundex(x) if pd.notnull(x) else np.nan)
 
 
-def exact(s1, s2):
-    """
-    Compares corresponding values from the two input series and checks if they are the same.
-    :param s1: Left input series.
-    :param s2: Right input series.
-    :return: For each (x,y) pair from two input series, return 1 if x == y and returns 0 otherwise.
-    """
-    x = pd.Series(0, index=s1.index)
-    x[s1 == s2] = 1
+class NyiisEncoding(AlgorithmProvider):
+    name = 'NYSIIS'
+    title = 'New York State Identification and Intelligence System'
+    type = 'TSF'
+    args = []
 
-    return x
+    def apply(self, s):
+        s = utf_encode(s)
+        return s.apply(lambda x: nysiis(x) if pd.notnull(x) else np.nan)
 
 
-def match_slice(s1, s2, start=0, end=0):
-    """
-    Compares a slice of the values in the two input series and checks if they are equal.
-    The slice is indicated by the start and end index.
-    :param s1: Left input series
-    :param s2: Right input series
-    :param start: Start index of the text slice
-    :param end: End index of the text slice
-    :return: For each (x,y) pair from two input series, return 1 if the two slices are the same
-            and returns 0 otherwise.
-    """
-    s1 = s1.apply(lambda x: x[start:end] if pd.notnull(x) else np.nan)
-    s2 = s2.apply(lambda x: x[start:end] if pd.notnull(x) else np.nan)
-
-    return exact(s1, s2)
+TRANSFORMATIONS = get_algorithms(types=['TSF'])
 
 
-def match_head(s1, s2, n):
-    """
-    Compares the first n characters of the entries in two input series and checks if they are equal.
-    :param s1: Left input series
-    :param s2: Right input series
-    :param n: Comparison length
-    :return: For each (x,y) pair from two input series, return 1 if their last n characters are the same
-            and returns 0 otherwise.
-    """
-    return match_slice(s1, s2, start=0, end=n)
+def apply_encoding(s, method='EXACT'):
+
+    alg = TRANSFORMATIONS.get(method)
+    return alg.apply(s)
 
 
-def match_tail(s1, s2, n):
-    """
-    Compares the last n characters of the entries in two input series and checks if they are equal.
-    :param s1: Left input series
-    :param s2: Right input series
-    :param n: Comparison length
-    :return: For each (x,y) pair from two input series, return 1 if their last n characters are the same
-            and returns 0 otherwise.
-    """
-    s1 = s1.apply(lambda x: x[-n:] if pd.notnull(x) else np.nan)
-    s2 = s2.apply(lambda x: x[-n:] if pd.notnull(x) else np.nan)
+class ExactComparsion(AlgorithmProvider):
+    name = 'EXACT'
+    title = 'Exact matching'
+    type = None
+    args = []
 
-    return exact(s1, s2)
+    def apply(self, s1, s2):
+        """
+        Compares corresponding values from the two input series and checks if they are the same.
+        :param s1: Left input series.
+        :param s2: Right input series.
+        :return: For each (x,y) pair from two input series, return 1 if x == y and returns 0 otherwise.
+        """
+        x = pd.Series(0, index=s1.index)
+        x[s1 == s2] = 1
 
-
-def fixed_len(s1, s2, length=0):
-    """
-    Checks the length of characters of the entries in two input series and compares them with n.
-    :param s1: Left input series
-    :param s2: Right input series
-    :param length: Characters length
-    :return: For each (x,y) pair from two input series, return 1 if both x and y have length n
-            and returns 0 otherwise.
-    """
-    s1 = s1.apply(lambda x: len(x) if pd.notnull(x) else np.nan)
-    s2 = s2.apply(lambda x: len(x) if pd.notnull(x) else np.nan)
-    x = pd.Series(0, index=s1.index)
-    x[(s1 == s2) & (s1 == length)] = 1
-
-    return x
+        return x
 
 
-def fixed_value(s1, s2, value):
-    """
-    Checks if both entries in s1 and s2 have the same value as the input value.
-    :param s1: Left input series
-    :param s2: Right input series
-    :param value: Comparison value
-    :return: For each (x,y) pair from two input series, return 1 if both x and y have the same value as the input value;
-            returns 0 otherwise.
-    """
-    x = pd.Series(0, index=s1.index)
-    x[(s1 == s2) & (s1 == value)] = 1
+class SoundexComparison(AlgorithmProvider):
+    name = 'SOUNDEX'
+    title = 'Soundex'
+    type = None
+    args = []
 
-    return x
+    def apply(self, s1, s2):
+        """
+        Compares the SOUNDEX encoding of two input series
+        :param s1: left input series
+        :param s2: right input series
+        :return: Comparison series.
+            For each pair (x,y) from two input series returns 1 if x and y have the same encoding,
+            otherwise returns 0.
+        """
+        encoding = TRANSFORMATIONS.get('SOUNDEX')
+
+        # Apply SOUNDEX encoding to both s1 and s2 and check if the encodings are the same
+        s1 = encoding.apply(s1)
+        s2 = encoding.apply(s2)
+        x = pd.Series(0, index=s1.index)
+        x[s1 == s2] = 1
+
+        return x
 
 
-def abs_diff(s1, s2, method='DTR', threshold=0):
-    d = pd.Series.abs(s1 - s2)
+class NYIISComparison(AlgorithmProvider):
+    name = 'NYSIIS'
+    title = 'New York State Identification and Intelligence System'
+    type = None
+    args = []
 
-    def fn(x, t):
-        return 1 if x <= t else 0
+    def apply(self, s1, s2):
+        """
+        Compares the NYSIIS encoding of two input series
+        :param s1: left input series
+        :param s2: right input series
+        :return: Comparison series.
+            For each pair (x,y) from two input series returns 1 if x and y have the same encoding,
+            otherwise returns 0.
+        """
+        encoding = TRANSFORMATIONS.get('NYSIIS')
 
-    if method == 'DTR':
+        # Apply NYIIS encoding to both s1 and s2 and check if the encodings are the same
+        s1 = encoding.apply(s1)
+        s2 = encoding.apply(s2)
+        x = pd.Series(0, index=s1.index)
+        x[s1 == s2] = 1
+
+        return x
+
+
+class MatchSlice(AlgorithmProvider):
+    name = 'SLICE_MATCH'
+    title = 'Substring match'
+    type = None
+    args = ['start', 'end']
+
+    def apply(self, s1, s2, start=0, end=0):
+        """
+        Compares a slice of the values in the two input series and checks if they are equal.
+        The slice is indicated by the start and end index.
+        :param s1: Left input series
+        :param s2: Right input series
+        :param start: Start index of the text slice
+        :param end: End index of the text slice
+        :return: For each (x,y) pair from two input series, return 1 if the two slices are the same
+                and returns 0 otherwise.
+        """
+
+        s1 = s1.apply(lambda x: x[start:end] if pd.notnull(x) else np.nan)
+        s2 = s2.apply(lambda x: x[start:end] if pd.notnull(x) else np.nan)
+        x = pd.Series(0, index=s1.index)
+        x[s1 == s2] = 1
+
+        return x
+
+
+class MatchHead(AlgorithmProvider):
+    name = 'HEAD_MATCH'
+    title = 'First n characters'
+    type = None
+    args = ['n']
+
+    def apply(self, s1, s2, n=0):
+        """
+        Compares the first n characters of the entries in two input series and checks if they are equal.
+        :param s1: Left input series
+        :param s2: Right input series
+        :param n: Comparison length
+        :return: For each (x,y) pair from two input series, return 1 if their last n characters are the same
+                and returns 0 otherwise.
+        """
+
+        s1 = s1.apply(lambda x: x[0:n] if pd.notnull(x) else np.nan)
+        s2 = s2.apply(lambda x: x[0:n] if pd.notnull(x) else np.nan)
+        x = pd.Series(0, index=s1.index)
+        x[s1 == s2] = 1
+
+        return x
+
+
+class MatchTail(AlgorithmProvider):
+    name = 'TAIL_MATCH'
+    title = 'Last n characters'
+    type = None
+    args = ['n']
+
+    def apply(self, s1, s2, n=0):
+        """
+        Compares the last n characters of the entries in two input series and checks if they are equal.
+        :param s1: Left input series
+        :param s2: Right input series
+        :param n: Comparison length
+        :return: For each (x,y) pair from two input series, return 1 if their last n characters are the same
+                and returns 0 otherwise.
+        """
+
+        s1 = s1.apply(lambda x: x[-n:] if pd.notnull(x) else np.nan)
+        s2 = s2.apply(lambda x: x[-n:] if pd.notnull(x) else np.nan)
+        x = pd.Series(0, index=s1.index)
+        x[s1 == s2] = 1
+
+        return x
+
+
+class FixedLength(AlgorithmProvider):
+    name = 'FIXED_LEN'
+    title = 'Exact string-length'
+    type = None
+    args = ['length']
+
+    def apply(self, s1, s2, length=0):
+        """
+        Checks the length of characters of the entries in two input series and compares them with n.
+        :param s1: Left input series
+        :param s2: Right input series
+        :param length: Characters length
+        :return: For each (x,y) pair from two input series, return 1 if both x and y have length n
+                and returns 0 otherwise.
+        """
+        s1 = s1.apply(lambda x: len(x) if pd.notnull(x) else np.nan)
+        s2 = s2.apply(lambda x: len(x) if pd.notnull(x) else np.nan)
+        x = pd.Series(0, index=s1.index)
+        x[(s1 == s2) & (s1 == length)] = 1
+
+        return x
+
+
+class FixedValue(AlgorithmProvider):
+    name = 'FIXED_VAL'
+    title = 'Field Specific Value'
+    type = None
+    args = ['value']
+
+    def apply(self, s1, s2, value):
+        """
+        Checks if both entries in s1 and s2 have the same value as the input value.
+        :param s1: Left input series
+        :param s2: Right input series
+        :param value: Comparison value
+        :return: For each (x,y) pair from two input series, return 1 if both x and y have the same value as the input value;
+                returns 0 otherwise.
+        """
+        x = pd.Series(0, index=s1.index)
+        x[(s1 == s2) & (s1 == value)] = 1
+
+        return x
+
+
+
+class AbsoluteDifference(AlgorithmProvider):
+    name = 'ABS_DIFF'
+    title = 'Absolute difference'
+    type = None
+    args = ['threshold']
+
+    def apply(self, s1, s2, threshold=0):
+        d = pd.Series.abs(s1 - s2)
+
+        def fn(x, t):
+            return 1 if x <= t else 0
+
         return d.apply(fn, args=(threshold,))
 
 
-def soundex_compare(s1, s2):
-    """
-    Compares the soundex encoding of two input series
-    :param s1: left input series
-    :param s2: right input series
-    :return: Comparison series.
-        For each pair (x,y) from two input series returns 1 if x and y have the same encoding,
-        otherwise returns 0.
-    """
-    return exact(apply_encoding(s1, 'SOUNDEX'), apply_encoding(s2, 'SOUNDEX'))
+DETERMINISTIC_COMPARISONS = get_algorithms(types=['DTR', None])
 
 
-def nysiis_compare(s1, s2):
-    """
-    Compares the NYSIIS encoding of two input series
-    :param s1: left input series
-    :param s2: right input series
-    :return: Comparison series.
-        For each pair (x,y) from two input series returns 1 if x and y have the same encoding,
-        otherwise returns 0.
-    """
+def apply_comparison(s1, s2, method='EXACT', **args):
+    alg = DETERMINISTIC_COMPARISONS.get(method)
 
-    return exact(apply_encoding(s1, 'NYSIIS'), apply_encoding(s2, 'NYSIIS'))
-
-
-LINKING_METHODS = {
-    'EXACT': exact,
-    'SOUNDEX': soundex_compare,
-    'NYSIIS': nysiis_compare,
-    'LEVENSHTEIN': levenshtein_similarity,
-    'JARO_WINKLER': jaro_winkler_similarity,
-    'SLICE_MATCH': match_slice,
-    'HEAD_MATCH': match_head,
-    'TAIL_MATCH': match_tail,
-    'FIXED_LEN': fixed_len,
-    'FIXED_VAL': fixed_value,
-    'ABS_DIFF': abs_diff
-}
+    return alg.apply(s1, s2, **args)

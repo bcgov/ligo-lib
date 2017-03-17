@@ -5,7 +5,7 @@ import json
 import numpy as np
 import pandas as pd
 
-from .algorithms import apply_encoding, LINKING_METHODS
+from .algorithms import apply_encoding, apply_comparison
 from .base import CHUNK_SIZE, MAX_PAIRS_SIZE, COLUMN_TYPES, LINKING_RELATIONSHIPS, _save_pairs
 from cdilinker.reports.report import generate_linking_summary
 
@@ -133,9 +133,7 @@ class Step(object):
 
         print "Compare Function : {0}".format(compare_fn)
 
-        fn = LINKING_METHODS.get(compare_fn, 'EXACT')
-
-        return fn(s1, s2, **args)
+        return apply_comparison(s1, s2, compare_fn, **args)
 
     def match(self, transforms, left_fields, right_fields=None):
 

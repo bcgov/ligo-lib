@@ -31,14 +31,17 @@ $("#form-steps-container").on('click', '.checkbox-label', function() {
 });
 
 $('#form-steps-container').on('click', '.linking-vars .link-var-create', function() {
-    var div_id = $(this).parent().parent().attr('id');
-    form_index = div_id.slice(14);
-    rows = $("#" + div_id + " .link-var-row").length;
 
+    var div_id = $(this).parent().parent().attr('id');
+    var form_index = div_id.slice(-1);
+    var rows = $("#" + div_id + " .link-var-row").length;
+
+    var step_link_method = $('#id_steps-' + form_index + '-linking_method').val();
+    var cmprsnChoices = comparison_choices[step_link_method];
 
     comparisons = '';
-    for (item in comparison_choices) {
-        comparisons += '<option value="' + comparison_choices[item][0] + '">' + comparison_choices[item][1] + '</option>';
+    for (item in cmprsnChoices) {
+        comparisons += '<option value="' + cmprsnChoices[item][0] + '">' + cmprsnChoices[item][1] + '</option>';
     }
 
     row_html = '<div class="link-var-row">'

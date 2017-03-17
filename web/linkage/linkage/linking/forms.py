@@ -126,7 +126,7 @@ LinkingStepFormset = inlineformset_factory(
         'blocking_schema': HiddenInput(),
         'linking_schema': HiddenInput(),
         'group': CheckboxInput(attrs={'class': 'ios-toggle toggle-info form-control'}),
-        'linking_method': Select(attrs={'class': 'form-control'}),
+        'linking_method': Select(attrs={'class': 'link-method form-control'}),
     },
     labels={
         'seq': _('Sequence'),

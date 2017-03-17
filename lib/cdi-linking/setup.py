@@ -33,6 +33,7 @@ setup(
     packages=[
         'cdilinker',
         'cdilinker.linker',
+        'cdilinker.plugins',
         'cdilinker.reports'
     ],
     package_dir={'cdilinker': 'cdilinker'},
