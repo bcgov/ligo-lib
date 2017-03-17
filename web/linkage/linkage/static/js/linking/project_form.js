@@ -144,13 +144,14 @@ function linking_json(index) {
          status = 'DRAFT';
      }
 
+     var link_method = $('#id_steps-' + index + '-linking_method').val();
      var trans_selector = "#linking-vars-" + index + " .alg";
      $(trans_selector).not(".deleted").each(function() {
         var selected_val = $(this).val();
         var suffix = this.id.slice(9);
 
         var comparison = {"name": selected_val};
-        args_list = COMPARISON_ARGS[selected_val];
+        args_list = COMPARISON_ARGS[link_method][selected_val];
         if (args_list) {
             args = {};
             for (index = 0; index < args_list.length; index++) {
@@ -233,10 +234,12 @@ $('#form-steps-container').on('click', '.linking-vars .linking-var-remove', func
 $("#form-steps-container").on('change', '.link-vars-container .link-var-row .alg', function(){
 
     var select_id = $(this).attr('id');
+    var form_index = select_id.slice(10).split('_')[0];
+    var step_link_method = $('#id_steps-' + form_index + '-linking_method').val();
     suffix = select_id.slice(9);
     var selected_alg = $(this).val();
     $(this).parent().parent().parent().find('.alg-arg').empty();
-    var args_list = comparison_args[selected_alg];
+    var args_list = comparison_args[step_link_method][selected_alg];
     if (args_list) {
         args_html = '';
         for (index = 0; index < args_list.length; index++) {
@@ -248,6 +251,33 @@ $("#form-steps-container").on('change', '.link-vars-container .link-var-row .alg
         $(this).parent().parent().parent().find('.alg-arg').append(args_html);
     }
 
+});
+
+$("#form-steps-container").on('change', '.link-method', function() {
+
+    var selected_method = $(this).val()
+    var form_id = $(this).parent().parent().parent().parent().attr('id');
+    var form_index = form_id.slice(-1);
+
+    //Find the selected linking method
+    var step_link_method = $('#id_steps-' + form_index + '-linking_method').val();
+
+    //Fetch the list of comparison algorithms for the selected linking method.
+    var cmprsnChoices = comparison_choices[step_link_method];
+
+    //Refresh the list of comparison algorithms for all drop down list of this step.
+    var comparisons = '<option>------------</option>';
+    for (item in cmprsnChoices) {
+        comparisons += '<option value="' + cmprsnChoices[item][0] + '">' + cmprsnChoices[item][1] + '</option>';
+    }
+
+    //Remove input elements of parameters of previously selected algorithms.
+    $('#' + form_id + ' .link-var-row .alg').each(function(index) {
+        $(this).html(comparisons);
+    });
+    $('#' + form_id + ' .link-var-row .alg-arg').each(function(index) {
+        $(this).empty();
+    });
 });
 
 $("#form-steps-container").on('click', '.step-delete', function() {

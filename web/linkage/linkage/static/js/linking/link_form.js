@@ -35,13 +35,14 @@ $('#form-steps-container').on('click', '.blocking-vars .block-var-create', funct
 
 $('#form-steps-container').on('click', '.linking-vars .link-var-create', function() {
     var div_id = $(this).parent().parent().attr('id');
-    form_index = div_id.slice(14);
-    rows = $("#" + div_id + " .link-var-row").length;
+    var form_index = div_id.slice(-1);
+    var rows = $("#" + div_id + " .link-var-row").length;
 
-
-    comparisons = '';
-    for (item in comparison_choices) {
-        comparisons += '<option value="' + comparison_choices[item][0] + '">' + comparison_choices[item][1] + '</option>';
+    var step_link_method = $('#id_steps-' + form_index + '-linking_method').val();
+    var cmprsnChoices = comparison_choices[step_link_method];
+    var comparisons = '';
+    for (item in cmprsnChoices) {
+        comparisons += '<option value="' + cmprsnChoices[item][0] + '">' + cmprsnChoices[item][1] + '</option>';
     }
 
     row_html = '<div class="link-var-row">'

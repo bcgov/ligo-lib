@@ -19,10 +19,17 @@ from utils import project_to_json
 
 tsf_alg = get_algorithms(types=['TSF'])
 dtr_alg = get_algorithms(types=['DTR', None])
+prb_alg = get_algorithms(types=['PRB', None])
 
 BLOKING_COMPARISONS = tuple((k, v.title) for k, v in tsf_alg.iteritems())
-COMPARISON_ARGS = dict((k, v.args) for k, v in dtr_alg.iteritems())
-LINKING_COMPARISONS = tuple((k, v.title) for k, v in dtr_alg.iteritems())
+COMPARISON_ARGS = {
+    'DTR': dict((k, v.args) for k, v in dtr_alg.iteritems()),
+    'PRB': dict((k, v.args) for k, v in prb_alg.iteritems())
+}
+LINKING_COMPARISONS = {
+    'DTR': tuple((k, v.title) for k, v in dtr_alg.iteritems()),
+    'PRB': tuple((k, v.title) for k, v in prb_alg.iteritems())
+}
 
 def select_type(request):
     if request.method == 'POST':
