@@ -39,6 +39,7 @@ class AlgorithmProvider:
     name :  The name of the algorithm(key)
     title:  A short description of the algorithm
     type :  'DTR' for Deterministic / 'PRB' for Probabilistic algorithms 'TSF' for Transformations
+    tags : A list of strings that can be used to search and filter algorithms.
     args :  A list of required named parameters, this does not include main parameter(s).
             For example, for the forlllowing Levenshtein strings similarity algorithm,
             the only required parameter is max_edits:

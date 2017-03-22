@@ -38,6 +38,7 @@ class NoEncoding(AlgorithmProvider):
     name = 'EXACT'
     title = 'Exact'
     type = 'TSF'
+    tags = ['all']
     args = []
 
     def apply(self, s):
@@ -48,6 +49,7 @@ class SoundexEncoding(AlgorithmProvider):
     name = 'SOUNDEX'
     title = 'Soundex Encoding'
     type = 'TSF'
+    tags = ['strings', 'names']
     args = []
 
     def apply(self, s):
@@ -59,6 +61,7 @@ class NyiisEncoding(AlgorithmProvider):
     name = 'NYSIIS'
     title = 'New York State Identification and Intelligence System'
     type = 'TSF'
+    tags = ['strings', 'names']
     args = []
 
     def apply(self, s):
@@ -79,6 +82,7 @@ class ExactComparsion(AlgorithmProvider):
     name = 'EXACT'
     title = 'Exact matching'
     type = None
+    tags = ['all']
     args = []
 
     def apply(self, s1, s2):
@@ -98,6 +102,7 @@ class SoundexComparison(AlgorithmProvider):
     name = 'SOUNDEX'
     title = 'Soundex'
     type = None
+    tags = ['strings', 'names']
     args = []
 
     def apply(self, s1, s2):
@@ -124,6 +129,7 @@ class NYIISComparison(AlgorithmProvider):
     name = 'NYSIIS'
     title = 'New York State Identification and Intelligence System'
     type = None
+    tags = ['strings', 'names']
     args = []
 
     def apply(self, s1, s2):
@@ -150,6 +156,7 @@ class MatchSlice(AlgorithmProvider):
     name = 'SLICE_MATCH'
     title = 'Substring match'
     type = None
+    tags = ['strings', 'names', 'dates']
     args = ['start', 'end']
 
     def apply(self, s1, s2, start=0, end=0):
@@ -176,6 +183,7 @@ class MatchHead(AlgorithmProvider):
     name = 'HEAD_MATCH'
     title = 'First n characters'
     type = None
+    tags = ['strings', 'names', 'dates']
     args = ['n']
 
     def apply(self, s1, s2, n=0):
@@ -200,6 +208,7 @@ class MatchTail(AlgorithmProvider):
     name = 'TAIL_MATCH'
     title = 'Last n characters'
     type = None
+    tags = ['strings', 'names', 'dates']
     args = ['n']
 
     def apply(self, s1, s2, n=0):
@@ -224,6 +233,7 @@ class FixedLength(AlgorithmProvider):
     name = 'FIXED_LEN'
     title = 'Exact string-length'
     type = None
+    tags = ['strings', 'names', 'dates']
     args = ['length']
 
     def apply(self, s1, s2, length=0):
@@ -247,6 +257,7 @@ class FixedValue(AlgorithmProvider):
     name = 'FIXED_VAL'
     title = 'Field Specific Value'
     type = None
+    tags = ['all']
     args = ['value']
 
     def apply(self, s1, s2, value):
@@ -269,6 +280,7 @@ class AbsoluteDifference(AlgorithmProvider):
     name = 'ABS_DIFF'
     title = 'Absolute difference'
     type = None
+    tags = ['numeric']
     args = ['threshold']
 
     def apply(self, s1, s2, threshold=0):
