@@ -19,6 +19,8 @@ $('#form-steps-container').on('click', '.blocking-vars .block-var-create', funct
 
     $("#" + div_id + " tbody").append(row_html);
 
+    $('#form-steps-container .blocking-vars select').select2({width: 'none'});
+
     return false;
 });
 
@@ -63,6 +65,8 @@ $('#form-steps-container').on('click', '.linking-vars .link-var-create', functio
              + '<div class="alg-arg"></div>';
 
     $("#" + div_id + " .link-vars-container").append(row_html);
+
+    $('#form-steps-container .linking-vars select').select2({width: 'none'});
 
     return false;
 });

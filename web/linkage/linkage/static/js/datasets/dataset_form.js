@@ -27,5 +27,5 @@ $(function () {
         var field_type = data_types[field_name] || header_types[field_name];
         $(this).val(field_type);
     });
-
+    $('select').select2({width: 'none'});
 });

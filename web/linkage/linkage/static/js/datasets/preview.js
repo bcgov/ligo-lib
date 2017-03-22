@@ -2,6 +2,7 @@ $(function () {
     $.ajaxSetup({
         headers: { "X-CSRFToken": Cookies.get('csrftoken') }
     });
+    $('select').select2();
 });
 
 function preview() {

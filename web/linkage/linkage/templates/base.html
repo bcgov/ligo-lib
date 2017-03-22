@@ -22,13 +22,15 @@
         <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
 
         <!-- Your stuff: Third-party CSS libraries go here -->
+        <link rel="stylesheet" href="{% static 'css/select2/select2.min.css' %}">
+        <link rel="stylesheet" href="{% static 'css/select2/select2-bootstrap.min.css' %}">
 
         <!-- This file stores project-specific CSS -->
         <link href="{% static 'css/project.css' %}" rel="stylesheet">
         <link rel="stylesheet" href="{% static 'css/datasets.css' %}">
         <link href="{% static 'css/toggle_switch.css' %}" rel="stylesheet">
     {% endblock %}
-
+    {{ form.media.css }}
 </head>
 
 <body>
@@ -102,6 +104,7 @@
     <script src="{% static 'js/bootstrap/bootstrap.min.js' %}"></script>
 
     <!-- Your stuff: Third-party javascript libraries go here -->
+    <script src="{% static 'js/select2/select2.full.min.js' %}"></script>
 
     <!-- place project specific Javascript in this file -->
 
@@ -109,6 +112,7 @@
 
 
 {% endblock javascript %}
+{{ form.media.js }}
 </body>
 </html>
 

@@ -15,3 +15,10 @@
             </div>
         </form>
 {%  endblock %}
+
+{% block javascript %}
+    {{ block.super }}
+    <script type="text/javascript">
+        $('select').select2({width: 'none'});
+   </script>
+{% endblock %}

@@ -26,6 +26,7 @@ urlpatterns = [
     # Datsets Linking
     url(r'^linking/', include('linkage.linking.urls', namespace='linking')),
 
+
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
 if settings.DEBUG:

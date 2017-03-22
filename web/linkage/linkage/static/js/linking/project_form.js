@@ -14,7 +14,7 @@ $(function () {
     $('.step-seq').each(function(index) {
         $(this).val(index + 1);
     });
-
+    $('select').select2({width: 'none'});
 });
 
 function getLeftHeader() {
@@ -304,6 +304,8 @@ $("#step-create").click(function() {
     $('#id_steps-TOTAL_FORMS').val(count+1);
     $("#id_steps-" + count +"-DELETE").hide();
     $("#id_steps-" + count +"-seq").val(count+1);
+
+    $('#form-step-' + count + ' .link-method').select2({width: 'none'});
     return false
 });
 

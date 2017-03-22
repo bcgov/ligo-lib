@@ -12,6 +12,7 @@ from django.forms import (ModelForm,
                           CheckboxInput)
 
 from django.utils.translation import ugettext_lazy as _
+
 from .models import LinkingProject, LinkingStep, PROJECT_TYPES
 from linkage.datasets.models import Dataset
 
@@ -126,7 +127,7 @@ LinkingStepFormset = inlineformset_factory(
         'blocking_schema': HiddenInput(),
         'linking_schema': HiddenInput(),
         'group': CheckboxInput(attrs={'class': 'ios-toggle toggle-info form-control'}),
-        'linking_method': Select(attrs={'class': 'link-method form-control'}),
+        'linking_method': Select(attrs={'class': 'form-control link-method'}),
     },
     labels={
         'seq': _('Sequence'),
