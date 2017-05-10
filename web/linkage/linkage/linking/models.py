@@ -31,33 +31,6 @@ BLOKING_COMPARISONS = (
     ('NYSIIS', 'New York State Identification and Intelligence System'),
 )
 
-LINKING_COMPARISONS = (
-    ('EXACT', 'Exact'),
-    ('SOUNDEX', 'Soundex'),
-    ('NYSIIS', 'New York State Identification and Intelligence System'),
-    ('LEVENSHTEIN', 'Levenshtein'),
-    ('JARO_WINKLER', 'Jaro-Winkler'),
-    ('SLICE_MATCH', 'Substring match'),
-    ('HEAD_MATCH', 'First n characters'),
-    ('TAIL_MATCH', 'Last n characters'),
-    ('FIXED_LEN', 'Exact string-length'),
-    ('FIXED_VAL', 'Field Specific Value'),
-    ('ABS_DIFF', 'Absolute difference'),
-)
-
-# Contains a list of arguments for each comparison algorithm
-COMPARISON_ARGS = {
-    'LEVENSHTEIN': ['max_edits'],
-    'JARO_WINKLER':  ['threshold'],
-    'SLICE_MATCH': ['start', 'end'],
-    'HEAD_MATCH': ['n'],
-    'TAIL_MATCH': ['n'],
-    'FIXED_LEN': ['length'],
-    'FIXED_VAL': ['value'],
-    'ABS_DIFF': ['threshold']
-}
-
-
 PROJECT_STATUS = (
     ('DRAFT', 'DRAFT'),
     ('READY', 'Ready'),
@@ -109,5 +82,3 @@ class LinkingStep(models.Model):
 
     class Meta:
         ordering = ['seq']
-
-

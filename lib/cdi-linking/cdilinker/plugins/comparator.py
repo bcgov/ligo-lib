@@ -1,3 +1,5 @@
+from __future__ import print_function
+
 import numpy as np
 import pandas as pd
 
@@ -7,7 +9,7 @@ from ..linker.algorithms import get_algorithms
 CMP_ALGORITHMS = get_algorithms(types=['PRB', None])
 
 
-class Comparator:
+class Comparator(metaclass=PluginMount):
     """
     Singleton Mount point for plugins that provide algorithms to calculate comparison weights of two given sets based
     on the filed type(i.e First name, Last name, Date of Birth or SIN fields).
@@ -23,7 +25,6 @@ class Comparator:
         the coutcome on a true unmatched pair.
 
     """
-    __metaclass__ = PluginMount
 
     def compare(self, s1, s2, compare_fn, **args):
         # Lookup comparison function

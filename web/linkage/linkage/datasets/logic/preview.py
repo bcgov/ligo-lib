@@ -1,8 +1,20 @@
+from __future__ import print_function
+
 import pandas as pd
 import random
 import numpy as np
 from django.conf import settings
 
+PD_PSQL_TYPE_MAP = {
+    "object"    : "VARCHAR",
+    "int64"     : "INTEGER",
+    "float64"   : "REAL",
+    "bool"      : "BOOLEAN",
+    "int8"      : "SMALLINT"
+}
+import logging
+logging.basicConfig(level=logging.DEBUG)
+logger = logging.getLogger(__name__)
 
 class Previewer(object):
 
@@ -28,9 +40,9 @@ class CSV_Previewer(Previewer):
 
     def preview(self, criteria='head', limit=100):
 
-        #from io import StringIO
+        from io import StringIO
         # in Python 2 use
-        from StringIO import StringIO
+        #from StringIO import StringIO
 
         def load_with_buffer(filename, skip, **kwargs):
             s_buf = StringIO()
@@ -59,7 +71,6 @@ class CSV_Previewer(Previewer):
 
         if self.filename is None:
             raise IOError('Dataset filename is missing')
-            return None
 
 
         # Load the csv file
@@ -70,12 +81,15 @@ class CSV_Previewer(Previewer):
             limit = self.row_count
 
         # Mapping of row selection criteria to the selecting functions.
+        # does not sound right for limit > self.row_count case mentioned above
+        # I guess that scenario has never been tested.
         selection = {
             'head': range(limit + 1, self.row_count + 1),
             'tail': range(1, self.row_count - limit),
-            'rand': sorted(random.sample(xrange(1, self.row_count + 1), self.row_count - limit))
+            'rand': sorted(random.sample(range(1, self.row_count + 1), self.row_count - limit))
         }
         skip_list = selection.get(criteria, None)
+        logger.debug("******************skip_list {0}****************************".format(skip_list))
 
         skip_list = np.asarray(skip_list, dtype=np.int64)
         # MAX >= number of rows in the file
@@ -87,8 +101,8 @@ class CSV_Previewer(Previewer):
         result = result.replace(np.nan, '', regex=True)
         header_types = {}
 
-        for (key, value) in result.dtypes.iteritems():
-            header_types[key] = value.name
+        for (key, value) in result.dtypes.items():
+            header_types[key] = PD_PSQL_TYPE_MAP.get(value.name)
         return {
             'len': self.row_count,
             'header': list(result),
@@ -99,5 +113,3 @@ class CSV_Previewer(Previewer):
 
 def get_preview(filename, data_format):
     return Previewer.create_previewer(filename, data_format)
-
-

@@ -5,6 +5,14 @@ from .models import LinkingProject, LinkingDataset
 
 def project_to_json(name):
 
+    def get_column_dict(data_dict, columns):
+        columns_dict = {}
+        if data_dict:
+            for (key, value) in data_dict.items():
+                if key in columns:
+                    columns_dict[key] = value
+        return columns_dict
+
     project = LinkingProject.objects.get(name=name)
     project_json = model_to_dict(project)
 
@@ -19,13 +27,8 @@ def project_to_json(name):
 
     if len(datasets) > 0:
         datasets[0]['columns'] = left_columns
-        data_types = datasets[0]['data_types']
-        if data_types:
-            selected_types = {}
-            for (key, value) in data_types.iteritems():
-                if key in left_columns:
-                    selected_types[key] = value
-            datasets[0]['data_types'] = selected_types
+        datasets[0]['data_types'] = get_column_dict(datasets[0]['data_types'], left_columns)
+        datasets[0]['field_cats'] = get_column_dict(datasets[0]['field_cats'], left_columns)
 
     if len(datasets) > 1 and project.type == 'LINK':
         right_link = LinkingDataset.objects.get(link_project=project, link_seq=2)
@@ -35,13 +38,8 @@ def project_to_json(name):
             right_columns = []
 
         datasets[1]['columns'] = right_columns
-        data_types = datasets[1]['data_types']
-        if data_types:
-            selected_types = {}
-            for (key, value) in data_types.iteritems():
-                if key in right_columns:
-                    selected_types[key] = value
-            datasets[1]['data_types'] = selected_types
+        datasets[1]['data_types'] = get_column_dict(datasets[1]['data_types'], right_columns)
+        datasets[0]['field_cats'] = get_column_dict(datasets[1]['field_cats'], right_columns)
 
     for dataset in project_json.get('datasets', []):
         dataset['url'] = settings.DATASTORE_URL + dataset['url']

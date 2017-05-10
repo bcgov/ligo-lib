@@ -29,7 +29,7 @@ class DatasetUpdateForm(DatasetForm):
 
     class Meta(DatasetForm.Meta):
 
-        fields = DatasetForm.Meta.fields + ['index_field', 'entity_field', 'data_types']
+        fields = DatasetForm.Meta.fields + ['index_field', 'entity_field', 'data_types', 'field_cats']
 
     def __init__(self, *args, **kwargs):
         super(DatasetUpdateForm, self).__init__(*args, **kwargs)
@@ -51,6 +51,7 @@ class DatasetUpdateForm(DatasetForm):
                     widget=Select(attrs={'class': 'form-control'}))
 
                 self.fields['data_types'].widget = HiddenInput()
+                self.fields['field_cats'].widget = HiddenInput()
 
             except Dataset.DoesNotExist:
                 pass

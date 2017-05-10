@@ -1,3 +1,5 @@
+from __future__ import print_function
+
 import os
 import json
 from django.shortcuts import render
@@ -7,6 +9,8 @@ from django.db import transaction
 from django.core.urlresolvers import reverse
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views.generic import ListView, CreateView, UpdateView, DeleteView
+from django.contrib.auth.decorators import login_required
+from django.views.decorators.csrf import csrf_protect
 
 from cdilinker.linker.algorithms import get_algorithms
 from .models import (LinkingProject,
@@ -15,20 +19,23 @@ from .models import (LinkingProject,
 from .forms import LinkingForm, DedupForm, LinkingStepFormset, ProjectTypeForm
 from linkage.datasets.models import Dataset
 from .tasks import run_task
-from utils import project_to_json
+from linkage.linking.utils import project_to_json
+import logging
+logging.basicConfig(level=logging.DEBUG)
+logger = logging.getLogger(__name__)
 
 tsf_alg = get_algorithms(types=['TSF'])
 dtr_alg = get_algorithms(types=['DTR', None])
 prb_alg = get_algorithms(types=['PRB', None])
 
-BLOKING_COMPARISONS = tuple((k, v.title) for k, v in tsf_alg.iteritems())
+BLOKING_COMPARISONS = tuple((k, v.title) for k, v in tsf_alg.items())
 COMPARISON_ARGS = {
-    'DTR': dict((k, v.args) for k, v in dtr_alg.iteritems()),
-    'PRB': dict((k, v.args) for k, v in prb_alg.iteritems())
+    'DTR': dict((k, v.args) for k, v in dtr_alg.items()),
+    'PRB': dict((k, v.args) for k, v in prb_alg.items())
 }
 LINKING_COMPARISONS = {
-    'DTR': tuple((k, v.title) for k, v in dtr_alg.iteritems()),
-    'PRB': tuple((k, v.title) for k, v in prb_alg.iteritems())
+    'DTR': tuple((k, v.title) for k, v in dtr_alg.items()),
+    'PRB': tuple((k, v.title) for k, v in prb_alg.items())
 }
 
 def select_type(request):
@@ -290,6 +297,8 @@ class LinkingProjectDeleteView(LoginRequiredMixin, DeleteView):
 
 
 @transaction.non_atomic_requests
+@csrf_protect
+@login_required
 def execute(request, name):
     '''
     Runs a linking/De-Diplication job in background without blocking user actions.
@@ -299,7 +308,6 @@ def execute(request, name):
     '''
     project_json = project_to_json(name)
     task = run_task.delay(name, project_json)
-    print "Task Id: {0}".format(task.task_id)
     return HttpResponseRedirect(reverse('linking:list'))
 
 
@@ -309,14 +317,15 @@ def view_results(request, name):
         project_type = {'LINK': 'Linking', 'DEDUP': 'De-Duplication'}.get(project.type, '')
         results_file = project.results_file
         file_path = settings.OUTPUT_URL + results_file
-
+        logger.debug(file_path)
+        #Adding file name for ease of debugging
         if not os.path.exists(file_path):
             message = project_type \
                       + ' Results summary file was not found. The file must have been deleted. ' \
                       + 'Please rerun the project to genereate the file.'
             return render(request, 'linking/linking_errors.html', {'message': message})
 
-        with open(file_path, 'r') as report:
+        with open(file_path, 'r+b') as report: #Binary mode should be specified in Python 3 otherwise we would get enconding error
             response = HttpResponse(report.read(), content_type='application/pdf')
             response['Content-Disposition'] = 'inline;filename=' + results_file
             return response

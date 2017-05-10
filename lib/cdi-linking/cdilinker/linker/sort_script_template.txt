@@ -1,0 +1,14 @@
+#!/bin/sh
+tail -n +2 $filename | split -l $chunksize - file_chunk_
+for i in file_chunk_*; do sort -t',' $sort_cols $$i > sorted_chunk_$${i}; done
+sort -m -t',' $sort_cols sorted_chunk_* > final_sorted_file.csv
+rm file_chunk_*
+rm sorted_chunk_*
+if [ -f $appendfile ]
+then
+    cat final_sorted_file.csv >> $appendfile
+else
+    head -n 1 $filename | cat - final_sorted_file.csv > $appendfile
+fi
+
+rm final_sorted_file.csv

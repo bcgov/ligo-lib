@@ -1,5 +1,6 @@
 
-from __future__ import absolute_import
+from __future__ import absolute_import, print_function
+
 import os
 from celery import Celery
 from django.apps import apps, AppConfig

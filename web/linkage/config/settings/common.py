@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/dev/ref/settings/
 from __future__ import absolute_import, unicode_literals
 
 import environ
+import os
 
 ROOT_DIR = environ.Path(__file__) - 3  # (linkage/config/settings/common.py - 3 = linkage/)
 APPS_DIR = ROOT_DIR.path('linkage')
@@ -49,6 +50,7 @@ LOCAL_APPS = (
     # Your stuff: custom apps go here
     'linkage.datasets.apps.DatasetsConfig',
     'linkage.linking.apps.LinkingConfig',
+
 )
 
 # See: https://docs.djangoproject.com/en/dev/ref/settings/#installed-apps
@@ -102,7 +104,17 @@ MANAGERS = ADMINS
 # ------------------------------------------------------------------------------
 # See: https://docs.djangoproject.com/en/dev/ref/settings/#databases
 DATABASES = {
-    'default': env.db('DATABASE_URL', default='postgres:///linkage'),
+    #'default': env.db('DATABASE_URL', default='postgres:///linkage'),
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        #'NAME': 'linkage',
+        'NAME': 'postgres',  #this is because i am using alpine linux based postgres doccker image
+        #... did not build it from custom docker file to set a different db like linkage
+        #by deafult available db is postgres
+        'USER': 'postgres',
+        'HOST': 'postgres2',
+        'PORT': 5432,
+    }
 }
 DATABASES['default']['ATOMIC_REQUESTS'] = True
 
@@ -192,8 +204,8 @@ STATICFILES_FINDERS = (
 # MEDIA CONFIGURATION
 # ------------------------------------------------------------------------------
 # See: https://docs.djangoproject.com/en/dev/ref/settings/#media-root
-MEDIA_ROOT = str(APPS_DIR('media'))
-
+#print(ROOT_DIR)
+MEDIA_ROOT = os.path.join('/user_data', 'media')
 # See: https://docs.djangoproject.com/en/dev/ref/settings/#media-url
 MEDIA_URL = '/media/'
 
@@ -267,5 +279,7 @@ ADMIN_URL = r'^admin/'
 # ------------------------------------------------------------------------------
 
 # Data Store URL
+#print(MEDIA_ROOT)
 DATASTORE_URL = env('LINKING_DATASTORE_URL', default=MEDIA_ROOT + '/datasets/')
-OUTPUT_URL = env('LINKING_OUTPUT_URL', default=MEDIA_ROOT + '/linking/')
+#print(DATASTORE_URL)
+OUTPUT_URL = env('LINKING_OUTPUT_URL', default=MEDIA_ROOT  + '/linking/')

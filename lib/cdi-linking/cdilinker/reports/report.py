@@ -1,11 +1,17 @@
+from __future__ import print_function
+
 from jinja2 import Environment, PackageLoader
 from cdilinker.linker.base import LINKING_RELATIONSHIPS, LINKING_METHODS
 
 from xhtml2pdf import pisa
+import logging
+
+logging.basicConfig(level=logging.DEBUG)
+logger = logging.getLogger(__name__)
 
 
 def generate_linking_summary(data, dest_dir='.'):
-    print "Genrating summary report..."
+    print("Genrating summary report...")
     project = data.project
     jenv = Environment(loader=PackageLoader('cdilinker.reports', 'templates'))
 
@@ -49,9 +55,12 @@ def generate_linking_summary(data, dest_dir='.'):
 
     html_out = template.render(template_vars)
 
-    report_file_name = dest_dir + "/" + project['name'] + "_summary.pdf"
-
+    # removing extra / from file path; depends on django media_root setting in common.py though
+    report_file_name = dest_dir + project['name'] + "_summary.pdf"
     report_file = open(report_file_name, "w+b")
-    pisa.CreatePDF(html_out.encode('utf-8'), dest=report_file, encoding='utf-8')
-
+    logger.debug(report_file)
+    try:
+        pisa.CreatePDF(html_out.encode('utf-8'), dest=report_file, encoding='utf-8')
+    except e:
+        logger.debug(e)
     return project['name'] + "_summary.pdf"

@@ -1,3 +1,6 @@
+#We are not using this one - using Alpine Linux based one. And we are getting Alpine based on
+#in the docker-compose file
+
 FROM postgres:9.6
 
 # add backup scripts

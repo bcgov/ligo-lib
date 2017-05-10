@@ -1,29 +1,19 @@
+from __future__ import print_function
+
 import sys
 import pandas as pd
 import numpy as np
 
-from ..plugins.base import AlgorithmProvider
+from cdilinker.plugins.base import AlgorithmProvider
 
 from jellyfish import (
     soundex,
     nysiis
 )
 
-
-def get_algorithms(types=[None]):
-    """
-    Returns the list of provided algorithms of a given type.
-    :param type: Type of the algorithms
-    :return: List of available algorithms of the given type.
-    """
-    all_alg = [alg() for alg in AlgorithmProvider.plugins]
-
-    algorithms = {}
-    for alg in all_alg:
-        if alg.type in types:
-            algorithms[alg.name] = alg
-
-    return algorithms
+import logging
+logging.basicConfig(level=logging.DEBUG)
+logger = logging.getLogger(__name__)
 
 
 def utf_encode(col):
@@ -67,15 +57,6 @@ class NyiisEncoding(AlgorithmProvider):
     def apply(self, s):
         s = utf_encode(s)
         return s.apply(lambda x: nysiis(x) if pd.notnull(x) else np.nan)
-
-
-TRANSFORMATIONS = get_algorithms(types=['TSF'])
-
-
-def apply_encoding(s, method='EXACT'):
-
-    alg = TRANSFORMATIONS.get(method)
-    return alg.apply(s)
 
 
 class ExactComparsion(AlgorithmProvider):
@@ -292,6 +273,22 @@ class AbsoluteDifference(AlgorithmProvider):
         return d.apply(fn, args=(threshold,))
 
 
+AVAILABLE_ALGORITHMS = [alg() for alg in AlgorithmProvider.plugins]
+
+def get_algorithms(types=[None]):
+    """
+    Returns the list of provided algorithms of a given type.
+    :param type: Type of the algorithms
+    :return: List of available algorithms of the given type.
+    """
+    algorithms = {}
+    for alg in AVAILABLE_ALGORITHMS:
+        if alg.type in types:
+            algorithms[alg.name] = alg
+
+    return algorithms
+
+
 DETERMINISTIC_COMPARISONS = get_algorithms(types=['DTR', None])
 
 
@@ -299,3 +296,14 @@ def apply_comparison(s1, s2, method='EXACT', **args):
     alg = DETERMINISTIC_COMPARISONS.get(method)
 
     return alg.apply(s1, s2, **args)
+
+
+TRANSFORMATIONS = get_algorithms(types=['TSF'])
+
+
+def apply_encoding(s, method='EXACT'):
+
+    alg = TRANSFORMATIONS.get(method)
+    return alg.apply(s)
+
+

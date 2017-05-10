@@ -11,12 +11,12 @@ from django.contrib.postgres.fields import JSONField
 
 
 COPLUMN_TYPES = (
-    ('bool', 'Boolean'),
-    ('float64', 'Float'),
-    ('int64', 'Integer'),
-    ('int8', 'Small Integer'),
-    ('object', 'String'),
+    ('BOOLEAN', 'Boolean'),
+    ('REAL', 'Float'),
+    ('INTEGER', 'Integer'),
+    ('VARCHAR', 'String'),
 )
+
 
 @python_2_unicode_compatible
 class Dataset(models.Model):
@@ -37,6 +37,7 @@ class Dataset(models.Model):
     url = models.CharField(_('Name of the dataset file'), max_length=255)
 
     data_types = JSONField(blank=True, null=True)
+    field_cats = JSONField(blank=True, null=True)
 
     class Meta:
         ordering = ['id']
@@ -51,7 +52,7 @@ class Dataset(models.Model):
 
     def get_fields(self):
         if self.data_types:
-            return self.data_types.keys()
+            return list(self.data_types.keys())
         else:
             file_path = settings.DATASTORE_URL + self.url
             df = pd.read_csv(file_path, nrows=1)

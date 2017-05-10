@@ -1,3 +1,9 @@
+from __future__ import print_function
+
+import logging
+logging.basicConfig(level=logging.DEBUG)
+logger = logging.getLogger(__name__)
+
 '''
 Forked from : `A Simple Plugin Framework <http://martyalchin.com/2008/jan/10/simple-plugin-framework/>`__ by
 Marty Alchin.
@@ -27,11 +33,11 @@ class PluginMount(type):
             # This must be a plugin implementation, which should be registered.
             # Simply appending it to the list is all that's needed to keep
             # track of it later.
-            print 'Adding new plugin class: {0} type: {1}.'.format(cls.name , cls.type)
+            print ('Adding new plugin class: {0}.'.format(cls.name))
             cls.plugins.append(cls)
 
 
-class AlgorithmProvider:
+class AlgorithmProvider(metaclass=PluginMount):
     """
     Singleton Mount point for plugins that provide comparison/matching algorithms for linking/De-Duplication jobs.
     Plugins implementing this reference should provide the following properties:
@@ -47,10 +53,8 @@ class AlgorithmProvider:
 
     """
 
-    __metaclass__ = PluginMount
-
     def apply(self, args):
-        raise NotImplementedError
+        raise NotImplementedError('Abstarct method. No implementation.')
 
 def load_plugins():
     '''

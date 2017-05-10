@@ -41,12 +41,14 @@ django-redis==4.7.0
 redis>=2.10.5
 
 
-
-
-
 # Your custom requirements go here
 weasyprint>=0.34
 
 celery==3.1.24
 
-
+pandas>=0.19.2"
+jellyfish>=0.5.6
+jinja2>=2.8.1
+html5lib==1.0b10
+xhtml2pdf>=0.1b2
+Flask-SQLAlchemy>=2.2

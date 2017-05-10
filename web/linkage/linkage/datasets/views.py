@@ -1,4 +1,4 @@
-from __future__ import absolute_import, unicode_literals
+from __future__ import absolute_import, print_function
 
 import json
 from django.core.urlresolvers import reverse
@@ -14,7 +14,14 @@ from .models import Dataset, COPLUMN_TYPES
 from .logic.preview import get_preview
 from .forms import DatasetForm, DatasetUpdateForm
 
-# Create your views here.
+import logging
+logging.basicConfig(level=logging.DEBUG)
+logger = logging.getLogger(__name__)
+
+
+from cdilinker.linker.base import FIELD_CATEGORIES
+
+FIELD_CATS = tuple((item.name, item.title) for item in FIELD_CATEGORIES)
 
 class DatasetPreviewMixin(object):
 
@@ -28,7 +35,6 @@ class DatasetPreviewMixin(object):
     @property
     def preview(self):
 
-        print self.data_format
         previewer = get_preview(self.filename, self.data_format)
         result = previewer.preview('head', 25)
         return {
@@ -40,7 +46,6 @@ class DatasetPreviewMixin(object):
 
     def get_context_data(self, **kwargs):
         context = super(DatasetPreviewMixin, self).get_context_data(**kwargs)
-        print context['object'].url
         self.data_format = 'csv'
         self.filename = context['object'].url
 
@@ -70,7 +75,9 @@ class DatasetUpdateView(LoginRequiredMixin, UpdateView):
         data = super(DatasetUpdateView, self).get_context_data(**kwargs)
         if not self.request.POST:
             data['data_types'] = self.object.data_types
+            data['field_cats'] = self.object.field_cats
             data['COPLUMN_TYPES'] = COPLUMN_TYPES
+            data['FIELD_CATS'] = FIELD_CATS
             previewer = get_preview(self.object.url, 'csv')
             result = previewer.preview('head', 4)
             data['columns'] = result['header']
@@ -106,12 +113,8 @@ def dataset_preview(request):
     filename = request.POST.get('filename')
     limit = request.POST.get('limit')
     criteria = request.POST.get('criteria')
-    print criteria
-    print 'Limit : {0}'.format(limit)
     previewer = get_preview(filename, 'csv')
     result = previewer.preview(criteria, int(limit))
-    from pprint import pprint
-    print len(result['rows'])
     data = {
         'header': result['header'],
         'rows': result['rows'],
@@ -123,12 +126,12 @@ def dataset_preview(request):
 @login_required
 def dataset_header(request):
     id = request.GET.get('id', '')
-    print "Dataset id : {}".format(id)
     try:
         dataset = Dataset.objects.get(pk=id)
         fields = dataset.get_fields()
-    except Dataset.DoesNotExist:
+    except Dataset.DoesNotExist as db_err:
+        fields = None
+    except ValueError as value_err:
         fields = None
 
     return HttpResponse(json.dumps({'header': fields}), content_type="application/json")
-
