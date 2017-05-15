@@ -156,7 +156,6 @@ class LinkBase(object):
             args = fn.get('args') or {}
             print ("Left : {0}, Right: {1}, Args: {2} ".format(left, right, fn))
             result = self._compare(pairs, left, right, method, **args)
-
             pairs['matched'] &= result
 
         pairs = pairs.loc[lambda df: df.matched == 1, :]

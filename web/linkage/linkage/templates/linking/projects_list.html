@@ -31,6 +31,11 @@
                         <i class="glyphicon glyphicon-export"></i>
                     </a>
                 {% endif %}
+                {% if project.status == 'RUNNING' %}
+                    <a class="project-exec" href="{% url 'linking:stop_project' project.name %}" data-toggle="tooltip" title="Stop Project">
+                        <i class="glyphicon glyphicon-stop"></i>
+                    </a>
+                {% endif %}
             </td>
             <td class="action-cell">
                 <a href="{% url 'linking:edit'  project.type project.name %}" data-toggle="tooltip" title="Edit Project">

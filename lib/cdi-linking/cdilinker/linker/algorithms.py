@@ -12,6 +12,7 @@ from jellyfish import (
 )
 
 import logging
+
 logging.basicConfig(level=logging.DEBUG)
 logger = logging.getLogger(__name__)
 
@@ -77,6 +78,41 @@ class ExactComparsion(AlgorithmProvider):
         x[s1 == s2] = 1
 
         return x
+
+
+def comp(s1, s2, empty_sum=2):
+    x = s1.apply(lambda x: 1 if pd.isnull(x) or len(str(x)) == 0 else 0)
+    y = s2.apply(lambda x: 1 if pd.isnull(x) or len(str(x)) == 0 else 0)
+    z = pd.concat([x, y], axis=1)
+    return z.apply(lambda x: 1 if x[0] + x[1] == empty_sum else 0, axis=1)
+
+
+class BothEmpty(AlgorithmProvider):
+    name = 'BOTH_EMPTY'
+    title = 'Both values empty'
+    type = None
+    args = []
+
+    def apply(self, s1, s2):
+        return comp(s1, s2, empty_sum=2)
+
+class OneEmpty(AlgorithmProvider):
+    name = 'ONE_EMPTY'
+    title = 'One value should be empty'
+    type = None
+    args = []
+
+    def apply(self, s1, s2):
+        return comp(s1, s2, empty_sum=1)
+
+class BothExist(AlgorithmProvider):
+    name = 'BOTH_EXIST'
+    title = 'Both values exist'
+    type = None
+    args = []
+
+    def apply(self, s1, s2):
+        return comp(s1, s2, empty_sum=0)
 
 
 class SoundexComparison(AlgorithmProvider):
@@ -256,7 +292,6 @@ class FixedValue(AlgorithmProvider):
         return x
 
 
-
 class AbsoluteDifference(AlgorithmProvider):
     name = 'ABS_DIFF'
     title = 'Absolute difference'
@@ -274,6 +309,7 @@ class AbsoluteDifference(AlgorithmProvider):
 
 
 AVAILABLE_ALGORITHMS = [alg() for alg in AlgorithmProvider.plugins]
+
 
 def get_algorithms(types=[None]):
     """
@@ -302,8 +338,5 @@ TRANSFORMATIONS = get_algorithms(types=['TSF'])
 
 
 def apply_encoding(s, method='EXACT'):
-
     alg = TRANSFORMATIONS.get(method)
     return alg.apply(s)
-
-

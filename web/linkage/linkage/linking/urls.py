@@ -52,4 +52,9 @@ urlpatterns = [
         view=views.export_to_json,
         name='export'
     ),
+    url(
+        regex=r'stop/(?P<name>[\w.@+-]+)$',
+        view=views.stop_project,
+        name='stop_project'
+    ),
 ]

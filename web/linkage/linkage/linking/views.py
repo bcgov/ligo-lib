@@ -333,6 +333,22 @@ def view_results(request, name):
         return HttpResponseRedirect(reverse('linking:list'))
 
 
+def stop_project(request, name):
+    try:
+        project = LinkingProject.objects.get(name=name)
+        project.status = 'READY'
+        project.save()
+
+    except Exception as e:
+
+        if project is not None:
+            project.status = 'FAILED'
+            project.comments = 'Project Stop Failed.'
+            project.save()
+
+    return HttpResponseRedirect(reverse('linking:list'))
+
+
 def export_to_json(request, name):
 
     project_json = project_to_json(name)
