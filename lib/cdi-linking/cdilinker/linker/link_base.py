@@ -29,6 +29,12 @@ class LinkBase(object):
         cls.id += 1
         return cls.id
 
+    def validate(self, project):
+
+        errors = []
+
+        # Check project type.
+
     def __init__(self, project):
         self.project = project
         self.project_type = project['type']

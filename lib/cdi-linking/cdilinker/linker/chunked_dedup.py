@@ -82,6 +82,10 @@ class DeDeupProject(LinkBase):
         link_index = pd.Index([], name='REC_ID')
         left_index = 'LEFT_' + self.left_index
         right_index = 'RIGHT_' + self.right_index
+
+        if not os.path.exists(matched_file) or os.path.getsize(matched_file) == 0:
+            return 0
+
         matched_reader = pd.read_csv(matched_file,
                                      index_col=[left_index, right_index], chunksize=CHUNK_SIZE)
 
