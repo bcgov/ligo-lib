@@ -16,16 +16,17 @@ def project_to_json(name):
     project = LinkingProject.objects.get(name=name)
     project_json = model_to_dict(project)
 
+    link_datasets = project.linkingdataset_set.all().order_by('link_seq')
     project_json['steps'] = [model_to_dict(step) for step in project.steps.all()]
-    project_json['datasets'] = [model_to_dict(dataset) for dataset in project.datasets.all()]
+    project_json['datasets'] = [model_to_dict(rec.dataset) for rec in link_datasets]
     datasets = project_json['datasets']
-    left_link = LinkingDataset.objects.get(link_project=project, link_seq=1)
-    try:
-        left_columns = json.loads(left_link.columns) or []
-    except:
-        left_columns = []
-
     if len(datasets) > 0:
+        left_link = LinkingDataset.objects.get(link_project=project, link_seq=1)
+        try:
+            left_columns = json.loads(left_link.columns) or []
+        except:
+            left_columns = []
+
         datasets[0]['columns'] = left_columns
         datasets[0]['data_types'] = get_column_dict(datasets[0]['data_types'], left_columns)
         datasets[0]['field_cats'] = get_column_dict(datasets[0]['field_cats'], left_columns)

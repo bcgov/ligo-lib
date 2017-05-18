@@ -194,12 +194,14 @@ class ProjectUpdateMixin(object):
             left_link = LinkingDataset.objects.get(link_project=self.object, link_seq=1)
             if left_link:
                 left_link.columns = form.cleaned_data['left_columns']
+                left_link.dataset = Dataset.objects.get(pk=form.cleaned_data['left_data'].pk)
                 left_link.save()
 
             if self.object.type == 'LINK':
                 right_link = LinkingDataset.objects.get(link_project=self.object, link_seq=2)
                 if right_link:
                     right_link.columns = form.cleaned_data['right_columns']
+                    right_link.dataset = Dataset.objects.get(pk=form.cleaned_data['right_data'].pk)
                     right_link.save()
 
         return super(ProjectUpdateMixin, self).form_valid(form)
