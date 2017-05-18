@@ -8,6 +8,8 @@ import pandas as pd
 from .algorithms import apply_encoding, apply_comparison
 from .base import (CHUNK_SIZE, _save_pairs)
 
+from validation import LinkError
+
 import logging
 logging.basicConfig(level=logging.DEBUG)
 logger = logging.getLogger(__name__)
@@ -32,8 +34,20 @@ class LinkBase(object):
     def validate(self, project):
 
         errors = []
+        if project is None:
+            errors.append(LinkError.NO_PROJECT)
 
-        # Check project type.
+        # Validate project type.
+        if 'type' not in project:
+            errors.append(LinkError.TYPE_MISSING)
+        elif project['type'] not in ['DEDUP', 'LINK']:
+            errors.append(LinkError.INVALID_TYPE)
+
+        # Validate project output directory
+        if 'output_root' not in project:
+            errors.append(LinkError.OUT_PATH_MISSING)
+
+        return errors
 
     def __init__(self, project):
         self.project = project

@@ -14,6 +14,7 @@ logger = logging.getLogger(__name__)
 
 
 class DeDeupProject(LinkBase):
+
     def __init__(self, project):
         super(DeDeupProject, self).__init__(project)
         self.project_type = 'DEDUP'
@@ -33,6 +34,15 @@ class DeDeupProject(LinkBase):
         data_dict['dataset'] = dataset['name']
 
         return json.dumps(data_dict, indent=4)
+
+    def validate(self, project):
+        from validation import  LinkError
+
+        errors = super(DeDeupProject, project)
+
+        # Check project datasets
+        if 'datasets' not in project or type(project['datasets'] is not list):
+            errors.append(LinkError.NO_DATASETS)
 
     def _save_linked_data(self, data, append=False):
 

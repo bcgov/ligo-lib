@@ -5,11 +5,15 @@ class LinkError(Exception):
     NO_PROJECT = 'NO_PROJECT'
     INVALID_TYPE = 'INVALID_TYPE'
     TYPE_MISSING = 'TYPE_MISSING'
+    OUT_PATH_MISSING = 'OUT_PATH_MISSING'
+    NO_DATASETS = 'NO_DATASETS'
 
     ERROR_MESSAGES = {
         NO_PROJECT: 'No project is provided. Project cannot be empty.',
         INVALID_TYPE: 'Invalid project type. Project type should be either LINK or DEDUP.',
-        TYPE_MISSING: 'Project type is missing.'
+        TYPE_MISSING: 'Project type is missing.',
+        OUT_PATH_MISSING: 'Path to project result storage is missing.',
+        NO_DATASETS: 'No input datasets are provided for the project'
     }
 
     @classmethod
