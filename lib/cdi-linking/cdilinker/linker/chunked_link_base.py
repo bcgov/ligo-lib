@@ -69,6 +69,8 @@ class LinkBase(object):
         self.right_index = None
         self.left_fields = None
         self.right_fields = None
+        self.left_dtypes = None
+        self.right_dtypes = None
         self.left_columns = self.right_columns = []
         self.output_root = self.project['output_root'] or './'
         self.steps = None
@@ -203,6 +205,7 @@ class LinkBase(object):
                                   index_col=[self.left_index],
                                   usecols=self.left_columns,
                                   skipinitialspace=True,
+                                  dtype=self.left_dtypes,
                                   chunksize=CHUNK_SIZE)
 
         for left_chunk_no, left_chunk in enumerate(left_reader):
@@ -212,6 +215,7 @@ class LinkBase(object):
                                        index_col=[self.right_index],
                                        usecols=self.right_columns,
                                        skipinitialspace=True,
+                                       dtype=self.right_dtypes,
                                        chunksize=CHUNK_SIZE)
 
             left_chunk.columns = ['LEFT_' + col for col in left_chunk.columns]

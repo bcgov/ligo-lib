@@ -7,6 +7,10 @@
     {%  endblock %}
         <form class="form-horizontal" id="linking-form"  method="post">
             {% csrf_token %}
+            {% if type == 'LINK' %}
+                {{ form.right_columns }}
+            {%  endif %}
+            {{ form.left_columns }}
             <ul class="nav nav-tabs">
                 <li role="presentation" class="active"><a href="#project-main-tab" data-toggle="tab">General</a></li>
                 <li role="presentation"><a href="#project-steps" data-toggle="tab">Steps</a></li>

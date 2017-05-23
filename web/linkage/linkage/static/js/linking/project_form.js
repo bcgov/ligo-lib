@@ -186,6 +186,8 @@ function getSelectedColumns(selector) {
 
 $("#linking-form").submit(function() {
     status = 'READY';
+    var left_vars = [];
+    var right_vars = [];
     var count = parseInt($('#id_steps-TOTAL_FORMS').val());
     //Reconstruct blocking and linking schema from the input elements
     for (var index = 0; index <count; index++) {
@@ -196,13 +198,27 @@ $("#linking-form").submit(function() {
         field_select = "#id_steps-" + index + "-linking_schema";
         $(field_select).val(linking_json(index));
 
+        left_vars = left_vars.concat(getVariable('blocking', 'left-header', index));
+        left_vars = left_vars.concat(getVariable('linking', 'left-header', index));
+        right_vars = right_vars.concat(getVariable('blocking', 'right-header', index));
+        right_vars = right_vars.concat(getVariable('linking', 'right-header', index));
     }
 
     leftColumns = getSelectedColumns($('#selected_left_columns'));
+    for (index in left_vars) {
+        if (leftColumns.indexOf(left_vars[index]) == -1) {
+            leftColumns.push(left_vars[index]);
+        }
+    }
 
     $('#id_left_columns').val(JSON.stringify(leftColumns));
     if (project_type == 'LINK') {
         rightColumns = getSelectedColumns($('#selected_right_columns'));
+        for (index in right_vars) {
+            if (rightColumns.indexOf(right_vars[index]) == -1) {
+                rightColumns.push(right_vars[index]);
+            }
+        }
         $('#id_right_columns').val(JSON.stringify(rightColumns));
     }
 
