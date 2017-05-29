@@ -456,4 +456,17 @@ class Linker(LinkBase):
         os.remove(linked_filename)
         os.rename(temp_sorted_file, linked_file_path)
 
+        sort_csv(self.left_file,
+                 appendfile=temp_sorted_file,
+                 cols=[self.left_index],
+                 types={self.left_index: 'numeric'})
+        os.remove(self.left_file)
+        os.rename(temp_sorted_file, self.left_file)
+        sort_csv(self.right_file,
+                 appendfile=temp_sorted_file,
+                 cols=[self.right_index],
+                 types={self.right_index: 'numeric'})
+        os.remove(self.right_file)
+        os.rename(temp_sorted_file, self.right_file)
+
         return generate_linking_summary(self, self.project['output_root'])

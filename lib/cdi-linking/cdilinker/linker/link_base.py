@@ -8,9 +8,8 @@ import pandas as pd
 from .algorithms import apply_encoding, apply_comparison
 from .base import (CHUNK_SIZE, _save_pairs)
 
-from validation import LinkError
-
 import logging
+
 logging.basicConfig(level=logging.DEBUG)
 logger = logging.getLogger(__name__)
 
@@ -30,24 +29,6 @@ class LinkBase(object):
     def getNextId(cls):
         cls.id += 1
         return cls.id
-
-    def validate(self, project):
-
-        errors = []
-        if project is None:
-            errors.append(LinkError.NO_PROJECT)
-
-        # Validate project type.
-        if 'type' not in project:
-            errors.append(LinkError.TYPE_MISSING)
-        elif project['type'] not in ['DEDUP', 'LINK']:
-            errors.append(LinkError.INVALID_TYPE)
-
-        # Validate project output directory
-        if 'output_root' not in project:
-            errors.append(LinkError.OUT_PATH_MISSING)
-
-        return errors
 
     def __init__(self, project):
         self.project = project
@@ -120,7 +101,7 @@ class LinkBase(object):
 
         s1 = pairs[left]
         s2 = pairs[right]
-        print ("Compare Function : {0}".format(compare_fn))
+        print("Compare Function : {0}".format(compare_fn))
 
         return apply_comparison(s1, s2, compare_fn, **args)
 
@@ -174,7 +155,7 @@ class LinkBase(object):
         for left, right, fn in zip(left_fields, right_fields, comparisons_methods):
             method = fn.get('name', 'EXACT')
             args = fn.get('args') or {}
-            print ("Left : {0}, Right: {1}, Args: {2} ".format(left, right, fn))
+            print("Left : {0}, Right: {1}, Args: {2} ".format(left, right, fn))
             result = self._compare(pairs, left, right, method, **args)
             pairs['matched'] &= result
 
@@ -236,7 +217,7 @@ class LinkBase(object):
                 right_block.columns = ['RIGHT_' + col for col in right_block.columns]
                 right_block.index.names = ['RIGHT_' + right_block.index.name]
 
-                print ("Finding record pairs for left block {0} and right block {1}".format(i, j))
+                print("Finding record pairs for left block {0} and right block {1}".format(i, j))
                 pairs = self.__pair_records(left_block,
                                             right_block,
                                             left_fields, right_fields, transformations)

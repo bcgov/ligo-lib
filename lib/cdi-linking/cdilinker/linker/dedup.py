@@ -9,6 +9,7 @@ from cdilinker.reports.report import generate_linking_summary
 from .base import COLUMN_TYPES
 
 import logging
+
 logging.basicConfig(level=logging.DEBUG)
 logger = logging.getLogger(__name__)
 
@@ -34,15 +35,6 @@ class DeDeupProject(LinkBase):
         data_dict['dataset'] = dataset['name']
 
         return json.dumps(data_dict, indent=4)
-
-    def validate(self, project):
-        from validation import  LinkError
-
-        errors = super(DeDeupProject, project)
-
-        # Check project datasets
-        if 'datasets' not in project or type(project['datasets'] is not list):
-            errors.append(LinkError.NO_DATASETS)
 
     def _save_linked_data(self, data, append=False):
 
@@ -123,8 +115,8 @@ class DeDeupProject(LinkBase):
         total_step_entities = None
         for step in self.project['steps']:
             self.steps[step['seq']] = {}
-            print ("De-duplication Step {0} :".format(step['seq']))
-            print ("{0}.1) Finding record pairs satisfying blocking constraints...".format(step['seq']))
+            print("De-duplication Step {0} :".format(step['seq']))
+            print("{0}.1) Finding record pairs satisfying blocking constraints...".format(step['seq']))
             self.pair_n_match(step=step['seq'],
                               link_method=step['linking_method'],
                               blocking=step['blocking_schema'],

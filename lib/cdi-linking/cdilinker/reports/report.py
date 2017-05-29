@@ -61,6 +61,6 @@ def generate_linking_summary(data, dest_dir='.'):
     logger.debug(report_file)
     try:
         pisa.CreatePDF(html_out.encode('utf-8'), dest=report_file, encoding='utf-8')
-    except e:
+    except Exception as e:
         logger.debug(e)
     return project['name'] + "_summary.pdf"

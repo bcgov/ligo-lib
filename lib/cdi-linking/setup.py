@@ -25,7 +25,7 @@ setup(
         "jellyfish>=0.5.6",
         "numpy>=1.11.2",
         "pandas>=0.19.2",
-        "xhtml2pdf>=0.0.6",
+        "xhtml2pdf>=0.1b2",
         "jinja2>=2.8.1",
         "html5lib==1.0b10"
     ],

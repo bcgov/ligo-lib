@@ -204,6 +204,7 @@ $("#linking-form").submit(function() {
         right_vars = right_vars.concat(getVariable('linking', 'right-header', index));
     }
 
+    left_vars = left_vars.concat(required_left);
     leftColumns = getSelectedColumns($('#selected_left_columns'));
     for (index in left_vars) {
         if (leftColumns.indexOf(left_vars[index]) == -1) {
@@ -213,6 +214,7 @@ $("#linking-form").submit(function() {
 
     $('#id_left_columns').val(JSON.stringify(leftColumns));
     if (project_type == 'LINK') {
+        right_vars = right_vars.concat(required_right);
         rightColumns = getSelectedColumns($('#selected_right_columns'));
         for (index in right_vars) {
             if (rightColumns.indexOf(right_vars[index]) == -1) {

@@ -25,7 +25,6 @@ def run_json(project_file):
     else:
         with open(project_file) as json_file:
             project = json.load(json_file)
-            print(project['type'])
             logger.debug(project['type'])
             #import_project_data(project)
             #import_project_data_to_hdf5(project)

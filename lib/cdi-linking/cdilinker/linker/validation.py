@@ -6,14 +6,36 @@ class LinkError(Exception):
     INVALID_TYPE = 'INVALID_TYPE'
     TYPE_MISSING = 'TYPE_MISSING'
     OUT_PATH_MISSING = 'OUT_PATH_MISSING'
-    NO_DATASETS = 'NO_DATASETS'
+    NO_STEPS = 'NO_STEPS'
+    NAME_MISSING = 'NAME_MISSING'
+    DATASET_MISSING = 'DATASET_MISSING'
+    INDEX_MISSING = 'INDEX_MISSING'
+    FILEPATH_MISSING = 'FILEPATH_MISSING'
+    NO_BLOCKING = 'NO_BLOCKING'
+    NO_LINKING = 'NO_LINKING'
+    ENTITY_ID_MISSING = 'ENTITY_ID_MISSING'
+    INVALID_PATH = 'INVALID_PATH'
+    INVALID_INDEX = 'INVALID_INDEX'
+    INVALID_ENTITY_FIELD = 'INVALID_ENTITY_FIELD'
+    DATASET_MISSING = 'DATASET_MISSING'
 
     ERROR_MESSAGES = {
         NO_PROJECT: 'No project is provided. Project cannot be empty.',
         INVALID_TYPE: 'Invalid project type. Project type should be either LINK or DEDUP.',
         TYPE_MISSING: 'Project type is missing.',
         OUT_PATH_MISSING: 'Path to project result storage is missing.',
-        NO_DATASETS: 'No input datasets are provided for the project'
+        NO_STEPS: 'Project step(s) missing. At least one project step must be provided.',
+        NAME_MISSING: 'Project name is required',
+        DATASET_MISSING: 'Input dataset(s) missing.',
+        INDEX_MISSING: 'Dataset index field is missing.',
+        FILEPATH_MISSING: 'Path to dataset file is required.',
+        NO_BLOCKING: 'Step blocking variable(s) not provided.',
+        NO_LINKING: 'Step linking variable(s) not provided',
+        ENTITY_ID_MISSING: 'Dataset entity id field is missing.',
+        INVALID_PATH: 'Invalid file path. Dataset file does not exist.',
+        INVALID_INDEX: 'Invalid Index Field. Index field does not exist in dataset.',
+        INVALID_ENTITY_FIELD: 'Invalid Entity ID Field. Entity ID does not exist in dataset.',
+        DATASET_MISSING: 'Project dataset is missing.'
     }
 
     @classmethod
