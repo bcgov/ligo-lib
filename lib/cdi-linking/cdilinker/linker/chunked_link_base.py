@@ -134,6 +134,7 @@ class LinkBase(object):
 
     def __pair_records(self, left_chunk, right_chunk, left_fields, right_fields, transformations):
 
+        left_chunk.replace(r'^\s+$', np.nan, regex=True, inplace=True)
         left_chunk = left_chunk.dropna(axis=0, how='any', subset=np.unique(left_fields))
 
         # Create a copy of blocking columns to apply encoding methods
@@ -144,6 +145,7 @@ class LinkBase(object):
         for left, method in zip(left_on, transformations):
             left_chunk.loc[:, left] = apply_encoding(left_chunk[left], method)
 
+        right_chunk.replace(r'^\s+$', np.nan, regex=True, inplace=True)
         right_chunk = right_chunk.dropna(axis=0, how='any', subset=np.unique(right_fields))
 
         # Create a copy of blocking columns to apply encoding methods

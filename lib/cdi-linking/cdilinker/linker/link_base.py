@@ -111,9 +111,11 @@ class LinkBase(object):
         right_fields = ['RIGHT_' + field for field in right_fields]
 
         left_chunk = left_chunk.sort_index()
+        left_chunk.replace(r'^\s+$', np.nan, regex=True, inplace=True)
         left_chunk = left_chunk.dropna(axis=0, how='any', subset=np.unique(left_fields))
 
         right_chunk = right_chunk.sort_index()
+        right_chunk.replace(r'^\s+$', np.nan, regex=True, inplace=True)
         right_chunk = right_chunk.dropna(axis=0, how='any', subset=np.unique(right_fields))
 
         # Create a copy of blocking columns to apply encoding methods

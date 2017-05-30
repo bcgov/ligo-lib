@@ -456,6 +456,7 @@ class Linker(LinkBase):
         os.remove(linked_filename)
         os.rename(temp_sorted_file, linked_file_path)
 
+        print ('Sorting remaining records...')
         sort_csv(self.left_file,
                  appendfile=temp_sorted_file,
                  cols=[self.left_index],
