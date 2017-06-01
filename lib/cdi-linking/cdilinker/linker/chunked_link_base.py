@@ -278,6 +278,16 @@ class LinkBase(object):
                 right_index = 'RIGHT_' + self.right_index
                 merge_columns = [left_index, right_index]
 
+                # Move index columns to the front
+                if self.project_type == 'LINK':
+                    entity_cols = ['LEFT_' + self.left_entity, 'RIGHT_' + self.right_entity]
+                    cols = matched.columns.tolist()
+                    cols = entity_cols + [x for x in cols if x not in entity_cols]
+                    matched = matched[cols]
+
+                # Replace all empty cells with empty string to avoid writing nan in the csv file.
+                matched.replace(np.nan, '', regex=True)
+
                 with open(matched_file, 'r') as in_file, open(temp_file, 'w') as merge_file:
                     reader = csv.reader(in_file)
                     merge_writer = csv.writer(merge_file)
@@ -349,7 +359,7 @@ class LinkBase(object):
 
         return count
 
-    def import_data(self, src_filename, columns, dest_filename, rename_cols=None):
+    def import_data(self, src_filename, columns, dest_filename, front_cols=None):
         '''
         Reads and imports the selected columns of a csv file into a new csv file.
         The copied files is used during linking process to leave the source file unchanged.
@@ -364,8 +374,10 @@ class LinkBase(object):
         with open(dest_filename, 'a') as dest_file:
             first_chunk = True
             for chunk in reader:
-                if first_chunk and rename_cols is not None:
-                    chunk.rename(columns=rename_cols, inplace=True)
+                if front_cols is not None:
+                    cols = chunk.columns.tolist()
+                    cols = front_cols + [x for x in cols if x not in front_cols]
+                    chunk = chunk[cols]
                 chunk.replace(np.nan, '', regex=True)
                 chunk.to_csv(dest_file, index=False, header=first_chunk)
                 first_chunk = False

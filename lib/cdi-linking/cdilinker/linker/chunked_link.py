@@ -78,7 +78,10 @@ class Linker(LinkBase):
         self.left_columns = usecols
 
         self.left_file = self.project['output_root'] + 'left_file.csv'
-        super(Linker, self).import_data(left_data['url'], columns=usecols, dest_filename=self.left_file)
+        super(Linker, self).import_data(left_data['url'],
+                                        columns=usecols,
+                                        dest_filename=self.left_file,
+                                        front_cols=[self.left_index, self.left_entity])
 
         right_data = self.project['datasets'][1]
         self.right_columns.append(right_data['index_field'])
@@ -100,7 +103,10 @@ class Linker(LinkBase):
         self.right_columns = usecols
 
         self.right_file = self.project['output_root'] + 'right_file.csv'
-        super(Linker, self).import_data(right_data['url'], usecols, self.right_file)
+        super(Linker, self).import_data(right_data['url'],
+                                        usecols,
+                                        self.right_file,
+                                        front_cols=[self.right_index, self.right_entity])
 
     def groupby_unique_filter(self, filename, group_col, filter_col,
                               not_linked_filename, add_link_id=True, linked_filename=None):
@@ -129,7 +135,7 @@ class Linker(LinkBase):
             not_linked_writer = csv.writer(not_linked_file)
 
             if add_link_id:
-                linked_writer.writerow(header + ['LINK_ID'])
+                linked_writer.writerow(['LINK_ID'] + header)
             else:
                 linked_writer.writerow(header)
 
@@ -155,7 +161,7 @@ class Linker(LinkBase):
                             link_id = None
                         for item in buffer:
                             if add_link_id:
-                                item.append(link_id)
+                                item.insert(0, link_id)
                             stats['total_records_linked'] += 1
                             linked_writer.writerow(item)
                     else:
@@ -183,7 +189,7 @@ class Linker(LinkBase):
                         link_id = None
                     for item in buffer:
                         if add_link_id:
-                            item.append(link_id)
+                            item.insert(0, link_id)
                         stats['total_records_linked'] += 1
                         linked_writer.writerow(item)
                 else:

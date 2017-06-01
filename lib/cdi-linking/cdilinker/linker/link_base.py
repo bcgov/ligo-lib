@@ -30,6 +30,10 @@ class LinkBase(object):
         cls.id += 1
         return cls.id
 
+    @classmethod
+    def resetId(cls):
+        cls.id = 0
+
     def __init__(self, project):
         self.project = project
         self.project_type = project['type']

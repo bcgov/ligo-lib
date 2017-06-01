@@ -96,6 +96,7 @@ class DeDeupProject(LinkBase):
         for left_id, right_id in self.matched.index.values:
             entts.union(index_loc[left_id], index_loc[right_id])
 
+        self.matched.insert(0, 'ENTITY_ID', np.nan)
         # Assign entity id's
         for left_id, right_id in self.matched.index.values:
             entt = entts.find(index_loc[left_id])
@@ -109,6 +110,8 @@ class DeDeupProject(LinkBase):
     def run(self):
 
         append = False
+
+        LinkBase.resetId()
 
         self.steps = {}
         self.linked = pd.DataFrame()
@@ -207,6 +210,9 @@ class DeDeupProject(LinkBase):
                                         skipinitialspace=True)
 
         result = pd.concat([self.left_dataset, output['ENTITY_ID']], axis=1, join='inner')
+        cols = result.columns.tolist()
+        cols.insert(0, cols.pop(cols.index('ENTITY_ID')))
+        result = result[cols]
 
         self.total_entities = len(output.groupby(['ENTITY_ID']))
         file_path = self.project['output_root'] + self.deduped_filename

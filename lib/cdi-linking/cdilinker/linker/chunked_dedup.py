@@ -73,7 +73,7 @@ class DeDeupProject(LinkBase):
 
         self.right_file = self.left_file = self.project['output_root'] + 'left_file.csv'
 
-        super(DeDeupProject, self).import_data(dataset['url'], usecols, self.left_file)
+        super(DeDeupProject, self).import_data(dataset['url'], usecols, self.left_file, front_cols=[self.left_index])
 
     def link_pairs(self):
         from cdilinker.linker.union_find import UnionFind
@@ -125,6 +125,7 @@ class DeDeupProject(LinkBase):
                                      index_col=[left_index, right_index], chunksize=CHUNK_SIZE)
 
         for chunk in matched_reader:
+            chunk.insert(0, 'ENTITY_ID', np.nan)
             for left_id, right_id in chunk.index.values:
                 entt = entts.find(index_loc[left_id])
                 entity_ids[entt] = entity_ids[entt] or LinkBase.getNextId()
@@ -165,11 +166,6 @@ class DeDeupProject(LinkBase):
             data_header = next(data_reader)
             index_header = next(index_reader)
 
-            # Write header rows for selected and remained rows
-            selected_header = data_header + index_cols
-            selected_writer.writerow(selected_header)
-            remained_writer.writerow(data_header)
-
             # Get the position of required columns in data and index rows
             data_header_map = {key: index for index, key in enumerate(data_header)}
             data_idx = data_header_map[data_id]
@@ -177,6 +173,11 @@ class DeDeupProject(LinkBase):
             index_header_map = {key: index for index, key in enumerate(index_header)}
             index_idx = index_header_map[index_id]
             col_index = [index_header_map[col] for col in index_cols]
+
+            # Write header rows for selected and remained rows
+            selected_header = index_cols + data_header
+            selected_writer.writerow(selected_header)
+            remained_writer.writerow(data_header)
 
             try:
                 data_row = next(data_reader)
@@ -190,7 +191,7 @@ class DeDeupProject(LinkBase):
                         data_row = next(data_reader)
                     else:
                         # Data row found in index file, so add it to selected rows.
-                        row = data_row + [index_row[i] for i in col_index]
+                        row = [index_row[i] for i in col_index] + data_row
                         selected_writer.writerow(row)
                         data_row = None
                         data_row = next(data_reader)
@@ -289,6 +290,7 @@ class DeDeupProject(LinkBase):
         total_remained = 0
         with open(output_filename, 'a') as out_file:
             for chunk in data_reader:
+                chunk.insert(0, 'ENTITY_ID', np.nan)
                 for rec_id in chunk.index.values:
                     chunk.set_value(rec_id, 'ENTITY_ID', LinkBase.getNextId())
                     total_remained += 1
