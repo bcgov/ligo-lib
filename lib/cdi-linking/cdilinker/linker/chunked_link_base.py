@@ -29,6 +29,10 @@ class LinkBase(object):
         cls.id += 1
         return cls.id
 
+    @classmethod
+    def resetId(cls):
+        cls.id = 0
+
     @staticmethod
     def get_rows_in(data, match_index, level=None):
         if level is None:

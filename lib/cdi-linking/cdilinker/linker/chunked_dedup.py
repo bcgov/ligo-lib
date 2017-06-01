@@ -218,6 +218,7 @@ class DeDeupProject(LinkBase):
         :return: A de-duplicated version of the original data file and the de-duplication summary report.
         '''
 
+        LinkBase.resetId()
         self.steps = {}
         self.linked = pd.DataFrame()
 

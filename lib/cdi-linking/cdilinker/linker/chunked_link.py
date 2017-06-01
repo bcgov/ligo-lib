@@ -372,6 +372,7 @@ class Linker(LinkBase):
 
     def run(self):
 
+        LinkBase.resetId()
         self.steps = {}
         linked_stats = {}
         prev_total = 0

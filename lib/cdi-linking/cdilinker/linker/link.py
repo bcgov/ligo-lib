@@ -150,6 +150,7 @@ class Linker(LinkBase):
         self.total_entities = 0
         print ('Project steps: {0}'.format(len(self.project['steps'])))
 
+        LinkBase.resetId()
         for step in self.project['steps']:
             self.steps[step['seq']] = {}
             print ("Linking Step {0} :".format(step['seq']))
