@@ -185,15 +185,17 @@ class LinkBase(object):
         left_df = self.left_dataset
 
         left_fields = blocking.get('left')
-        if self.project_type == 'DEDUP':
+        if self.project_type == 'DEDUP' and (blocking.get('right') is None or len(blocking.get('right')) == 0):
             right_fields = left_fields
         else:
             right_fields = blocking.get('right')
 
+        print (right_fields)
+
         transformations = blocking.get('transformations')
 
         left_link_fields = linking.get('left')
-        if self.project_type == 'DEDUP':
+        if self.project_type == 'DEDUP' and (linking.get('right') is None or len(linking.get('right')) == 0):
             right_link_fields = left_link_fields
         else:
             right_link_fields = linking.get('right')

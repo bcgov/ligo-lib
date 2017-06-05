@@ -111,8 +111,8 @@ function blocking_json(index) {
 
      schema = {left : [], right: [], transformations: [] };
 
-     schema.left = getVariable('blocking', 'left-header', index);
-     schema.right = getVariable('blocking', 'right-header', index);
+     schema.left = getVariable('blocking', 'left-blocking-var', index);
+     schema.right = getVariable('blocking', 'right-blocking-var', index);
 
      if (schema.left.length == 0 || (project_type == 'LINK' && schema.right.length == 0)) {
          status = 'DRAFT';
@@ -137,8 +137,8 @@ function linking_json(index) {
 
      schema = {left : [], right: [], comparisons: [] };
 
-     schema.left = getVariable('linking', 'left-header', index);
-     schema.right = getVariable('linking', 'right-header', index);
+     schema.left = getVariable('linking', 'left-link-var', index);
+     schema.right = getVariable('linking', 'right-link-var', index);
 
      if (schema.left.length == 0 || (project_type == 'LINK' && schema.right.length == 0)) {
          status = 'DRAFT';
@@ -234,8 +234,8 @@ $("#linking-form").submit(function() {
 
 
 $('#form-steps-container').on('click', '.blocking-vars .blocking-var-remove', function() {
-    var row = $(this).parent().parent();
-    row.find("td select").addClass( "deleted" );
+    var row = $(this).parent().parent().parent().parent().parent();
+    row.find("select, input").addClass( "deleted" );
     row.hide();
 
     return false;
@@ -382,4 +382,62 @@ $('#selected_left_columns').on('click', ' input:checkbox', function() {
 
 $('#selected_right_columns').on('click', ' input:checkbox', function() {
     updateSelectedColumns(rightColumns, $(this));
+});
+
+
+var previous_link_var;
+var previous_block_var;
+
+
+$("#form-steps-container").on('select2:selecting', '.link-vars-container .link-var-row .left-link-var', function(){
+
+    // Store the left variable before the change.
+    previous_link_var = this.value;
+
+    console.log($(this).attr('id'));
+
+});
+
+$("#form-steps-container").on('select2:select', '.link-vars-container .link-var-row .left-link-var', function(){
+
+    if (project_type === 'LINK')  return;
+
+    var left_var_id = $(this).attr('id');
+    var right_var_id = 'link_id_right' + left_var_id.slice(12);
+
+    var right_selected_value = $('#' + right_var_id).val();
+
+    console.log(previous_link_var, right_selected_value);
+
+    // Change the right variable to the new value if left and right variables were the same before the change.
+    if (previous_link_var === right_selected_value) {
+        $('#' + right_var_id).val($(this).val());
+        $('#' + right_var_id).select2({width: 'none'});
+    }
+});
+
+
+$("#form-steps-container").on('select2:selecting', '.block-vars-container .block-var-row .left-blocking-var', function() {
+
+    // Store the left variable before the change.
+    previous_block_var = this.value;
+
+});
+
+$("#form-steps-container").on('select2:select', '.block-vars-container .block-var-row .left-blocking-var', function(){
+
+    if (project_type === 'LINK')  return;
+
+    var left_var_id = $(this).attr('id');
+    var right_var_id = 'block_id_right' + left_var_id.slice(13);
+
+    var right_selected_value = $('#' + right_var_id).val();
+
+    console.log(previous_block_var, right_selected_value);
+
+    // Change the right variable to the new value if left and right variables were the same before the change.
+    if (previous_block_var === right_selected_value) {
+        $('#' + right_var_id).val($(this).val());
+        $('#' + right_var_id).select2({width: 'none'});
+    }
 });

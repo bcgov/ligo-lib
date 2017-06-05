@@ -78,40 +78,40 @@
             <tr>
                 <th>Sequnce</th><td>{{ step.seq }}</td>
             </tr>
+            <tr>
+                <th rowspan="3">Bolcking</th>
+                <td><strong>Left Variables:</strong> {% for column in step.blocking_schema.left %} {{ column }} {% endfor %}</td>
+            </tr>
+            <tr>
+                <td><strong>Right Varibales:</strong> {% for column in step.blocking_schema.right %} {{ column }} {% endfor %}</td>
+            </tr>
+            <tr>
+                <td><strong>transformations:</strong> {% for alg in step.blocking_schema.transformations %}{{ alg }} {% endfor %}</td>
+            </tr>
+            <tr>
+                <th rowspan="3">Linking</th>
+                <td><strong>Left Variables:</strong> {% for column in step.linking_schema.left %} {{ column }} {% endfor %}</td>
+            </tr>
+            <tr>
+                <td><strong>Right Varibales:</strong> {% for column in step.linking_schema.right %} {{ column }} {% endfor %}</td>
+            </tr>
+            <tr>
+                <td><strong>Comparison Methods:</strong>
+                    {% for alg in step.linking_schema.comparisons %}
+                        {{ alg.name }}
+                        {% if alg.args is defined %}
+                            {% for item in alg.args %}
+                                <strong>{{ item }}</strong> = {{ alg.args[item] }}
+                            {% endfor %}
+                        {% endif %}
+                    {% endfor %}
+                </td>
+            </tr>
+            <tr>
+                <th>Total pairs of linked records</th>
+                <td>{{ step.total_records_linked }}</td>
+            </tr>
             {%  if type == 'Linking' %}
-                <tr>
-                    <th rowspan="3">Bolcking</th>
-                    <td><strong>Left Variables:</strong> {% for column in step.blocking_schema.left %} {{ column }} {% endfor %}</td>
-                </tr>
-                <tr>
-                    <td><strong>Right Varibales:</strong> {% for column in step.blocking_schema.right %} {{ column }} {% endfor %}</td>
-                </tr>
-                <tr>
-                    <td><strong>transformations:</strong> {% for alg in step.blocking_schema.transformations %}{{ alg }} {% endfor %}</td>
-                </tr>
-                <tr>
-                    <th rowspan="3">Linking</th>
-                    <td><strong>Left Variables:</strong> {% for column in step.linking_schema.left %} {{ column }} {% endfor %}</td>
-                </tr>
-                <tr>
-                    <td><strong>Right Varibales:</strong> {% for column in step.linking_schema.right %} {{ column }} {% endfor %}</td>
-                </tr>
-                <tr>
-                    <td><strong>Comparison Methods:</strong>
-                        {% for alg in step.linking_schema.comparisons %}
-                            {{ alg.name }}
-                            {% if alg.args is defined %}
-                                {% for item in alg.args %}
-                                    <strong>{{ item }}</strong> = {{ alg.args[item] }}
-                                {% endfor %}
-                            {% endif %}
-                        {% endfor %}
-                    </td>
-                </tr>
-                <tr>
-                    <th>Total pairs of linked records</th>
-                    <td>{{ step.total_records_linked }}</td>
-                </tr>
                 <tr>
                     <th>Total pairs of linked entities</th>
                     <td>{{ step.total_entities }}</td>
@@ -120,35 +120,7 @@
                     <th>Total pairs of matched but not linked records</th>
                     <td>{{ step.total_matched_not_linked }}</td>
                 </tr>
-            {% else %}
-                <tr>
-                    <th rowspan="2">Blocking</th>
-                    <td>Variables: {% for column in step.blocking_schema.left %} {{ column }} {% endfor %}</td>
-                </tr>
-                <tr>
-                    <td>transformations: {% for alg in step.blocking_schema.transformations %}{{ alg }} {% endfor %}</td>
-                </tr>
-                <tr>
-                    <th>Total pairs of linked records</th>
-                    <td>{{ step.total_records_linked }}</td>
-                </tr>
-                <tr>
-                    <th rowspan="2">Linking</th>
-                    <td><strong>Variables:</strong> {% for column in step.linking_schema.left %} {{ column }} {% endfor %}</td>
-                </tr>
-                <tr>
-                    <td><strong>Comparison Methods:</strong>
-                        {% for alg in step.linking_schema.comparisons %}
-                            {{ alg.name }}
-                            {% if alg.args is defined %}
-                                {% for item in alg.args %}
-                                    <strong>{{ item }}</strong> = {{ alg.args[item] }}
-                                {% endfor %}
-                            {% endif %}
-                        {% endfor %}
-                    </td>
-                </tr>
-            {% endif %}
+            {%  endif %}
         </tbody>
       </table>
       <br/>

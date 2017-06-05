@@ -10,28 +10,40 @@ $("#" + right_data_id).change(function() {
 $('#form-steps-container').on('click', '.blocking-vars .block-var-create', function() {
     var div_id = $(this).parent().parent().attr('id');
     form_index = div_id.slice(14);
-    rows = $("#" + div_id + " tr").length;
+    var rows = $("#" + div_id + " .block-var-row").length;
 
     transformation = '';
     for (item in transformation_choices) {
-        transformation += '<option value="' + transformation_choices[item][0] + '">' + transformation_choices[item][1] + '</option>';
+        transformation  += '<option value="' + transformation_choices[item][0] + '">'
+                        + transformation_choices[item][1] + '</option>';
     }
 
-    row_html = '<tr><td><select id="block_id_left_' + form_index + '_' + rows + '" class="left-header form-control"'
-             + 'name="block_id_left_' + form_index + '_' + rows + '">' + header_options[left_data_id] + '</select></td>'
-             + '<td><select id="block_id_right_' + form_index + '_' + rows + '" class="right-header form-control"'
-             + 'name="block_id_right_' + form_index + '_' + rows + '">' + header_options[right_data_id] + '</select></td>'
-             + '<td><select id="block_comp_' + form_index + '_' + rows + '" class="alg form-control"'
+    row_html = '<div class="block-var-row">'
+             + '<div class="row">'
+             + '<label for="block_id_left_' + form_index + '_' + rows + '" class="control-label col-sm-2">Left Variable</label>'
+             + '<div class="preview col-sm-4">'
+             + '<select id="block_id_left_' + form_index + '_' + rows + '" class="left-header left-blocking-var form-control"'
+             + ' name="block_id_left_' + form_index + '_' + rows + '">' + header_options[left_data_id] + '</select></div>'
+             + '<label for="block_id_right_' + form_index + '_' + rows + '" class="control-label col-sm-2">Right Variable</label>'
+             + '<div class="preview col-sm-4">'
+             + '<select id="block_id_right_' + form_index + '_' + rows + '" class="right-header right-blocking-var form-control"'
+             + ' name="block_id_right_' + form_index + '_' + rows + '">' + header_options[right_data_id] + '</select></div></div>'
+             + '<div class="row">'
+             + '<label for="block_comp_' + form_index + '_' + rows + '" class="control-label col-sm-2">Transformation</label>'
+             + '<div class="col-sm-10"><div class="preview input-group">'
+             + '<select id="block_comp_' + form_index + '_' + rows + '" class="alg form-control"'
              + 'name="block_comp_' + form_index + '_' + rows + '">'
-             + '<option>------------</option>' + transformation
-             + '</select></td>'
-             + '<td><button type="button" class="blocking-var-remove btn btn-danger">'
-             + '<i class="glyphicon glyphicon-remove"></i></button></td></tr>';
+             + '<option>------------</option>' + transformation + '</select>'
+             + '<div class="input-group-btn">'
+             + '<button type="button" class="blocking-var-remove btn btn-danger">'
+             + '<i class="glyphicon glyphicon-remove"></i></button>'
+             + '</div></div></div></div>';
 
-    $("#" + div_id + " tbody").append(row_html);
+    $("#" + div_id + " .block-vars-container").append(row_html);
 
     $('#form-steps-container .blocking-vars select').select2({width: 'none'});
     return false;
+
 });
 
 $('#form-steps-container').on('click', '.linking-vars .link-var-create', function() {
@@ -50,11 +62,11 @@ $('#form-steps-container').on('click', '.linking-vars .link-var-create', functio
              + '<div class="row">'
              + '<label for="link_id_left_' + form_index + '_' + rows + '" class="control-label col-sm-2">Left Variable</label>'
              + '<div class="preview col-sm-4">'
-             + '<select id="link_id_left_' + form_index + '_' + rows + '" class="left-header form-control"'
+             + '<select id="link_id_left_' + form_index + '_' + rows + '" class="left-header left-link-var form-control"'
              + ' name="link_id_left_' + form_index + '_' + rows + '">' + header_options[left_data_id] + '</select></div>'
              + '<label for="link_id_right_' + form_index + '_' + rows + '" class="control-label col-sm-2">Right Variable</label>'
              + '<div class="preview col-sm-4">'
-             + '<select id="link_id_right_' + form_index + '_' + rows + '" class="right-header form-control"'
+             + '<select id="link_id_right_' + form_index + '_' + rows + '" class="right-header right-link-var form-control"'
              + ' name="link_id_right_' + form_index + '_' + rows + '">' + header_options[right_data_id] + '</select></div></div>'
              + '<div class="row">'
              + '<label for="link_comp_' + form_index + '_' + rows + '" class="control-label col-sm-2">Comparison Method</label>'

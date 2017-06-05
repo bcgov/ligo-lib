@@ -270,9 +270,11 @@ class DedupProjectUpdateView(LoginRequiredMixin, ProjectUpdateMixin, UpdateView)
                     block_schema = step.first()['blocking_schema']
                     link_schema = step.first()['linking_schema']
                     blocking_schema[seq] = zip(block_schema['left'],
+                                               block_schema['right'],
                                                block_schema['transformations'])
 
                     linking_schema[seq] = zip(link_schema['left'],
+                                              link_schema['right'],
                                               link_schema['comparisons'])
             data['blocking_schema'] = blocking_schema
             data['linking_schema'] = linking_schema

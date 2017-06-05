@@ -246,7 +246,7 @@ class LinkBase(object):
                 right_chunk = right_chunk.sort_index()
 
                 left_fields = blocking.get('left')
-                if self.project_type == 'DEDUP':
+                if self.project_type == 'DEDUP' and (blocking.get('right') is None or len(blocking.get('right')) == 0):
                     right_fields = left_fields
                 else:
                     right_fields = blocking.get('right')
@@ -263,10 +263,12 @@ class LinkBase(object):
                 if len(pairs.index) == 0:
                     continue
                 left_fields = linking.get('left')
-                if self.project_type == 'DEDUP':
+                if self.project_type == 'DEDUP' and (linking.get('right') is None or len(linking.get('right')) == 0):
                     right_fields = left_fields
                 else:
                     right_fields = linking.get('right')
+
+                print ('Right Fields: ', right_fields)
 
                 left_fields = ['LEFT_' + field for field in left_fields]
                 right_fields = ['RIGHT_' + field for field in right_fields]
