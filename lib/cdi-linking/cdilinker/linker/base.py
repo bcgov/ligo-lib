@@ -15,7 +15,7 @@ logger = logging.getLogger(__name__)
 
 # Get linking configuration
 link_config = config.get_section('LINKER')
-CHUNK_SIZE = link_config.get('CHUNK_SIZE') or 100000
+CHUNK_SIZE = int(link_config.get('chunk_size') or '100000')
 
 
 LINKING_RELATIONSHIPS = (
