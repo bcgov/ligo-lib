@@ -10,7 +10,7 @@ export REDIS_URL=redis://redis:6379
 export C_FORCE_ROOT=true
 
 # the official postgres image uses 'postgres' as default user if not set explictly.
-if [ -z "$POSTGRES_USER" ]; then
+if [ -z "$LINK_DB_USER" ]; then
     export POSTGRES_USER=postgres
 fi
 #$POSTGRES_PASSWORD is not defined then it is empty/blank in the DB_URL
@@ -18,8 +18,11 @@ fi
 #this is because i am using alpine postgres image ... did not build it from custom docker file to set a different db like linkage
 #by deafult available db is postgres
 #(for alpine postgres base image postgres usr has no pass)
-#                   service     user           pass              host      local host port linked to db container / database name
-export DATABASE_URL=postgres://$POSTGRES_USER:$POSTGRES_PASSWORD@postgres2:5432/postgres
+export LINK_DB_NAME=$LINK_DB_NAME
+export LINK_DB_USER=$LINK_DB_USER
+export LINK_DB_PASSWORD=$LINK_DB_PASSWORD
+export LINK_DB_HOST=$LINK_DB_HOST
+export LINK_DB_PORT=$LINK_DB_PORT
 
 function postgres_ready(){
 python << END
@@ -28,7 +31,7 @@ import psycopg2
 try:
     #this is because i am using alpine postgres image ... did not build it from custom docker file to set a different db like linkage
     #by deafult available db is postgres
-    conn = psycopg2.connect(dbname="postgres", user="$POSTGRES_USER", password="$POSTGRES_PASSWORD", host="postgres2")
+    conn = psycopg2.connect(dbname="$LINK_DB_NAME", user="$LINK_DB_USER", password="$LINK_DB_PASSWORD", host="$LINK_DB_HOST")
 
 except psycopg2.OperationalError:
     sys.exit(-1)

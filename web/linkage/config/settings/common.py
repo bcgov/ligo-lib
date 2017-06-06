@@ -104,16 +104,13 @@ MANAGERS = ADMINS
 # ------------------------------------------------------------------------------
 # See: https://docs.djangoproject.com/en/dev/ref/settings/#databases
 DATABASES = {
-    #'default': env.db('DATABASE_URL', default='postgres:///linkage'),
     'default': {
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        #'NAME': 'linkage',
-        'NAME': 'postgres',  #this is because i am using alpine linux based postgres doccker image
-        #... did not build it from custom docker file to set a different db like linkage
-        #by deafult available db is postgres
-        'USER': 'postgres',
-        'HOST': 'postgres2',
-        'PORT': 5432,
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': env('LINK_DB_NAME', default='postgres'),
+        'USER': env('LINK_DB_USER', default='postgres'),
+        'HOST': env('LINK_DB_HOST', default='postgres2'),
+        'PORT': env('LINK_DB_PORT', default='5432'),
+        'PASSWORD': env('LINK_DB_PASSWORD', default=None)
     }
 }
 DATABASES['default']['ATOMIC_REQUESTS'] = True

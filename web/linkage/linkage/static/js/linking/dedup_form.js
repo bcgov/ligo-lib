@@ -1,6 +1,6 @@
 $('#form-steps-container').on('click', '.blocking-vars .block-var-create', function() {
     var div_id = $(this).parent().parent().attr('id');
-    form_index = div_id.slice(14);
+    form_index = div_id.slice(-1);
     var rows = $("#" + div_id + " .block-var-row").length;
 
     transformation = '';

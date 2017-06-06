@@ -1,7 +1,6 @@
 from linkage.taskapp.celery import app
 from linkage.linking.models import LinkingProject
 
-from linkage.linking.utils import project_to_json
 from  cdilinker.linker.commands import execute_project
 import logging
 

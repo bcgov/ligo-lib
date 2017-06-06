@@ -144,7 +144,14 @@ TEMPLATES[0]['OPTIONS']['loaders'] = [
 
 # Use the Heroku-style specification
 # Raises ImproperlyConfigured exception if DATABASE_URL not in os.environ
-DATABASES['default'] = env.db('DATABASE_URL')
+DATABASES['default'] = {
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': env('LINK_DB_NAME'),
+        'USER': env('LINK_DB_USER'),
+        'PASSWORD': env('LINK_DB_PASSWORD'),
+        'HOST': env('LINK_DB_HOST'),
+        'PORT': env('LINK_DB_PORT')
+}
 
 # CACHING
 # ------------------------------------------------------------------------------

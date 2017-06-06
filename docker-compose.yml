@@ -10,15 +10,7 @@ services:
 
      ports:
           - "8002:8000"
-     #env_file: env
-     environment:
-         #DJANGO_SECRET_KEY: fix_me
-         #service://user:pass_if_any@dbhost:my_local_host_port_that_is_attachedto_dbhost_port/databasename
-         #DATABASE_URL : postgres://postgres:@postgres2:5432/postgres
-         CELERY_BROKER_URL : redis://redis:6379/0
-         IN_DOCKER: 1
-         #LINKING_DATASTORE_URL : '/linkage/linkage/media/datasets/'
-         #LINKING_OUTPUT_URL : '/linkage//linkage/media/linking/'
+     env_file: ./web/linkage/config/settings/.env
 
      depends_on:
                  - postgres2
