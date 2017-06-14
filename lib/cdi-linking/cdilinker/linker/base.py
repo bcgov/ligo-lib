@@ -55,6 +55,10 @@ def _save_pairs(file_path, data, append=False):
 
 def sort_csv(filename, appendfile, cols, types):
 
+    work_dir = os.path.split(filename)[0]
+    if work_dir and work_dir[-1] == '/':
+        work_dir = work_dir[:-1]
+
     template_file = os.path.dirname(__file__) + '/sort_script_template.txt'
     template_script_file = open(template_file)
     sort_script = Template(template_script_file.read())
@@ -77,17 +81,20 @@ def sort_csv(filename, appendfile, cols, types):
         'filename': filename,
         'sort_cols': sort_cols,
         'chunksize': CHUNK_SIZE,
-        'appendfile': appendfile
+        'appendfile': appendfile,
+        'work_dir': work_dir
     }
 
     sort_script = sort_script.substitute(params)
-    script_filename = os.path.join(os.path.dirname(__file__), 'sort_script.sh')
+    script_filename = os.path.join(work_dir, 'sort_script.sh')
 
     with open(script_filename, 'w') as script_file:
         script_file.write(sort_script)
     os.chmod(script_filename, 0o777)
     subprocess.call([script_filename])
-    os.remove(script_filename)
+
+    if os.path.isfile(script_filename):
+        os.remove(script_filename)
 
 
 

@@ -1,13 +1,17 @@
 from __future__ import print_function
 
+import os
 import json
 import pandas as pd
 import numpy as np
 
 from cdilinker.linker.link_base import LinkBase
 from cdilinker.reports.report import generate_linking_summary
-from .base import (COLUMN_TYPES,
+from .base import (link_config,
+                   COLUMN_TYPES,
                    LINKING_RELATIONSHIPS)
+
+from cdilinker.linker.files import LinkFiles
 
 import logging
 logging.basicConfig(level=logging.DEBUG)
@@ -106,7 +110,7 @@ class Linker(LinkBase):
         :return: Linked record pairs.
         """
 
-        match_file_path = self.output_root + "matched_temp.csv"
+        match_file_path = self.output_root + LinkFiles.TEMP_MATCHED_FILE
         matched = pd.read_csv(match_file_path,
                               index_col=['LEFT_' + self.left_index, 'RIGHT_' + self.right_index])
 
@@ -130,7 +134,7 @@ class Linker(LinkBase):
         right_entity_id = 'RIGHT_' + self.right_entity
         link_index = linked.reset_index()[[left_entity_id, right_entity_id]].drop_duplicates()
         link_index = link_index.set_index([left_entity_id, right_entity_id])
-        link_index['LINK_ID'] = pd.Series([LinkBase.getNextId() for row in link_index.index], index=link_index.index)
+        link_index['LINK_ID'] = pd.Series([LinkBase.get_next_id() for row in link_index.index], index=link_index.index)
         link_index['LINK_ID'] = link_index['LINK_ID'].map(
             lambda x: '{:.0f}'.format(x)
             if pd.notnull(x)
@@ -150,7 +154,7 @@ class Linker(LinkBase):
         self.total_entities = 0
         print ('Project steps: {0}'.format(len(self.project['steps'])))
 
-        LinkBase.resetId()
+        LinkBase.reset_id()
         for step in self.project['steps']:
             self.steps[step['seq']] = {}
             print ("Linking Step {0} :".format(step['seq']))
@@ -225,6 +229,11 @@ class Linker(LinkBase):
 
             print ("Number of records linked : {0}".format(len(self.linked)))
 
+        temp_match_file_path = self.output_root + LinkFiles.TEMP_MATCHED_FILE
+        # Delete temporary matched file.
+        if os.path.isfile(temp_match_file_path):
+            os.remove(temp_match_file_path)
+
     def save(self):
         left_index = 'LEFT_' + self.left_index
         right_index = 'RIGHT_' + self.right_index
@@ -235,8 +244,9 @@ class Linker(LinkBase):
 
         self.matched_not_linked = pd.DataFrame(grouped)
 
+        # Storing linked data records.
         print ("Writing results to the output files ...")
-        linked_file_path = self.project['output_root'] + "linked_data.csv"
+        linked_file_path = self.project['output_root'] + link_config.get('linked_data_file', 'linked_data.csv')
 
         self.linked['STEP'] = self.linked['STEP'].map(
             lambda x: '{:.0f}'.format(x)
@@ -269,7 +279,9 @@ class Linker(LinkBase):
         self.linked.replace(np.nan, '', regex=True)
         self.linked.to_csv(linked_file_path, index=False)
 
-        matched_file_path = self.project['output_root'] + "matched_not_linked_data.csv"
+        # Storing matched but not linked records.
+        matched_file_path = self.project['output_root'] \
+                            + link_config.get('matched_not_linked_filename', 'matched_not_linked_data.csv')
         self.matched_not_linked.replace(np.nan, '', regex=True)
         self.matched_not_linked.to_csv(matched_file_path)
 

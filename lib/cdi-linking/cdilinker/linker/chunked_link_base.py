@@ -9,6 +9,8 @@ import numpy as np
 from cdilinker.linker.algorithms import apply_encoding, apply_comparison
 from cdilinker.linker.base import (CHUNK_SIZE)
 
+from cdilinker.linker.files import LinkFiles
+
 import logging
 
 logging.basicConfig(level=logging.DEBUG)
@@ -25,12 +27,12 @@ class LinkBase(object):
     id = 0
 
     @classmethod
-    def getNextId(cls):
+    def get_next_id(cls):
         cls.id += 1
         return cls.id
 
     @classmethod
-    def resetId(cls):
+    def reset_id(cls):
         cls.id = 0
 
     @staticmethod
@@ -76,7 +78,7 @@ class LinkBase(object):
         self.left_dtypes = None
         self.right_dtypes = None
         self.left_columns = self.right_columns = []
-        self.output_root = self.project['output_root'] or './'
+        self.output_root = self.project['output_root']
         self.steps = None
         self.linked = None
         self.total_records_linked = 0
@@ -198,7 +200,7 @@ class LinkBase(object):
 
     def pair_n_match(self, step, link_method, blocking, linking, matched_file):
 
-        temp_file = self.output_root + "matched_temp.csv"
+        temp_file = self.output_root + LinkFiles.TEMP_MATCHED_FILE
 
         total_pairs = 0
         shared = 0
@@ -268,8 +270,6 @@ class LinkBase(object):
                 else:
                     right_fields = linking.get('right')
 
-                print ('Right Fields: ', right_fields)
-
                 left_fields = ['LEFT_' + field for field in left_fields]
                 right_fields = ['RIGHT_' + field for field in right_fields]
                 comparison_methods = linking.get('comparisons')
@@ -309,8 +309,10 @@ class LinkBase(object):
                                              columns=merge_columns,
                                              csv_writer=merge_writer)
 
-                os.remove(matched_file)
-                os.rename(temp_file, matched_file)
+                if os.path.isfile(matched_file):
+                    os.remove(matched_file)
+                if os.path.isfile(temp_file):
+                    os.rename(temp_file, matched_file)
 
         return total_pairs
 
@@ -365,7 +367,7 @@ class LinkBase(object):
 
         return count
 
-    def import_data(self, src_filename, columns, dest_filename, front_cols=None):
+    def import_data(self, src_filename, columns, dest_filename, front_cols=None, data_types=None):
         '''
         Reads and imports the selected columns of a csv file into a new csv file.
         The copied files is used during linking process to leave the source file unchanged.
@@ -376,7 +378,7 @@ class LinkBase(object):
         '''
 
         open(dest_filename, 'w').close()
-        reader = pd.read_csv(src_filename, usecols=columns, skipinitialspace=True, chunksize=CHUNK_SIZE)
+        reader = pd.read_csv(src_filename, usecols=columns, skipinitialspace=True, chunksize=CHUNK_SIZE, dtype=data_types)
         with open(dest_filename, 'a') as dest_file:
             first_chunk = True
             for chunk in reader:

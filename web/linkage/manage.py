@@ -14,7 +14,7 @@ if __name__ == '__main__':
     except ImportError as e:
         # The above import may fail for some other reason. Ensure that the
         # issue is really that Django is missing to avoid masking other
-        # exceptions on Python 2.
+        # exceptions on Python.
         try:
             import django  # noqa
         except ImportError as err:

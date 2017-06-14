@@ -319,8 +319,8 @@ def view_results(request, name):
     try:
         project = LinkingProject.objects.get(name=name)
         project_type = {'LINK': 'Linking', 'DEDUP': 'De-Duplication'}.get(project.type, '')
-        results_file = project.results_file
-        file_path = settings.OUTPUT_URL + results_file
+        file_path = project.results_file
+        results_file = os.path.basename(file_path)
         logger.debug(file_path)
         #Adding file name for ease of debugging
         if not os.path.exists(file_path):
