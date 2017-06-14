@@ -6,9 +6,11 @@ import csv
 
 from .chunked_link_base import LinkBase
 
-from .base import (COLUMN_TYPES,
+from .base import (link_config,
+                   COLUMN_TYPES,
                    LINKING_RELATIONSHIPS,
                    sort_csv)
+from cdilinker.linker.files import LinkFiles
 from cdilinker.reports.report import generate_linking_summary
 
 import logging
@@ -35,8 +37,6 @@ class Linker(LinkBase):
         self.right_entity = datasets[1]['entity_field']
 
         self.matched = None
-        self.out_filename = self.project['name'] + '_linked_out.csv'
-        self.deduped_filename = self.project['name'] + '_dedup_result.csv'
 
     def __str__(self):
 
@@ -77,11 +77,11 @@ class Linker(LinkBase):
         self.left_dtypes = left_dtypes
         self.left_columns = usecols
 
-        self.left_file = self.project['output_root'] + 'left_file.csv'
+        self.left_file = self.output_root + link_config.get('left_file', 'left_file.csv')
         super(Linker, self).import_data(left_data['url'],
                                         columns=usecols,
                                         dest_filename=self.left_file,
-                                        front_cols=[self.left_index, self.left_entity])
+                                        front_cols=[self.left_index, self.left_entity], data_types=self.left_dtypes)
 
         right_data = self.project['datasets'][1]
         self.right_columns.append(right_data['index_field'])
@@ -102,20 +102,21 @@ class Linker(LinkBase):
         self.right_dtypes = right_dtypes
         self.right_columns = usecols
 
-        self.right_file = self.project['output_root'] + 'right_file.csv'
+        self.right_file = self.output_root + link_config.get('right_file', 'right_file.csv')
+
         super(Linker, self).import_data(right_data['url'],
                                         usecols,
                                         self.right_file,
-                                        front_cols=[self.right_index, self.right_entity])
+                                        front_cols=[self.right_index, self.right_entity], data_types=self.right_dtypes)
 
     def groupby_unique_filter(self, filename, group_col, filter_col,
                               not_linked_filename, add_link_id=True, linked_filename=None):
 
         stats = {'total_linked': 0, 'total_filtered': 0, 'total_records_linked': 0}
 
-        temp_sorted_file = self.output_root + 'temp_link_file.csv'
+        temp_sorted_file = self.output_root + LinkFiles.TEMP_LINK_FILE
 
-        filtered_file = self.output_root + 'temp_link_filtered.csv'
+        filtered_file = self.output_root + LinkFiles.TEMP_LINK_FILTERED
         if add_link_id:
             out_filename = linked_filename
         else:
@@ -155,7 +156,7 @@ class Linker(LinkBase):
                 if group_id != current_group_id:
                     if not filter:
                         if add_link_id:
-                            link_id = LinkBase.getNextId()
+                            link_id = LinkBase.get_next_id()
                             stats['total_linked'] += 1
                         else:
                             link_id = None
@@ -183,7 +184,7 @@ class Linker(LinkBase):
             if len(buffer) > 0:
                 if not filter:
                     if add_link_id:
-                        link_id = LinkBase.getNextId()
+                        link_id = LinkBase.get_next_id()
                         stats['total_linked'] += 1
                     else:
                         link_id = None
@@ -197,7 +198,8 @@ class Linker(LinkBase):
                         stats['total_filtered'] += 1
                         not_linked_writer.writerow(item)
 
-        os.remove(temp_sorted_file)
+        if os.path.isfile(temp_sorted_file):
+            os.remove(temp_sorted_file)
 
         return out_filename, stats
 
@@ -212,10 +214,13 @@ class Linker(LinkBase):
         :return: Linked record pairs.
         """
 
-        matched_file = self.output_root + "matched_records.csv"
-        filtered_filename = self.output_root + "filtered_records.csv"
-        matched_not_linked_filename = self.output_root + "matched_not_linked_data.csv"
-        linked_filename = self.output_root + "step_linked_records.csv"
+        matched_file = self.output_root + LinkFiles.MATCHED_RECORDS
+        filtered_filename = self.output_root + LinkFiles.TEMP_FILTER_RECORDS
+
+        matched_not_linked_filename = self.output_root + \
+                                      link_config.get('matched_not_linked_filename', 'matched_not_linked_data.csv')
+
+        linked_filename = self.output_root + LinkFiles.TEMP_STEP_LINKED_FILE
 
         group_field = 'RIGHT_' + self.right_entity
         filter_field = 'LEFT_' + self.left_entity
@@ -240,7 +245,8 @@ class Linker(LinkBase):
             add_link_id = True
             group_field, filter_field = filter_field, group_field
 
-            os.rename(temp_filename, filtered_filename)
+            if os.path.isfile(temp_filename):
+                os.rename(temp_filename, filtered_filename)
             temp_filename, more_stats = self.groupby_unique_filter(filtered_filename,
                                                                    group_col=group_field,
                                                                    filter_col=filter_field,
@@ -252,7 +258,8 @@ class Linker(LinkBase):
             stats['total_linked'] = more_stats['total_linked']
             stats['total_records_linked'] = more_stats['total_records_linked']
 
-            os.remove(filtered_filename)
+            if os.path.isfile(filtered_filename):
+                os.remove(filtered_filename)
 
         return stats
 
@@ -268,8 +275,8 @@ class Linker(LinkBase):
 
             writer.writerow(extra_row)
 
-        temp_linked_file = self.output_root + "temp_link_sorted.csv"
-        temp_data_file = self.output_root + "temp_data.csv"
+        temp_linked_file = self.output_root + LinkFiles.TEMP_LINK_SORTED
+        temp_data_file = self.output_root + LinkFiles.TEMP_LINKING_DATA
 
         if prefix == 'LEFT_':
             entity_field = self.left_entity
@@ -364,27 +371,32 @@ class Linker(LinkBase):
                     data_writer.writerow(data_row)
                     previous_link_row = None
 
-        os.remove(data_filename)
-        os.rename(temp_data_file, data_filename)
+        if os.path.isfile(data_filename):
+            os.remove(data_filename)
+        if os.path.isfile(temp_data_file):
+            os.rename(temp_data_file, data_filename)
 
-        os.remove(linked_filename)
-        os.rename(temp_linked_file, linked_filename)
+        if os.path.isfile(linked_filename):
+            os.remove(linked_filename)
+        if os.path.isfile(temp_linked_file):
+            os.rename(temp_linked_file, linked_filename)
 
     def run(self):
 
-        LinkBase.resetId()
+        LinkBase.reset_id()
         self.steps = {}
         linked_stats = {}
         prev_total = 0
         self.total_entities = 0
         self.total_records_linked = 0
 
-        matched_file = self.output_root + "matched_records.csv"
+        matched_file = self.output_root + LinkFiles.MATCHED_RECORDS
 
-        matched_not_linked_filename = self.output_root + "matched_not_linked_data.csv"
-        linked_filename = self.output_root + "linked_records.csv"
-        step_linked = self.output_root + "step_linked_records.csv"
-        temp_sorted_file = self.output_root + "temp_sort_data.csv"
+        matched_not_linked_filename = self.output_root \
+                                      + link_config.get('matched_not_linked_filename', 'matched_not_linked_data.csv')
+        linked_filename = self.output_root + LinkFiles.TEMP_LINKED_RECORDS
+        step_linked = self.output_root + LinkFiles.TEMP_STEP_LINKED_FILE
+        temp_sorted_file = self.output_root + LinkFiles.TEMP_SORTED_FILE
 
         open(linked_filename, 'w').close()
 
@@ -398,6 +410,7 @@ class Linker(LinkBase):
                      appendfile=temp_sorted_file,
                      cols=[self.left_index],
                      types={self.left_index: 'numeric'})
+
             os.remove(self.left_file)
             os.rename(temp_sorted_file, self.left_file)
             sort_csv(self.right_file,
@@ -418,6 +431,13 @@ class Linker(LinkBase):
                                                     linking=step['linking_schema'], matched_file=matched_file)
 
             linked_stats[step['seq']] = pairs_count
+
+            if pairs_count == 0:
+                self.steps[step['seq']]['total_records_linked'] = 0
+                self.steps[step['seq']]['total_matched_not_linked'] = 0
+                self.steps[step['seq']]['total_entities'] = 0
+
+                continue
 
             print ("{0}.3) Identifying the linked records based on the relationship type...".format(step['seq']))
             link_stats = self.link(self.project['relationship_type'])
@@ -448,33 +468,50 @@ class Linker(LinkBase):
             LinkBase.append_rows(linked_filename, step_linked, first_batch=first_batch)
             first_batch = False
 
+        if os.path.isfile(step_linked):
+            os.remove(step_linked)
+        if os.path.isfile(matched_file):
+            os.remove(matched_file)
+
     def save(self):
         print ("Writing results to the output files ...")
-        linked_file_path = self.project['output_root'] + "linked_data.csv"
+        linked_file_path = self.output_root + link_config.get('linked_data_file', 'linked_data.csv')
 
-        linked_filename = self.output_root + "linked_records.csv"
-        temp_sorted_file = self.output_root + "temp_sort_data.csv"
+        linked_filename = self.output_root + LinkFiles.TEMP_LINKED_RECORDS
+        temp_sorted_file = self.output_root + LinkFiles.TEMP_SORTED_FILE
 
-        sort_csv(linked_filename,
-                 appendfile=temp_sorted_file,
-                 cols=['LINK_ID'],
-                 types={'LINK_ID': 'numeric'})
+        if self.total_records_linked > 0:
+            sort_csv(linked_filename,
+                     appendfile=temp_sorted_file,
+                     cols=['LINK_ID'],
+                     types={'LINK_ID': 'numeric'})
 
-        os.remove(linked_filename)
-        os.rename(temp_sorted_file, linked_file_path)
+            if os.path.isfile(linked_filename):
+                os.remove(linked_filename)
+            if os.path.isfile(temp_sorted_file):
+                os.rename(temp_sorted_file, linked_file_path)
+        else:
+            if os.path.isfile(linked_filename):
+                os.remove(linked_filename)
 
-        print ('Sorting remaining records...')
         sort_csv(self.left_file,
                  appendfile=temp_sorted_file,
                  cols=[self.left_index],
                  types={self.left_index: 'numeric'})
-        os.remove(self.left_file)
-        os.rename(temp_sorted_file, self.left_file)
+
+        if os.path.isfile(self.left_file):
+            os.remove(self.left_file)
+        if os.path.isfile(temp_sorted_file):
+            os.rename(temp_sorted_file, self.left_file)
+
         sort_csv(self.right_file,
                  appendfile=temp_sorted_file,
                  cols=[self.right_index],
                  types={self.right_index: 'numeric'})
-        os.remove(self.right_file)
-        os.rename(temp_sorted_file, self.right_file)
 
-        return generate_linking_summary(self, self.project['output_root'])
+        if os.path.isfile(self.right_file):
+            os.remove(self.right_file)
+        if os.path.isfile(temp_sorted_file):
+            os.rename(temp_sorted_file, self.right_file)
+
+        return generate_linking_summary(self, self.output_root)

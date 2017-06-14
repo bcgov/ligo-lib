@@ -1,12 +1,14 @@
 from __future__ import print_function
 
 import json
+import os
 import pandas as pd
 import numpy as np
 
 from cdilinker.linker.link_base import LinkBase
 from cdilinker.reports.report import generate_linking_summary
-from .base import COLUMN_TYPES
+from .base import (link_config, COLUMN_TYPES)
+from cdilinker.linker.files import LinkFiles
 
 import logging
 
@@ -22,8 +24,6 @@ class DeDeupProject(LinkBase):
         dataset = project['datasets'][0]
         self.left_index = self.right_index = dataset['index_field']
         self.matched = None
-        self.out_filename = self.project['name'] + '_dedup_matched.csv'
-        self.deduped_filename = self.project['name'] + '_dedup_result.csv'
         self.left_dtypes = self.right_dtypes = None
 
     def __str__(self):
@@ -38,7 +38,8 @@ class DeDeupProject(LinkBase):
 
     def _save_linked_data(self, data, append=False):
 
-        file_path = self.project['output_root'] + self.out_filename
+        file_path = self.project['output_root'] + link_config.get('dedup_matched_file', 'dedup_matched.csv')
+
         data.replace(np.nan, '', regex=True)
         if not append:
             data.to_csv(file_path)
@@ -64,11 +65,13 @@ class DeDeupProject(LinkBase):
             except KeyError:
                 usecols = self.left_columns
 
+            self.left_dtypes = left_dtypes
             self.left_dataset = pd.read_csv(dataset['url'],
                                             index_col=dataset['index_field'],
                                             usecols=usecols,
                                             skipinitialspace=True,
-                                            dtype=left_dtypes)
+                                            dtype=self.left_dtypes)
+
 
     def link(self):
         from .union_find import UnionFind
@@ -100,7 +103,7 @@ class DeDeupProject(LinkBase):
         # Assign entity id's
         for left_id, right_id in self.matched.index.values:
             entt = entts.find(index_loc[left_id])
-            entity_ids[entt] = entity_ids[entt] or LinkBase.getNextId()
+            entity_ids[entt] = entity_ids[entt] or LinkBase.get_next_id()
             self.matched.set_value((left_id, right_id), 'ENTITY_ID', entity_ids[entt])
             linked.set_value(left_id, 'ENTITY_ID', entity_ids[entt])
             linked.set_value(right_id, 'ENTITY_ID', entity_ids[entt])
@@ -111,7 +114,7 @@ class DeDeupProject(LinkBase):
 
         append = False
 
-        LinkBase.resetId()
+        LinkBase.reset_id()
 
         self.steps = {}
         self.linked = pd.DataFrame()
@@ -125,7 +128,7 @@ class DeDeupProject(LinkBase):
                               blocking=step['blocking_schema'],
                               linking=step['linking_schema'])
 
-            match_file_path = self.project['output_root'] + "matched_temp.csv"
+            match_file_path = self.project['output_root'] + LinkFiles.TEMP_MATCHED_FILE
 
             left_index = 'LEFT_' + self.left_index
             right_index = 'RIGHT_' + self.right_index
@@ -184,6 +187,11 @@ class DeDeupProject(LinkBase):
         for step in self.project['steps']:
             self.steps[step['seq']]['total_records_linked'] = linked_stats.get(step['seq'], 0)
 
+        # Delete temporary matched file.
+        if os.path.isfile(match_file_path):
+            os.remove(match_file_path)
+
+
     def save(self):
         """
         Generates the de-duplicated file.
@@ -192,7 +200,7 @@ class DeDeupProject(LinkBase):
 
         # Assign entity id to all remaining records.
         for rec_id in self.left_dataset.index.values:
-            self.left_dataset.set_value(rec_id, 'ENTITY_ID', LinkBase.getNextId())
+            self.left_dataset.set_value(rec_id, 'ENTITY_ID', LinkBase.get_next_id())
 
         output = self.linked.append(self.left_dataset)
         output = output.sort_values(['ENTITY_ID'])
@@ -207,7 +215,8 @@ class DeDeupProject(LinkBase):
         self.left_dataset = pd.read_csv(dataset['url'],
                                         index_col=dataset['index_field'],
                                         usecols=usecols,
-                                        skipinitialspace=True)
+                                        skipinitialspace=True,
+                                        dtype=self.left_dtypes)
 
         result = pd.concat([self.left_dataset, output['ENTITY_ID']], axis=1, join='inner')
         cols = result.columns.tolist()
@@ -215,7 +224,9 @@ class DeDeupProject(LinkBase):
         result = result[cols]
 
         self.total_entities = len(output.groupby(['ENTITY_ID']))
-        file_path = self.project['output_root'] + self.deduped_filename
+
+        # Storing deduplication result. It contains the original records plus the entity id of each record.
+        deduped_file_path = self.project['output_root'] + link_config.get('deduped_data_file', 'deduped_data.csv')
 
         result['ENTITY_ID'] = result['ENTITY_ID'].map(
             lambda x: '{:.0f}'.format(x)
@@ -223,6 +234,8 @@ class DeDeupProject(LinkBase):
             else np.nan)
 
         result.replace(np.nan, '', regex=True)
-        result.to_csv(file_path, index_label=dataset['index_field'], header=True, index=True)
+        result.to_csv(deduped_file_path, index_label=dataset['index_field'], header=True, index=True)
 
+
+        print ('Project output root: ', self.project['output_root'])
         return generate_linking_summary(self, self.project['output_root'])

@@ -101,7 +101,28 @@ def validate(project):
 
 
 def execute_project(project):
+    """
+    Executes a linking/De-duplication project and generates the summary report.
+    :param project: The project json object
+    :return: Path to the summary report.
+    """
+
+    """
+    Create a unique project identifier before running the project.
+    This unique identifier will be used to uniquely identify the project specific recources
+    such as linking input, output and temporary files.
+    """
+
+    import uuid
+    import os
+
     validate(project)
+
+    path_uuid = uuid.uuid4()
+    project['task_uuid'] = path_uuid.hex
+    project['output_root'] += project['task_uuid'] + '/'
+    os.makedirs(project['output_root'])
+
     left_size = get_dataset_size(project['datasets'][0]['url'])
     if project['type'] == 'DEDUP':
         right_size = 0

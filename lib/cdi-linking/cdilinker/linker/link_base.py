@@ -7,6 +7,7 @@ import pandas as pd
 
 from .algorithms import apply_encoding, apply_comparison
 from .base import (CHUNK_SIZE, _save_pairs)
+from cdilinker.linker.files import LinkFiles
 
 import logging
 
@@ -26,12 +27,12 @@ class LinkBase(object):
     id = 0
 
     @classmethod
-    def getNextId(cls):
+    def get_next_id(cls):
         cls.id += 1
         return cls.id
 
     @classmethod
-    def resetId(cls):
+    def reset_id(cls):
         cls.id = 0
 
     def __init__(self, project):
@@ -44,7 +45,7 @@ class LinkBase(object):
         self.left_fields = None
         self.right_fields = None
         self.left_columns = self.right_columns = []
-        self.output_root = self.project['output_root'] or './'
+        self.output_root = self.project['output_root']
         self.steps = None
         self.linked = None
         self.total_records_linked = 0
@@ -180,7 +181,7 @@ class LinkBase(object):
          """
 
         append = False
-        match_file_path = self.output_root + "matched_temp.csv"
+        match_file_path = self.output_root + LinkFiles.TEMP_MATCHED_FILE
 
         left_df = self.left_dataset
 
@@ -189,8 +190,6 @@ class LinkBase(object):
             right_fields = left_fields
         else:
             right_fields = blocking.get('right')
-
-        print (right_fields)
 
         transformations = blocking.get('transformations')
 
@@ -247,6 +246,7 @@ class LinkBase(object):
 
                 _save_pairs(match_file_path, matched, append)
                 append = True
+
 
     def link(self):
         NotImplemented

@@ -10,7 +10,7 @@ logging.basicConfig(level=logging.DEBUG)
 logger = logging.getLogger(__name__)
 
 
-def generate_linking_summary(data, dest_dir='.'):
+def generate_linking_summary(data, dest_dir):
     print("Genrating summary report...")
     project = data.project
     jenv = Environment(loader=PackageLoader('cdilinker.reports', 'templates'))
@@ -63,4 +63,4 @@ def generate_linking_summary(data, dest_dir='.'):
         pisa.CreatePDF(html_out.encode('utf-8'), dest=report_file, encoding='utf-8')
     except Exception as e:
         logger.debug(e)
-    return project['name'] + "_summary.pdf"
+    return dest_dir + project['name'] + "_summary.pdf"

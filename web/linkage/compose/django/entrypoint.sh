@@ -18,11 +18,6 @@ fi
 #this is because i am using alpine postgres image ... did not build it from custom docker file to set a different db like linkage
 #by deafult available db is postgres
 #(for alpine postgres base image postgres usr has no pass)
-export LINK_DB_NAME=$LINK_DB_NAME
-export LINK_DB_USER=$LINK_DB_USER
-export LINK_DB_PASSWORD=$LINK_DB_PASSWORD
-export LINK_DB_HOST=$LINK_DB_HOST
-export LINK_DB_PORT=$LINK_DB_PORT
 
 function postgres_ready(){
 python << END
