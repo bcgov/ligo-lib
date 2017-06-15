@@ -19,6 +19,8 @@ logger = logging.getLogger(__name__)
 class DeDeupProject(LinkBase):
 
     def __init__(self, project):
+        if project is None:
+            raise TypeError
         super(DeDeupProject, self).__init__(project)
         self.project_type = 'DEDUP'
         dataset = project['datasets'][0]

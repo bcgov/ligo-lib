@@ -117,7 +117,7 @@ class SINField(FieldCategory):
 
 
 class GeneralStringField(FieldCategory):
-    name = 'string)field'
+    name = 'string_field'
 
     def __init__(self):
         self.name = 'string_field'

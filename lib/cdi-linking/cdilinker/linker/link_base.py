@@ -74,7 +74,7 @@ class LinkBase(object):
         for step in self.project['steps']:
             step_dict = {
                 "Seq": step['seq'],
-                "Name": step['name'],
+                # "Name": step['name'], # Not used
                 "Blocking": step['blocking_schema'],
                 "Linking": step['linking_schema']
             }
