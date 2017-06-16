@@ -138,10 +138,18 @@ class LinkBase(object):
                     if row_no > 0:
                         append_file.write(row)
 
+
     def __pair_records(self, left_chunk, right_chunk, left_fields, right_fields, transformations):
 
+        left_index = 'LEFT_' + self.left_index
+        right_index = 'RIGHT_' + self.right_index
+
+        # Remove all rows that their blocking columns are empty.
         left_chunk.replace(r'^\s+$', np.nan, regex=True, inplace=True)
         left_chunk = left_chunk.dropna(axis=0, how='any', subset=np.unique(left_fields))
+
+        right_chunk.replace(r'^\s+$', np.nan, regex=True, inplace=True)
+        right_chunk = right_chunk.dropna(axis=0, how='any', subset=np.unique(right_fields))
 
         # Create a copy of blocking columns to apply encoding methods
         left_on = [field + '_T' for field in left_fields]
@@ -151,9 +159,6 @@ class LinkBase(object):
         for left, method in zip(left_on, transformations):
             left_chunk.loc[:, left] = apply_encoding(left_chunk[left], method)
 
-        right_chunk.replace(r'^\s+$', np.nan, regex=True, inplace=True)
-        right_chunk = right_chunk.dropna(axis=0, how='any', subset=np.unique(right_fields))
-
         # Create a copy of blocking columns to apply encoding methods
         right_on = [field + '_T' for field in right_fields]
         right_chunk[right_on] = right_chunk[right_fields]
@@ -162,6 +167,11 @@ class LinkBase(object):
         for right, method in zip(right_on, transformations):
             right_chunk.loc[:, right] = apply_encoding(right_chunk[right], method)
 
+        # The following too line are required to reset the index names in case if the data frames were emptied
+        # after removing rows that have no values for the blocking variables. Otherwise the merge command will fail.
+        left_chunk.index.names = [left_index]
+        right_chunk.index.names = [right_index]
+
         chunk_pairs = left_chunk.reset_index().merge(
             right_chunk.reset_index(),
             how='inner',
@@ -169,13 +179,13 @@ class LinkBase(object):
             right_on=right_on,
         )
 
-        left_index = 'LEFT_' + self.left_index
-        right_index = 'RIGHT_' + self.right_index
+        # Skip comparing a record with itself for de-duplication projects
         if self.project_type == 'DEDUP':
             chunk_pairs = chunk_pairs.loc[chunk_pairs[left_index] < chunk_pairs[right_index]]
 
         chunk_pairs = chunk_pairs.set_index([left_index, right_index])
 
+        # Remove temporary columns.
         chunk_pairs.drop(left_on + right_on, axis=1, inplace=True)
 
         return chunk_pairs
