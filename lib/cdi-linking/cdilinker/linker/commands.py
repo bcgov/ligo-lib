@@ -1,6 +1,8 @@
 from __future__ import print_function
 
 import pandas as pd
+
+from cdilinker.config.config import config
 from cdilinker.linker.base import CHUNK_SIZE
 from cdilinker.linker.validation import LinkError, ValidationError
 
