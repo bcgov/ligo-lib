@@ -32,7 +32,6 @@ COLUMN_TYPES = {
     "INTEGER": np.int64,
     "CHAR": object,
     "TEXT": object,
-
 }
 
 
@@ -41,8 +40,8 @@ LINKING_METHODS = {
     'PRB': 'Probabilistic',
 }
 
-
 FIELD_CATEGORIES = [field_cat() for field_cat in FieldCategory.plugins]
+
 
 def _save_pairs(file_path, data, append=False):
     data.replace(np.nan, '', regex=True)
@@ -95,6 +94,3 @@ def sort_csv(filename, appendfile, cols, types):
 
     if os.path.isfile(script_filename):
         os.remove(script_filename)
-
-
-

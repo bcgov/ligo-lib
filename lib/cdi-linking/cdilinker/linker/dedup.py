@@ -74,7 +74,6 @@ class DeDeupProject(LinkBase):
                                             skipinitialspace=True,
                                             dtype=self.left_dtypes)
 
-
     def link(self):
         from .union_find import UnionFind
         left_index = self.matched.index.get_level_values(0).drop_duplicates()
@@ -113,7 +112,6 @@ class DeDeupProject(LinkBase):
         return linked
 
     def run(self):
-
         append = False
 
         LinkBase.reset_id()
@@ -134,11 +132,13 @@ class DeDeupProject(LinkBase):
 
             left_index = 'LEFT_' + self.left_index
             right_index = 'RIGHT_' + self.right_index
-            matched = pd.read_csv(match_file_path, index_col=[left_index, right_index])
-            self.matched = matched if self.matched is None else self.matched.append(matched)
-            self.matched = self.matched.groupby(level=[0, 1]).min()
-            self.matched = pd.DataFrame(self.matched)
-            if step['group'] and not self.matched.empty:
+            if os.path.isfile(match_file_path):
+                matched = pd.read_csv(match_file_path, index_col=[left_index, right_index])
+                self.matched = matched if self.matched is None else self.matched.append(matched)
+                self.matched = self.matched.groupby(level=[0, 1]).min()
+                self.matched = pd.DataFrame(self.matched)
+
+            if step['group'] and self.matched is not None and not self.matched.empty:
                 self.total_records_linked += len(self.matched.index)
                 # Group rows that blong to the same entity and assign entity id
                 result = self.link()
@@ -193,7 +193,6 @@ class DeDeupProject(LinkBase):
         if os.path.isfile(match_file_path):
             os.remove(match_file_path)
 
-
     def save(self):
         """
         Generates the de-duplicated file.
@@ -238,6 +237,5 @@ class DeDeupProject(LinkBase):
         result.replace(np.nan, '', regex=True)
         result.to_csv(deduped_file_path, index_label=dataset['index_field'], header=True, index=True)
 
-
-        print ('Project output root: ', self.project['output_root'])
+        print('Project output root: ', self.project['output_root'])
         return generate_linking_summary(self, self.project['output_root'])
