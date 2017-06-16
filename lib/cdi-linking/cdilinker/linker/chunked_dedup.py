@@ -5,6 +5,8 @@ import json
 import numpy as np
 import pandas as pd
 
+import logging
+
 from .base import (link_config,
                    CHUNK_SIZE,
                    COLUMN_TYPES,
@@ -16,9 +18,7 @@ from .chunked_link_base import LinkBase
 
 from cdilinker.linker.files import LinkFiles
 
-import logging
 
-logging.basicConfig(level=logging.DEBUG)
 logger = logging.getLogger(__name__)
 
 
@@ -44,6 +44,8 @@ class DeDeupProject(LinkBase):
         return json.dumps(data_dict, indent=4)
 
     def load_data(self):
+
+        logger.info('Loading de-duplication dataset...')
 
         dataset = self.project['datasets'][0]
         self.left_columns.append(dataset['index_field'])
@@ -215,6 +217,7 @@ class DeDeupProject(LinkBase):
         :return: A de-duplicated version of the original data file and the de-duplication summary report.
         '''
 
+        logger.info('Running De-Duplication project {0}-{1} '.format(self.project['name'], self.project['task_uuid']))
         LinkBase.reset_id()
         self.steps = {}
         self.linked = pd.DataFrame()
@@ -236,8 +239,8 @@ class DeDeupProject(LinkBase):
         first_batch = True
         for step in self.project['steps']:
             self.steps[step['seq']] = {}
-            print("De-duplication Step {0} :".format(step['seq']))
-            print("{0}.1) Finding record pairs satisfying blocking and linking constraints...".format(step['seq']))
+            logger.info("De-duplication Step {0} :".format(step['seq']))
+            logger.info("{0}.1) Finding record pairs satisfying blocking and linking constraints...".format(step['seq']))
 
             pairs_count = self.pair_n_match(step=step['seq'],
                                             link_method=step['linking_method'],
@@ -281,6 +284,8 @@ class DeDeupProject(LinkBase):
         :return: De-duplication summary report.
         """
 
+        logger.info('Saving results of the de-duplication project {0}-{1}'
+                    .format(self.project['name'], self.project['task_uuid']))
         # Adding the selected (de-duped) entities to the final result
         selected_rows = self.output_root + LinkFiles.TEMP_DEDUP_ALL_SELECTED
         data_reader = pd.read_csv(self.left_file,
@@ -312,6 +317,9 @@ class DeDeupProject(LinkBase):
 
         # Total number of entities after de-duplication
         self.total_entities += total_remained
+
+        logger.info('Generating the summary report of the de-duplication project {0}-{1}'
+                    .format(self.project['name'], self.project['task_uuid']))
 
         # Generating de-duplication summary report
         return generate_linking_summary(self, self.output_root)

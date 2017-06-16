@@ -7,7 +7,12 @@ from __future__ import print_function
 
 import os
 import configparser
-import cdilinker
+
+import logging
+
+
+
+logger = logging.getLogger(__name__)
 
 config = None
 
@@ -32,8 +37,17 @@ class Configuration:
         return data
 
 
+def load_config():
+
+    logging.config.fileConfig(os.path.dirname(__file__) + '/proof.ini')
+
+    logger.info('Loading config options.')
+    config = Configuration(os.path.dirname(__file__) + '/proof.ini')
+    config.load_config()
+    logger.info('Config is loaded.')
+
+    return config
+
 # Create the configuration object and provide the config file if not provided by the environment variable.
 if config is None:
-    config = Configuration(os.path.dirname(cdilinker.__file__) + '/proof.ini')
-    config.load_config()
-
+    config = load_config()

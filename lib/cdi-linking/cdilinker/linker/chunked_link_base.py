@@ -13,7 +13,6 @@ from cdilinker.linker.files import LinkFiles
 
 import logging
 
-logging.basicConfig(level=logging.DEBUG)
 logger = logging.getLogger(__name__)
 
 
@@ -210,6 +209,7 @@ class LinkBase(object):
 
     def pair_n_match(self, step, link_method, blocking, linking, matched_file):
 
+        logger.info('Finding matched records.')
         temp_file = self.output_root + LinkFiles.TEMP_MATCHED_FILE
 
         total_pairs = 0
@@ -219,6 +219,9 @@ class LinkBase(object):
         Prefix each column in left data with 'LEFT_' and the right data columns with 'RIGHT_'
         to avoid name conflicts on merging two data chunks.
         '''
+
+        logger.info('Readding input data file chunk by chunk')
+        logger.info('Data chunk size: {0}'.format(CHUNK_SIZE))
         left_reader = pd.read_csv(self.left_file,
                                   index_col=[self.left_index],
                                   usecols=self.left_columns,
@@ -241,7 +244,7 @@ class LinkBase(object):
 
             for right_chunk_no, right_chunk in enumerate(right_reader):
 
-                print("Finding record pairs for left block {0} and right block {1}".format(left_chunk_no,
+                logger.info("Finding record pairs for left block {0} and right block {1}".format(left_chunk_no,
                                                                                            right_chunk_no))
                 if self.project_type == 'DEDUP' and left_chunk_no > right_chunk_no:
                     continue
@@ -304,6 +307,7 @@ class LinkBase(object):
                 # Replace all empty cells with empty string to avoid writing nan in the csv file.
                 matched.replace(np.nan, '', regex=True)
 
+                logger.info('Merging chunk result into the matched records file.')
                 with open(matched_file, 'r') as in_file, open(temp_file, 'w') as merge_file:
                     reader = csv.reader(in_file)
                     merge_writer = csv.writer(merge_file)
@@ -324,6 +328,7 @@ class LinkBase(object):
                 if os.path.isfile(temp_file):
                     os.rename(temp_file, matched_file)
 
+        logger.info('Finding matched records is complete.')
         return total_pairs
 
     def merge(self, left_reader, right_reader, header, columns, csv_writer):
@@ -387,6 +392,8 @@ class LinkBase(object):
         :return:
         '''
 
+        logger.info('Importing datafile {0}...'.format(src_filename))
+
         open(dest_filename, 'w').close()
         reader = pd.read_csv(src_filename, usecols=columns, skipinitialspace=True, chunksize=CHUNK_SIZE, dtype=data_types)
         with open(dest_filename, 'a') as dest_file:
@@ -399,6 +406,8 @@ class LinkBase(object):
                 chunk.replace(np.nan, '', regex=True)
                 chunk.to_csv(dest_file, index=False, header=first_chunk)
                 first_chunk = False
+
+        logger.info('Datafile {0} is imported successfuly.'.format(src_filename))
 
     def load_data(self):
         NotImplemented
