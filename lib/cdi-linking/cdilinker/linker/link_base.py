@@ -1,5 +1,3 @@
-from __future__ import print_function
-
 import json
 
 import numpy as np
@@ -11,7 +9,6 @@ from cdilinker.linker.files import LinkFiles
 
 import logging
 
-logging.basicConfig(level=logging.DEBUG)
 logger = logging.getLogger(__name__)
 
 
@@ -102,15 +99,21 @@ class LinkBase(object):
         return rows
 
     @staticmethod
-    def _compare(pairs, left, right, compare_fn, **args):
+    def compare_fields(pairs, left, right, compare_fn, **args):
+        logger.debug('>>--- compare_fields --->>')
 
         s1 = pairs[left]
         s2 = pairs[right]
-        print("Compare Function : {0}".format(compare_fn))
+        logger.info("Applying comparison function : {0}".format(compare_fn))
 
+        logger.debug('<<--- compare_fields ---<<')
         return apply_comparison(s1, s2, compare_fn, **args)
 
-    def __pair_records(self, left_chunk, right_chunk, left_fields, right_fields, transformations):
+    def pair_records(self, left_chunk, right_chunk, left_fields, right_fields, transformations):
+
+        logger.debug('>>--- pair_records --->>')
+
+        logger.info('Applying blocking rules.')
 
         left_fields = ['LEFT_' + field for field in left_fields]
         right_fields = ['RIGHT_' + field for field in right_fields]
@@ -155,15 +158,21 @@ class LinkBase(object):
 
         chunk_pairs.drop(left_on + right_on, axis=1, inplace=True)
 
+        logger.debug('<<--- pair_records ---<<')
+
         return chunk_pairs
 
-    def __match_records(self, pairs, left_fields, right_fields, comparisons_methods):
+    def match_records(self, pairs, left_fields, right_fields, comparisons_methods):
+
+        logger.debug('>>--- match_records --->>')
+
+        logger.info('Applying linking rules.')
         pairs['matched'] = 1
         for left, right, fn in zip(left_fields, right_fields, comparisons_methods):
             method = fn.get('name', 'EXACT')
             args = fn.get('args') or {}
-            print("Left : {0}, Right: {1}, Args: {2} ".format(left, right, fn))
-            result = self._compare(pairs, left, right, method, **args)
+            logger.info("Left : {0}, Right: {1}, Args: {2} ".format(left, right, fn))
+            result = self.compare_fields(pairs, left, right, method, **args)
             pairs['matched'] &= result
 
         pairs = pairs.loc[lambda df: df.matched == 1, :]
@@ -171,6 +180,8 @@ class LinkBase(object):
         pairs.drop('matched', axis=1, inplace=True)
 
         pairs = pairs.sort_index()
+        logger.debug('<<--- match_records ---<<')
+
         return pairs
 
     def pair_n_match(self, step, link_method, blocking, linking):
@@ -180,6 +191,8 @@ class LinkBase(object):
              id not None.
          """
 
+        logger.debug('>>--- pair_n_match --->>')
+        logger.info('Finding records pairs that satisfy blocking and linking rules.')
         append = False
         match_file_path = self.output_root + LinkFiles.TEMP_MATCHED_FILE
 
@@ -224,18 +237,18 @@ class LinkBase(object):
                 right_block.columns = ['RIGHT_' + col for col in right_block.columns]
                 right_block.index.names = ['RIGHT_' + right_block.index.name]
 
-                print("Finding record pairs for left block {0} and right block {1}".format(i, j))
-                pairs = self.__pair_records(left_block,
-                                            right_block,
-                                            left_fields, right_fields, transformations)
+                logger.info("Finding record pairs for left block {0} and right block {1}".format(i, j))
+                pairs = self.pair_records(left_block,
+                                          right_block,
+                                          left_fields, right_fields, transformations)
 
                 if len(pairs.index) == 0:
                     continue
 
-                matched = self.__match_records(pairs,
-                                               left_link_fields,
-                                               right_link_fields,
-                                               comparison_methods)
+                matched = self.match_records(pairs,
+                                             left_link_fields,
+                                             right_link_fields,
+                                             comparison_methods)
                 if self.project_type == 'LINK':
                     matched = matched[['LEFT_' + self.left_entity, 'RIGHT_' + self.right_entity]]
                 else:
@@ -247,6 +260,7 @@ class LinkBase(object):
                 _save_pairs(match_file_path, matched, append)
                 append = True
 
+        logger.debug('<<--- pair_n_match ---<<')
 
     def link(self):
         NotImplemented

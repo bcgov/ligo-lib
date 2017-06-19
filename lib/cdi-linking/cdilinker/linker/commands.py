@@ -1,5 +1,3 @@
-from __future__ import print_function
-
 import pandas as pd
 import logging
 
@@ -100,7 +98,7 @@ def validate(project):
 
     # Check errors and raise Validation error if the errors list is not empty.
     if len(errors) > 0:
-        logger.error('Project validation faoiled.')
+        logger.error('Project validation failed.')
         raise ValidationError(errors)
 
 

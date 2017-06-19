@@ -3,8 +3,6 @@ Reads and parse system configutation and properties from an ini config file.
 The config file name can be provided through the PROOF_CFG environment variable
 or it can be specified on creating the configuration object.
 """
-from __future__ import print_function
-
 import os
 import configparser
 

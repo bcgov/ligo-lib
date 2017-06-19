@@ -1,11 +1,14 @@
 
-from __future__ import absolute_import, print_function
+from __future__ import absolute_import
 
 import os
+import logging
+
 from celery import Celery
 from django.apps import apps, AppConfig
 from django.conf import settings
 
+logger = logging.getLogger(__name__)
 
 if not settings.configured:
     # set the default Django settings module for the 'celery' program.
@@ -40,4 +43,4 @@ class CeleryConfig(AppConfig):
 
 @app.task(bind=True)
 def debug_task(self):
-    print('Request: {0!r}'.format(self.request))
+    logger.debug('Request: {0!r}'.format(self.request))

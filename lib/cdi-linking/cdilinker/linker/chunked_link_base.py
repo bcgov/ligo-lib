@@ -1,5 +1,3 @@
-from __future__ import print_function
-
 import os
 import csv
 import json
@@ -36,24 +34,29 @@ class LinkBase(object):
 
     @staticmethod
     def get_rows_in(data, match_index, level=None):
+        logger.debug('>>--- get_rows_in --->>')
         if level is None:
             index = match_index
         else:
             index = match_index.get_level_values(level)
         rows = data.loc[index]
         rows.index = match_index
+        logger.debug('<<--- get_rows_in ---<<')
         return rows
 
     @staticmethod
     def get_rows_not_in(data, match_index, level=None):
+        logger.debug('>>--- get_rows_not_in --->>')
         if level is None:
             index = data.index.difference(match_index)
         else:
             index = data.index.difference(match_index.get_level_values(level))
         rows = data.loc[index]
+        logger.debug('<<--- get_rows_not_in ---<<')
         return rows
 
     def select_rows_in(self, data_file, index_col, index):
+        logger.debug('>>--- select_rows_in --->>')
 
         reader = pd.read_csv(data_file, index_col=index_col, skipinitialspace=True, chunksize=CHUNK_SIZE)
 
@@ -62,6 +65,7 @@ class LinkBase(object):
         for chunk in reader:
             selected = selected.append(chunk.loc[index])
 
+        logger.debug('<<--- select_rows_in ---<<')
         return selected
 
     def __init__(self, project):
@@ -117,16 +121,19 @@ class LinkBase(object):
         return json.dumps(data_dict, indent=4)
 
     @staticmethod
-    def _compare(pairs, left, right, compare_fn, **args):
+    def compare_fields(pairs, left, right, compare_fn, **args):
+        logger.debug('>>--- compare_fields --->>')
 
         s1 = pairs[left]
         s2 = pairs[right]
-        print("Compare Function : {0}".format(compare_fn))
+        logger.info("Compare Function : {0}".format(compare_fn))
 
+        logger.debug('<<--- compare_fields ---<<')
         return apply_comparison(s1, s2, compare_fn, **args)
 
     @staticmethod
     def append_rows(append_filename, source_filename, first_batch=True):
+        logger.debug('>>--- append_rows --->>')
 
         if first_batch:
             os.rename(source_filename, append_filename)
@@ -137,8 +144,13 @@ class LinkBase(object):
                     if row_no > 0:
                         append_file.write(row)
 
+        logger.debug('<<--- append_rows ---<<')
 
-    def __pair_records(self, left_chunk, right_chunk, left_fields, right_fields, transformations):
+    def pair_records(self, left_chunk, right_chunk, left_fields, right_fields, transformations):
+
+        logger.debug('>>--- pair_records --->>')
+
+        logger.info('Applying blocking rules.')
 
         left_index = 'LEFT_' + self.left_index
         right_index = 'RIGHT_' + self.right_index
@@ -187,16 +199,20 @@ class LinkBase(object):
         # Remove temporary columns.
         chunk_pairs.drop(left_on + right_on, axis=1, inplace=True)
 
+        logger.debug('<<--- pair_records ---<<')
         return chunk_pairs
 
-    def __match_records(self, pairs, left_fields, right_fields, comparisons_methods):
+    def match_records(self, pairs, left_fields, right_fields, comparisons_methods):
+
+        logger.debug('>>--- match_records --->>')
+        logger.info('Applying linking rules.')
 
         pairs['matched'] = 1
         for left, right, fn in zip(left_fields, right_fields, comparisons_methods):
             method = fn.get('name', 'EXACT')
             args = fn.get('args') or {}
-            print("Left : {0}, Right: {1}, Args: {2} ".format(left, right, fn))
-            result = self._compare(pairs, left, right, method, **args)
+            logger.info("Left : {0}, Right: {1}, Args: {2} ".format(left, right, fn))
+            result = self.compare_fields(pairs, left, right, method, **args)
 
             pairs['matched'] &= result
 
@@ -205,11 +221,18 @@ class LinkBase(object):
         pairs.drop('matched', axis=1, inplace=True)
 
         pairs = pairs.sort_index()
+
+        logger.debug('<<--- match_records ---<<')
         return pairs
 
     def pair_n_match(self, step, link_method, blocking, linking, matched_file):
 
+        logger.debug('>>--- pair_n_match --->>')
+
         logger.info('Finding matched records.')
+        logger.debug('Blocking variables: {0}'.format(blocking))
+        logger.debug('Linking variables: {0}'.format(linking))
+
         temp_file = self.output_root + LinkFiles.TEMP_MATCHED_FILE
 
         total_pairs = 0
@@ -221,7 +244,6 @@ class LinkBase(object):
         '''
 
         logger.info('Readding input data file chunk by chunk')
-        logger.info('Data chunk size: {0}'.format(CHUNK_SIZE))
         left_reader = pd.read_csv(self.left_file,
                                   index_col=[self.left_index],
                                   usecols=self.left_columns,
@@ -245,7 +267,7 @@ class LinkBase(object):
             for right_chunk_no, right_chunk in enumerate(right_reader):
 
                 logger.info("Finding record pairs for left block {0} and right block {1}".format(left_chunk_no,
-                                                                                           right_chunk_no))
+                                                                                                 right_chunk_no))
                 if self.project_type == 'DEDUP' and left_chunk_no > right_chunk_no:
                     continue
 
@@ -271,9 +293,9 @@ class LinkBase(object):
 
                 transformations = blocking.get('transformations')
 
-                pairs = self.__pair_records(left_chunk,
-                                            right_chunk,
-                                            left_fields, right_fields, transformations)
+                pairs = self.pair_records(left_chunk,
+                                          right_chunk,
+                                          left_fields, right_fields, transformations)
 
                 if len(pairs.index) == 0:
                     continue
@@ -286,10 +308,10 @@ class LinkBase(object):
                 left_fields = ['LEFT_' + field for field in left_fields]
                 right_fields = ['RIGHT_' + field for field in right_fields]
                 comparison_methods = linking.get('comparisons')
-                matched = self.__match_records(pairs,
-                                               left_fields,
-                                               right_fields,
-                                               comparison_methods)
+                matched = self.match_records(pairs,
+                                             left_fields,
+                                             right_fields,
+                                             comparison_methods)
                 matched[self.project_type + '_STEP'] = step
                 matched = matched.sort_index()
 
@@ -329,9 +351,12 @@ class LinkBase(object):
                     os.rename(temp_file, matched_file)
 
         logger.info('Finding matched records is complete.')
+        logger.debug('<<--- pair_n_match ---<<')
         return total_pairs
 
     def merge(self, left_reader, right_reader, header, columns, csv_writer):
+
+        logger.debug('>>--- merge --->>')
 
         csv_writer.writerow(header)
         header_index = {key: index for index, key in enumerate(header)}
@@ -380,22 +405,26 @@ class LinkBase(object):
             csv_writer.writerow(right_row)
             count += 1
 
+        logger.debug('<<--- merge ---<<')
         return count
 
     def import_data(self, src_filename, columns, dest_filename, front_cols=None, data_types=None):
-        '''
+        """
         Reads and imports the selected columns of a csv file into a new csv file.
         The copied files is used during linking process to leave the source file unchanged.
         :param src_file: Original csv file
         :param columns: Columns from the file that need to be imported.
         :param dest_file: Copied file with selected column
         :return:
-        '''
+        """
+
+        logger.debug('>>--- import_data --->>')
 
         logger.info('Importing datafile {0}...'.format(src_filename))
 
         open(dest_filename, 'w').close()
-        reader = pd.read_csv(src_filename, usecols=columns, skipinitialspace=True, chunksize=CHUNK_SIZE, dtype=data_types)
+        reader = pd.read_csv(src_filename, usecols=columns, skipinitialspace=True, chunksize=CHUNK_SIZE,
+                             dtype=data_types)
         with open(dest_filename, 'a') as dest_file:
             first_chunk = True
             for chunk in reader:
@@ -408,6 +437,7 @@ class LinkBase(object):
                 first_chunk = False
 
         logger.info('Datafile {0} is imported successfuly.'.format(src_filename))
+        logger.debug('<<--- import_data ---<<')
 
     def load_data(self):
         NotImplemented

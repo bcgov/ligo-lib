@@ -1,5 +1,3 @@
-from __future__ import print_function
-
 import json
 import os
 import pandas as pd
@@ -12,7 +10,6 @@ from cdilinker.linker.files import LinkFiles
 
 import logging
 
-logging.basicConfig(level=logging.DEBUG)
 logger = logging.getLogger(__name__)
 
 
@@ -36,8 +33,9 @@ class DeDeupProject(LinkBase):
 
         return json.dumps(data_dict, indent=4)
 
-    def _save_linked_data(self, data, append=False):
+    def save_linked_data(self, data, append=False):
 
+        logger.debug('>>--- save_linked_data --->>')
         file_path = self.project['output_root'] + link_config.get('dedup_matched_file', 'dedup_matched.csv')
 
         data.replace(np.nan, '', regex=True)
@@ -47,7 +45,12 @@ class DeDeupProject(LinkBase):
             with open(file_path, 'a') as f:
                 data.to_csv(f, header=False)
 
+        logger.debug('<<--- save_linked_data ---<<')
+
     def load_data(self):
+        logger.debug('>>--- load_data --->>')
+        logger.info('Loading input dataset for project: {0} with task id: {1}.'
+                    .format(self.project['name'], self.project['task_uuid']))
         super(DeDeupProject, self).load_data()
         if self.project['datasets'] and len(self.project['datasets']) > 0:
             dataset = self.project['datasets'][0]
@@ -71,10 +74,13 @@ class DeDeupProject(LinkBase):
                                             usecols=usecols,
                                             skipinitialspace=True,
                                             dtype=self.left_dtypes)
-
+        logger.debug('<<--- load_data ---<<')
 
     def link(self):
+        logger.debug('>>--- link --->>')
         from .union_find import UnionFind
+
+        logger.info('Assigning entity id to linked records.')
         left_index = self.matched.index.get_level_values(0).drop_duplicates()
         right_index = self.matched.index.get_level_values(1).drop_duplicates()
         link_index = left_index.union(right_index)
@@ -108,10 +114,15 @@ class DeDeupProject(LinkBase):
             linked.set_value(left_id, 'ENTITY_ID', entity_ids[entt])
             linked.set_value(right_id, 'ENTITY_ID', entity_ids[entt])
 
+        logger.debug('<<--- link ---<<')
         return linked
 
     def run(self):
 
+        logger.debug('>>--- run --->>')
+
+        logger.info('Executing de-duplication project {0}. Task id: {1}.'
+                    .format(self.project['name'], self.project['task_uuid']))
         append = False
 
         LinkBase.reset_id()
@@ -121,8 +132,8 @@ class DeDeupProject(LinkBase):
         total_step_entities = None
         for step in self.project['steps']:
             self.steps[step['seq']] = {}
-            print("De-duplication Step {0} :".format(step['seq']))
-            print("{0}.1) Finding record pairs satisfying blocking constraints...".format(step['seq']))
+            logger.info("De-duplication Step {0} :".format(step['seq']))
+            logger.info("{0}.1) Finding record pairs satisfying blocking constraints...".format(step['seq']))
             self.pair_n_match(step=step['seq'],
                               link_method=step['linking_method'],
                               blocking=step['blocking_schema'],
@@ -132,10 +143,14 @@ class DeDeupProject(LinkBase):
 
             left_index = 'LEFT_' + self.left_index
             right_index = 'RIGHT_' + self.right_index
-            matched = pd.read_csv(match_file_path, index_col=[left_index, right_index])
-            self.matched = matched if self.matched is None else self.matched.append(matched)
-            self.matched = self.matched.groupby(level=[0, 1]).min()
-            self.matched = pd.DataFrame(self.matched)
+
+            if os.path.isfile(match_file_path):
+
+                matched = pd.read_csv(match_file_path, index_col=[left_index, right_index])
+                self.matched = matched if self.matched is None else self.matched.append(matched)
+                self.matched = self.matched.groupby(level=[0, 1]).min()
+                self.matched = pd.DataFrame(self.matched)
+
             if step['group'] and not self.matched.empty:
                 self.total_records_linked += len(self.matched.index)
                 # Group rows that blong to the same entity and assign entity id
@@ -172,7 +187,7 @@ class DeDeupProject(LinkBase):
                 ).set_index([left_index, right_index])
 
                 self.matched = self.matched.sort_values(['ENTITY_ID'])
-                self._save_linked_data(self.matched, append)
+                self.save_linked_data(self.matched, append)
                 append = True
                 self.matched = None
                 # Remove grouped records from input dataset
@@ -191,14 +206,20 @@ class DeDeupProject(LinkBase):
         if os.path.isfile(match_file_path):
             os.remove(match_file_path)
 
+        logger.info('Execution of de-duplication project {0} with Task id: {1} is completed.'
+                    .format(self.project['name'], self.project['task_uuid']))
+
+        logger.debug('<<--- run ---<<')
 
     def save(self):
         """
         Generates the de-duplicated file.
         :return:
         """
+        logger.debug('>>--- save --->>')
 
         # Assign entity id to all remaining records.
+        logger.info('Assigning entity id to all remaining records.')
         for rec_id in self.left_dataset.index.values:
             self.left_dataset.set_value(rec_id, 'ENTITY_ID', LinkBase.get_next_id())
 
@@ -225,6 +246,7 @@ class DeDeupProject(LinkBase):
 
         self.total_entities = len(output.groupby(['ENTITY_ID']))
 
+        logger.info('Total number of entities after de-duplication: {0}'.format(self.total_entities))
         # Storing deduplication result. It contains the original records plus the entity id of each record.
         deduped_file_path = self.project['output_root'] + link_config.get('deduped_data_file', 'deduped_data.csv')
 
@@ -235,7 +257,7 @@ class DeDeupProject(LinkBase):
 
         result.replace(np.nan, '', regex=True)
         result.to_csv(deduped_file_path, index_label=dataset['index_field'], header=True, index=True)
+        logger.info('De-duplicated file generated at {0}.'.format(deduped_file_path))
 
-
-        print ('Project output root: ', self.project['output_root'])
+        logger.debug('<<--- save ---<<')
         return generate_linking_summary(self, self.project['output_root'])
