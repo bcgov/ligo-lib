@@ -22,6 +22,26 @@ The following environment variables are required for project settings:
     - LINKING_OUTPUT_URL : Path to linking output directory
     - DJANGO_DEBUG : True/False, Toggles debug mode
 
+    - LINK_DB_USER: postgres database user name
+    - LINK_DB_HOST: postgres hostname or url
+    - LINK_DB_PORT: postgres port
+    - LINK_DB_SERVICE: postgres service name
+    - LINK_DB_PASSWORD: password for Postgres Database
+
+    - IN_DOCKER : valid value 0 or 1
+    - C_FORCE_ROOT: celery should run as root or non root
+                boolean; valid value : true/false
+
+
+    # General settings
+    DJANGO_ADMIN_URL=
+    DJANGO_SETTINGS_MODULE=config.settings.local
+    DJANGO_SECRET_KEY=e(q8huau(-+qz6oi9!k62#_+t61n(*7daz7vmv2439ns1+2=g^
+    DJANGO_ALLOWED_HOSTS=.localhost  pass this as env variable
+
+    You may choose to modify code and pass INTERNAL_IPS as environment variable
+    as well
+
 
 Basic Commands
 --------------
@@ -73,7 +93,8 @@ To migrate database, on the application root directory run :
 Celery
 ^^^^^^
 
-The web application uses Celery to run linking jobs asynchronously. You need to setup a Celery broker like Redis or
+The web application uses Celery to run linking jobs asynchronously.
+You need to setup a Celery broker like Redis or
 RabbitMQ and start a Celery worker.
 
 The Celery broker is provided by CELERY_BROKER_URL environment variable. To start a Celery worker use:
@@ -82,3 +103,21 @@ The Celery broker is provided by CELERY_BROKER_URL environment variable. To star
 
     celery -A linkage worker --loglevel=INFO
 
+Docker Based Deployment
+^^^^^^^^^^^^^^^^^^^^^^^
+For docker-compose based solution follow
+use
+
+docker-compose up --build --force-recreate
+
+Openshift and Kubernetes Based Deployment
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+1) Build using Decker-dev for solution where django
+user is not in sudoers list
+
+Also pass start-dev.sh to entrypoint.sh
+
+2) Build using Docker-dev-os for solution where the django
+ user is in sudoers list
+
+Also pass start-dev-os.sh to entrypoint.sh

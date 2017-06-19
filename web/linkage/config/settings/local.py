@@ -24,8 +24,8 @@ TEMPLATES[0]['OPTIONS']['debug'] = DEBUG
 # See: https://docs.djangoproject.com/en/dev/ref/settings/#secret-key
 # Note: This key only used for development and testing.
 SECRET_KEY = env('DJANGO_SECRET_KEY', default='vzqpz#bo&^l)=s%9e=%08i(!7v(zswd+0=36%sp#&ftb2jzv2s')
-
-ALLOWED_HOSTS = ['localhost', '127.0.0.1', '[::1]', 'services-secure-area', 'proof-dev-services-secure-area.canadacentral.cloudapp.azure.com']
+allowed_host = os.environ['ALLOWED_HOST']
+ALLOWED_HOSTS = ['localhost', '127.0.0.1', '[::1]', 'services-secure-area', 'proof-dev-services-secure-area.canadacentral.cloudapp.azure.com', allowed_host]
 
 # Mail settings
 # ------------------------------------------------------------------------------
@@ -34,8 +34,10 @@ EMAIL_PORT = 1025
 
 EMAIL_HOST = 'localhost'
 EMAIL_BACKEND = env('DJANGO_EMAIL_BACKEND',
-                    default='django.core.mail.backends.console.EmailBackend')
+                    default='django.core.mail.backends.filebased.EmailBackend')
+#'django.core.mail.backends.console.EmailBackend')
 
+EMAIL_FILE_PATH=env('DJANGO_EMAIL_FILE_PATH',default='/tmp/django-email-dev')
 
 # CACHING
 # ------------------------------------------------------------------------------
@@ -51,7 +53,7 @@ CACHES = {
 MIDDLEWARE += ('debug_toolbar.middleware.DebugToolbarMiddleware',)
 INSTALLED_APPS += ('debug_toolbar', )
 
-INTERNAL_IPS = ['127.0.0.1', '10.0.2.2',]
+INTERNAL_IPS = ['127.0.0.1', '10.0.2.2', '10.0.75.2']
 # tricks to have debug toolbar when developing with docker
 if os.environ.get('USE_DOCKER') == 'yes':
     ip = socket.gethostbyname(socket.gethostname())
