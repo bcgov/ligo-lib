@@ -2,6 +2,8 @@ version: "2"
 services:
    redis:
       image: redis:latest
+   #merged celery with web so that the same start-dev file works for both
+   #docker-compose based containerization as well as Kubernetes based containerization
    web:
      #restart: always
      build:
@@ -13,7 +15,8 @@ services:
      env_file: ./web/linkage/config/settings/.env
 
      depends_on:
-                 - postgres2
+         - postgres2
+         - redis
      #environment:
      #        IN_DOCKER: 1
      #user: django
@@ -22,7 +25,7 @@ services:
      #if we use it then we have to uncomment the "files" line in the bottom most volumes specific#in this file
      #need to check that it is not buggy
      volumes:
-               - ./files/:/user_data
+         - ./files/:/user_data
 
      command:
          #for testing
@@ -35,6 +38,7 @@ services:
    postgres2:
       #restart: always
       image: postgres:9.6-alpine
+      #env_file: ./web/linkage/config/settings/.env
       ##if we do not want to lose data when the database container is gone
       #volumes:
       #    - db_linking:/var/lib/postgresql/data
@@ -43,28 +47,6 @@ services:
       #port 5432 (RHS)
       ports:
         - "5432:5432"
-
-   celeryworker:
-        build:
-          context: .
-          dockerfile: ./web/linkage/compose/django/Dockerfile-dev
-        #user: django
-        env_file: ./web/linkage/config/settings/.env
-        depends_on:
-         - postgres2
-         - redis
-        volumes:
-           - ./files/:/user_data
-        #- web
-        # #comment out or one or the other depending on what we want to list
-        # #debug level message or info level message
-        #   #ldeally info > debug
-        #   #if we want to capture a msg at level y and any level higher than that
-        #   #then we have to set the level
-        #   #to the lower one (y) after the -l flag
-        #   #command: celery -A linkage.taskapp worker -l INFO
-        #   command: celery -A linkage.taskapp worker -l DEBUG
-        command: celery -A linkage.taskapp worker -l DEBUG
 volumes:
     files:
 #    db_linking:
