@@ -1,0 +1,29 @@
+apiVersion: v1
+kind: Route
+metadata:
+  name: postgresql2
+  namespace: linking-project-dev-2-1-0
+  selfLink: /oapi/v1/namespaces/linking-project-dev-2-1-0/routes/postgresql2
+  uid: b2e0837a-4ba5-11e7-a97d-4af56a6b7ca1
+  resourceVersion: '43218'
+  creationTimestamp: '2017-06-07T17:21:10Z'
+  annotations:
+    openshift.io/host.generated: 'true'
+spec:
+  host: postgresql2-linking-project-dev-2-1-0.10.0.75.2.xip.io
+  to:
+    kind: Service
+    name: postgresql2
+    weight: 100
+  port:
+    targetPort: 5432-tcp
+  wildcardPolicy: None
+status:
+  ingress:
+    - host: postgresql2-linking-project-dev-2-1-0.10.0.75.2.xip.io
+      routerName: router
+      conditions:
+        - type: Admitted
+          status: 'True'
+          lastTransitionTime: '2017-06-07T17:21:10Z'
+      wildcardPolicy: None

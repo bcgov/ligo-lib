@@ -1,0 +1,26 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: redis3
+  namespace: linking-project-dev-2-1-0
+  selfLink: /api/v1/namespaces/linking-project-dev-2-1-0/services/redis3
+  uid: a6a8e1bc-5010-11e7-a97d-4af56a6b7ca1
+  resourceVersion: '263550'
+  creationTimestamp: '2017-06-13T08:16:50Z'
+  labels:
+    app: redis3
+  annotations:
+    openshift.io/generated-by: OpenShiftWebConsole
+spec:
+  ports:
+    - name: 6379-tcp
+      protocol: TCP
+      port: 6379
+      targetPort: 6379
+  selector:
+    deploymentconfig: redis3
+  clusterIP: 172.30.73.97
+  type: ClusterIP
+  sessionAffinity: None
+status:
+  loadBalancer: {}
