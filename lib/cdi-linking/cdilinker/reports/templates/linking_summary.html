@@ -70,20 +70,20 @@
         </tbody>
     </table>
 
-    <p><strong>Total Stps: </strong>{{ steps|length }}</p>
+    <p><strong>Total Steps: </strong>{{ steps|length }}</p>
 
   {% for step in steps %}
       <table class="step-info">
         <tbody>
             <tr>
-                <th>Sequnce</th><td>{{ step.seq }}</td>
+                <th>Sequence</th><td>{{ step.seq }}</td>
             </tr>
             <tr>
-                <th rowspan="3">Bolcking</th>
+                <th rowspan="3">Blocking</th>
                 <td><strong>Left Variables:</strong> {% for column in step.blocking_schema.left %} {{ column }} {% endfor %}</td>
             </tr>
             <tr>
-                <td><strong>Right Varibales:</strong> {% for column in step.blocking_schema.right %} {{ column }} {% endfor %}</td>
+                <td><strong>Right Variables:</strong> {% for column in step.blocking_schema.right %} {{ column }} {% endfor %}</td>
             </tr>
             <tr>
                 <td><strong>transformations:</strong> {% for alg in step.blocking_schema.transformations %}{{ alg }} {% endfor %}</td>
@@ -93,7 +93,7 @@
                 <td><strong>Left Variables:</strong> {% for column in step.linking_schema.left %} {{ column }} {% endfor %}</td>
             </tr>
             <tr>
-                <td><strong>Right Varibales:</strong> {% for column in step.linking_schema.right %} {{ column }} {% endfor %}</td>
+                <td><strong>Right Variables:</strong> {% for column in step.linking_schema.right %} {{ column }} {% endfor %}</td>
             </tr>
             <tr>
                 <td><strong>Comparison Methods:</strong>

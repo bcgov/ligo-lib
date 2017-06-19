@@ -1,12 +1,11 @@
-from __future__ import print_function
-
 import pandas as pd
+import logging
+
+from cdilinker.config.config import config
+
 from cdilinker.linker.base import CHUNK_SIZE
 from cdilinker.linker.validation import LinkError, ValidationError
 
-import logging
-
-logging.basicConfig(level=logging.DEBUG)
 logger = logging.getLogger(__name__)
 
 
@@ -58,6 +57,8 @@ def validate_step(step, errors):
 
 
 def validate(project):
+
+    logger.info('Validating project')
     errors = []
     if project is None:
         errors.append(LinkError.NO_PROJECT)
@@ -97,6 +98,7 @@ def validate(project):
 
     # Check errors and raise Validation error if the errors list is not empty.
     if len(errors) > 0:
+        logger.error('Project validation failed.')
         raise ValidationError(errors)
 
 
@@ -118,8 +120,12 @@ def execute_project(project):
 
     validate(project)
 
+    logger.info('Assigning uuid to project.')
     path_uuid = uuid.uuid4()
+
     project['task_uuid'] = path_uuid.hex
+    logger.info('Project uudi {0}'.format(project['task_uuid']))
+
     project['output_root'] += project['task_uuid'] + '/'
     os.makedirs(project['output_root'])
 

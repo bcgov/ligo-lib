@@ -1,5 +1,3 @@
-from __future__ import print_function
-
 import os
 import json
 import csv
@@ -14,7 +12,6 @@ from cdilinker.linker.files import LinkFiles
 from cdilinker.reports.report import generate_linking_summary
 
 import logging
-logging.basicConfig(level=logging.DEBUG)
 logger = logging.getLogger(__name__)
 
 
@@ -58,6 +55,10 @@ class Linker(LinkBase):
 
     def load_data(self):
 
+        logger.debug('>>--- load_data --->>')
+        logger.info('Loading input datasets for project: {0} with task id: {1}.'
+                    .format(self.project['name'], self.project['task_uuid']))
+
         left_data = self.project['datasets'][0]
         self.left_columns.append(left_data['index_field'])
         self.left_columns.append(left_data['entity_field'])
@@ -77,11 +78,15 @@ class Linker(LinkBase):
         self.left_dtypes = left_dtypes
         self.left_columns = usecols
 
+        logger.debug('Left data columns: {0}.'.format(self.left_columns))
+        logger.debug('Left data types: {0}'.format(self.left_dtypes))
+
         self.left_file = self.output_root + link_config.get('left_file', 'left_file.csv')
         super(Linker, self).import_data(left_data['url'],
                                         columns=usecols,
                                         dest_filename=self.left_file,
-                                        front_cols=[self.left_index, self.left_entity], data_types=self.left_dtypes)
+                                        front_cols=[self.left_index, self.left_entity],
+                                        data_types=self.left_dtypes)
 
         right_data = self.project['datasets'][1]
         self.right_columns.append(right_data['index_field'])
@@ -102,16 +107,23 @@ class Linker(LinkBase):
         self.right_dtypes = right_dtypes
         self.right_columns = usecols
 
+        logger.debug('Right data columns: {0}.'.format(self.right_columns))
+        logger.debug('Right data types: {0}'.format(self.right_dtypes))
+
         self.right_file = self.output_root + link_config.get('right_file', 'right_file.csv')
 
         super(Linker, self).import_data(right_data['url'],
                                         usecols,
                                         self.right_file,
-                                        front_cols=[self.right_index, self.right_entity], data_types=self.right_dtypes)
+                                        front_cols=[self.right_index, self.right_entity],
+                                        data_types=self.right_dtypes)
+
+        logger.debug('<<--- load_data ---<<')
 
     def groupby_unique_filter(self, filename, group_col, filter_col,
                               not_linked_filename, add_link_id=True, linked_filename=None):
 
+        logger.debug('>>--- groupby_unique_filter --->>')
         stats = {'total_linked': 0, 'total_filtered': 0, 'total_records_linked': 0}
 
         temp_sorted_file = self.output_root + LinkFiles.TEMP_LINK_FILE
@@ -136,6 +148,7 @@ class Linker(LinkBase):
             not_linked_writer = csv.writer(not_linked_file)
 
             if add_link_id:
+                logger.info('Assigning link id to the selected subset of record pairs.')
                 linked_writer.writerow(['LINK_ID'] + header)
             else:
                 linked_writer.writerow(header)
@@ -201,6 +214,7 @@ class Linker(LinkBase):
         if os.path.isfile(temp_sorted_file):
             os.remove(temp_sorted_file)
 
+        logger.debug('<<--- groupby_unique_filter ---<<')
         return out_filename, stats
 
     def link(self, step, relationship='1T1'):
@@ -213,7 +227,9 @@ class Linker(LinkBase):
             'NT1': Many-To-One
         :return: Linked record pairs.
         """
+        logger.debug('>>--- link --->>')
 
+        logger.info('Linking the records pairs based on the relationship type.')
         matched_file = self.output_root + LinkFiles.MATCHED_RECORDS
         filtered_filename = self.output_root + LinkFiles.TEMP_FILTER_RECORDS
 
@@ -261,9 +277,12 @@ class Linker(LinkBase):
             if os.path.isfile(filtered_filename):
                 os.remove(filtered_filename)
 
+        logger.debug('<<--- link ---<<')
         return stats
 
     def extract_linked_records(self, linked_filename, prefix='LEFT_'):
+        logger.debug('>>--- extract_linked_records --->>')
+        logger.info('Removing all linked records from the input data file and preparing data for the next step.')
 
         def add_data_row_to_linked(row, link_id, writer):
 
@@ -381,7 +400,13 @@ class Linker(LinkBase):
         if os.path.isfile(temp_linked_file):
             os.rename(temp_linked_file, linked_filename)
 
+        logger.debug('<<--- extract_linked_records ---<<')
+
     def run(self):
+        logger.debug('>>--- run --->>')
+
+        logger.info('Executing linking project {0}. Task id: {1}.'
+                    .format(self.project['name'], self.project['task_uuid']))
 
         LinkBase.reset_id()
         self.steps = {}
@@ -421,8 +446,8 @@ class Linker(LinkBase):
             os.rename(temp_sorted_file, self.right_file)
 
             self.steps[step['seq']] = {}
-            print("Linking Step {0} :".format(step['seq']))
-            print("{0}.1) Finding record pairs satisfying blocking and linking constraints...".format(step['seq']))
+            logger.info("Linking Step {0} :".format(step['seq']))
+            logger.info("{0}.1) Finding record pairs satisfying blocking and linking constraints...".format(step['seq']))
 
             open(matched_file, 'w').close()
             pairs_count = self.pair_n_match(step=step['seq'],
@@ -433,13 +458,14 @@ class Linker(LinkBase):
             linked_stats[step['seq']] = pairs_count
 
             if pairs_count == 0:
+                logger.info('No records matched at step {0}'.format(step['seq']))
                 self.steps[step['seq']]['total_records_linked'] = 0
                 self.steps[step['seq']]['total_matched_not_linked'] = 0
                 self.steps[step['seq']]['total_entities'] = 0
 
                 continue
 
-            print ("{0}.3) Identifying the linked records based on the relationship type...".format(step['seq']))
+            logger.info("{0}.3) Identifying the linked records based on the relationship type...".format(step['seq']))
             link_stats = self.link(self.project['relationship_type'])
 
             self.steps[step['seq']]['total_records_linked'] = link_stats['total_records_linked']
@@ -473,8 +499,15 @@ class Linker(LinkBase):
         if os.path.isfile(matched_file):
             os.remove(matched_file)
 
+        logger.info('Execution of linking project {0} with Task id: {1} is completed.'
+                    .format(self.project['name'], self.project['task_uuid']))
+        logger.debug('<<--- run ---<<')
+
     def save(self):
-        print ("Writing results to the output files ...")
+        logger.debug('>>--- save --->>')
+        logger.info("Preparing output file of the linking project {0} with tsk id {1}."
+                    .format(self.project['name'], self.project['task_uuid']))
+
         linked_file_path = self.output_root + link_config.get('linked_data_file', 'linked_data.csv')
 
         linked_filename = self.output_root + LinkFiles.TEMP_LINKED_RECORDS
@@ -513,5 +546,9 @@ class Linker(LinkBase):
             os.remove(self.right_file)
         if os.path.isfile(temp_sorted_file):
             os.rename(temp_sorted_file, self.right_file)
+
+        logger.info('Linking output file generated at {0}.'.format(linked_file_path))
+
+        logger.debug('<<--- save ---<<')
 
         return generate_linking_summary(self, self.output_root)
