@@ -12,12 +12,15 @@ from .base import (link_config,
 from cdilinker.linker.files import LinkFiles
 
 import logging
+
+logging.basicConfig(level=logging.DEBUG)
 logger = logging.getLogger(__name__)
 
 
 class Linker(LinkBase):
-
     def __init__(self, project):
+        if project is None:
+            raise TypeError
         super(Linker, self).__init__(project)
         self.matched_not_linked = None
         self.left_index_type = "object"
@@ -43,7 +46,8 @@ class Linker(LinkBase):
         descriptor = super(Linker, self).__str__()
 
         data_dict = json.loads(descriptor)
-        data_dict['datasets'] = [dataset['name'] for dataset in self.project['datasets']]
+        data_dict['datasets'] = [dataset['name'] for dataset in
+                                 self.project['datasets']]
         data_dict['Relationship_type'] = relationship
 
         return json.dumps(data_dict, indent=4)
@@ -57,8 +61,10 @@ class Linker(LinkBase):
         datasets = self.project['datasets']
         if datasets and len(datasets) > 1:
 
-            self.left_columns += [datasets[0]['index_field'], datasets[0]['entity_field']]
-            self.right_columns += [datasets[1]['index_field'], datasets[1]['entity_field']]
+            self.left_columns += [datasets[0]['index_field'],
+                                  datasets[0]['entity_field']]
+            self.right_columns += [datasets[1]['index_field'],
+                                   datasets[1]['entity_field']]
 
             if 'data_types' in datasets[0]:
                 left_dtypes = {}
@@ -122,30 +128,36 @@ class Linker(LinkBase):
         logger.info('Linking the records pairs based on the relationship type.')
         match_file_path = self.output_root + LinkFiles.TEMP_MATCHED_FILE
         matched = pd.read_csv(match_file_path,
-                              index_col=['LEFT_' + self.left_index, 'RIGHT_' + self.right_index])
+                              index_col=['LEFT_' + self.left_index,
+                                         'RIGHT_' + self.right_index])
 
         group_field = 'RIGHT_' + self.right_entity
         filter_field = 'LEFT_' + self.left_entity
         if relationship == 'MT1':
             group_field, filter_field = filter_field, group_field
 
-        reltionship_group = matched.groupby(group_field)
-        linked = reltionship_group.filter(lambda x: len(x[filter_field].unique()) == 1)
+        relationship_group = matched.groupby(group_field)
+        linked = relationship_group.filter(
+            lambda x: len(x[filter_field].unique()) == 1)
 
         if relationship == '1T1':
             group_field, filter_field = filter_field, group_field
 
-            reltionship_group = linked.groupby(group_field)
-            linked = reltionship_group.filter(lambda x: len(x[filter_field].unique()) == 1)
+            relationship_group = linked.groupby(group_field)
+            linked = relationship_group.filter(
+                lambda x: len(x[filter_field].unique()) == 1)
 
         linked['STEP'] = seq
 
         logger.info('Assigning link id to the selected subset of record pairs.')
         left_entity_id = 'LEFT_' + self.left_entity
         right_entity_id = 'RIGHT_' + self.right_entity
-        link_index = linked.reset_index()[[left_entity_id, right_entity_id]].drop_duplicates()
+        link_index = linked.reset_index()[
+            [left_entity_id, right_entity_id]].drop_duplicates()
         link_index = link_index.set_index([left_entity_id, right_entity_id])
-        link_index['LINK_ID'] = pd.Series([LinkBase.get_next_id() for row in link_index.index], index=link_index.index)
+        link_index['LINK_ID'] = pd.Series(
+            [LinkBase.get_next_id() for row in link_index.index],
+            index=link_index.index)
         link_index['LINK_ID'] = link_index['LINK_ID'].map(
             lambda x: '{:.0f}'.format(x)
             if pd.notnull(x)
@@ -188,16 +200,22 @@ class Linker(LinkBase):
             right_index = 'RIGHT_' + self.right_index
             left_entity_id = 'LEFT_' + self.left_entity
             right_entity_id = 'RIGHT_' + self.right_entity
-            self.steps[step['seq']]['total_records_linked'] = len(step_linked.index.values)
+            self.steps[step['seq']]['total_records_linked'] = len(
+                step_linked.index.values)
             self.total_records_linked += len(step_linked.index.values)
-            self.steps[step['seq']]['total_entities'] = len(step_linked.groupby([left_entity_id, right_entity_id]))
+            self.steps[step['seq']]['total_entities'] = len(
+                step_linked.groupby([left_entity_id, right_entity_id]))
             self.total_entities += self.steps[step['seq']]['total_entities']
 
             if not step_linked.empty:
                 # Cretae EntityID - LinkId map
-                left_links = step_linked[[left_entity_id, 'LINK_ID']].drop_duplicates()
-                left_links = left_links.reset_index().set_index(left_entity_id)['LINK_ID']
-                left_match = self.left_dataset.join(left_links, on=self.left_entity, how='inner')
+                left_links = step_linked[
+                    [left_entity_id, 'LINK_ID']].drop_duplicates()
+                left_links = left_links.reset_index().set_index(
+                    left_entity_id)['LINK_ID']
+                left_match = self.left_dataset.join(left_links,
+                                                    on=self.left_entity,
+                                                    how='inner')
 
                 linked = pd.merge(
                     left_match.reset_index(),
@@ -208,12 +226,18 @@ class Linker(LinkBase):
                 )
                 linked.drop(left_index, axis=1, inplace=True)
                 linked.drop(left_entity_id, axis=1, inplace=True)
-                linked.rename(columns={self.left_index: left_index}, inplace=True)
-                linked.rename(columns={self.left_entity: left_entity_id}, inplace=True)
+                linked.rename(columns={self.left_index: left_index},
+                              inplace=True)
+                linked.rename(columns={self.left_entity: left_entity_id},
+                              inplace=True)
 
-                right_links = step_linked[[right_entity_id, 'LINK_ID']].drop_duplicates()
-                right_links = right_links.reset_index().set_index(right_entity_id)['LINK_ID']
-                right_match = self.right_dataset.join(right_links, on=self.right_entity, how='inner')
+                right_links = step_linked[
+                    [right_entity_id, 'LINK_ID']].drop_duplicates()
+                right_links = right_links.reset_index().set_index(
+                    right_entity_id)['LINK_ID']
+                right_match = self.right_dataset.join(right_links,
+                                                      on=self.right_entity,
+                                                      how='inner')
 
                 linked = pd.merge(
                     linked,
@@ -225,24 +249,31 @@ class Linker(LinkBase):
 
                 linked.drop(right_index, axis=1, inplace=True)
                 linked.drop(right_entity_id, axis=1, inplace=True)
-                linked.rename(columns={self.right_index: right_index}, inplace=True)
-                linked.rename(columns={self.right_entity: right_entity_id}, inplace=True)
+                linked.rename(columns={self.right_index: right_index},
+                              inplace=True)
+                linked.rename(columns={self.right_entity: right_entity_id},
+                              inplace=True)
                 linked.drop(['LINK_ID_x', 'LINK_ID_y'], axis=1, inplace=True)
             else:
                 linked = pd.DataFrame()
 
-            self.linked = linked if self.linked is None else self.linked.append(linked)
+            self.linked = linked if self.linked is None \
+                else self.linked.append(linked)
 
-            self.steps[step['seq']]['total_matched_not_linked'] = len(step_matched_not_linked.index.values)
+            self.steps[step['seq']]['total_matched_not_linked'] = len(
+                step_matched_not_linked.index.values)
             if self.matched_not_linked is None:
                 self.matched_not_linked = step_matched_not_linked
             else:
-                self.matched_not_linked = self.matched_not_linked.append(step_matched_not_linked)
+                self.matched_not_linked = self.matched_not_linked.append(
+                    step_matched_not_linked)
 
             self.left_dataset = self.left_dataset[
-                ~self.left_dataset[self.left_entity].isin(step_linked[left_entity_id])]
+                ~self.left_dataset[self.left_entity].isin(
+                    step_linked[left_entity_id])]
             self.right_dataset = self.right_dataset[
-                ~self.right_dataset[self.right_entity].isin(step_linked[right_entity_id])]
+                ~self.right_dataset[self.right_entity].isin(
+                    step_linked[right_entity_id])]
 
             logger.info("Number of records linked at step {0}: {1}".format(step['seq'], len(self.linked)))
 
@@ -263,7 +294,8 @@ class Linker(LinkBase):
         left_entity_id = 'LEFT_' + self.left_entity
         right_entity_id = 'RIGHT_' + self.right_entity
         grouped = self.matched_not_linked.reset_index().groupby([
-            left_index, right_index, left_entity_id, right_entity_id]).agg({'STEP': 'min'})
+            left_index, right_index, left_entity_id, right_entity_id]).agg(
+            {'STEP': 'min'})
 
         self.matched_not_linked = pd.DataFrame(grouped)
 
@@ -304,8 +336,8 @@ class Linker(LinkBase):
         self.linked.to_csv(linked_file_path, index=False)
 
         # Storing matched but not linked records.
-        matched_file_path = self.project['output_root'] \
-            + link_config.get('matched_not_linked_filename', 'matched_not_linked_data.csv')
+        matched_file_path = self.project['output_root'] + link_config.get(
+            'matched_not_linked_filename', 'matched_not_linked_data.csv')
         self.matched_not_linked.replace(np.nan, '', regex=True)
         self.matched_not_linked.to_csv(matched_file_path)
 
