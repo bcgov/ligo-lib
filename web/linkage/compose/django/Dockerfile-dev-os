@@ -1,0 +1,76 @@
+FROM python:3.5
+
+ENV PYTHONUNBUFFERED 1
+
+RUN apt-get update && \
+      apt-get -y install sudo
+#docker file to allow sudo and add django in sudoers list
+# the reason is explained in JIRA - 762
+RUN useradd -m django && echo "django:django" | chpasswd && adduser django sudo
+
+
+
+#Docker file for forming local/dev Django container
+
+# Requirements have to be pulled and installed here, otherwise caching won't work
+#COPY ./requirements /requirements
+COPY ./web/linkage/requirements /requirements
+RUN pip install -r /requirements/local.txt
+
+COPY ./web/linkage/ /linkage
+#find better way
+RUN mkdir /linkage/lib
+COPY ./lib/  /linkage/lib
+
+
+RUN pip install -e /linkage/lib/cdi-linking/
+RUN pip install -e /linkage/lib/linking_ext/
+
+
+COPY ./web/linkage/compose/django/entrypoint.sh /linkage/entrypoint.sh
+RUN sed -i 's/\r//' /linkage/entrypoint.sh
+RUN chmod +x /linkage/entrypoint.sh
+
+
+COPY ./web/linkage/compose/django/start-dev-os.sh /linkage/start-dev-os.sh
+RUN sed -i 's/\r//' /linkage/start-dev-os.sh
+RUN chmod +x /linkage/start-dev-os.sh
+
+#not mandatory for local/dev env; needed for prod setup when Django works with Apache or nginx
+#RUN  groupadd -r django
+#RUN useradd -r -g django django
+
+
+RUN mkdir /user_data
+RUN mkdir /user_data/media
+RUN mkdir  /user_data/media/datasets
+RUN mkdir  /user_data/media/linking
+
+#use this style when not volume mounting the (files column --- see the docker-compose file please)
+#COPY ./lib/cdi-linking/test/dedup/levensthein/  /user_data/media/datasets
+
+
+#the following change in ownership instructions are not absolutely essential for docker based local/dev env
+
+RUN chmod -R 0777 /user_data
+
+RUN chown  django:django /linkage/entrypoint.sh
+RUN chown  django:django /linkage/start-dev-os.sh
+
+RUN chown  django:django -R /linkage
+RUN chown  django:django -R /user_data
+
+
+
+#RUN touch /tmp/django-email-dev
+RUN mkdir /tmp/django-email-dev
+RUN chown  django:django -R /tmp
+
+#RUN adduser django sudo
+#RUN exec su -l django
+
+RUN sudo echo "django ALL=(ALL:ALL) NOPASSWD: ALL" > /etc/sudoers.d/django
+USER django
+WORKDIR /linkage
+
+ENTRYPOINT ["/linkage/entrypoint.sh"]
