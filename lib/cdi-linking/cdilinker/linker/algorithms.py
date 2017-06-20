@@ -330,7 +330,6 @@ DETERMINISTIC_COMPARISONS = get_algorithms(types=['DTR', None])
 
 def apply_comparison(s1, s2, method='EXACT', **args):
     alg = DETERMINISTIC_COMPARISONS.get(method)
-
     return alg.apply(s1, s2, **args)
 
 

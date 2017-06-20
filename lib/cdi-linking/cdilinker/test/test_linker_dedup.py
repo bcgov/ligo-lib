@@ -3,6 +3,7 @@ import os
 import pandas as pd
 import pytest
 
+from cdilinker.linker.files import LinkFiles
 from cdilinker.linker.dedup import DeDeupProject
 
 
@@ -10,17 +11,27 @@ class TestLinkerDedup(object):
     @pytest.fixture(scope="class")
     def project(self):
         """Read test_jtst_dedup project configuration"""
+        import uuid
+
         __location__ = os.path.realpath(
             os.path.join(os.getcwd(), os.path.dirname(__file__)))
         with open(os.path.join(__location__, "data/test_jtst_dedup.json")) \
                 as data_file:
             project = json.load(data_file)
+        # Add task_uuid to this project
+        project['task_uuid'] = uuid.uuid4().hex
+
         yield project
 
         # Teardown and clean up
-        os.remove(project['output_root'] + 'dedup_matched.csv')
-        os.remove(project['output_root'] + 'deduped_data.csv')
-        os.remove(project['output_root'] + project['name'] + "_summary.pdf")
+        if os.path.isfile(project['output_root'] + 'dedup_matched.csv'):
+            os.remove(project['output_root'] + 'dedup_matched.csv')
+        if os.path.isfile(project['output_root'] + 'deduped_data.csv'):
+            os.remove(project['output_root'] + 'deduped_data.csv')
+        if os.path.isfile(project['output_root'] + project['name'] +
+                          '_summary.pdf'):
+            os.remove(project['output_root'] + project['name'] +
+                      '_summary.pdf')
 
     def test_init_none(self):
         """Ensure initialization does not proceed with empty JSON"""
@@ -47,7 +58,7 @@ class TestLinkerDedup(object):
         # TODO Add dynamic file directory checking and removal
         ddp = DeDeupProject(project)
         df = pd.DataFrame()
-        ddp._save_linked_data(df)
+        ddp.save_linked_data(df)
 
         assert os.path.isfile(project['output_root'] + 'dedup_matched.csv')
 
@@ -57,6 +68,7 @@ class TestLinkerDedup(object):
         ddp.load_data()
 
         assert ddp.left_columns is not None
+        assert len(ddp.left_columns) == 6
         assert ddp.left_dtypes is not None
         assert ddp.left_dataset is not None
 
@@ -66,7 +78,8 @@ class TestLinkerDedup(object):
         ddp.load_data()
         ddp.run()
 
-        assert not os.path.isfile(project['output_root'] + 'matched_temp.csv')
+        assert not os.path.isfile(project['output_root'] +
+                                  LinkFiles.TEMP_MATCHED_FILE)
         assert ddp.steps is not None
         assert len(ddp.steps) == len(project['steps'])
         assert ddp.linked is not None
@@ -84,4 +97,4 @@ class TestLinkerDedup(object):
         assert ddp.total_entities == 98
         assert os.path.isfile(project['output_root'] + 'deduped_data.csv')
         assert os.path.isfile(project['output_root'] + project['name'] +
-                              "_summary.pdf")
+                              '_summary.pdf')
