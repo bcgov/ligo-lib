@@ -19,7 +19,7 @@ from linkage.datasets.models import Dataset
 from .tasks import run_task
 from linkage.linking.utils import project_to_json
 import logging
-logging.basicConfig(level=logging.DEBUG)
+
 logger = logging.getLogger(__name__)
 
 tsf_alg = get_algorithms(types=['TSF'])
@@ -332,6 +332,7 @@ def view_results(request, name):
             response['Content-Disposition'] = 'inline;filename=' + results_file
             return response
     except LinkingProject.DoesNotExist:
+        logger.error('Databse Error: Linking project {0} was not found.'.format(name))
         return HttpResponseRedirect(reverse('linking:list'))
 
 
@@ -341,12 +342,8 @@ def stop_project(request, name):
         project.status = 'READY'
         project.save()
 
-    except Exception as e:
-
-        if project is not None:
-            project.status = 'FAILED'
-            project.comments = 'Project Stop Failed.'
-            project.save()
+    except LinkingProject.DoesNotExist as db_err:
+        logger.error('Databse Error: Linking project {0} was not found.'.format(name))
 
     return HttpResponseRedirect(reverse('linking:list'))
 

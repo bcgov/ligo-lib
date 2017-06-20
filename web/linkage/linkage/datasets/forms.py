@@ -1,7 +1,10 @@
+import logging
 from django.forms import ModelForm, Textarea, TextInput, Select, ChoiceField, HiddenInput
 from django.utils.translation import ugettext_lazy as _
 
 from .models import Dataset
+
+logger = logging.getLogger(__name__)
 
 
 class DatasetForm(ModelForm):
@@ -54,6 +57,7 @@ class DatasetUpdateForm(DatasetForm):
                 self.fields['field_cats'].widget = HiddenInput()
 
             except Dataset.DoesNotExist:
+                logger.error('Database error: No dataset with id {0} was found.'.format(self.instance.pk))
                 pass
 
 

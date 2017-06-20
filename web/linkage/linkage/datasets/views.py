@@ -1,6 +1,8 @@
 from __future__ import absolute_import
 
 import json
+import logging
+
 from django.core.urlresolvers import reverse
 from django.contrib.auth.decorators import login_required
 from django.views.decorators.csrf import csrf_protect
@@ -14,14 +16,13 @@ from .models import Dataset, COPLUMN_TYPES
 from .logic.preview import get_preview
 from .forms import DatasetForm, DatasetUpdateForm
 
-import logging
-logging.basicConfig(level=logging.DEBUG)
 logger = logging.getLogger(__name__)
 
 
 from cdilinker.linker.base import FIELD_CATEGORIES
 
 FIELD_CATS = tuple((item.name, item.title) for item in FIELD_CATEGORIES)
+
 
 class DatasetPreviewMixin(object):
 
@@ -130,8 +131,10 @@ def dataset_header(request):
         dataset = Dataset.objects.get(pk=id)
         fields = dataset.get_fields()
     except Dataset.DoesNotExist as db_err:
+        logger.error('Database error. No dataset with id {0} was found.'.format(id))
         fields = None
     except ValueError as value_err:
+        logger.error('Database error on fetching record data.')
         fields = None
 
     return HttpResponse(json.dumps({'header': fields}), content_type="application/json")

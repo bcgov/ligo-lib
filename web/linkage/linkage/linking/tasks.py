@@ -1,9 +1,9 @@
+import logging
 from linkage.taskapp.celery import app
 from linkage.linking.models import LinkingProject
 
 from  cdilinker.linker.commands import execute_project
-import logging
-
+logger = logging.getLogger(__name__)
 
 @app.task(name="run_project")
 def run_task(name, project_json):
@@ -27,13 +27,15 @@ def run_task(name, project_json):
             project.status = 'COMPLETED'
             project.comments = ''
             project.save()
+    except LinkingProject.DoesNotExist as db_err:
+        logger.error('Database error. Linking project {0} was not found.'.format(name))
     except Exception as e:
+        logger.error('Error occurred during project execution.', exc_info=True)
         try:
             msg = e.message
         except AttributeError as ae:
-            msg = 'An error occured during project execution. Please check the logs for details'
+            msg = 'An error occurred during project execution. Please check the logs for details'
 
-        logger.debug(e)
         if len(msg) > 100:
             msg = msg[:100] + ' ...'
         if project is not None:
