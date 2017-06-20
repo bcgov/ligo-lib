@@ -2,7 +2,7 @@ import numpy as np
 import pandas as pd
 
 from .base import PluginMount
-from ..linker.algorithms import get_algorithms
+from cdilinker.linker.algorithms import get_algorithms
 
 CMP_ALGORITHMS = get_algorithms(types=['PRB', None])
 

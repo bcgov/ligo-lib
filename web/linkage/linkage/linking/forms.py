@@ -1,4 +1,5 @@
 import json
+import logging
 from django import forms
 from django.forms.models import inlineformset_factory
 from django.forms import (ModelForm,
@@ -15,6 +16,8 @@ from django.utils.translation import ugettext_lazy as _
 
 from .models import LinkingProject, LinkingStep, PROJECT_TYPES
 from linkage.datasets.models import Dataset
+
+logger = logging.getLogger(__name__)
 
 TYPE_CHOICES = (('', 'Select Project Type'),) + PROJECT_TYPES
 
@@ -56,7 +59,8 @@ class ProjectForm(ModelForm):
                 self.fields['left_data'].initial = left_dataset.dataset.pk
                 try:
                     columns = json.loads(left_dataset.columns) or []
-                except:
+                except json.JSONDecodeError as json_err:
+                    logger.error('Error on parsing json data of dataset columns.')
                     columns = []
                 if left_dataset.dataset.index_field is not None and left_dataset.dataset.index_field not in columns:
                     columns.append(left_dataset.dataset.index_field)
@@ -64,7 +68,10 @@ class ProjectForm(ModelForm):
                     columns.append(left_dataset.dataset.entity_field)
                 self.fields['left_columns'].initial = columns
 
-            except LinkingProject.DoesNotExist:
+            except LinkingProject.DoesNotExist as project_err:
+                logger.error('Database error. Linking project with id {0} was not found'.format(self.instance.pk))
+            except Exception as db_err:
+                logger.error('Database error on fetching Linking project with id {0}.'.format(self.instance.pk))
                 pass
 
 
@@ -95,7 +102,8 @@ class LinkingForm(ProjectForm):
                 self.fields['right_data'].initial = right_dataset.dataset.pk
                 try:
                     columns = json.loads(right_dataset.columns) or []
-                except:
+                except json.JSONDecodeError as json_err:
+                    logger.error('Error on parsing json data of dataset columns.')
                     columns = []
                 if right_dataset.dataset.index_field is not None and right_dataset.dataset.index_field not in columns:
                     columns.append(right_dataset.dataset.index_field)
@@ -103,6 +111,7 @@ class LinkingForm(ProjectForm):
                     columns.append(right_dataset.dataset.entity_field)
                 self.fields['right_columns'].initial = columns
             except LinkingProject.DoesNotExist:
+                logger.error('Database error. Linking project with id {0} was not found'.format(self.instance.pk))
                 pass
 
 

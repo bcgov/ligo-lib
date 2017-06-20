@@ -1,7 +1,10 @@
 import json
+import logging
 from django.forms.models import model_to_dict
 from django.conf import settings
 from .models import LinkingProject, LinkingDataset
+
+logger = logging.getLogger(__name__)
 
 def project_to_json(name):
 
@@ -24,7 +27,8 @@ def project_to_json(name):
         left_link = LinkingDataset.objects.get(link_project=project, link_seq=1)
         try:
             left_columns = json.loads(left_link.columns) or []
-        except:
+        except json.JSONDecodeError as json_err:
+            logger.error('Error on parsing json data of dataset columns.')
             left_columns = []
 
         datasets[0]['columns'] = left_columns
@@ -35,7 +39,8 @@ def project_to_json(name):
         right_link = LinkingDataset.objects.get(link_project=project, link_seq=2)
         try:
             right_columns = json.loads(right_link.columns) or []
-        except:
+        except json.JSONDecodeError as json_err:
+            logger.error('Error on parsing dataset columns json.')
             right_columns = []
 
         datasets[1]['columns'] = right_columns
