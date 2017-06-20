@@ -11,11 +11,16 @@ class TestLinkerDedup(object):
     @pytest.fixture(scope="class")
     def project(self):
         """Read test_jtst_dedup project configuration"""
+        import uuid
+
         __location__ = os.path.realpath(
             os.path.join(os.getcwd(), os.path.dirname(__file__)))
         with open(os.path.join(__location__, "data/test_jtst_dedup.json")) \
                 as data_file:
             project = json.load(data_file)
+        # Add task_uuid to this project
+        project['task_uuid'] = uuid.uuid4().hex
+
         yield project
 
         # Teardown and clean up
@@ -53,7 +58,7 @@ class TestLinkerDedup(object):
         # TODO Add dynamic file directory checking and removal
         ddp = DeDeupProject(project)
         df = pd.DataFrame()
-        ddp._save_linked_data(df)
+        ddp.save_linked_data(df)
 
         assert os.path.isfile(project['output_root'] + 'dedup_matched.csv')
 

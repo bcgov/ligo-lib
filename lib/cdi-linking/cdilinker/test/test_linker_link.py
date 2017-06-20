@@ -10,12 +10,16 @@ class TestLinkerLink(object):
     @pytest.fixture(scope="class")
     def project(self):
         """Read test_jtst_educ_linking project configuration"""
+        import uuid
+
         __location__ = os.path.realpath(
             os.path.join(os.getcwd(), os.path.dirname(__file__)))
         with open(os.path.join(
                 __location__, "data/test_jtst_educ_linking.json")) \
                 as data_file:
             project = json.load(data_file)
+        # Add task_uuid to this project
+        project['task_uuid'] = uuid.uuid4().hex
         yield project
 
         # Teardown and clean up
