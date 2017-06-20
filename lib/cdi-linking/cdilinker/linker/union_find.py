@@ -68,4 +68,3 @@ class UnionFind:
             self.weight[i] += 1
 
         self.size -= 1
-

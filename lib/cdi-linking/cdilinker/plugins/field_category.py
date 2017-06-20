@@ -64,9 +64,8 @@ class FieldCategory(metaclass=PluginMount):
         u_data['Agreement'] = total / float(left_size * right_size)
         u_data['Disagreement'] = (left_len * right_len - total) / float(left_size * right_size)
 
-        u_data['Missing'] = (left_missing * right_size
-                             + right_missing * left_size
-                             - left_missing * right_missing) / float(left_size * right_size)
+        u_data['Missing'] = (left_missing * right_size + right_missing *
+                             left_size - left_missing * right_missing) / float(left_size * right_size)
 
         return u_data
 

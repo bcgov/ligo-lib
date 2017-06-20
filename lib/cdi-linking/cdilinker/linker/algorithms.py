@@ -94,6 +94,7 @@ class BothEmpty(AlgorithmProvider):
     def apply(self, s1, s2):
         return comp(s1, s2, empty_sum=2)
 
+
 class OneEmpty(AlgorithmProvider):
     name = 'ONE_EMPTY'
     title = 'One value should be empty'
@@ -102,6 +103,7 @@ class OneEmpty(AlgorithmProvider):
 
     def apply(self, s1, s2):
         return comp(s1, s2, empty_sum=1)
+
 
 class BothExist(AlgorithmProvider):
     name = 'BOTH_EXIST'
@@ -328,7 +330,6 @@ DETERMINISTIC_COMPARISONS = get_algorithms(types=['DTR', None])
 
 def apply_comparison(s1, s2, method='EXACT', **args):
     alg = DETERMINISTIC_COMPARISONS.get(method)
-
     return alg.apply(s1, s2, **args)
 
 

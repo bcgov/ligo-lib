@@ -31,7 +31,7 @@ class PluginMount(type):
             # This must be a plugin implementation, which should be registered.
             # Simply appending it to the list is all that's needed to keep
             # track of it later.
-            print ('Adding new plugin class: {0}.'.format(cls.name))
+            print('Adding new plugin class: {0}.'.format(cls.name))
             cls.plugins.append(cls)
 
 
@@ -53,6 +53,7 @@ class AlgorithmProvider(metaclass=PluginMount):
 
     def apply(self, args):
         raise NotImplementedError('Abstarct method. No implementation.')
+
 
 def load_plugins():
     '''

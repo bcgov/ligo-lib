@@ -233,8 +233,8 @@ class Linker(LinkBase):
         matched_file = self.output_root + LinkFiles.MATCHED_RECORDS
         filtered_filename = self.output_root + LinkFiles.TEMP_FILTER_RECORDS
 
-        matched_not_linked_filename = self.output_root + \
-                                      link_config.get('matched_not_linked_filename', 'matched_not_linked_data.csv')
+        matched_not_linked_filename = self.output_root + link_config \
+            .get('matched_not_linked_filename', 'matched_not_linked_data.csv')
 
         linked_filename = self.output_root + LinkFiles.TEMP_STEP_LINKED_FILE
 
@@ -355,7 +355,6 @@ class Linker(LinkBase):
                         linked_writer.writerow(linked_row)
                         linked_row = next(linked_reader)
 
-
                     elif float(data_row[data_entity_index]) < float(linked_row[link_entity_index]):
                         if previous_link_row and \
                                 float(previous_link_row[link_entity_index]) == float(data_row[data_entity_index]):
@@ -364,7 +363,6 @@ class Linker(LinkBase):
                                                    linked_writer)
                         else:
                             data_writer.writerow(data_row)
-
 
                         data_row = next(data_reader)
 
@@ -418,7 +416,7 @@ class Linker(LinkBase):
         matched_file = self.output_root + LinkFiles.MATCHED_RECORDS
 
         matched_not_linked_filename = self.output_root \
-                                      + link_config.get('matched_not_linked_filename', 'matched_not_linked_data.csv')
+            + link_config.get('matched_not_linked_filename', 'matched_not_linked_data.csv')
         linked_filename = self.output_root + LinkFiles.TEMP_LINKED_RECORDS
         step_linked = self.output_root + LinkFiles.TEMP_STEP_LINKED_FILE
         temp_sorted_file = self.output_root + LinkFiles.TEMP_SORTED_FILE
@@ -451,9 +449,9 @@ class Linker(LinkBase):
 
             open(matched_file, 'w').close()
             pairs_count = self.pair_n_match(step=step['seq'],
-                                                    link_method=step['linking_method'],
-                                                    blocking=step['blocking_schema'],
-                                                    linking=step['linking_schema'], matched_file=matched_file)
+                                            link_method=step['linking_method'],
+                                            blocking=step['blocking_schema'],
+                                            linking=step['linking_schema'], matched_file=matched_file)
 
             linked_stats[step['seq']] = pairs_count
 

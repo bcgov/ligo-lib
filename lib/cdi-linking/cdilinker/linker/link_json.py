@@ -2,12 +2,13 @@ import os
 import sys
 import json
 import getopt
-#from cdilinker.config.config import config
+# from cdilinker.config.config import config
 from cdilinker.linker.commands import execute_project
 
 
 import logging
 logger = logging.getLogger(__name__)
+
 
 def run_json(project_file):
     '''
@@ -23,6 +24,7 @@ def run_json(project_file):
             project = json.load(json_file)
             logger.debug(project['type'])
             return execute_project(project)
+
 
 def main(argv):
     try:
