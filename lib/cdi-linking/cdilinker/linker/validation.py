@@ -60,5 +60,3 @@ class ValidationError(LinkError):
 
     def __str__(self):
         return self.message
-
-

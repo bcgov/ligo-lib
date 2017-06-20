@@ -9,10 +9,10 @@ import configparser
 import logging
 
 
-
 logger = logging.getLogger(__name__)
 
 config = None
+
 
 class Configuration:
     def __init__(self, config_file):

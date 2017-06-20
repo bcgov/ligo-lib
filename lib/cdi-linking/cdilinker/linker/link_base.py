@@ -230,7 +230,8 @@ class LinkBase(object):
             left_block.index.names = ['LEFT_' + left_block.index.name]
 
             for j in range(0, right_chunks):
-                if self.project_type == 'DEDUP' and i > j: continue
+                if self.project_type == 'DEDUP' and i > j:
+                    continue
 
                 right_block = right_df.iloc[j * CHUNK_SIZE: (j + 1) * CHUNK_SIZE]
 

@@ -162,7 +162,7 @@ class SynonymTable(AlgorithmProvider):
         nicknames['nameA'] = map(lambda x: x.upper(), nicknames['nameA'])
         nicknames['nameB'] = map(lambda x: x.upper(), nicknames['nameB'])
         names = pd.concat([nicknames['nameA'], nicknames['nameB']]).drop_duplicates()
-        #names = names.sort_values()
+        # names = names.sort_values()
         names.index = list(range(len(names)))
         names_index = pd.Series(list(range(len(names))), index=names.values)
         name_set = UnionFind(len(names))

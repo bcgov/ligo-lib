@@ -14,6 +14,7 @@ from cdilinker.linker.files import LinkFiles
 import logging
 logger = logging.getLogger(__name__)
 
+
 class Linker(LinkBase):
 
     def __init__(self, project):
@@ -66,7 +67,7 @@ class Linker(LinkBase):
                 if self.left_index in left_dtypes:
                     self.left_index_type = left_dtypes[self.left_index]
             else:
-               left_dtypes = None
+                left_dtypes = None
 
             if 'data_types' in datasets[1]:
                 right_dtypes = {}
@@ -76,7 +77,6 @@ class Linker(LinkBase):
                     self.right_index_type = right_dtypes[self.right_index]
             else:
                 right_dtypes = None
-
 
         try:
             left_usecols = datasets[0]['columns'] or self.left_columns
@@ -305,7 +305,7 @@ class Linker(LinkBase):
 
         # Storing matched but not linked records.
         matched_file_path = self.project['output_root'] \
-                            + link_config.get('matched_not_linked_filename', 'matched_not_linked_data.csv')
+            + link_config.get('matched_not_linked_filename', 'matched_not_linked_data.csv')
         self.matched_not_linked.replace(np.nan, '', regex=True)
         self.matched_not_linked.to_csv(matched_file_path)
 
