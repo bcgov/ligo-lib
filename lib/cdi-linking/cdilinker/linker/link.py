@@ -208,7 +208,7 @@ class Linker(LinkBase):
             self.total_entities += self.steps[step['seq']]['total_entities']
 
             if not step_linked.empty:
-                # Cretae EntityID - LinkId map
+                # Create EntityID - LinkId map
                 left_links = step_linked[
                     [left_entity_id, 'LINK_ID']].drop_duplicates()
                 left_links = left_links.reset_index().set_index(

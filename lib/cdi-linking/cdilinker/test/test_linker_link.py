@@ -23,6 +23,14 @@ class TestLinkerLink(object):
         yield project
 
         # Teardown and clean up
+        if os.path.isfile(project['output_root'] + 'matched_not_linked_data.csv'):
+            os.remove(project['output_root'] + 'matched_not_linked_data.csv')
+        if os.path.isfile(project['output_root'] + 'linked_data.csv'):
+            os.remove(project['output_root'] + 'linked_data.csv')
+        if os.path.isfile(project['output_root'] + project['name'] +
+                          '_summary.pdf'):
+            os.remove(project['output_root'] + project['name'] +
+                      '_summary.pdf')
 
     def test_init_none(self):
         """Ensure initialization does not proceed with empty JSON"""
@@ -68,7 +76,26 @@ class TestLinkerLink(object):
 
     def test_link(self, project):
         """Tests link and filter functionality"""
-        NotImplemented
+        step = project['steps'][0]
+        linker = Linker(project)
+        linker.load_data()
+        linker.pair_n_match(step=step['seq'],
+                            link_method=step['linking_method'],
+                            blocking=step['blocking_schema'],
+                            linking=step['linking_schema'])
+        assert os.path.isfile(project['output_root'] +
+                              LinkFiles.TEMP_MATCHED_FILE)
+        step_linked, step_matched_not_linked = \
+            linker.link(step['seq'], project['relationship_type'])
+
+        assert step_linked is not None
+        assert len(step_linked) == 72
+        assert step_matched_not_linked is not None
+        assert len(step_matched_not_linked) == 0
+
+        if os.path.isfile(project['output_root'] +
+                          LinkFiles.TEMP_MATCHED_FILE):
+            os.remove(project['output_root'] + LinkFiles.TEMP_MATCHED_FILE)
 
     def test_run(self, project):
         """Tests if the task can be run"""
@@ -82,3 +109,19 @@ class TestLinkerLink(object):
         assert len(linker.steps) == len(project['steps'])
         assert linker.total_records_linked == 144
         assert linker.total_entities == 30
+        assert len(linker.linked) == 72
+
+    def test_save(self, project):
+        """Tests if the execution results are saved"""
+        linker = Linker(project)
+        linker.load_data()
+        linker.run()
+        linker.save()
+
+        assert linker.total_entities is not None
+        assert linker.total_entities == 30
+        assert os.path.isfile(project['output_root'] +
+                              'matched_not_linked_data.csv')
+        assert os.path.isfile(project['output_root'] + 'linked_data.csv')
+        assert os.path.isfile(project['output_root'] + project['name'] +
+                              '_summary.pdf')
