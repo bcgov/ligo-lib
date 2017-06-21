@@ -2,6 +2,9 @@ import csv
 from collections import Counter
 
 from cdilinker.plugins.base import PluginMount
+from cdilinker.config.config import config
+link_config = config.get_section('LINKER')
+CHUNK_SIZE = int(link_config.get('chunk_size') or '100000')
 
 
 class FieldCategory(metaclass=PluginMount):
@@ -60,7 +63,7 @@ class FieldCategory(metaclass=PluginMount):
             pass
 
         u_data = dict()
-        u_data['Values'] = dict(u_values.most_common(1000000))
+        u_data['Values'] = dict(u_values.most_common(CHUNK_SIZE))
         u_data['Agreement'] = total / float(left_size * right_size)
         u_data['Disagreement'] = (left_len * right_len - total) / float(left_size * right_size)
 
