@@ -29,8 +29,7 @@ setup(
     ],
     package_dir={'bcgov_linkext': 'bcgov_linkext'},
     license='MIT',
-    entry_points=\
-    """
+    entry_points="""
         [bcgov.linking.plugins]
         lev_alg = bcgov_linkext.algorithms:Levenshtein
         jaro_alg = bcgov_linkext.algorithms:Jaro_Winkler

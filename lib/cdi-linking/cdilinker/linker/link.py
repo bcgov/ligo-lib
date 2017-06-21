@@ -2,16 +2,15 @@ import os
 import json
 import pandas as pd
 import numpy as np
+import logging
 
+from cdilinker.linker.base import (link_config,
+                                   COLUMN_TYPES,
+                                   LINKING_RELATIONSHIPS)
+from cdilinker.linker.files import LinkFiles
 from cdilinker.linker.link_base import LinkBase
 from cdilinker.reports.report import generate_linking_summary
-from .base import (link_config,
-                   COLUMN_TYPES,
-                   LINKING_RELATIONSHIPS)
 
-from cdilinker.linker.files import LinkFiles
-
-import logging
 
 logging.basicConfig(level=logging.DEBUG)
 logger = logging.getLogger(__name__)

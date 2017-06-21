@@ -3,8 +3,8 @@ import json
 import numpy as np
 import pandas as pd
 
-from .algorithms import apply_encoding, apply_comparison
-from .base import (CHUNK_SIZE, _save_pairs)
+from cdilinker.linker.algorithms import apply_encoding, apply_comparison
+from cdilinker.linker.base import (CHUNK_SIZE, _save_pairs)
 from cdilinker.linker.files import LinkFiles
 
 import logging
@@ -246,8 +246,7 @@ class LinkBase(object):
                 if self.project_type == 'DEDUP' and i > j:
                     continue
 
-                right_block = right_df.iloc[
-                              j * CHUNK_SIZE: (j + 1) * CHUNK_SIZE]
+                right_block = right_df.iloc[j * CHUNK_SIZE: (j + 1) * CHUNK_SIZE]
 
                 right_block.columns = ['RIGHT_' + col for col in
                                        right_block.columns]

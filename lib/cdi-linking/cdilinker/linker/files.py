@@ -1,7 +1,4 @@
-
-
 class LinkFiles:
-
     """
     Define filename constants used internally during linking process.
     These files are generated during liking and gets removed after that.

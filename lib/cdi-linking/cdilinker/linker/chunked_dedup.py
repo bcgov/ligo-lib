@@ -2,29 +2,25 @@ import os
 import json
 import numpy as np
 import pandas as pd
-
 import logging
 
-from .base import (link_config,
-                   CHUNK_SIZE,
-                   COLUMN_TYPES,
-                   _save_pairs,
-                   sort_csv)
-from cdilinker.reports.report import generate_linking_summary
-
-from .chunked_link_base import LinkBase
-
+from cdilinker.linker.base import (link_config,
+                                   CHUNK_SIZE,
+                                   COLUMN_TYPES,
+                                   _save_pairs,
+                                   sort_csv)
+from cdilinker.linker.chunked_link_base import LinkBase
 from cdilinker.linker.files import LinkFiles
-
+from cdilinker.reports.report import generate_linking_summary
 
 logger = logging.getLogger(__name__)
 
 
 class DeDeupProject(LinkBase):
     def __init__(self, project):
-
+        if project is None:
+            raise TypeError
         super(DeDeupProject, self).__init__(project)
-
         self.project_type = 'DEDUP'
         dataset = project['datasets'][0]
         self.left_index = self.right_index = dataset['index_field']
@@ -32,7 +28,6 @@ class DeDeupProject(LinkBase):
         self.left_dtypes = self.right_dtypes = None
 
     def __str__(self):
-
         descriptor = super(DeDeupProject, self).__str__()
 
         data_dict = json.loads(descriptor)
@@ -42,7 +37,6 @@ class DeDeupProject(LinkBase):
         return json.dumps(data_dict, indent=4)
 
     def load_data(self):
-
         logger.debug('>>--- load_data --->>')
         logger.info('Loading input dataset for project: {0} with task id: {1}.'
                     .format(self.project['name'], self.project['task_uuid']))
@@ -68,7 +62,8 @@ class DeDeupProject(LinkBase):
         logger.debug('Data columns: {0}.'.format(self.left_columns))
         logger.debug('Data types: {0}'.format(self.left_dtypes))
 
-        self.right_file = self.left_file = self.output_root + link_config.get('left_file', 'left_file.csv')
+        self.right_file = self.left_file = self.output_root + link_config.get(
+            'left_file', 'left_file.csv')
 
         super(DeDeupProject, self).import_data(dataset['url'],
                                                usecols,
@@ -89,11 +84,13 @@ class DeDeupProject(LinkBase):
         left_index = 'LEFT_' + self.left_index
         right_index = 'RIGHT_' + self.right_index
 
-        if not os.path.exists(matched_file) or os.path.getsize(matched_file) == 0:
+        if not os.path.exists(matched_file) or os.path.getsize(
+                matched_file) == 0:
             return 0
 
         matched_reader = pd.read_csv(matched_file,
-                                     index_col=[left_index, right_index], chunksize=CHUNK_SIZE)
+                                     index_col=[left_index, right_index],
+                                     chunksize=CHUNK_SIZE)
 
         logger.debug('Loading linked records chunk by chunk.')
         for chunk in matched_reader:
@@ -119,9 +116,11 @@ class DeDeupProject(LinkBase):
 
         # Find all connected records and make entity groups
         matched_reader = pd.read_csv(matched_file,
-                                     index_col=[left_index, right_index], chunksize=CHUNK_SIZE)
+                                     index_col=[left_index, right_index],
+                                     chunksize=CHUNK_SIZE)
 
-        logger.debug('Finding chains of connected records that belong to the same entity')
+        logger.debug(
+            'Finding chains of connected records that belong to the same entity')
         for chunk in matched_reader:
             for left_id, right_id in chunk.index.values:
                 entts.union(index_loc[left_id], index_loc[right_id])
@@ -130,14 +129,16 @@ class DeDeupProject(LinkBase):
         append = False
         entity_file = self.output_root + LinkFiles.TEMP_MATCHED_ENTITY_FILE
         matched_reader = pd.read_csv(matched_file,
-                                     index_col=[left_index, right_index], chunksize=CHUNK_SIZE)
+                                     index_col=[left_index, right_index],
+                                     chunksize=CHUNK_SIZE)
 
         for chunk in matched_reader:
             chunk.insert(0, 'ENTITY_ID', np.nan)
             for left_id, right_id in chunk.index.values:
                 entt = entts.find(index_loc[left_id])
                 entity_ids[entt] = entity_ids[entt] or LinkBase.get_next_id()
-                chunk.set_value((left_id, right_id), 'ENTITY_ID', entity_ids[entt])
+                chunk.set_value((left_id, right_id), 'ENTITY_ID',
+                                entity_ids[entt])
                 linked.set_value(left_id, 'ENTITY_ID', entity_ids[entt])
                 linked.set_value(right_id, 'ENTITY_ID', entity_ids[entt])
 
@@ -156,10 +157,12 @@ class DeDeupProject(LinkBase):
         logger.debug('<<--- link_pairs ---<<')
         return entts.count()
 
-    def extract_rows(self, data_filename, data_id, index_filename, index_id, index_cols, selected_filename=None):
+    def extract_rows(self, data_filename, data_id, index_filename, index_id,
+                     index_cols, selected_filename=None):
         logger.debug('>>--- extract_rows --->>')
 
-        logger.info('Removing all linked records from the input data file and preparing data for the next step.')
+        logger.info(
+            'Removing all linked records from the input data file and preparing data for the next step.')
 
         import csv
 
@@ -167,7 +170,7 @@ class DeDeupProject(LinkBase):
             selected_filename = self.output_root + LinkFiles.TEMP_DEDUP_STEP_SELECTED
         remained_filename = self.output_root + LinkFiles.TEMP_STEP_REMAINED
 
-        with open(data_filename, 'r') as data_file, open(index_filename, 'r') as index_file, \
+        with open(data_filename, 'r') as data_file, open(index_filename, 'r') as index_file,\
                 open(selected_filename, 'w') as selected_file, open(remained_filename, 'w') as remained_file:
 
             data_reader = csv.reader(data_file)
@@ -181,10 +184,12 @@ class DeDeupProject(LinkBase):
             index_header = next(index_reader)
 
             # Get the position of required columns in data and index rows
-            data_header_map = {key: index for index, key in enumerate(data_header)}
+            data_header_map = {key: index for index, key in
+                               enumerate(data_header)}
             data_idx = data_header_map[data_id]
 
-            index_header_map = {key: index for index, key in enumerate(index_header)}
+            index_header_map = {key: index for index, key in
+                                enumerate(index_header)}
             index_idx = index_header_map[index_id]
             col_index = [index_header_map[col] for col in index_cols]
 
@@ -249,7 +254,8 @@ class DeDeupProject(LinkBase):
         selected_filename = self.output_root + LinkFiles.TEMP_DEDUP_STEP_SELECTED
         final_selected_file = self.output_root + LinkFiles.TEMP_DEDUP_ALL_SELECTED
 
-        dedup_results_file = self.output_root + link_config.get('dedup_matched_file', 'dedup_matched.csv')
+        dedup_results_file = self.output_root + link_config.get(
+            'dedup_matched_file', 'dedup_matched.csv')
 
         linked_file = self.output_root + LinkFiles.TEMP_ENTITIES_FILE
 
@@ -262,12 +268,15 @@ class DeDeupProject(LinkBase):
         for step in self.project['steps']:
             self.steps[step['seq']] = {}
             logger.info("De-duplication Step {0} :".format(step['seq']))
-            logger.info("{0}.1) Finding record pairs satisfying blocking and linking constraints...".format(step['seq']))
+            logger.info(
+                "{0}.1) Finding record pairs satisfying blocking and linking constraints...".format(
+                    step['seq']))
 
             pairs_count = self.pair_n_match(step=step['seq'],
                                             link_method=step['linking_method'],
                                             blocking=step['blocking_schema'],
-                                            linking=step['linking_schema'], matched_file=matched_file)
+                                            linking=step['linking_schema'],
+                                            matched_file=matched_file)
 
             linked_stats[step['seq']] = pairs_count - prev_total
             prev_total = pairs_count
@@ -275,21 +284,25 @@ class DeDeupProject(LinkBase):
             if step['group']:
                 self.total_entities += self.link_pairs()
 
-                self.extract_rows(data_filename=self.left_file, data_id=self.left_index,
-                                  index_filename=linked_file, index_id='REC_ID', index_cols=['ENTITY_ID'])
+                self.extract_rows(data_filename=self.left_file,
+                                  data_id=self.left_index,
+                                  index_filename=linked_file, index_id='REC_ID',
+                                  index_cols=['ENTITY_ID'])
 
                 sort_csv(selected_filename, appendfile=final_selected_file,
                          cols=['ENTITY_ID'], types={'ENTITY_ID': 'numeric'})
 
                 self.total_records_linked += pairs_count
 
-                LinkBase.append_rows(dedup_results_file, matched_file, first_batch=first_batch)
+                LinkBase.append_rows(dedup_results_file, matched_file,
+                                     first_batch=first_batch)
                 first_batch = False
                 open(matched_file, 'w').close()
                 prev_total = 0
 
         for step in self.project['steps']:
-            self.steps[step['seq']]['total_records_linked'] = linked_stats.get(step['seq'], 0)
+            self.steps[step['seq']]['total_records_linked'] = linked_stats.get(
+                step['seq'], 0)
 
         if os.path.isfile(matched_file):
             os.remove(matched_file)
@@ -298,8 +311,9 @@ class DeDeupProject(LinkBase):
         if os.path.isfile(selected_filename):
             os.remove(selected_filename)
 
-        logger.info('Execution of de-duplication project {0} with Task id: {1} is completed.'
-                    .format(self.project['name'], self.project['task_uuid']))
+        logger.info(
+            'Execution of de-duplication project {0} with Task id: {1} is completed.'
+            .format(self.project['name'], self.project['task_uuid']))
         logger.debug('<<--- run ---<<')
 
     def save(self):
@@ -316,11 +330,13 @@ class DeDeupProject(LinkBase):
         # Adding the selected (de-duped) entities to the final result
         selected_rows = self.output_root + LinkFiles.TEMP_DEDUP_ALL_SELECTED
         data_reader = pd.read_csv(self.left_file,
-                                  usecols=self.left_columns, dtype=self.left_dtypes,
+                                  usecols=self.left_columns,
+                                  dtype=self.left_dtypes,
                                   skipinitialspace=True, chunksize=CHUNK_SIZE)
 
         # Storing deduplication result. It contains the original records plus the entity id of each record.
-        deduped_file_path = self.output_root + link_config.get('deduped_data_file', 'deduped_data.csv')
+        deduped_file_path = self.output_root + link_config.get(
+            'deduped_data_file', 'deduped_data.csv')
 
         file_mode = 'a'
         header = False
@@ -345,9 +361,11 @@ class DeDeupProject(LinkBase):
 
         # Total number of entities after de-duplication
         self.total_entities += total_remained
-        logger.info('Total number of entities after de-duplication: {0}'.format(self.total_entities))
+        logger.info('Total number of entities after de-duplication: {0}'.format(
+            self.total_entities))
 
-        logger.info('De-duplicated file generated at {0}.'.format(deduped_file_path))
+        logger.info(
+            'De-duplicated file generated at {0}.'.format(deduped_file_path))
 
         logger.debug('<<--- save ---<<')
         # Generating de-duplication summary report

@@ -1,12 +1,13 @@
-
 import os
-from string import Template
 import subprocess
 import numpy as np
+import logging
+
+from string import Template
 from cdilinker.config.config import config
 from cdilinker.plugins.field_category import FieldCategory
 
-import logging
+
 logging.basicConfig(level=logging.DEBUG)
 logger = logging.getLogger(__name__)
 

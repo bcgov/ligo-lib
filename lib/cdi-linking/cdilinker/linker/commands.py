@@ -2,7 +2,6 @@ import pandas as pd
 import logging
 
 from cdilinker.config.config import config
-
 from cdilinker.linker.base import CHUNK_SIZE
 from cdilinker.linker.validation import LinkError, ValidationError
 

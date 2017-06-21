@@ -1,17 +1,17 @@
 import os
 import json
 import csv
+import logging
 
-from .chunked_link_base import LinkBase
-
-from .base import (link_config,
-                   COLUMN_TYPES,
-                   LINKING_RELATIONSHIPS,
-                   sort_csv)
+from cdilinker.linker.base import (link_config,
+                                   COLUMN_TYPES,
+                                   LINKING_RELATIONSHIPS,
+                                   sort_csv)
+from cdilinker.linker.chunked_link_base import LinkBase
 from cdilinker.linker.files import LinkFiles
 from cdilinker.reports.report import generate_linking_summary
 
-import logging
+
 logger = logging.getLogger(__name__)
 
 
