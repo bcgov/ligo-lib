@@ -88,7 +88,7 @@ def sort_csv(filename, appendfile, cols, types):
 
     with open(script_filename, 'w') as script_file:
         script_file.write(sort_script)
-    os.chmod(script_filename, 0o777)
+    os.chmod(script_filename, 0o700)
     subprocess.call([script_filename])
 
     if os.path.isfile(script_filename):
