@@ -79,3 +79,4 @@ CELERY_ALWAYS_EAGER = False
 
 # Your local stuff: Below this line define 3rd party library settings
 # ------------------------------------------------------------------------------
+SHOW_INDEXES = True
