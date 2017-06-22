@@ -69,7 +69,7 @@ class TestLinkerDedup(object):
         assert ddp.left_dtypes is not None
         assert len(ddp.left_dtypes) == 7
         assert ddp.left_dataset is not None
-        assert len(ddp.left_dataset) == 98
+        assert len(ddp.left_dataset) == 999
 
     def test_run(self, project):
         """Tests if the task can be run"""
@@ -83,7 +83,8 @@ class TestLinkerDedup(object):
         assert len(ddp.steps) == len(project['steps'])
         assert ddp.linked is not None
         assert len(ddp.linked) == 0
-        assert ddp.matched is None
+        assert ddp.matched is not None
+        assert len(ddp.matched) == 0
         assert ddp.total_linked is None
 
     def test_save(self, project):
@@ -94,7 +95,7 @@ class TestLinkerDedup(object):
         ddp.save()
 
         assert ddp.total_entities is not None
-        assert ddp.total_entities == 98
+        assert ddp.total_entities == 999
         assert os.path.isfile(project['output_root'] + 'deduped_data.csv')
         assert os.path.isfile(project['output_root'] + project['name'] +
                               '_summary.pdf')

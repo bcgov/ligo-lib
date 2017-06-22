@@ -436,7 +436,7 @@ class LinkBase(object):
                 chunk.to_csv(dest_file, index=False, header=first_chunk)
                 first_chunk = False
 
-        logger.info('Datafile {0} is imported successfuly.'.format(src_filename))
+        logger.info('Datafile {0} is imported successfully.'.format(src_filename))
         logger.debug('<<--- import_data ---<<')
 
     def load_data(self):

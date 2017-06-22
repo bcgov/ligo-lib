@@ -2,6 +2,7 @@ import json
 import os
 import pytest
 
+from cdilinker.linker.files import LinkFiles
 from cdilinker.linker.chunked_dedup import DeDeupProject
 
 
@@ -53,8 +54,8 @@ class TestLinkerDedup(object):
         """Should not be throwing a JSONDecodeError"""
         json.loads(str(DeDeupProject(project)))
 
-    def test_run(self, project):
-        """Tests if the task can be run"""
+    def test_load_data(self, project):
+        """Tests if the data is properly loaded"""
         ddp = DeDeupProject(project)
         ddp.load_data()
 
@@ -69,4 +70,14 @@ class TestLinkerDedup(object):
 
     def test_link_pairs(self, project):
         """Tests if link_pairs behaves as intended"""
+        NotImplemented
+
+    def test_extract_rows(self, project):
+        """Tests if linked records are removed from input data"""
+        NotImplemented
+
+    def test_run(self, project):
+        """Tests if the task can be run"""
         ddp = DeDeupProject(project)
+        ddp.load_data()
+        # ddp.run() # TODO Invokes a shell-script which does not work on Windows
