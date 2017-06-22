@@ -19,7 +19,7 @@ setup(
 
     # Description
     description="BCGOV Python toolkit for linking and de-duplication of csv data files",
-    long_description=read('readme.rst'),
+    long_description=read('../readme.rst'),
 
     install_requires=[
         "jellyfish>=0.5.6",
