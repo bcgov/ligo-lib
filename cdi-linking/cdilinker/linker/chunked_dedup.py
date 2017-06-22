@@ -13,6 +13,7 @@ from cdilinker.linker.chunked_link_base import LinkBase
 from cdilinker.linker.files import LinkFiles
 from cdilinker.reports.report import generate_linking_summary
 
+
 logger = logging.getLogger(__name__)
 
 

@@ -1,9 +1,7 @@
 import json
 import os
-import pandas as pd
 import pytest
 
-from cdilinker.linker.files import LinkFiles
 from cdilinker.linker.chunked_dedup import DeDeupProject
 
 
@@ -13,14 +11,12 @@ class TestLinkerDedup(object):
         """Read test_jtst_dedup project configuration"""
         import uuid
 
-        __location__ = os.path.realpath(
-            os.path.join(os.getcwd(), os.path.dirname(__file__)))
-        with open(os.path.join(__location__, "data/test_jtst_dedup.json")) \
-                as data_file:
+        with open(os.path.join(os.path.dirname(__file__), '..', 'data',
+                               'test_jtst_dedup.json')) as data_file:
             project = json.load(data_file)
+
         # Add task_uuid to this project
         project['task_uuid'] = uuid.uuid4().hex
-
         yield project
 
         # Teardown and clean up
@@ -57,8 +53,8 @@ class TestLinkerDedup(object):
         """Should not be throwing a JSONDecodeError"""
         json.loads(str(DeDeupProject(project)))
 
-    def test_load_data(self, project):
-        """Tests if the data is properly loaded"""
+    def test_run(self, project):
+        """Tests if the task can be run"""
         ddp = DeDeupProject(project)
         ddp.load_data()
 
@@ -70,3 +66,7 @@ class TestLinkerDedup(object):
         assert len(ddp.right_columns) == 7
         assert ddp.right_dtypes is not None
         assert len(ddp.right_dtypes) == 7
+
+    def test_link_pairs(self, project):
+        """Tests if link_pairs behaves as intended"""
+        ddp = DeDeupProject(project)
