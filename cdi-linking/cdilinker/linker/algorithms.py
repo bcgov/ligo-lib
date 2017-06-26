@@ -71,7 +71,8 @@ class ExactComparsion(AlgorithmProvider):
         :return: For each (x,y) pair from two input series, return 1 if x == y and returns 0 otherwise.
         """
         x = pd.Series(0, index=s1.index)
-        x[s1 == s2] = 1
+
+        x[(s1 == s2) | ((s1 != s1) & (s2 != s2))] = 1
 
         return x
 
