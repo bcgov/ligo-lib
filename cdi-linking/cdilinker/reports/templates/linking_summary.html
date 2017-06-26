@@ -80,24 +80,52 @@
             </tr>
             <tr>
                 <th rowspan="3">Blocking</th>
-                <td><strong>Left Variables:</strong> {% for column in step.blocking_schema.left %} {{ column }} {% endfor %}</td>
+                <td><strong>Left Variables:</strong>
+                    {% for column in step.blocking_schema.left %}
+                        {% if loop.index > 1 %},
+                        {% endif %}
+                        {{ column }}
+                    {% endfor %}
+                </td>
             </tr>
             <tr>
-                <td><strong>Right Variables:</strong> {% for column in step.blocking_schema.right %} {{ column }} {% endfor %}</td>
+                <td><strong>Right Variables:</strong>
+                    {% for column in step.blocking_schema.right %}
+                        {% if loop.index > 1 %},
+                        {% endif %}
+                        {{ column }}
+                    {% endfor %}</td>
             </tr>
             <tr>
-                <td><strong>transformations:</strong> {% for alg in step.blocking_schema.transformations %}{{ alg }} {% endfor %}</td>
+                <td><strong>transformations:</strong>
+                    {% for alg in step.blocking_schema.transformations %}
+                        {% if loop.index > 1 %},
+                        {% endif %}
+                        {{ alg }}
+                    {% endfor %}</td>
             </tr>
             <tr>
                 <th rowspan="3">Linking</th>
-                <td><strong>Left Variables:</strong> {% for column in step.linking_schema.left %} {{ column }} {% endfor %}</td>
+                <td><strong>Left Variables:</strong>
+                    {% for column in step.linking_schema.left %}
+                        {% if loop.index > 1 %},
+                        {% endif %}
+                        {{ column }}
+                    {% endfor %}</td>
             </tr>
             <tr>
-                <td><strong>Right Variables:</strong> {% for column in step.linking_schema.right %} {{ column }} {% endfor %}</td>
+                <td><strong>Right Variables:</strong>
+                    {% for column in step.linking_schema.right %}
+                        {% if loop.index > 1 %},
+                        {% endif %}
+                        {{ column }}
+                    {% endfor %}</td>
             </tr>
             <tr>
                 <td><strong>Comparison Methods:</strong>
                     {% for alg in step.linking_schema.comparisons %}
+                        {% if loop.index > 1 %},
+                        {% endif %}
                         {{ alg.name }}
                         {% if alg.args is defined %}
                             {% for item in alg.args %}
