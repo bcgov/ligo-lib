@@ -1,0 +1,5 @@
+# Test dependencies
+-r base.txt
+
+pytest>=3.0.7
+coverage==4.3.1

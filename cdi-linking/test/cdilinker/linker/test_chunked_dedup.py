@@ -80,4 +80,4 @@ class TestLinkerDedup(object):
         """Tests if the task can be run"""
         ddp = DeDeupProject(project)
         ddp.load_data()
-        # ddp.run() # TODO Invokes a shell-script which does not work on Windows
+        ddp.run()

@@ -44,6 +44,17 @@ To test the library simply use:
     pytest
 
 
+Docker Environment
+~~~~~~~~~~~~~~~~~~
+
+To run the tests within a docker environment (such as when you are on a Windows host) run the following:
+
+.. code:: sh
+
+    docker build . -f Dockerfile-dev -t datalinking_test
+    docker run --rm datalinking_test
+
+
 How to Use
 ----------
 
