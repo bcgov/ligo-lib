@@ -10,7 +10,12 @@ class TestLinkerDedup(object):
     @pytest.fixture(scope="class")
     def project(self):
         """Read test_jtst_dedup project configuration"""
+        import pandas as pd
         import uuid
+
+        # Suppress SettingWithCopyWarning warnings from Pandas
+        # https://stackoverflow.com/q/20625582
+        pd.options.mode.chained_assignment = None  # default='warn'
 
         with open(os.path.join(os.path.dirname(__file__), '..', 'data',
                                'test_jtst_dedup.json')) as data_file:
@@ -23,16 +28,10 @@ class TestLinkerDedup(object):
         # Teardown and clean up
         if os.path.isfile(project['output_root'] + 'left_file.csv'):
             os.remove(project['output_root'] + 'left_file.csv')
-        if os.path.isfile(project['output_root'] + 'matched_records.csv'):
-            os.remove(project['output_root'] + 'matched_records.csv')
-        if os.path.isfile(project['output_root'] + 'dedup_matched.csv'):
-            os.remove(project['output_root'] + 'dedup_matched.csv')
-        if os.path.isfile(project['output_root'] + 'deduped_data.csv'):
-            os.remove(project['output_root'] + 'deduped_data.csv')
-        if os.path.isfile(project['output_root'] + project['name'] +
-                          '_summary.pdf'):
-            os.remove(project['output_root'] + project['name'] +
-                      '_summary.pdf')
+        if os.path.isfile(project['output_root'] +
+                          LinkFiles.TEMP_DEDUP_ALL_SELECTED):
+            os.remove(project['output_root'] +
+                      LinkFiles.TEMP_DEDUP_ALL_SELECTED)
 
     def test_init_none(self):
         """Ensure initialization does not proceed with empty JSON"""
@@ -70,7 +69,12 @@ class TestLinkerDedup(object):
 
     def test_link_pairs(self, project):
         """Tests if link_pairs behaves as intended"""
-        NotImplemented
+        ddp = DeDeupProject(project)
+        ddp.load_data()
+        value = ddp.link_pairs()
+
+        assert value is not None
+        assert value == 0
 
     def test_extract_rows(self, project):
         """Tests if linked records are removed from input data"""
@@ -81,3 +85,21 @@ class TestLinkerDedup(object):
         ddp = DeDeupProject(project)
         ddp.load_data()
         ddp.run()
+
+        assert ddp.steps is not None
+        assert len(ddp.steps) == 2
+        assert ddp.linked is not None
+        assert len(ddp.linked) == 0
+        assert ddp.total_entities is not None
+        assert ddp.total_entities == 0
+        assert ddp.total_records_linked is not None
+        assert ddp.total_records_linked == 0
+
+        assert not os.path.isfile(project['output_root'] +
+                                  LinkFiles.MATCHED_RECORDS)
+        assert not os.path.isfile(project['output_root'] +
+                                  LinkFiles.TEMP_ENTITIES_FILE)
+        assert not os.path.isfile(project['output_root'] +
+                                  LinkFiles.TEMP_DEDUP_STEP_SELECTED)
+        assert os.path.isfile(project['output_root'] +
+                              LinkFiles.TEMP_DEDUP_ALL_SELECTED)

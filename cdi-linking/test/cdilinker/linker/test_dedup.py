@@ -13,6 +13,10 @@ class TestLinkerDedup(object):
         """Read test_jtst_dedup project configuration"""
         import uuid
 
+        # Suppress SettingWithCopyWarning warnings from Pandas
+        # https://stackoverflow.com/q/20625582
+        pd.options.mode.chained_assignment = None  # default='warn'
+
         with open(os.path.join(os.path.dirname(__file__), '..', 'data',
                                'test_jtst_dedup.json')) as data_file:
             project = json.load(data_file)

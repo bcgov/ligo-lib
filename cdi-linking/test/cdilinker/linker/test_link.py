@@ -10,7 +10,12 @@ class TestLinkerLink(object):
     @pytest.fixture(scope="class")
     def project(self):
         """Read test_jtst_educ_linking project configuration"""
+        import pandas as pd
         import uuid
+
+        # Suppress SettingWithCopyWarning warnings from Pandas
+        # https://stackoverflow.com/q/20625582
+        pd.options.mode.chained_assignment = None  # default='warn'
 
         with open(os.path.join(os.path.dirname(__file__), '..', 'data',
                                'test_jtst_educ_linking.json')) as data_file:
