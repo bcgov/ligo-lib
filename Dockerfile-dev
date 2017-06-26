@@ -1,6 +1,6 @@
 # Dockerfile for providing a test environment for Windows developers
 
-FROM python:3.5
+FROM python:3.6
 ENV PYTHONUNBUFFERED 1
 
 # Requirements have to be pulled and installed here, otherwise caching won't work
@@ -8,9 +8,9 @@ COPY ./requirements /requirements
 RUN pip install -r /requirements/test.txt
 
 # Install cdi-linking
-# The readme.rst file must be one directory above cdi-linking otherwise setup will fail
-COPY ./readme.rst /lib/readme.rst
 COPY ./cdi-linking /lib/cdi-linking
+# The cdi-linking requires the readme.rst file to be one directory above itself
+COPY ./readme.rst /lib/readme.rst
 RUN pip install -e /lib/cdi-linking/
 
 # Install linking_ext
