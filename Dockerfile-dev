@@ -20,4 +20,4 @@ RUN pip install -e /lib/linking_ext/
 WORKDIR /lib
 
 # Default container action - run Pytest tests
-CMD ["pytest"]
+CMD ["pytest", "--cov=cdilinker"]

@@ -37,11 +37,16 @@ To install the library simply use:
 Tests
 -----
 
+The **CDI Linker** library tests depend on:
+
+- pytest>=3.0.7
+- pytest-cov>=2.5.1
+
 To test the library simply use:
 
 .. code:: sh
 
-    pytest
+    pytest --cov=cdilinker
 
 
 Docker Environment
