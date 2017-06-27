@@ -13,14 +13,16 @@ class TestLinkerDedup(object):
         """Read test_jtst_dedup project configuration"""
         import uuid
 
-        __location__ = os.path.realpath(
-            os.path.join(os.getcwd(), os.path.dirname(__file__)))
-        with open(os.path.join(__location__, "data/test_jtst_dedup.json")) \
-                as data_file:
+        # Suppress SettingWithCopyWarning warnings from Pandas
+        # https://stackoverflow.com/q/20625582
+        pd.options.mode.chained_assignment = None  # default='warn'
+
+        with open(os.path.join(os.path.dirname(__file__), '..', 'data',
+                               'test_jtst_dedup.json')) as data_file:
             project = json.load(data_file)
+
         # Add task_uuid to this project
         project['task_uuid'] = uuid.uuid4().hex
-
         yield project
 
         # Teardown and clean up
@@ -55,7 +57,6 @@ class TestLinkerDedup(object):
 
     def test_save_linked_data(self, project):
         """Tests if the deduped matched file exists"""
-        # TODO Add dynamic file directory checking and removal
         ddp = DeDeupProject(project)
         df = pd.DataFrame()
         ddp.save_linked_data(df)
@@ -70,7 +71,9 @@ class TestLinkerDedup(object):
         assert ddp.left_columns is not None
         assert len(ddp.left_columns) == 6
         assert ddp.left_dtypes is not None
+        assert len(ddp.left_dtypes) == 7
         assert ddp.left_dataset is not None
+        assert len(ddp.left_dataset) == 999
 
     def test_run(self, project):
         """Tests if the task can be run"""
@@ -78,13 +81,15 @@ class TestLinkerDedup(object):
         ddp.load_data()
         ddp.run()
 
-        assert not os.path.isfile(project['output_root'] +
-                                  LinkFiles.TEMP_MATCHED_FILE)
         assert ddp.steps is not None
         assert len(ddp.steps) == len(project['steps'])
         assert ddp.linked is not None
+        assert len(ddp.linked) == 2
         assert ddp.matched is None
-        assert ddp.total_linked is None
+        assert ddp.total_linked is not None
+        assert len(ddp.total_linked) == 1
+        assert not os.path.isfile(project['output_root'] +
+                                  LinkFiles.TEMP_MATCHED_FILE)
 
     def test_save(self, project):
         """Tests if the execution results are saved"""
@@ -94,7 +99,7 @@ class TestLinkerDedup(object):
         ddp.save()
 
         assert ddp.total_entities is not None
-        assert ddp.total_entities == 98
+        assert ddp.total_entities == 998
         assert os.path.isfile(project['output_root'] + 'deduped_data.csv')
         assert os.path.isfile(project['output_root'] + project['name'] +
                               '_summary.pdf')

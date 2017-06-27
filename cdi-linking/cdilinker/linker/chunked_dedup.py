@@ -13,6 +13,7 @@ from cdilinker.linker.chunked_link_base import LinkBase
 from cdilinker.linker.files import LinkFiles
 from cdilinker.reports.report import generate_linking_summary
 
+
 logger = logging.getLogger(__name__)
 
 
@@ -204,7 +205,7 @@ class DeDeupProject(LinkBase):
 
                 while True:
                     if float(data_row[data_idx]) < float(index_row[index_idx]):
-                        # Data row doses not exist in index file, so add it to remained rows
+                        # Data row does not exist in index file, so add it to remained rows
                         remained_writer.writerow(data_row)
                         data_row = None
                         data_row = next(data_reader)

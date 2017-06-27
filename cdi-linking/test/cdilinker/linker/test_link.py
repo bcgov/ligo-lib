@@ -10,20 +10,24 @@ class TestLinkerLink(object):
     @pytest.fixture(scope="class")
     def project(self):
         """Read test_jtst_educ_linking project configuration"""
+        import pandas as pd
         import uuid
 
-        __location__ = os.path.realpath(
-            os.path.join(os.getcwd(), os.path.dirname(__file__)))
-        with open(os.path.join(
-                __location__, "data/test_jtst_educ_linking.json")) \
-                as data_file:
+        # Suppress SettingWithCopyWarning warnings from Pandas
+        # https://stackoverflow.com/q/20625582
+        pd.options.mode.chained_assignment = None  # default='warn'
+
+        with open(os.path.join(os.path.dirname(__file__), '..', 'data',
+                               'test_jtst_educ_linking.json')) as data_file:
             project = json.load(data_file)
+
         # Add task_uuid to this project
         project['task_uuid'] = uuid.uuid4().hex
         yield project
 
         # Teardown and clean up
-        if os.path.isfile(project['output_root'] + 'matched_not_linked_data.csv'):
+        if os.path.isfile(project['output_root'] +
+                          'matched_not_linked_data.csv'):
             os.remove(project['output_root'] + 'matched_not_linked_data.csv')
         if os.path.isfile(project['output_root'] + 'linked_data.csv'):
             os.remove(project['output_root'] + 'linked_data.csv')
@@ -109,6 +113,7 @@ class TestLinkerLink(object):
         assert len(linker.steps) == len(project['steps'])
         assert linker.total_records_linked == 144
         assert linker.total_entities == 30
+        assert linker.linked is not None
         assert len(linker.linked) == 72
 
     def test_save(self, project):
