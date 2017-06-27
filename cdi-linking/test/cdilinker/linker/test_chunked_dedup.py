@@ -6,7 +6,7 @@ from cdilinker.linker.files import LinkFiles
 from cdilinker.linker.chunked_dedup import DeDeupProject
 
 
-class TestLinkerDedup(object):
+class TestLinkerChunkedDedup(object):
     @pytest.fixture(scope="class")
     def project(self):
         """Read test_jtst_dedup project configuration"""
@@ -32,6 +32,12 @@ class TestLinkerDedup(object):
                           LinkFiles.TEMP_DEDUP_ALL_SELECTED):
             os.remove(project['output_root'] +
                       LinkFiles.TEMP_DEDUP_ALL_SELECTED)
+        if os.path.isfile(project['output_root'] + 'deduped_data.csv'):
+            os.remove(project['output_root'] + 'deduped_data.csv')
+        if os.path.isfile(project['output_root'] + project['name'] +
+                          '_summary.pdf'):
+            os.remove(project['output_root'] + project['name'] +
+                      '_summary.pdf')
 
     def test_init_none(self):
         """Ensure initialization does not proceed with empty JSON"""
@@ -69,8 +75,17 @@ class TestLinkerDedup(object):
 
     def test_link_pairs(self, project):
         """Tests if link_pairs behaves as intended"""
+        step = project['steps'][1]
+        matched_file = project['output_root'] + LinkFiles.MATCHED_RECORDS
+        open(matched_file, 'w').close()
+
         ddp = DeDeupProject(project)
         ddp.load_data()
+        ddp.pair_n_match(step=step['seq'],
+                         link_method=step['linking_method'],
+                         blocking=step['blocking_schema'],
+                         linking=step['linking_schema'],
+                         matched_file=matched_file)
         value = ddp.link_pairs()
 
         assert value is not None
@@ -78,7 +93,31 @@ class TestLinkerDedup(object):
 
     def test_extract_rows(self, project):
         """Tests if linked records are removed from input data"""
-        NotImplemented
+        step = project['steps'][1]
+        matched_file = project['output_root'] + LinkFiles.MATCHED_RECORDS
+        open(matched_file, 'w').close()
+        linked_file = project['output_root'] + LinkFiles.TEMP_ENTITIES_FILE
+
+        ddp = DeDeupProject(project)
+        ddp.load_data()
+        ddp.pair_n_match(step=step['seq'],
+                         link_method=step['linking_method'],
+                         blocking=step['blocking_schema'],
+                         linking=step['linking_schema'],
+                         matched_file=matched_file)
+        ddp.link_pairs()
+        ddp.extract_rows(data_filename=ddp.left_file,
+                         data_id=ddp.left_index,
+                         index_filename=linked_file, index_id='REC_ID',
+                         index_cols=['ENTITY_ID'])
+
+        assert not os.path.isfile(project['output_root'] +
+                                  LinkFiles.TEMP_STEP_REMAINED)
+        assert os.path.isfile(ddp.left_file)
+        with open(ddp.left_file) as f:
+            for left_file_size, l in enumerate(f):
+                pass
+        assert left_file_size == 999
 
     def test_run(self, project):
         """Tests if the task can be run"""
@@ -91,9 +130,9 @@ class TestLinkerDedup(object):
         assert ddp.linked is not None
         assert len(ddp.linked) == 0
         assert ddp.total_entities is not None
-        assert ddp.total_entities == 0
+        assert ddp.total_entities == 1
         assert ddp.total_records_linked is not None
-        assert ddp.total_records_linked == 0
+        assert ddp.total_records_linked == 1
 
         assert not os.path.isfile(project['output_root'] +
                                   LinkFiles.MATCHED_RECORDS)
@@ -103,3 +142,16 @@ class TestLinkerDedup(object):
                                   LinkFiles.TEMP_DEDUP_STEP_SELECTED)
         assert os.path.isfile(project['output_root'] +
                               LinkFiles.TEMP_DEDUP_ALL_SELECTED)
+
+    def test_save(self, project):
+        """Tests if the execution results are saved"""
+        ddp = DeDeupProject(project)
+        ddp.load_data()
+        ddp.run()
+        ddp.save()
+
+        assert ddp.total_entities is not None
+        assert ddp.total_entities == 998
+        assert os.path.isfile(project['output_root'] + 'deduped_data.csv')
+        assert os.path.isfile(project['output_root'] + project['name'] +
+                              '_summary.pdf')

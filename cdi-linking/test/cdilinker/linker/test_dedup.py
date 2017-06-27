@@ -81,15 +81,15 @@ class TestLinkerDedup(object):
         ddp.load_data()
         ddp.run()
 
-        assert not os.path.isfile(project['output_root'] +
-                                  LinkFiles.TEMP_MATCHED_FILE)
         assert ddp.steps is not None
         assert len(ddp.steps) == len(project['steps'])
         assert ddp.linked is not None
-        assert len(ddp.linked) == 0
-        assert ddp.matched is not None
-        assert len(ddp.matched) == 0
-        assert ddp.total_linked is None
+        assert len(ddp.linked) == 2
+        assert ddp.matched is None
+        assert ddp.total_linked is not None
+        assert len(ddp.total_linked) == 1
+        assert not os.path.isfile(project['output_root'] +
+                                  LinkFiles.TEMP_MATCHED_FILE)
 
     def test_save(self, project):
         """Tests if the execution results are saved"""
@@ -99,7 +99,7 @@ class TestLinkerDedup(object):
         ddp.save()
 
         assert ddp.total_entities is not None
-        assert ddp.total_entities == 999
+        assert ddp.total_entities == 998
         assert os.path.isfile(project['output_root'] + 'deduped_data.csv')
         assert os.path.isfile(project['output_root'] + project['name'] +
                               '_summary.pdf')
