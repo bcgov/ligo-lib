@@ -13,7 +13,7 @@ Some of the algorithms and functions are taken from Python Record Linkage Toolki
 Dependencies
 ------------
 
-The **CDI Linker** library depends on:
+The **CDI Linker** library needs to be executed in a Unix environment because it utilizes some shell scripting. It depends on:
 
 - Python (>=3.5)
 - NumPy (>=1.11.2)
@@ -41,12 +41,14 @@ The **CDI Linker** library tests depend on:
 
 - pytest>=3.0.7
 - pytest-cov>=2.5.1
+- pytest-allure-adaptor>=1.7.7
+- coverage>=4.3.1
 
 To test the library simply use:
 
 .. code:: sh
 
-    pytest --cov=cdilinker
+    pytest . --cov-report term:skip-covered --cov=cdilinker --alluredir allure-results/
 
 
 Docker Environment
