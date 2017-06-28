@@ -3,10 +3,10 @@ import os
 import pytest
 
 from cdilinker.linker.files import LinkFiles
-from cdilinker.linker.link import Linker
+from cdilinker.linker.chunked_link import Linker
 
 
-class TestLinkerLink(object):
+class TestLinkerChunkedLink(object):
     @pytest.fixture(scope="class")
     def project(self):
         """Read test_jtst_educ_linking project configuration"""
@@ -29,6 +29,16 @@ class TestLinkerLink(object):
         if os.path.isfile(project['output_root'] +
                           LinkFiles.TEMP_MATCHED_FILE):
             os.remove(project['output_root'] + LinkFiles.TEMP_MATCHED_FILE)
+        if os.path.isfile(project['output_root'] + 'left_file.csv'):
+            os.remove(project['output_root'] + 'left_file.csv')
+        if os.path.isfile(project['output_root'] + 'right_file.csv'):
+            os.remove(project['output_root'] + 'right_file.csv')
+        if os.path.isfile(project['output_root'] +
+                          LinkFiles.TEMP_LINKED_RECORDS):
+            os.remove(project['output_root'] + LinkFiles.TEMP_LINKED_RECORDS)
+        if os.path.isfile(project['output_root'] +
+                          LinkFiles.MATCHED_RECORDS):
+            os.remove(project['output_root'] + LinkFiles.MATCHED_RECORDS)
         if os.path.isfile(project['output_root'] +
                           'matched_not_linked_data.csv'):
             os.remove(project['output_root'] + 'matched_not_linked_data.csv')
@@ -67,36 +77,31 @@ class TestLinkerLink(object):
         assert linker.left_columns is not None
         assert len(linker.left_columns) == \
             len(project['datasets'][0]['columns'])
+        assert linker.left_dtypes is not None
+        assert len(linker.left_dtypes) == 6
         assert linker.right_columns is not None
         assert len(linker.right_columns) == \
             len(project['datasets'][1]['columns'])
+        assert linker.right_dtypes is not None
+        assert len(linker.right_dtypes) == 6
         assert linker.left_index is not None
         assert linker.left_index == project['datasets'][0]['index_field']
         assert linker.right_index is not None
         assert linker.right_index == project['datasets'][1]['index_field']
-        assert linker.left_dataset is not None
-        assert len(linker.left_dataset) == 999
-        assert linker.right_dataset is not None
-        assert len(linker.right_dataset) == 999
+        assert os.path.isfile(project['output_root'] + 'left_file.csv')
+        assert os.path.isfile(project['output_root'] + 'right_file.csv')
+
+    def test_groupby_unique_filter(self, project):
+        """Checks unique grouping is behaving correctly"""
+        NotImplemented
 
     def test_link(self, project):
         """Tests link and filter functionality"""
-        step = project['steps'][0]
-        linker = Linker(project)
-        linker.load_data()
-        linker.pair_n_match(step=step['seq'],
-                            link_method=step['linking_method'],
-                            blocking=step['blocking_schema'],
-                            linking=step['linking_schema'])
-        assert os.path.isfile(project['output_root'] +
-                              LinkFiles.TEMP_MATCHED_FILE)
-        step_linked, step_matched_not_linked = \
-            linker.link(step['seq'], project['relationship_type'])
+        NotImplemented
 
-        assert step_linked is not None
-        assert len(step_linked) == 72
-        assert step_matched_not_linked is not None
-        assert len(step_matched_not_linked) == 0
+    def test_extract_linked_records(self, project):
+        """Tests if linked records are removed"""
+        NotImplemented
 
     def test_run(self, project):
         """Tests if the task can be run"""
@@ -104,14 +109,20 @@ class TestLinkerLink(object):
         linker.load_data()
         linker.run()
 
-        assert not os.path.isfile(project['output_root'] +
-                                  LinkFiles.TEMP_MATCHED_FILE)
         assert linker.steps is not None
         assert len(linker.steps) == len(project['steps'])
-        assert linker.total_records_linked == 144
-        assert linker.total_entities == 30
-        assert linker.linked is not None
-        assert len(linker.linked) == 72
+        assert linker.total_entities is not None
+        assert linker.total_entities == 15
+        assert linker.total_records_linked is not None
+        assert linker.total_records_linked == 72
+        assert linker.linked is None
+        assert os.path.isfile(project['output_root'] +
+                              LinkFiles.TEMP_LINKED_RECORDS)
+        assert not os.path.isfile(project['output_root'] +
+                                  LinkFiles.TEMP_MATCHED_FILE)
+        assert not os.path.isfile(project['output_root'] +
+                                  LinkFiles.MATCHED_RECORDS)
+
 
     def test_save(self, project):
         """Tests if the execution results are saved"""
@@ -121,7 +132,7 @@ class TestLinkerLink(object):
         linker.save()
 
         assert linker.total_entities is not None
-        assert linker.total_entities == 30
+        assert linker.total_entities == 15
         assert os.path.isfile(project['output_root'] +
                               'matched_not_linked_data.csv')
         assert os.path.isfile(project['output_root'] + 'linked_data.csv')
