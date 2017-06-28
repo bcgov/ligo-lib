@@ -48,7 +48,7 @@ To test the library simply use:
 
 .. code:: sh
 
-    pytest . --cov-report term:skip-covered --cov=cdilinker --alluredir allure-results/
+    pytest
 
 
 Docker Environment

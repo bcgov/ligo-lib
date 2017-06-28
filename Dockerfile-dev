@@ -11,13 +11,15 @@ RUN pip install -r /data-linking/requirements/test.txt
 COPY ./cdi-linking /data-linking/cdi-linking
 # The cdi-linking requires the readme.rst file to be one directory above itself
 COPY ./readme.rst /data-linking/readme.rst
-RUN pip install -e /data-linking/cdi-linking/
+RUN pip install -e /data-linking/cdi-linking
 
 # Install linking_ext
 COPY ./linking_ext /data-linking/linking_ext
-RUN pip install -e /data-linking/linking_ext/
+RUN pip install -e /data-linking/linking_ext
 
+# Set up Pytest environment
+COPY ./pytest.ini /data-linking/pytest.ini
 WORKDIR /data-linking
 
 # Default container action - run Pytest tests
-CMD ["pytest", ".", "--cov-report", "term:skip-covered", "--cov=cdilinker", "--alluredir", "allure-results/"]
+CMD ["pytest"]
