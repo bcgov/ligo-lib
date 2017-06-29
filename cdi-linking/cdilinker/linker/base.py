@@ -7,10 +7,7 @@ from string import Template
 from cdilinker.config.config import config
 from cdilinker.plugins.field_category import FieldCategory
 
-
-logging.basicConfig(level=logging.DEBUG)
 logger = logging.getLogger(__name__)
-
 
 # Get linking configuration
 link_config = config.get_section('LINKER')
@@ -23,7 +20,6 @@ LINKING_RELATIONSHIPS = (
     ('MT1', 'Many to One'),
 )
 
-
 COLUMN_TYPES = {
     "VARCHAR": object,
     "BOOLEAN": np.bool_,
@@ -32,7 +28,6 @@ COLUMN_TYPES = {
     "CHAR": object,
     "TEXT": object,
 }
-
 
 LINKING_METHODS = {
     'DTR': 'Deterministic',
