@@ -506,14 +506,11 @@ class Linker(LinkBase):
                      appendfile=temp_sorted_file,
                      cols=['LINK_ID'],
                      types={'LINK_ID': 'numeric'})
-
-            if os.path.isfile(linked_filename):
-                os.remove(linked_filename)
             if os.path.isfile(temp_sorted_file):
                 os.rename(temp_sorted_file, linked_file_path)
-        else:
-            if os.path.isfile(linked_filename):
-                os.remove(linked_filename)
+
+        if os.path.isfile(linked_filename):
+            os.remove(linked_filename)
 
         sort_csv(self.left_file,
                  appendfile=temp_sorted_file,

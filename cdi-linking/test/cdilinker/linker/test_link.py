@@ -88,8 +88,10 @@ class TestLinkerLink(object):
                             link_method=step['linking_method'],
                             blocking=step['blocking_schema'],
                             linking=step['linking_schema'])
+
         assert os.path.isfile(project['output_root'] +
                               LinkFiles.TEMP_MATCHED_FILE)
+
         step_linked, step_matched_not_linked = \
             linker.link(step['seq'], project['relationship_type'])
 
@@ -104,14 +106,14 @@ class TestLinkerLink(object):
         linker.load_data()
         linker.run()
 
-        assert not os.path.isfile(project['output_root'] +
-                                  LinkFiles.TEMP_MATCHED_FILE)
         assert linker.steps is not None
         assert len(linker.steps) == len(project['steps'])
         assert linker.total_records_linked == 144
         assert linker.total_entities == 30
         assert linker.linked is not None
         assert len(linker.linked) == 72
+        assert not os.path.isfile(project['output_root'] +
+                                  LinkFiles.TEMP_MATCHED_FILE)
 
     def test_save(self, project):
         """Tests if the execution results are saved"""

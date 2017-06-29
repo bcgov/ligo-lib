@@ -34,6 +34,9 @@ class TestLinkerChunkedLink(object):
         if os.path.isfile(project['output_root'] + 'right_file.csv'):
             os.remove(project['output_root'] + 'right_file.csv')
         if os.path.isfile(project['output_root'] +
+                          LinkFiles.TEMP_STEP_LINKED_FILE):
+            os.remove(project['output_root'] + LinkFiles.TEMP_STEP_LINKED_FILE)
+        if os.path.isfile(project['output_root'] +
                           LinkFiles.TEMP_LINKED_RECORDS):
             os.remove(project['output_root'] + LinkFiles.TEMP_LINKED_RECORDS)
         if os.path.isfile(project['output_root'] +
@@ -93,15 +96,89 @@ class TestLinkerChunkedLink(object):
 
     def test_groupby_unique_filter(self, project):
         """Checks unique grouping is behaving correctly"""
-        NotImplemented
+        step = project['steps'][0]
+        group_field = 'RIGHT_' + project['datasets'][1]['entity_field']
+        filter_field = 'LEFT_' + project['datasets'][0]['entity_field']
+        matched_not_linked_filename = project['output_root'] + \
+                                      'matched_not_linked_data.csv'
+        matched_file = project['output_root'] + LinkFiles.MATCHED_RECORDS
+        open(matched_file, 'w').close()
+
+        linker = Linker(project)
+        linker.load_data()
+        linker.pair_n_match(step=step['seq'],
+                            link_method=step['linking_method'],
+                            blocking=step['blocking_schema'],
+                            linking=step['linking_schema'],
+                            matched_file=matched_file)
+        temp_filename, stats = \
+            linker.groupby_unique_filter(matched_file,
+                                         group_col=group_field,
+                                         filter_col=filter_field,
+                                         not_linked_filename=matched_not_linked_filename,
+                                         add_link_id=False,
+                                         linked_filename=None)
+
+        assert temp_filename is not None
+        assert temp_filename == \
+            project['output_root'] + LinkFiles.TEMP_LINK_FILTERED
+        assert stats is not None
+        assert len(stats) == 3
+        assert stats['total_linked'] == 0
+        assert stats['total_filtered'] == 0
+        assert stats['total_records_linked'] == 72
 
     def test_link(self, project):
         """Tests link and filter functionality"""
-        NotImplemented
+        step = project['steps'][0]
+        matched_file = project['output_root'] + LinkFiles.MATCHED_RECORDS
+        open(matched_file, 'w').close()
+
+        linker = Linker(project)
+        linker.load_data()
+        linker.pair_n_match(step=step['seq'],
+                            link_method=step['linking_method'],
+                            blocking=step['blocking_schema'],
+                            linking=step['linking_schema'],
+                            matched_file=matched_file)
+        stats = linker.link(project['relationship_type'])
+
+        assert stats is not None
+        assert len(stats) == 3
+        assert stats['total_linked'] == 15
+        assert stats['total_filtered'] == 0
+        assert stats['total_records_linked'] == 72
 
     def test_extract_linked_records(self, project):
         """Tests if linked records are removed"""
-        NotImplemented
+        step = project['steps'][0]
+        step_linked = project['output_root'] + LinkFiles.TEMP_STEP_LINKED_FILE
+        data_filename = project['output_root'] + 'left_file.csv'
+        matched_file = project['output_root'] + LinkFiles.MATCHED_RECORDS
+        open(matched_file, 'w').close()
+
+        linker = Linker(project)
+        linker.load_data()
+        linker.pair_n_match(step=step['seq'],
+                            link_method=step['linking_method'],
+                            blocking=step['blocking_schema'],
+                            linking=step['linking_schema'],
+                            matched_file=matched_file)
+        linker.link(project['relationship_type'])
+
+        assert os.path.isfile(step_linked)
+        linker.extract_linked_records(linked_filename=step_linked, prefix='LEFT_')
+
+        assert os.path.isfile(data_filename)
+        with open(data_filename) as f:
+            for data_filename_size, l in enumerate(f):
+                pass
+        assert data_filename_size == 928
+        assert os.path.isfile(step_linked)
+        with open(step_linked) as f:
+            for step_linked_size, l in enumerate(f):
+                pass
+        assert step_linked_size == 72
 
     def test_run(self, project):
         """Tests if the task can be run"""
@@ -115,14 +192,12 @@ class TestLinkerChunkedLink(object):
         assert linker.total_entities == 15
         assert linker.total_records_linked is not None
         assert linker.total_records_linked == 72
-        assert linker.linked is None
         assert os.path.isfile(project['output_root'] +
                               LinkFiles.TEMP_LINKED_RECORDS)
         assert not os.path.isfile(project['output_root'] +
                                   LinkFiles.TEMP_MATCHED_FILE)
         assert not os.path.isfile(project['output_root'] +
                                   LinkFiles.MATCHED_RECORDS)
-
 
     def test_save(self, project):
         """Tests if the execution results are saved"""
@@ -133,6 +208,10 @@ class TestLinkerChunkedLink(object):
 
         assert linker.total_entities is not None
         assert linker.total_entities == 15
+        assert not os.path.isfile(project['output_root'] +
+                                  LinkFiles.TEMP_LINKED_RECORDS)
+        assert os.path.isfile(project['output_root'] + 'left_file.csv')
+        assert os.path.isfile(project['output_root'] + 'right_file.csv')
         assert os.path.isfile(project['output_root'] +
                               'matched_not_linked_data.csv')
         assert os.path.isfile(project['output_root'] + 'linked_data.csv')
