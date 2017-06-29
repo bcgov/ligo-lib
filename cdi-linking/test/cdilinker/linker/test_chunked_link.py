@@ -1,29 +1,20 @@
-import json
 import os
 import pytest
 
-from cdilinker.linker.files import LinkFiles
 from cdilinker.linker.chunked_link import Linker
+from cdilinker.linker.files import LinkFiles
+from test.cdilinker.utils import Utils
 
 
-class TestLinkerChunkedLink(object):
+class TestChunkedLink(object):
     @pytest.fixture(scope="class")
     def project(self):
         """Read test_jtst_educ_linking project configuration"""
-        import pandas as pd
-        import uuid
+        return Utils.load_project('test_jtst_educ_linking.json')
 
-        # Suppress SettingWithCopyWarning warnings from Pandas
-        # https://stackoverflow.com/q/20625582
-        pd.options.mode.chained_assignment = None  # default='warn'
-
-        with open(os.path.join(os.path.dirname(__file__), '..', 'data',
-                               'test_jtst_educ_linking.json')) as data_file:
-            project = json.load(data_file)
-
-        # Add task_uuid to this project
-        project['task_uuid'] = uuid.uuid4().hex
-        yield project
+    @pytest.fixture
+    def linker(self, project):
+        yield Linker(project)
 
         # Teardown and clean up
         if os.path.isfile(project['output_root'] +
@@ -57,10 +48,8 @@ class TestLinkerChunkedLink(object):
         with pytest.raises(TypeError):
             Linker(None)
 
-    def test_init(self, project):
+    def test_init(self, project, linker):
         """Ensure initialization sets fields correctly"""
-        linker = Linker(project)
-
         assert linker.matched_not_linked is None
         assert linker.project_type == 'LINK'
         assert linker.left_index == project['datasets'][0]['index_field']
@@ -68,13 +57,14 @@ class TestLinkerChunkedLink(object):
         assert linker.left_entity == project['datasets'][0]['entity_field']
         assert linker.right_entity == project['datasets'][1]['entity_field']
 
-    def test_str(self, project):
+    def test_str(self, linker):
         """Should not be throwing a JSONDecodeError"""
-        json.loads(str(Linker(project)))
+        import json
 
-    def test_load_data(self, project):
+        json.loads(str(linker))
+
+    def test_load_data(self, project, linker):
         """Tests if the data is properly loaded"""
-        linker = Linker(project)
         linker.load_data()
 
         assert linker.left_columns is not None
@@ -94,17 +84,16 @@ class TestLinkerChunkedLink(object):
         assert os.path.isfile(project['output_root'] + 'left_file.csv')
         assert os.path.isfile(project['output_root'] + 'right_file.csv')
 
-    def test_groupby_unique_filter(self, project):
+    def test_groupby_unique_filter(self, project, linker):
         """Checks unique grouping is behaving correctly"""
         step = project['steps'][0]
         group_field = 'RIGHT_' + project['datasets'][1]['entity_field']
         filter_field = 'LEFT_' + project['datasets'][0]['entity_field']
         matched_not_linked_filename = project['output_root'] + \
-                                      'matched_not_linked_data.csv'
+            'matched_not_linked_data.csv'
         matched_file = project['output_root'] + LinkFiles.MATCHED_RECORDS
         open(matched_file, 'w').close()
 
-        linker = Linker(project)
         linker.load_data()
         linker.pair_n_match(step=step['seq'],
                             link_method=step['linking_method'],
@@ -128,13 +117,12 @@ class TestLinkerChunkedLink(object):
         assert stats['total_filtered'] == 0
         assert stats['total_records_linked'] == 72
 
-    def test_link(self, project):
+    def test_link(self, project, linker):
         """Tests link and filter functionality"""
         step = project['steps'][0]
         matched_file = project['output_root'] + LinkFiles.MATCHED_RECORDS
         open(matched_file, 'w').close()
 
-        linker = Linker(project)
         linker.load_data()
         linker.pair_n_match(step=step['seq'],
                             link_method=step['linking_method'],
@@ -149,7 +137,7 @@ class TestLinkerChunkedLink(object):
         assert stats['total_filtered'] == 0
         assert stats['total_records_linked'] == 72
 
-    def test_extract_linked_records(self, project):
+    def test_extract_linked_records(self, project, linker):
         """Tests if linked records are removed"""
         step = project['steps'][0]
         step_linked = project['output_root'] + LinkFiles.TEMP_STEP_LINKED_FILE
@@ -157,7 +145,6 @@ class TestLinkerChunkedLink(object):
         matched_file = project['output_root'] + LinkFiles.MATCHED_RECORDS
         open(matched_file, 'w').close()
 
-        linker = Linker(project)
         linker.load_data()
         linker.pair_n_match(step=step['seq'],
                             link_method=step['linking_method'],
@@ -170,19 +157,12 @@ class TestLinkerChunkedLink(object):
         linker.extract_linked_records(linked_filename=step_linked, prefix='LEFT_')
 
         assert os.path.isfile(data_filename)
-        with open(data_filename) as f:
-            for data_filename_size, l in enumerate(f):
-                pass
-        assert data_filename_size == 928
+        assert Utils.file_len(data_filename) == 929
         assert os.path.isfile(step_linked)
-        with open(step_linked) as f:
-            for step_linked_size, l in enumerate(f):
-                pass
-        assert step_linked_size == 72
+        assert Utils.file_len(step_linked) == 73
 
-    def test_run(self, project):
+    def test_run(self, project, linker):
         """Tests if the task can be run"""
-        linker = Linker(project)
         linker.load_data()
         linker.run()
 
@@ -199,9 +179,8 @@ class TestLinkerChunkedLink(object):
         assert not os.path.isfile(project['output_root'] +
                                   LinkFiles.MATCHED_RECORDS)
 
-    def test_save(self, project):
+    def test_save(self, project, linker):
         """Tests if the execution results are saved"""
-        linker = Linker(project)
         linker.load_data()
         linker.run()
         linker.save()

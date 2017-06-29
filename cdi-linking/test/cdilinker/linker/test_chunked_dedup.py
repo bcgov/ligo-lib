@@ -1,29 +1,20 @@
-import json
 import os
 import pytest
 
-from cdilinker.linker.files import LinkFiles
 from cdilinker.linker.chunked_dedup import DeDeupProject
+from cdilinker.linker.files import LinkFiles
+from test.cdilinker.utils import Utils
 
 
-class TestLinkerChunkedDedup(object):
+class TestChunkedDedup(object):
     @pytest.fixture(scope="class")
     def project(self):
         """Read test_jtst_dedup project configuration"""
-        import pandas as pd
-        import uuid
+        return Utils.load_project('test_jtst_dedup.json')
 
-        # Suppress SettingWithCopyWarning warnings from Pandas
-        # https://stackoverflow.com/q/20625582
-        pd.options.mode.chained_assignment = None  # default='warn'
-
-        with open(os.path.join(os.path.dirname(__file__), '..', 'data',
-                               'test_jtst_dedup.json')) as data_file:
-            project = json.load(data_file)
-
-        # Add task_uuid to this project
-        project['task_uuid'] = uuid.uuid4().hex
-        yield project
+    @pytest.fixture
+    def ddp(self, project):
+        yield DeDeupProject(project)
 
         # Teardown and clean up
         if os.path.isfile(project['output_root'] + 'left_file.csv'):
@@ -44,10 +35,8 @@ class TestLinkerChunkedDedup(object):
         with pytest.raises(TypeError):
             DeDeupProject(None)
 
-    def test_init(self, project):
+    def test_init(self, project, ddp):
         """Ensure initialization sets fields correctly"""
-        ddp = DeDeupProject(project)
-
         assert ddp.project_type == 'DEDUP'
         assert ddp.left_index == project['datasets'][0]['index_field']
         assert ddp.right_index == project['datasets'][0]['index_field']
@@ -55,13 +44,14 @@ class TestLinkerChunkedDedup(object):
         assert ddp.left_dtypes is None
         assert ddp.right_dtypes is None
 
-    def test_str(self, project):
+    def test_str(self, ddp):
         """Should not be throwing a JSONDecodeError"""
-        json.loads(str(DeDeupProject(project)))
+        import json
 
-    def test_load_data(self, project):
+        json.loads(str(ddp))
+
+    def test_load_data(self, ddp):
         """Tests if the data is properly loaded"""
-        ddp = DeDeupProject(project)
         ddp.load_data()
 
         assert ddp.left_columns is not None
@@ -73,13 +63,12 @@ class TestLinkerChunkedDedup(object):
         assert ddp.right_dtypes is not None
         assert len(ddp.right_dtypes) == 7
 
-    def test_link_pairs(self, project):
+    def test_link_pairs(self, project, ddp):
         """Tests if link_pairs behaves as intended"""
         step = project['steps'][1]
         matched_file = project['output_root'] + LinkFiles.MATCHED_RECORDS
         open(matched_file, 'w').close()
 
-        ddp = DeDeupProject(project)
         ddp.load_data()
         ddp.pair_n_match(step=step['seq'],
                          link_method=step['linking_method'],
@@ -91,14 +80,13 @@ class TestLinkerChunkedDedup(object):
         assert value is not None
         assert value == 0
 
-    def test_extract_rows(self, project):
+    def test_extract_rows(self, project, ddp):
         """Tests if linked records are removed from input data"""
         step = project['steps'][1]
         matched_file = project['output_root'] + LinkFiles.MATCHED_RECORDS
         open(matched_file, 'w').close()
         linked_file = project['output_root'] + LinkFiles.TEMP_ENTITIES_FILE
 
-        ddp = DeDeupProject(project)
         ddp.load_data()
         ddp.pair_n_match(step=step['seq'],
                          link_method=step['linking_method'],
@@ -114,14 +102,10 @@ class TestLinkerChunkedDedup(object):
         assert not os.path.isfile(project['output_root'] +
                                   LinkFiles.TEMP_STEP_REMAINED)
         assert os.path.isfile(ddp.left_file)
-        with open(ddp.left_file) as f:
-            for left_file_size, l in enumerate(f):
-                pass
-        assert left_file_size == 999
+        assert Utils.file_len(ddp.left_file) == 1000
 
-    def test_run(self, project):
+    def test_run(self, project, ddp):
         """Tests if the task can be run"""
-        ddp = DeDeupProject(project)
         ddp.load_data()
         ddp.run()
 
@@ -143,9 +127,8 @@ class TestLinkerChunkedDedup(object):
         assert os.path.isfile(project['output_root'] +
                               LinkFiles.TEMP_DEDUP_ALL_SELECTED)
 
-    def test_save(self, project):
+    def test_save(self, project, ddp):
         """Tests if the execution results are saved"""
-        ddp = DeDeupProject(project)
         ddp.load_data()
         ddp.run()
         ddp.save()
