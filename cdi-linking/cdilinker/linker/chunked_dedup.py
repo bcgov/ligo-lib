@@ -13,7 +13,6 @@ from cdilinker.linker.chunked_link_base import LinkBase
 from cdilinker.linker.files import LinkFiles
 from cdilinker.reports.report import generate_linking_summary
 
-
 logger = logging.getLogger(__name__)
 
 
@@ -144,7 +143,8 @@ class DeDeupProject(LinkBase):
                 linked.set_value(right_id, 'ENTITY_ID', entity_ids[entt])
 
             _save_pairs(entity_file, chunk, append)
-            append = True
+            if (not append) and os.path.isfile(entity_file):
+                append = True
 
         if os.path.isfile(matched_file):
             os.remove(matched_file)
@@ -171,7 +171,7 @@ class DeDeupProject(LinkBase):
             selected_filename = self.output_root + LinkFiles.TEMP_DEDUP_STEP_SELECTED
         remained_filename = self.output_root + LinkFiles.TEMP_STEP_REMAINED
 
-        with open(data_filename, 'r') as data_file, open(index_filename, 'r') as index_file,\
+        with open(data_filename, 'r') as data_file, open(index_filename, 'r') as index_file, \
                 open(selected_filename, 'w') as selected_file, open(remained_filename, 'w') as remained_file:
 
             data_reader = csv.reader(data_file)
@@ -279,11 +279,28 @@ class DeDeupProject(LinkBase):
                                             linking=step['linking_schema'],
                                             matched_file=matched_file)
 
+            # This is required in case some intermediate steps have no results.
+            # So, the results from the previous steps will not be merged and counted.
+            if pairs_count == 0:
+                pairs_count = prev_total
+
             linked_stats[step['seq']] = pairs_count - prev_total
             prev_total = pairs_count
 
-            if step['group']:
-                self.total_entities += self.link_pairs()
+            logger.debug(
+                'Total records matched at step {0}: {1}'
+                    .format(step['seq'], linked_stats[step['seq']])
+            )
+
+            # Skip the step if no records matched.
+            if step['group'] and pairs_count > 0:
+                step_total_entities = self.link_pairs()
+                logger.debug(
+                    'Total entities found at step {0}: {1}'
+                        .format(step['seq'], step_total_entities)
+                )
+
+                self.total_entities += step_total_entities
 
                 self.extract_rows(data_filename=self.left_file,
                                   data_id=self.left_index,
@@ -314,7 +331,7 @@ class DeDeupProject(LinkBase):
 
         logger.info(
             'Execution of de-duplication project {0} with Task id: {1} is completed.'
-            .format(self.project['name'], self.project['task_uuid']))
+                .format(self.project['name'], self.project['task_uuid']))
         logger.debug('<<--- run ---<<')
 
     def save(self):
