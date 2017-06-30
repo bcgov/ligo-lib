@@ -17,14 +17,10 @@ logger = logging.getLogger(__name__)
 
 class Linker(LinkBase):
     def __init__(self, project):
+        if project is None:
+            raise TypeError
         super(Linker, self).__init__(project)
         self.matched_not_linked = None
-        self.left_index_type = "object"
-        self.right_index_type = "object"
-
-    def __init__(self, project):
-
-        super(Linker, self).__init__(project)
 
         self.project_type = 'LINK'
         datasets = project['datasets']
@@ -36,7 +32,6 @@ class Linker(LinkBase):
         self.matched = None
 
     def __str__(self):
-
         if self.project is None:
             return ''
 
@@ -54,7 +49,6 @@ class Linker(LinkBase):
         return json.dumps(data_dict, indent=4)
 
     def load_data(self):
-
         logger.debug('>>--- load_data --->>')
         logger.info('Loading input datasets for project: {0} with task id: {1}.'
                     .format(self.project['name'], self.project['task_uuid']))
@@ -122,7 +116,6 @@ class Linker(LinkBase):
 
     def groupby_unique_filter(self, filename, group_col, filter_col,
                               not_linked_filename, add_link_id=True, linked_filename=None):
-
         logger.debug('>>--- groupby_unique_filter --->>')
         stats = {'total_linked': 0, 'total_filtered': 0, 'total_records_linked': 0}
 
@@ -402,14 +395,12 @@ class Linker(LinkBase):
 
     def run(self):
         logger.debug('>>--- run --->>')
-
         logger.info('Executing linking project {0}. Task id: {1}.'
                     .format(self.project['name'], self.project['task_uuid']))
 
         LinkBase.reset_id()
         self.steps = {}
         linked_stats = {}
-        prev_total = 0
         self.total_entities = 0
         self.total_records_linked = 0
 
@@ -422,7 +413,6 @@ class Linker(LinkBase):
         temp_sorted_file = self.output_root + LinkFiles.TEMP_SORTED_FILE
 
         open(linked_filename, 'w').close()
-
         open(matched_not_linked_filename, 'w').close()
 
         first_batch = True
@@ -451,7 +441,8 @@ class Linker(LinkBase):
             pairs_count = self.pair_n_match(step=step['seq'],
                                             link_method=step['linking_method'],
                                             blocking=step['blocking_schema'],
-                                            linking=step['linking_schema'], matched_file=matched_file)
+                                            linking=step['linking_schema'],
+                                            matched_file=matched_file)
 
             linked_stats[step['seq']] = pairs_count
 
@@ -460,7 +451,6 @@ class Linker(LinkBase):
                 self.steps[step['seq']]['total_records_linked'] = 0
                 self.steps[step['seq']]['total_matched_not_linked'] = 0
                 self.steps[step['seq']]['total_entities'] = 0
-
                 continue
 
             logger.info("{0}.3) Identifying the linked records based on the relationship type...".format(step['seq']))
@@ -516,14 +506,11 @@ class Linker(LinkBase):
                      appendfile=temp_sorted_file,
                      cols=['LINK_ID'],
                      types={'LINK_ID': 'numeric'})
-
-            if os.path.isfile(linked_filename):
-                os.remove(linked_filename)
             if os.path.isfile(temp_sorted_file):
                 os.rename(temp_sorted_file, linked_file_path)
-        else:
-            if os.path.isfile(linked_filename):
-                os.remove(linked_filename)
+
+        if os.path.isfile(linked_filename):
+            os.remove(linked_filename)
 
         sort_csv(self.left_file,
                  appendfile=temp_sorted_file,
@@ -546,7 +533,6 @@ class Linker(LinkBase):
             os.rename(temp_sorted_file, self.right_file)
 
         logger.info('Linking output file generated at {0}.'.format(linked_file_path))
-
         logger.debug('<<--- save ---<<')
 
         return generate_linking_summary(self, self.output_root)

@@ -1,31 +1,25 @@
-import json
 import os
 import pytest
 
 from cdilinker.linker.files import LinkFiles
 from cdilinker.linker.link import Linker
+from test.cdilinker.utils import Utils
 
 
-class TestLinkerLink(object):
+class TestLink(object):
     @pytest.fixture(scope="class")
     def project(self):
         """Read test_jtst_educ_linking project configuration"""
-        import pandas as pd
-        import uuid
+        return Utils.load_project('test_jtst_educ_linking.json')
 
-        # Suppress SettingWithCopyWarning warnings from Pandas
-        # https://stackoverflow.com/q/20625582
-        pd.options.mode.chained_assignment = None  # default='warn'
-
-        with open(os.path.join(os.path.dirname(__file__), '..', 'data',
-                               'test_jtst_educ_linking.json')) as data_file:
-            project = json.load(data_file)
-
-        # Add task_uuid to this project
-        project['task_uuid'] = uuid.uuid4().hex
-        yield project
+    @pytest.fixture
+    def linker(self, project):
+        yield Linker(project)
 
         # Teardown and clean up
+        if os.path.isfile(project['output_root'] +
+                          LinkFiles.TEMP_MATCHED_FILE):
+            os.remove(project['output_root'] + LinkFiles.TEMP_MATCHED_FILE)
         if os.path.isfile(project['output_root'] +
                           'matched_not_linked_data.csv'):
             os.remove(project['output_root'] + 'matched_not_linked_data.csv')
@@ -41,26 +35,23 @@ class TestLinkerLink(object):
         with pytest.raises(TypeError):
             Linker(None)
 
-    def test_init(self, project):
+    def test_init(self, project, linker):
         """Ensure initialization sets fields correctly"""
-        linker = Linker(project)
-
         assert linker.matched_not_linked is None
-        assert linker.left_index_type == "object"
-        assert linker.right_index_type == "object"
         assert linker.project_type == 'LINK'
         assert linker.left_index == project['datasets'][0]['index_field']
         assert linker.right_index == project['datasets'][1]['index_field']
         assert linker.left_entity == project['datasets'][0]['entity_field']
         assert linker.right_entity == project['datasets'][1]['entity_field']
 
-    def test_str(self, project):
+    def test_str(self, linker):
         """Should not be throwing a JSONDecodeError"""
-        json.loads(str(Linker(project)))
+        import json
 
-    def test_load_data(self, project):
+        json.loads(str(linker))
+
+    def test_load_data(self, project, linker):
         """Tests if the data is properly loaded"""
-        linker = Linker(project)
         linker.load_data()
 
         assert linker.left_columns is not None
@@ -78,17 +69,19 @@ class TestLinkerLink(object):
         assert linker.right_dataset is not None
         assert len(linker.right_dataset) == 999
 
-    def test_link(self, project):
+    def test_link(self, project, linker):
         """Tests link and filter functionality"""
         step = project['steps'][0]
-        linker = Linker(project)
+
         linker.load_data()
         linker.pair_n_match(step=step['seq'],
                             link_method=step['linking_method'],
                             blocking=step['blocking_schema'],
                             linking=step['linking_schema'])
+
         assert os.path.isfile(project['output_root'] +
                               LinkFiles.TEMP_MATCHED_FILE)
+
         step_linked, step_matched_not_linked = \
             linker.link(step['seq'], project['relationship_type'])
 
@@ -97,28 +90,22 @@ class TestLinkerLink(object):
         assert step_matched_not_linked is not None
         assert len(step_matched_not_linked) == 0
 
-        if os.path.isfile(project['output_root'] +
-                          LinkFiles.TEMP_MATCHED_FILE):
-            os.remove(project['output_root'] + LinkFiles.TEMP_MATCHED_FILE)
-
-    def test_run(self, project):
+    def test_run(self, project, linker):
         """Tests if the task can be run"""
-        linker = Linker(project)
         linker.load_data()
         linker.run()
 
-        assert not os.path.isfile(project['output_root'] +
-                                  LinkFiles.TEMP_MATCHED_FILE)
         assert linker.steps is not None
         assert len(linker.steps) == len(project['steps'])
         assert linker.total_records_linked == 144
         assert linker.total_entities == 30
         assert linker.linked is not None
         assert len(linker.linked) == 72
+        assert not os.path.isfile(project['output_root'] +
+                                  LinkFiles.TEMP_MATCHED_FILE)
 
-    def test_save(self, project):
+    def test_save(self, project, linker):
         """Tests if the execution results are saved"""
-        linker = Linker(project)
         linker.load_data()
         linker.run()
         linker.save()

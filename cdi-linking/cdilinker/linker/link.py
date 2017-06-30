@@ -22,8 +22,6 @@ class Linker(LinkBase):
             raise TypeError
         super(Linker, self).__init__(project)
         self.matched_not_linked = None
-        self.left_index_type = "object"
-        self.right_index_type = "object"
 
         self.project_type = 'LINK'
         datasets = project['datasets']
