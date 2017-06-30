@@ -59,7 +59,7 @@ class FieldCategory(metaclass=PluginMount):
                     total += next_left[1] * next_right[1]
                     next_left = next(left_itr)
                     next_right = next(right_itr)
-        except StopIteration as err:
+        except StopIteration:
             pass
 
         u_data = dict()
