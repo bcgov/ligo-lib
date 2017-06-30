@@ -17,8 +17,9 @@ RUN pip install -e /data-linking/cdi-linking
 COPY ./linking_ext /data-linking/linking_ext
 RUN pip install -e /data-linking/linking_ext
 
-# Set up Pytest environment
+# Set up Test environment
 COPY ./pytest.ini /data-linking/pytest.ini
+COPY ./pylintrc /data-linking/pylintrc
 WORKDIR /data-linking
 
 # Default container action - run Pytest tests
