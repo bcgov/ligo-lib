@@ -11,8 +11,6 @@ from cdilinker.linker.files import LinkFiles
 from cdilinker.linker.link_base import LinkBase
 from cdilinker.reports.report import generate_linking_summary
 
-
-logging.basicConfig(level=logging.DEBUG)
 logger = logging.getLogger(__name__)
 
 
