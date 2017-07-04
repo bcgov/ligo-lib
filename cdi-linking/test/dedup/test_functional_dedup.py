@@ -21,6 +21,8 @@ class TestFunctionalDedup(object):
 
         if os.path.isdir(os.path.join(work_path, task_uuid)):
             shutil.rmtree(os.path.join(work_path, task_uuid))
+        if os.path.exists(project['temp_path']):
+            shutil.rmtree(project['temp_path'])
 
     def test_dedup_levensthein(self):
         work_path = os.path.join(os.path.dirname(__file__), 'levensthein')
@@ -36,6 +38,8 @@ class TestFunctionalDedup(object):
 
         if os.path.isdir(os.path.join(work_path, task_uuid)):
             shutil.rmtree(os.path.join(work_path, task_uuid))
+        if os.path.exists(project['temp_path']):
+            shutil.rmtree(project['temp_path'])
 
     def test_dedup_soundex(self):
         work_path = os.path.join(os.path.dirname(__file__), 'soundex')
@@ -51,3 +55,5 @@ class TestFunctionalDedup(object):
 
         if os.path.isdir(os.path.join(work_path, task_uuid)):
             shutil.rmtree(os.path.join(work_path, task_uuid))
+        if os.path.exists(project['temp_path']):
+            shutil.rmtree(project['temp_path'])

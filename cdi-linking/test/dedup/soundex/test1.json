@@ -17,6 +17,7 @@
   "linked_url": "",
   "comments": "",
   "output_root": "cdi-linking/test/dedup/soundex/",
+  "temp_path": "cdi-linking/test/dedup/soundex/temp/",
   "results_file": "test1.pdf",
   "steps": [
     {
