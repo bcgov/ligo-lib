@@ -15,6 +15,10 @@ logger = logging.getLogger(__name__)
 
 
 class LinkBase(object):
+    # Suppress SettingWithCopyWarning warnings from Pandas
+    # https://stackoverflow.com/q/20625582
+    pd.options.mode.chained_assignment = None  # default='warn'
+
     LEFT_INDEX = 'LEFT_ID'
     RIGHT_INDEX = 'RIGHT_ID'
 

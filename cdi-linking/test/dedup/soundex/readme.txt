@@ -11,11 +11,11 @@ Block match on birth date, pref family name, community, and postal code, soundex
 
 Test cases:
 
-1.  Soundex should match 
+1.  Soundex should match
 19890827,GRACIE0,SANTIAGO,RICHMOND,V6X4H7, 1
 19890827,GRACIE,SANTIAGO,RICHMOND,V6X4H7,2
 
-2.  Soundex should match the first two, but not the third 
+2.  Soundex should match the first two, but not the third
 19790813,ARCHER,SCIBELLI,KASLO,V0G1M0,3
 19790813,ARGUER,SCIBELLI,KASLO,V0G1M0,4
 19790813,APTER,SCIBELLI,KASLO,V0G1M0,5

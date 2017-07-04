@@ -17,12 +17,7 @@ class Utils(object):
     def load_project(json_file):
         """Parses and loads a JSON Project json_file"""
         import json
-        import pandas as pd
         import uuid
-
-        # Suppress SettingWithCopyWarning warnings from Pandas
-        # https://stackoverflow.com/q/20625582
-        pd.options.mode.chained_assignment = None  # default='warn'
 
         with open(os.path.join(os.path.dirname(__file__), 'data', json_file)) \
                 as data_file:

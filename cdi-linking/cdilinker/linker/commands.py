@@ -52,6 +52,9 @@ def validate_step(step, errors):
 
     if 'linking_schema' not in step:
         errors.append(LinkError.NO_LINKING)
+
+    if 'linking_method' not in step:
+        errors.append(LinkError.NO_LINKING_METHOD)
     return errors
 
 
