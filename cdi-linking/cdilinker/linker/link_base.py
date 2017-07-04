@@ -43,6 +43,7 @@ class LinkBase(object):
         self.right_fields = None
         self.left_columns = self.right_columns = []
         self.output_root = self.project['output_root']
+        self.temp_path = self.project['temp_path']
         self.steps = None
         self.linked = None
         self.total_records_linked = 0
@@ -203,7 +204,7 @@ class LinkBase(object):
         logger.debug('>>--- pair_n_match --->>')
         logger.info('Finding records pairs that satisfy blocking and linking rules.')
         append = False
-        match_file_path = self.output_root + LinkFiles.TEMP_MATCHED_FILE
+        match_file_path = self.temp_path + LinkFiles.TEMP_MATCHED_FILE
 
         left_df = self.left_dataset
 

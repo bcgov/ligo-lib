@@ -3,6 +3,7 @@ import os
 import pandas as pd
 import numpy as np
 import logging
+import shutil
 
 from cdilinker.linker.base import (link_config, COLUMN_TYPES)
 from cdilinker.linker.files import LinkFiles
@@ -141,7 +142,7 @@ class DeDeupProject(LinkBase):
                               linking=step['linking_schema'])
 
             match_file_path = \
-                self.project['output_root'] + LinkFiles.TEMP_MATCHED_FILE
+                self.temp_path + LinkFiles.TEMP_MATCHED_FILE
 
             left_index = 'LEFT_' + self.left_index
             right_index = 'RIGHT_' + self.right_index
@@ -269,6 +270,10 @@ class DeDeupProject(LinkBase):
         result.to_csv(deduped_file_path, index_label=dataset['index_field'],
                       header=True, index=True)
         logger.info('De-duplicated file generated at %s.', deduped_file_path)
+
+        # Clean all remaining temp files
+        if os.path.exists(self.temp_path):
+            shutil.rmtree(self.temp_path)
 
         logger.debug('<<--- save ---<<')
         return generate_linking_summary(self, self.project['output_root'])

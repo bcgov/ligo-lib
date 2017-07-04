@@ -3,6 +3,12 @@ class LinkFiles:
     Define filename constants used internally during linking process.
     These files are generated during liking and gets removed after that.
     """
+
+    # File name of the left dataset clone (To make a copy and not touch the original file)
+    LEFT_FILE = 'left_file.csv'
+    # File name of the right dataset clone
+    RIGHT_FILE = 'right_file.csv'
+
     MATCHED_RECORDS = 'matched_records.csv'
 
     # De-Duplication files

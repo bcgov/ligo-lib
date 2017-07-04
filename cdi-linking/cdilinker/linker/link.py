@@ -3,6 +3,7 @@ import json
 import pandas as pd
 import numpy as np
 import logging
+import shutil
 
 from cdilinker.linker.base import (link_config,
                                    COLUMN_TYPES,
@@ -121,7 +122,7 @@ class Linker(LinkBase):
         """
         logger.debug('>>--- link --->>')
         logger.info('Linking the records pairs based on the relationship type.')
-        match_file_path = self.output_root + LinkFiles.TEMP_MATCHED_FILE
+        match_file_path = self.temp_path + LinkFiles.TEMP_MATCHED_FILE
         matched = pd.read_csv(match_file_path,
                               index_col=['LEFT_' + self.left_index,
                                          'RIGHT_' + self.right_index])
@@ -272,7 +273,7 @@ class Linker(LinkBase):
 
             logger.info("Number of records linked at step {0}: {1}".format(step['seq'], len(self.linked)))
 
-        temp_match_file_path = self.output_root + LinkFiles.TEMP_MATCHED_FILE
+        temp_match_file_path = self.temp_path + LinkFiles.TEMP_MATCHED_FILE
         # Delete temporary matched file.
         if os.path.isfile(temp_match_file_path):
             os.remove(temp_match_file_path)
@@ -337,5 +338,10 @@ class Linker(LinkBase):
         self.matched_not_linked.to_csv(matched_file_path)
 
         logger.info('Linking output files generated: {0},\n {1}.'.format(linked_file_path, matched_file_path))
+
+        # Clean all remaining temp files
+        if os.path.exists(self.temp_path):
+            shutil.rmtree(self.temp_path)
+
         logger.debug('<<--- save ---<<')
         return generate_linking_summary(self, self.project['output_root'])

@@ -128,6 +128,9 @@ def execute_project(project):
     project['output_root'] += project['task_uuid'] + '/'
     os.makedirs(project['output_root'])
 
+    project['temp_path'] += project['task_uuid'] + '/'
+    os.makedirs(project['temp_path'])
+
     left_size = get_dataset_size(project['datasets'][0]['url'])
     if project['type'] == 'DEDUP':
         right_size = 0

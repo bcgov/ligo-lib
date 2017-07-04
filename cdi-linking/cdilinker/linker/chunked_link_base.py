@@ -82,6 +82,7 @@ class LinkBase(object):
         self.right_dtypes = None
         self.left_columns = self.right_columns = []
         self.output_root = self.project['output_root']
+        self.temp_path = self.project['temp_path']
         self.steps = None
         self.linked = None
         self.total_records_linked = 0
@@ -233,7 +234,7 @@ class LinkBase(object):
         logger.debug('Blocking variables: {0}'.format(blocking))
         logger.debug('Linking variables: {0}'.format(linking))
 
-        temp_file = self.output_root + LinkFiles.TEMP_MATCHED_FILE
+        temp_file = self.temp_path + LinkFiles.TEMP_MATCHED_FILE
 
         total_pairs = 0
         shared = 0
