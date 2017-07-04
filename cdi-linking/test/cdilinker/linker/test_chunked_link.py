@@ -1,5 +1,6 @@
 import os
 import pytest
+import shutil
 
 from cdilinker.linker.chunked_link import Linker
 from cdilinker.linker.files import LinkFiles
@@ -14,25 +15,27 @@ class TestChunkedLink(object):
 
     @pytest.fixture
     def linker(self, project):
+        if not os.path.exists(project['temp_path']):
+            os.makedirs(project['temp_path'])
         yield Linker(project)
 
         # Teardown and clean up
-        if os.path.isfile(project['output_root'] +
+        if os.path.isfile(project['temp_path'] +
                           LinkFiles.TEMP_MATCHED_FILE):
-            os.remove(project['output_root'] + LinkFiles.TEMP_MATCHED_FILE)
-        if os.path.isfile(project['output_root'] + 'left_file.csv'):
-            os.remove(project['output_root'] + 'left_file.csv')
-        if os.path.isfile(project['output_root'] + 'right_file.csv'):
-            os.remove(project['output_root'] + 'right_file.csv')
-        if os.path.isfile(project['output_root'] +
+            os.remove(project['temp_path'] + LinkFiles.TEMP_MATCHED_FILE)
+        if os.path.isfile(project['temp_path'] + 'left_file.csv'):
+            os.remove(project['temp_path'] + 'left_file.csv')
+        if os.path.isfile(project['temp_path'] + 'right_file.csv'):
+            os.remove(project['temp_path'] + 'right_file.csv')
+        if os.path.isfile(project['temp_path'] +
                           LinkFiles.TEMP_STEP_LINKED_FILE):
-            os.remove(project['output_root'] + LinkFiles.TEMP_STEP_LINKED_FILE)
-        if os.path.isfile(project['output_root'] +
+            os.remove(project['temp_path'] + LinkFiles.TEMP_STEP_LINKED_FILE)
+        if os.path.isfile(project['temp_path'] +
                           LinkFiles.TEMP_LINKED_RECORDS):
-            os.remove(project['output_root'] + LinkFiles.TEMP_LINKED_RECORDS)
-        if os.path.isfile(project['output_root'] +
+            os.remove(project['temp_path'] + LinkFiles.TEMP_LINKED_RECORDS)
+        if os.path.isfile(project['temp_path'] +
                           LinkFiles.MATCHED_RECORDS):
-            os.remove(project['output_root'] + LinkFiles.MATCHED_RECORDS)
+            os.remove(project['temp_path'] + LinkFiles.MATCHED_RECORDS)
         if os.path.isfile(project['output_root'] +
                           'matched_not_linked_data.csv'):
             os.remove(project['output_root'] + 'matched_not_linked_data.csv')
@@ -42,6 +45,8 @@ class TestChunkedLink(object):
                           '_summary.pdf'):
             os.remove(project['output_root'] + project['name'] +
                       '_summary.pdf')
+        if os.path.exists(project['temp_path']):
+            shutil.rmtree(project['temp_path'])
 
     def test_init_none(self):
         """Ensure initialization does not proceed with empty JSON"""
@@ -81,8 +86,8 @@ class TestChunkedLink(object):
         assert linker.left_index == project['datasets'][0]['index_field']
         assert linker.right_index is not None
         assert linker.right_index == project['datasets'][1]['index_field']
-        assert os.path.isfile(project['output_root'] + 'left_file.csv')
-        assert os.path.isfile(project['output_root'] + 'right_file.csv')
+        assert os.path.isfile(project['temp_path'] + 'left_file.csv')
+        assert os.path.isfile(project['temp_path'] + 'right_file.csv')
 
     def test_groupby_unique_filter(self, project, linker):
         """Checks unique grouping is behaving correctly"""
@@ -91,7 +96,7 @@ class TestChunkedLink(object):
         filter_field = 'LEFT_' + project['datasets'][0]['entity_field']
         matched_not_linked_filename = project['output_root'] + \
             'matched_not_linked_data.csv'
-        matched_file = project['output_root'] + LinkFiles.MATCHED_RECORDS
+        matched_file = project['temp_path'] + LinkFiles.MATCHED_RECORDS
         open(matched_file, 'w').close()
 
         linker.load_data()
@@ -110,7 +115,7 @@ class TestChunkedLink(object):
 
         assert temp_filename is not None
         assert temp_filename == \
-            project['output_root'] + LinkFiles.TEMP_LINK_FILTERED
+            project['temp_path'] + LinkFiles.TEMP_LINK_FILTERED
         assert stats is not None
         assert len(stats) == 3
         assert stats['total_linked'] == 0
@@ -120,7 +125,7 @@ class TestChunkedLink(object):
     def test_link(self, project, linker):
         """Tests link and filter functionality"""
         step = project['steps'][0]
-        matched_file = project['output_root'] + LinkFiles.MATCHED_RECORDS
+        matched_file = project['temp_path'] + LinkFiles.MATCHED_RECORDS
         open(matched_file, 'w').close()
 
         linker.load_data()
@@ -140,9 +145,9 @@ class TestChunkedLink(object):
     def test_extract_linked_records(self, project, linker):
         """Tests if linked records are removed"""
         step = project['steps'][0]
-        step_linked = project['output_root'] + LinkFiles.TEMP_STEP_LINKED_FILE
-        data_filename = project['output_root'] + 'left_file.csv'
-        matched_file = project['output_root'] + LinkFiles.MATCHED_RECORDS
+        step_linked = project['temp_path'] + LinkFiles.TEMP_STEP_LINKED_FILE
+        data_filename = project['temp_path'] + 'left_file.csv'
+        matched_file = project['temp_path'] + LinkFiles.MATCHED_RECORDS
         open(matched_file, 'w').close()
 
         linker.load_data()
@@ -172,11 +177,11 @@ class TestChunkedLink(object):
         assert linker.total_entities == 15
         assert linker.total_records_linked is not None
         assert linker.total_records_linked == 72
-        assert os.path.isfile(project['output_root'] +
+        assert os.path.isfile(project['temp_path'] +
                               LinkFiles.TEMP_LINKED_RECORDS)
-        assert not os.path.isfile(project['output_root'] +
+        assert not os.path.isfile(project['temp_path'] +
                                   LinkFiles.TEMP_MATCHED_FILE)
-        assert not os.path.isfile(project['output_root'] +
+        assert not os.path.isfile(project['temp_path'] +
                                   LinkFiles.MATCHED_RECORDS)
 
     def test_save(self, project, linker):
@@ -187,10 +192,10 @@ class TestChunkedLink(object):
 
         assert linker.total_entities is not None
         assert linker.total_entities == 15
-        assert not os.path.isfile(project['output_root'] +
+        assert not os.path.isfile(project['temp_path'] +
                                   LinkFiles.TEMP_LINKED_RECORDS)
-        assert os.path.isfile(project['output_root'] + 'left_file.csv')
-        assert os.path.isfile(project['output_root'] + 'right_file.csv')
+        assert not os.path.isfile(project['temp_path'] + 'left_file.csv')
+        assert not os.path.isfile(project['temp_path'] + 'right_file.csv')
         assert os.path.isfile(project['output_root'] +
                               'matched_not_linked_data.csv')
         assert os.path.isfile(project['output_root'] + 'linked_data.csv')

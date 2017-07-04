@@ -1,5 +1,6 @@
 import os
 import pytest
+import shutil
 
 from cdilinker.linker.files import LinkFiles
 from cdilinker.linker.link import Linker
@@ -14,21 +15,25 @@ class TestLink(object):
 
     @pytest.fixture
     def linker(self, project):
+        if not os.path.exists(project['temp_path']):
+            os.makedirs(project['temp_path'])
         yield Linker(project)
 
         # Teardown and clean up
-        if os.path.isfile(project['output_root'] +
+        if os.path.isfile(project['temp_path'] +
                           LinkFiles.TEMP_MATCHED_FILE):
-            os.remove(project['output_root'] + LinkFiles.TEMP_MATCHED_FILE)
-        if os.path.isfile(project['output_root'] +
+            os.remove(project['temp_path'] + LinkFiles.TEMP_MATCHED_FILE)
+        if os.path.isfile(project['temp_path'] +
                           'matched_not_linked_data.csv'):
-            os.remove(project['output_root'] + 'matched_not_linked_data.csv')
+            os.remove(project['temp_path'] + 'matched_not_linked_data.csv')
         if os.path.isfile(project['output_root'] + 'linked_data.csv'):
             os.remove(project['output_root'] + 'linked_data.csv')
         if os.path.isfile(project['output_root'] + project['name'] +
                           '_summary.pdf'):
             os.remove(project['output_root'] + project['name'] +
                       '_summary.pdf')
+        if os.path.exists(project['temp_path']):
+            shutil.rmtree(project['temp_path'])
 
     def test_init_none(self):
         """Ensure initialization does not proceed with empty JSON"""
@@ -79,7 +84,7 @@ class TestLink(object):
                             blocking=step['blocking_schema'],
                             linking=step['linking_schema'])
 
-        assert os.path.isfile(project['output_root'] +
+        assert os.path.isfile(project['temp_path'] +
                               LinkFiles.TEMP_MATCHED_FILE)
 
         step_linked, step_matched_not_linked = \
@@ -101,7 +106,7 @@ class TestLink(object):
         assert linker.total_entities == 30
         assert linker.linked is not None
         assert len(linker.linked) == 72
-        assert not os.path.isfile(project['output_root'] +
+        assert not os.path.isfile(project['temp_path'] +
                                   LinkFiles.TEMP_MATCHED_FILE)
 
     def test_save(self, project, linker):

@@ -1,5 +1,6 @@
 import os
 import pytest
+import shutil
 
 from cdilinker.linker.chunked_dedup import DeDeupProject
 from cdilinker.linker.files import LinkFiles
@@ -14,14 +15,16 @@ class TestChunkedDedup(object):
 
     @pytest.fixture
     def ddp(self, project):
+        if not os.path.exists(project['temp_path']):
+            os.makedirs(project['temp_path'])
         yield DeDeupProject(project)
 
         # Teardown and clean up
-        if os.path.isfile(project['output_root'] + 'left_file.csv'):
-            os.remove(project['output_root'] + 'left_file.csv')
-        if os.path.isfile(project['output_root'] +
+        if os.path.isfile(project['temp_path'] + 'left_file.csv'):
+            os.remove(project['temp_path'] + 'left_file.csv')
+        if os.path.isfile(project['temp_path'] +
                           LinkFiles.TEMP_DEDUP_ALL_SELECTED):
-            os.remove(project['output_root'] +
+            os.remove(project['temp_path'] +
                       LinkFiles.TEMP_DEDUP_ALL_SELECTED)
         if os.path.isfile(project['output_root'] + 'deduped_data.csv'):
             os.remove(project['output_root'] + 'deduped_data.csv')
@@ -29,6 +32,8 @@ class TestChunkedDedup(object):
                           '_summary.pdf'):
             os.remove(project['output_root'] + project['name'] +
                       '_summary.pdf')
+        if os.path.exists(project['temp_path']):
+            shutil.rmtree(project['temp_path'])
 
     def test_init_none(self):
         """Ensure initialization does not proceed with empty JSON"""
@@ -66,7 +71,7 @@ class TestChunkedDedup(object):
     def test_link_pairs(self, project, ddp):
         """Tests if link_pairs behaves as intended"""
         step = project['steps'][1]
-        matched_file = project['output_root'] + LinkFiles.MATCHED_RECORDS
+        matched_file = project['temp_path'] + LinkFiles.MATCHED_RECORDS
         open(matched_file, 'w').close()
 
         ddp.load_data()
@@ -83,9 +88,9 @@ class TestChunkedDedup(object):
     def test_extract_rows(self, project, ddp):
         """Tests if linked records are removed from input data"""
         step = project['steps'][1]
-        matched_file = project['output_root'] + LinkFiles.MATCHED_RECORDS
+        matched_file = project['temp_path'] + LinkFiles.MATCHED_RECORDS
         open(matched_file, 'w').close()
-        linked_file = project['output_root'] + LinkFiles.TEMP_ENTITIES_FILE
+        linked_file = project['temp_path'] + LinkFiles.TEMP_ENTITIES_FILE
 
         ddp.load_data()
         ddp.pair_n_match(step=step['seq'],
@@ -99,7 +104,7 @@ class TestChunkedDedup(object):
                          index_filename=linked_file, index_id='REC_ID',
                          index_cols=['ENTITY_ID'])
 
-        assert not os.path.isfile(project['output_root'] +
+        assert not os.path.isfile(project['temp_path'] +
                                   LinkFiles.TEMP_STEP_REMAINED)
         assert os.path.isfile(ddp.left_file)
         assert Utils.file_len(ddp.left_file) == 1000
@@ -118,13 +123,13 @@ class TestChunkedDedup(object):
         assert ddp.total_records_linked is not None
         assert ddp.total_records_linked == 1
 
-        assert not os.path.isfile(project['output_root'] +
+        assert not os.path.isfile(project['temp_path'] +
                                   LinkFiles.MATCHED_RECORDS)
-        assert not os.path.isfile(project['output_root'] +
+        assert not os.path.isfile(project['temp_path'] +
                                   LinkFiles.TEMP_ENTITIES_FILE)
-        assert not os.path.isfile(project['output_root'] +
+        assert not os.path.isfile(project['temp_path'] +
                                   LinkFiles.TEMP_DEDUP_STEP_SELECTED)
-        assert os.path.isfile(project['output_root'] +
+        assert os.path.isfile(project['temp_path'] +
                               LinkFiles.TEMP_DEDUP_ALL_SELECTED)
 
     def test_save(self, project, ddp):

@@ -42,6 +42,7 @@
   "linked_url": "",
   "name": "jtst_dedup",
   "output_root": "cdi-linking/test/cdilinker/data/",
+  "temp_path": "cdi-linking/test/cdilinker/data/temp/",
   "matched_url": "",
   "results_file": "jtst_dedup_summary.pdf",
   "status": "COMPLETED",

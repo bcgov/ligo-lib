@@ -1,5 +1,6 @@
 import os
 import pytest
+import shutil
 
 from cdilinker.linker.dedup import DeDeupProject
 from cdilinker.linker.files import LinkFiles
@@ -14,17 +15,21 @@ class TestDedup(object):
 
     @pytest.fixture
     def ddp(self, project):
+        if not os.path.exists(project['temp_path']):
+            os.makedirs(project['temp_path'])
         yield DeDeupProject(project)
 
         # Teardown and clean up
-        if os.path.isfile(project['output_root'] + 'dedup_matched.csv'):
-            os.remove(project['output_root'] + 'dedup_matched.csv')
+        if os.path.isfile(project['temp_path'] + 'dedup_matched.csv'):
+            os.remove(project['temp_path'] + 'dedup_matched.csv')
         if os.path.isfile(project['output_root'] + 'deduped_data.csv'):
             os.remove(project['output_root'] + 'deduped_data.csv')
         if os.path.isfile(project['output_root'] + project['name'] +
                           '_summary.pdf'):
             os.remove(project['output_root'] + project['name'] +
                       '_summary.pdf')
+        if os.path.exists(project['temp_path']):
+            shutil.rmtree(project['temp_path'])
 
     def test_init_none(self):
         """Ensure initialization does not proceed with empty JSON"""
@@ -77,7 +82,7 @@ class TestDedup(object):
         assert ddp.matched is None
         assert ddp.total_linked is not None
         assert len(ddp.total_linked) == 1
-        assert not os.path.isfile(project['output_root'] +
+        assert not os.path.isfile(project['temp_path'] +
                                   LinkFiles.TEMP_MATCHED_FILE)
 
     def test_save(self, project, ddp):

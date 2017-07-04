@@ -3,6 +3,7 @@
   "comments": "",
   "matched_url": "",
   "output_root": "cdi-linking/test/cdilinker/data/",
+  "temp_path": "cdi-linking/test/cdilinker/data/temp/",
   "status": "COMPLETED",
   "name": "jtst_educ",
   "steps": [
