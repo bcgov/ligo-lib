@@ -29,5 +29,6 @@ class Utils(object):
             project = json.load(data_file)
 
         # Add task_uuid to this project
-        project['task_uuid'] = uuid.uuid4().hex
+        if 'task_uuid' not in project:
+            project['task_uuid'] = uuid.uuid4().hex
         return project

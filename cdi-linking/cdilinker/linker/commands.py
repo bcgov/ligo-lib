@@ -56,7 +56,6 @@ def validate_step(step, errors):
 
 
 def validate(project):
-
     logger.info('Validating project')
     errors = []
     if project is None:
@@ -120,10 +119,9 @@ def execute_project(project):
     validate(project)
 
     logger.info('Assigning uuid to project.')
-    path_uuid = uuid.uuid4()
-
-    project['task_uuid'] = path_uuid.hex
-    logger.info('Project uudi {0}'.format(project['task_uuid']))
+    if 'task_uuid' not in project:
+        project['task_uuid'] = uuid.uuid4().hex
+    logger.info('Project uuid %s', project['task_uuid'])
 
     project['output_root'] += project['task_uuid'] + '/'
     os.makedirs(project['output_root'])
