@@ -4,7 +4,7 @@ from jinja2 import Environment, FileSystemLoader, Template
 import os.path
 
 #Call syntax
-#C:\Users\Suraiya\khalegh_linking_latest_2\data-linking>python transform.py --projectroot C:\Users\Suraiya\khalegh_linking_latest_2\data-linking --input "C:\Users\Suraiya\khalegh_linking_latest_2\data-linking\web\linkage\config\openshift\sampleinput\web\deployment.sample.input"   --output django_deployment.yml --template deployment.yaml.tpl --projectroot "C:\Users\Suraiya\khalegh_linking_latest_2\data-linking\web\linkage\config\openshift\template\web"
+#C:\Users\Suraiya\khalegh_linking_latest_2\data-linking>python transform.py  --input "C:\Users\Suraiya\khalegh_linking_latest_2\data-linking\web\linkage\config\openshift\sampleinput\web\deployment.sample.input"   --output django_deployment.yml --template deployment.yaml.tpl --projectroot "C:\Users\Suraiya\khalegh_linking_latest_2\data-linking\web\linkage\config\openshift\template\web"
 
 INPUT_FILE_EXTENSION  = '.input'
 OUTPUT_FILE_EXTENSION  = ['.yml', '.yaml']
@@ -60,19 +60,16 @@ with open(input_file) as file1:
     print(customconfig)
     print(type(customconfig))
 
-#with open('C:\\Users\\Suraiya\\khalegh_linking_latest_2\\data-linking\\customconfig.j2') as tmpl:
-#    print(tmpl.read())
-
-#template = ENV.get_template('customconfig.tpl')
 template = ENV.get_template(template_file)
 
 #print(template)
 #print (template.render())
 print (template.render(customconfig=customconfig))
-#generate file with extension yml
-#with open("outputconfig.yml", "w") as file2:
+
+#generating actual configuration files
 with open(output_file, "w") as file2:
     file2.write(template.render(customconfig=customconfig))
 
 
-#do not commit .input; .env, .yml, .yaml
+#in .gitignore we would not let the user commit files with extension or name
+#.input; .env, .yml, .yaml
