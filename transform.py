@@ -9,6 +9,7 @@ import os.path
 INPUT_FILE_EXTENSION  = '.input'
 OUTPUT_FILE_EXTENSION  = ['.yml', '.yaml']
 TEMPLATE_FILE_EXTENSION  = '.tpl'
+ENV_FILE = '.env'
 
 #as a future improvement step we could remove the project root and pass
 # that as part of input
@@ -21,7 +22,7 @@ args = vars(parser.parse_args())
 
 def extension(filename):
     file_extension = os.path.splitext(filename)[-1]
-    print(file_extension)
+    print("extension: {0}".format(file_extension))
     return file_extension
 
 project_root = args['projectroot']
@@ -29,8 +30,15 @@ input_file = args['input']
 template_file = args['template']
 output_file = args['output']
 
+if extension(output_file) == '':
+    print("Output file extension is blank")
+
+#the output needs to have a name that has .yaml or .yml as an extension
+#or it needs to be called .env
 if ((extension(input_file) != INPUT_FILE_EXTENSION) or
-    (extension(output_file) not in OUTPUT_FILE_EXTENSION) or
+    not (((extension(output_file) == '') and (output_file ==  ENV_FILE))
+     or (extension(output_file) in OUTPUT_FILE_EXTENSION))
+    or
     (extension(template_file) != TEMPLATE_FILE_EXTENSION)
     ):
     print("Either input, output or template files do not have appropriate extension; exiting")
@@ -41,6 +49,7 @@ print(project_root)
 print(input_file)
 print(template_file)
 print(output_file)
+print(extension(output_file))
 
 ENV = Environment(loader=FileSystemLoader(project_root))
 print ENV
@@ -67,9 +76,13 @@ template = ENV.get_template(template_file)
 print (template.render(customconfig=customconfig))
 
 #generating actual configuration files
-with open(output_file, "w") as file2:
-    file2.write(template.render(customconfig=customconfig))
 
+with open(output_file, "w") as file2:
+    try:
+        file2.write(template.render(customconfig=customconfig))
+    except:
+        print( "Problem while creating/generating actual (environment/deployment/service/routing) configuration files")
 
 #in .gitignore we would not let the user commit files with extension or name
-#.input; .env, .yml, .yaml
+#.input; .env, .yml, .yaml unless explicitly negated (would be needed for
+# docker-compose.yml as we would want to be able to commit it)
