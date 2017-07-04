@@ -405,6 +405,7 @@ class LinkBase(object):
             csv_writer.writerow(right_row)
             count += 1
 
+        logger.debug('Number of records merged: {0}'.format(count))
         logger.debug('<<--- merge ---<<')
         return count
 
