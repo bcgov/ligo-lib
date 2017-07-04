@@ -1,0 +1,14 @@
+#ignore all .yaml, .yml files except docker-compose
+*.yml
+*.yaml
+!docker-compose.yml
+#I am not sure why the web/linkage/dev.yml file was committed to begin with.
+#Do we want to remove it from git repo too?
+
+#ignore compiled python files, files with extension "input"
+#and file with name .env
+*.pyc
+*.input
+*.env
+#ignore commitiing anything under the files directory
+files
