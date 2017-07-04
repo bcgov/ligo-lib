@@ -1,0 +1,9 @@
+name: redis3
+namespace: linking-project-dev-2-1-0
+app_name: redis3
+port_name: 6379-tcp
+port: 6379
+target_port: 6379
+#should match the name of the output deployment config file
+deploymentconfig: redis3
+cluster_IP: 172.30.73.97

@@ -1,0 +1,18 @@
+name: datalinkingwebose21
+namespace: linking-project-dev-2-1-0
+containername: datalinkingwebose21
+imagename_and_tag: 'datalinking_web_ose2:latest'
+deploymentconfig: djangodeploymentconfig
+containername: datalinkingwebose21
+enrty_point_command_part_1: /bin/bash
+enrty_point_command_part_2: start-dev.sh
+port_name: web
+containerport: 8080
+db_user: postgres
+db_host: postgresql2.linking-project-dev-2-1-0.svc
+db_port: '5432'
+db_service: postgres
+db_pssword: postgres
+#django_server_external_address
+allowed_host: datalinkingwebose21v2-linking-project-dev-2-1-0.10.0.75.2.xip.io
+celery_broker_url: 'redis://redis3.linking-project-dev-2-1-0.svc:6379'

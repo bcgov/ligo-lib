@@ -1,0 +1,9 @@
+name: datalinkingwebose21v2
+namespace: linking-project-dev-2-1-0
+app_name: datalinkingwebose21
+template_name: datalinkingwebose21
+port_name: web
+port: 8000
+target_port: 8000
+deploymentconfig: datalinkingwebose21
+cluster_IP: 172.30.236.61

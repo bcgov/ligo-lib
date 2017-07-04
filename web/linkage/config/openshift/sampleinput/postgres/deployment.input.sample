@@ -1,0 +1,15 @@
+name: postgresql2
+namespace: linking-project-dev-2-1-0
+app_name: postgresql2
+spec_strategy_type: Rolling
+container_name: postgresql2
+postgres_version_tag: 'postgresql:latest'
+app_name: postgresql2
+deploymentconfig: postgresql2
+volume_name: postgresql2-1
+container_port: 5432
+postgres_user: postgres
+postgres_password: postgres
+postgres_database: postgres
+postgresql_host: postgresql2.linking-project-dev-2-1-0.svc
+volume_name: postgresql2-1

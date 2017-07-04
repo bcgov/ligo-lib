@@ -1,0 +1,9 @@
+name: redis3
+namespace: linking-project-dev-2-1-0
+app_name: redis3
+container_name: redis3
+redis_version_tag: 'redis:latest'
+#should match name of the deployment config file for redis
+deploymentconfig: redis3
+volume_name: redis3-1
+container_port: 6379

@@ -1,0 +1,25 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: datalinkingwebose21v2
+  namespace: linking-project-dev-2-1-0
+  selfLink: /api/v1/namespaces/linking-project-dev-2-1-0/services/datalinkingwebose21v2
+  uid: 9110dc4a-4fc2-11e7-a97d-4af56a6b7ca1
+  resourceVersion: '242166'
+  creationTimestamp: '2017-06-12T22:57:53Z'
+  labels:
+    app: datalinkingwebose21
+    template: datalinkingwebose21
+spec:
+  ports:
+    - name: web
+      protocol: TCP
+      port: 8000
+      targetPort: 8000
+  selector:
+    deploymentconfig: datalinkingwebose21
+  clusterIP: 172.30.236.61
+  type: ClusterIP
+  sessionAffinity: None
+status:
+  loadBalancer: {}

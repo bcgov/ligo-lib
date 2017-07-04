@@ -1,0 +1,4 @@
+name: datalinkingwebose21v2
+namespace: linking-project-dev-2-1-0
+django_server_external_address: datalinkingwebose21v2-linking-project-dev-2-1-0.10.0.75.2.xip.io
+target_port_name: web
