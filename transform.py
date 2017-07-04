@@ -10,18 +10,14 @@ INPUT_FILE_EXTENSION  = '.input'
 OUTPUT_FILE_EXTENSION  = ['.yml', '.yaml']
 TEMPLATE_FILE_EXTENSION  = '.tpl'
 
-#remove project root and pass that as part of input
+#as a future improvement step we could remove the project root and pass
+# that as part of input
 parser = argparse.ArgumentParser(description='Stashes input values to configuration template and produces actual configuration file')
 parser.add_argument("-i",'--input', help = 'File with input configuration values', required = True )
 parser.add_argument("-t",'--template', help = 'Configuration template', required = True)
 parser.add_argument("-o",'--output', help = 'Output configuration', required = True)
 parser.add_argument("-r",'--projectroot', help = 'absolute dir part to template file', required = True)
 args = vars(parser.parse_args())
-
-#if args['input']:
-#    full_input_filename = args['input']
-#    input_dir_name = os.path.dirname(full_input_filename)
-#ENV = Environment(loader=FileSystemLoader("C:\\Users\\Suraiya\\khalegh_linking_latest_2\\data-linking\\"))
 
 def extension(filename):
     file_extension = os.path.splitext(filename)[-1]
