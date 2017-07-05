@@ -1,7 +1,7 @@
 import numpy as np
 import pandas as pd
 
-from .base import PluginMount
+from cdilinker.plugins.base import PluginMount
 from cdilinker.linker.algorithms import get_algorithms
 
 CMP_ALGORITHMS = get_algorithms(types=['PRB', None])
@@ -21,7 +21,6 @@ class Comparator(metaclass=PluginMount):
         the coutcome on a true match pair.
     u : For each outcome (Agreemet, disagreement, missing, ...) provides the probability that fields satisfy
         the coutcome on a true unmatched pair.
-
     """
 
     def compare(self, s1, s2, compare_fn, **args):
@@ -72,7 +71,6 @@ class FirstNameComparator(Comparator):
 
             4) Calculate u probability per value :
                 u(x) = (FA(x) * FB(x) ) / (NA * NB)
-
         """
 
         left_field = left_data.columns.values[0]
@@ -104,11 +102,10 @@ class FirstNameComparator(Comparator):
         m_a = np.count_nonzero(left_data[left_field].isnull().values.ravel())
         m_b = np.count_nonzero(right_data[right_field].isnull().values.ravel())
 
-        sum = (data['left_count'] * data['right_count']).sum()
+        summation = (data['left_count'] * data['right_count']).sum()
 
-        u_vals['Agreement'] = (sum * 1.0) / (left_size * right_size)
-        u_vals['Disagreement'] = (left_len * right_len - sum * 1.0) / (left_size * right_size)
-
+        u_vals['Agreement'] = (summation * 1.0) / (left_size * right_size)
+        u_vals['Disagreement'] = (left_len * right_len - summation * 1.0) / (left_size * right_size)
         u_vals['Missing'] = (m_a * right_size + m_b * left_size - m_a * m_b) * 1.0 / (left_size * right_size)
 
         data.drop('left_count', axis=1, inplace=True)

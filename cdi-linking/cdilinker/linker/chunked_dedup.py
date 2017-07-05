@@ -40,8 +40,8 @@ class DeDeupProject(LinkBase):
 
     def load_data(self):
         logger.debug('>>--- load_data --->>')
-        logger.info('Loading input dataset for project: {0} with task id: {1}.'
-                    .format(self.project['name'], self.project['task_uuid']))
+        logger.info('Loading input dataset for project: %s with task id: %s.',
+                    self.project['name'], self.project['task_uuid'])
 
         dataset = self.project['datasets'][0]
         self.left_columns.append(dataset['index_field'])
@@ -61,8 +61,8 @@ class DeDeupProject(LinkBase):
         self.left_dtypes = self.right_dtypes = left_dtypes
         self.left_columns = self.right_columns = usecols
 
-        logger.debug('Data columns: {0}.'.format(self.left_columns))
-        logger.debug('Data types: {0}'.format(self.left_dtypes))
+        logger.debug('Data columns: %s.', self.left_columns)
+        logger.debug('Data types: %s', self.left_dtypes)
 
         self.right_file = self.left_file = self.temp_path + LinkFiles.LEFT_FILE
 
@@ -238,14 +238,14 @@ class DeDeupProject(LinkBase):
         logger.debug('<<--- extract_rows ---<<')
 
     def run(self):
-        '''
+        """
         Runs a de-duplication project consisting of a sequence of steps.
         Each step is defined by a set of blocking and linking identifiers and rules.
         :return: A de-duplicated version of the original data file and the de-duplication summary report.
-        '''
+        """
         logger.debug('>>--- run --->>')
-        logger.info('Executing de-duplication project {0}. Task id: {1}.'
-                    .format(self.project['name'], self.project['task_uuid']))
+        logger.info('Executing de-duplication project %s. Task id: %s.',
+                    self.project['name'], self.project['task_uuid'])
 
         LinkBase.reset_id()
         self.steps = {}
@@ -269,10 +269,9 @@ class DeDeupProject(LinkBase):
         first_batch = True
         for step in self.project['steps']:
             self.steps[step['seq']] = {}
-            logger.info("De-duplication Step {0} :".format(step['seq']))
-            logger.info(
-                "{0}.1) Finding record pairs satisfying blocking and linking constraints...".format(
-                    step['seq']))
+            logger.info("De-duplication Step %s :", step['seq'])
+            logger.info("%s.1) Finding record pairs satisfying blocking and linking constraints...",
+                        step['seq'])
 
             pairs_count = self.pair_n_match(step=step['seq'],
                                             link_method=step['linking_method'],
@@ -281,25 +280,21 @@ class DeDeupProject(LinkBase):
                                             matched_file=matched_file)
 
             # This is required in case some intermediate steps have no results.
-            # So, the results from the previous steps will not be merged and counted.
+            # The results from previous steps will not be merged and counted.
             if pairs_count == 0:
                 pairs_count = prev_total
 
             linked_stats[step['seq']] = pairs_count - prev_total
             prev_total = pairs_count
 
-            logger.debug(
-                'Total records matched at step {0}: {1}'
-                    .format(step['seq'], linked_stats[step['seq']])
-            )
+            logger.debug('Total records matched at step %s: %s',
+                         step['seq'], linked_stats[step['seq']])
 
             # Skip the step if no records matched.
             if step['group'] and pairs_count > 0:
                 step_total_entities = self.link_pairs()
-                logger.debug(
-                    'Total entities found at step {0}: {1}'
-                        .format(step['seq'], step_total_entities)
-                )
+                logger.debug('Total entities found at step %s: %s',
+                             step['seq'], step_total_entities)
 
                 self.total_entities += step_total_entities
 
@@ -330,9 +325,8 @@ class DeDeupProject(LinkBase):
         if os.path.isfile(selected_filename):
             os.remove(selected_filename)
 
-        logger.info(
-            'Execution of de-duplication project {0} with Task id: {1} is completed.'
-                .format(self.project['name'], self.project['task_uuid']))
+        logger.info('Execution of de-duplication project %s with Task id: %s completed.',
+                    self.project['name'], self.project['task_uuid'])
         logger.debug('<<--- run ---<<')
 
     def save(self):
@@ -343,9 +337,8 @@ class DeDeupProject(LinkBase):
         :return: De-duplication summary report.
         """
         logger.debug('>>--- save --->>')
-
-        logger.info('Saving results of the de-duplication project {0}-{1}'
-                    .format(self.project['name'], self.project['task_uuid']))
+        logger.info('Saving results of the de-duplication project %s-%s',
+                    self.project['name'], self.project['task_uuid'])
         # Adding the selected (de-duped) entities to the final result
         selected_rows = self.temp_path + LinkFiles.TEMP_DEDUP_ALL_SELECTED
         data_reader = pd.read_csv(self.left_file,
@@ -381,17 +374,14 @@ class DeDeupProject(LinkBase):
 
         # Total number of entities after de-duplication
         self.total_entities += total_remained
-        logger.info(
-            'Total number of entities after de-duplication: {0}'
-            .format(self.total_entities))
+        logger.info('Total number of entities after de-duplication: %s',
+                    self.total_entities)
 
         # Clean all remaining temp files
         if os.path.exists(self.temp_path):
             shutil.rmtree(self.temp_path)
 
-        logger.info(
-            'De-duplicated file generated at {0}.'.format(deduped_file_path))
-
+        logger.info('De-duplicated file generated at %s.', deduped_file_path)
         logger.debug('<<--- save ---<<')
         # Generating de-duplication summary report
         return generate_linking_summary(self, self.output_root)

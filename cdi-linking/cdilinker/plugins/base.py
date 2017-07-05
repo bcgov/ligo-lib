@@ -50,8 +50,8 @@ class AlgorithmProvider(metaclass=PluginMount):
 
     """
 
-    def apply(self, args):
-        raise NotImplementedError('Abstarct method. No implementation.')
+    def apply(self, *args):
+        raise NotImplementedError('Abstract method. No implementation.')
 
 
 def load_plugins():

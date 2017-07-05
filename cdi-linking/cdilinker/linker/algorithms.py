@@ -313,7 +313,7 @@ AVAILABLE_ALGORITHMS = [alg() for alg in AlgorithmProvider.plugins]
 def get_algorithms(types=[None]):
     """
     Returns the list of provided algorithms of a given type.
-    :param type: Type of the algorithms
+    :param types: Type of the algorithms
     :return: List of available algorithms of the given type.
     """
     algorithms = {}

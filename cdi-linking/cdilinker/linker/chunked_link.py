@@ -52,8 +52,8 @@ class Linker(LinkBase):
 
     def load_data(self):
         logger.debug('>>--- load_data --->>')
-        logger.info('Loading input datasets for project: {0} with task id: {1}.'
-                    .format(self.project['name'], self.project['task_uuid']))
+        logger.info('Loading input datasets for project: %s with task id: %s.',
+                    self.project['name'], self.project['task_uuid'])
 
         left_data = self.project['datasets'][0]
         self.left_columns.append(left_data['index_field'])
@@ -74,8 +74,8 @@ class Linker(LinkBase):
         self.left_dtypes = left_dtypes
         self.left_columns = usecols
 
-        logger.debug('Left data columns: {0}.'.format(self.left_columns))
-        logger.debug('Left data types: {0}'.format(self.left_dtypes))
+        logger.debug('Left data columns: %s.', self.left_columns)
+        logger.debug('Left data types: %s', self.left_dtypes)
 
         self.left_file = self.temp_path + LinkFiles.LEFT_FILE
         super(Linker, self).import_data(left_data['url'],
@@ -103,8 +103,8 @@ class Linker(LinkBase):
         self.right_dtypes = right_dtypes
         self.right_columns = usecols
 
-        logger.debug('Right data columns: {0}.'.format(self.right_columns))
-        logger.debug('Right data types: {0}'.format(self.right_dtypes))
+        logger.debug('Right data columns: %s.', self.right_columns)
+        logger.debug('Right data types: %s', self.right_dtypes)
 
         self.right_file = self.temp_path + LinkFiles.RIGHT_FILE
 
@@ -155,14 +155,14 @@ class Linker(LinkBase):
             buffer = []
 
             current_group_id = None
-            filter = True
+            current_filter = True
             prev_filter_id = None
 
             for row in reader:
                 group_id = row[group_index]
 
                 if group_id != current_group_id:
-                    if not filter:
+                    if not current_filter:
                         if add_link_id:
                             link_id = LinkBase.get_next_id()
                             stats['total_linked'] += 1
@@ -179,18 +179,18 @@ class Linker(LinkBase):
                             not_linked_writer.writerow(item)
 
                     buffer = []
-                    filter = False
+                    current_filter = False
 
                     current_group_id = group_id
                     prev_filter_id = row[filter_index]
 
                 buffer.append(row)
                 if prev_filter_id != row[filter_index]:
-                    filter = True
+                    current_filter = True
 
             # Write any remaining buffered records
             if len(buffer) > 0:
-                if not filter:
+                if not current_filter:
                     if add_link_id:
                         link_id = LinkBase.get_next_id()
                         stats['total_linked'] += 1
@@ -212,7 +212,7 @@ class Linker(LinkBase):
         logger.debug('<<--- groupby_unique_filter ---<<')
         return out_filename, stats
 
-    def link(self, step, relationship='1T1'):
+    def link(self, relationship='1T1'):
         """
         Links the matched record based on relationship type.
         Filters all the record pairs that don't agree on the relationship type.
@@ -223,7 +223,6 @@ class Linker(LinkBase):
         :return: Linked record pairs.
         """
         logger.debug('>>--- link --->>')
-
         logger.info('Linking the records pairs based on the relationship type.')
         matched_file = self.temp_path + LinkFiles.MATCHED_RECORDS
         filtered_filename = self.temp_path + LinkFiles.TEMP_FILTER_RECORDS
@@ -397,8 +396,8 @@ class Linker(LinkBase):
 
     def run(self):
         logger.debug('>>--- run --->>')
-        logger.info('Executing linking project {0}. Task id: {1}.'
-                    .format(self.project['name'], self.project['task_uuid']))
+        logger.info('Executing linking project %s. Task id: %s.',
+                    self.project['name'], self.project['task_uuid'])
 
         LinkBase.reset_id()
         self.steps = {}
@@ -436,8 +435,9 @@ class Linker(LinkBase):
             os.rename(temp_sorted_file, self.right_file)
 
             self.steps[step['seq']] = {}
-            logger.info("Linking Step {0} :".format(step['seq']))
-            logger.info("{0}.1) Finding record pairs satisfying blocking and linking constraints...".format(step['seq']))
+            logger.info("Linking Step %s :", step['seq'])
+            logger.info("%s.1) Finding record pairs satisfying blocking and linking constraints...",
+                        step['seq'])
 
             open(matched_file, 'w').close()
             pairs_count = self.pair_n_match(step=step['seq'],
@@ -449,13 +449,14 @@ class Linker(LinkBase):
             linked_stats[step['seq']] = pairs_count
 
             if pairs_count == 0:
-                logger.info('No records matched at step {0}'.format(step['seq']))
+                logger.info('No records matched at step %s', step['seq'])
                 self.steps[step['seq']]['total_records_linked'] = 0
                 self.steps[step['seq']]['total_matched_not_linked'] = 0
                 self.steps[step['seq']]['total_entities'] = 0
                 continue
 
-            logger.info("{0}.3) Identifying the linked records based on the relationship type...".format(step['seq']))
+            logger.info("%s.3) Identifying the linked records based on the relationship type...",
+                        step['seq'])
             link_stats = self.link(self.project['relationship_type'])
 
             self.steps[step['seq']]['total_records_linked'] = link_stats['total_records_linked']
@@ -489,14 +490,14 @@ class Linker(LinkBase):
         if os.path.isfile(matched_file):
             os.remove(matched_file)
 
-        logger.info('Execution of linking project {0} with Task id: {1} is completed.'
-                    .format(self.project['name'], self.project['task_uuid']))
+        logger.info('Execution of linking project %s with Task id: %s is completed.',
+                    self.project['name'], self.project['task_uuid'])
         logger.debug('<<--- run ---<<')
 
     def save(self):
         logger.debug('>>--- save --->>')
-        logger.info("Preparing output file of the linking project {0} with tsk id {1}."
-                    .format(self.project['name'], self.project['task_uuid']))
+        logger.info("Preparing output file of the linking project %s with tsk id %s.",
+                    self.project['name'], self.project['task_uuid'])
 
         linked_file_path = self.output_root + link_config.get('linked_data_file', 'linked_data.csv')
 
@@ -538,7 +539,7 @@ class Linker(LinkBase):
         if os.path.exists(self.temp_path):
             shutil.rmtree(self.temp_path)
 
-        logger.info('Linking output file generated at {0}.'.format(linked_file_path))
+        logger.info('Linking output file generated at %s.', linked_file_path)
         logger.debug('<<--- save ---<<')
 
         return generate_linking_summary(self, self.output_root)

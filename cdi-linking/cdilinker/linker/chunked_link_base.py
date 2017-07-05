@@ -127,8 +127,8 @@ class LinkBase(object):
 
         s1 = pairs[left]
         s2 = pairs[right]
-        logger.info("Compare Function : {0}".format(compare_fn))
 
+        logger.info("Compare Function : %s", compare_fn)
         logger.debug('<<--- compare_fields ---<<')
         return apply_comparison(s1, s2, compare_fn, **args)
 
@@ -212,7 +212,7 @@ class LinkBase(object):
         for left, right, fn in zip(left_fields, right_fields, comparisons_methods):
             method = fn.get('name', 'EXACT')
             args = fn.get('args') or {}
-            logger.info("Left : {0}, Right: {1}, Args: {2} ".format(left, right, fn))
+            logger.info("Left : %s, Right: %s, Args: %s", left, right, fn)
             result = self.compare_fields(pairs, left, right, method, **args)
 
             pairs['matched'] &= result
@@ -227,22 +227,18 @@ class LinkBase(object):
         return pairs
 
     def pair_n_match(self, step, link_method, blocking, linking, matched_file):
-
         logger.debug('>>--- pair_n_match --->>')
-
         logger.info('Finding matched records.')
-        logger.debug('Blocking variables: {0}'.format(blocking))
-        logger.debug('Linking variables: {0}'.format(linking))
+        logger.debug('Blocking variables: %s', blocking)
+        logger.debug('Linking variables: %s', linking)
 
         temp_file = self.temp_path + LinkFiles.TEMP_MATCHED_FILE
 
         total_pairs = 0
-        shared = 0
 
-        '''
-        Prefix each column in left data with 'LEFT_' and the right data columns with 'RIGHT_'
-        to avoid name conflicts on merging two data chunks.
-        '''
+        # Prefix each column in left data with 'LEFT_' and the right data
+        # columns with 'RIGHT_' to avoid name conflicts on merging two data
+        # chunks.
 
         logger.info('Readding input data file chunk by chunk')
         left_reader = pd.read_csv(self.left_file,
@@ -267,15 +263,14 @@ class LinkBase(object):
 
             for right_chunk_no, right_chunk in enumerate(right_reader):
 
-                logger.info("Finding record pairs for left block {0} and right block {1}".format(left_chunk_no,
-                                                                                                 right_chunk_no))
+                logger.info("Finding record pairs for left block %s and right block %s",
+                            left_chunk_no, right_chunk_no)
                 if self.project_type == 'DEDUP' and left_chunk_no > right_chunk_no:
                     continue
 
-                '''
-                Prefix each column in left data with 'LEFT_' and the right data columns with 'RIGHT_'
-                to avoid name conflicts on merging two data chunks.
-                '''
+                # Prefix each column in left data with 'LEFT_' and the right
+                # data columns with 'RIGHT_' to avoid name conflicts on merging
+                # two data chunks.
 
                 right_chunk.columns = ['RIGHT_' + col for col in right_chunk.columns]
                 right_chunk.index.names = ['RIGHT_' + right_chunk.index.name]
@@ -337,7 +332,7 @@ class LinkBase(object):
                     matched = matched.reset_index()
                     try:
                         header = next(reader)
-                    except StopIteration as e:
+                    except StopIteration:
                         header = matched.columns
                     matched_reader = iter(matched.values.tolist())
                     total_pairs = self.merge(left_reader=reader,
@@ -355,8 +350,8 @@ class LinkBase(object):
         logger.debug('<<--- pair_n_match ---<<')
         return total_pairs
 
-    def merge(self, left_reader, right_reader, header, columns, csv_writer):
-
+    @staticmethod
+    def merge(left_reader, right_reader, header, columns, csv_writer):
         logger.debug('>>--- merge --->>')
 
         csv_writer.writerow(header)
@@ -389,7 +384,7 @@ class LinkBase(object):
                     left_row = right_row = None
                     left_row = next(left_reader)
                     right_row = next(right_reader)
-        except StopIteration as e:
+        except StopIteration:
             pass
 
         if left_row is not None:
@@ -406,7 +401,7 @@ class LinkBase(object):
             csv_writer.writerow(right_row)
             count += 1
 
-        logger.debug('Number of records merged: {0}'.format(count))
+        logger.debug('Number of records merged: %s', count)
         logger.debug('<<--- merge ---<<')
         return count
 
@@ -421,8 +416,7 @@ class LinkBase(object):
         """
 
         logger.debug('>>--- import_data --->>')
-
-        logger.info('Importing datafile {0}...'.format(src_filename))
+        logger.info('Importing datafile %s...', src_filename)
 
         open(dest_filename, 'w').close()
         reader = pd.read_csv(src_filename, usecols=columns, skipinitialspace=True, chunksize=CHUNK_SIZE,
@@ -438,7 +432,7 @@ class LinkBase(object):
                 chunk.to_csv(dest_file, index=False, header=first_chunk)
                 first_chunk = False
 
-        logger.info('Datafile {0} is imported successfully.'.format(src_filename))
+        logger.info('Datafile %s is imported successfully.', src_filename)
         logger.debug('<<--- import_data ---<<')
 
     def load_data(self):
