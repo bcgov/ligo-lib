@@ -97,6 +97,10 @@ The value after --template is the file name  (here deployment.yaml.tpl that is
 available immediately under the project root) and does not contain full path. This is
 the template file that defines the structure of output config file.
 
+For Docker-compose related .env file generation you would find
+both the file containing env input as well as the template under the
+data-linking\\web\\linkage\\config\\dockercompose directory
+
 
 Basic Commands
 --------------
