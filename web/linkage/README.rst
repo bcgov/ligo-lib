@@ -78,7 +78,7 @@ data-linking\\web\\linkage\\config\\openshift\\template\\redis for configuration
 
 Call syntax:
 
-    .. code:: python
+.. code:: python
 
     python transform.py  --input "C:\Users\Suraiya\khalegh_linking_latest_2\data-linking\web\linkage\config\openshift\sampleinput\web\deployment.sample.input"   --output djangodeploymentconfig.yml --template deployment.yaml.tpl --projectroot "C:\Users\Suraiya\khalegh_linking_latest_2\data-linking\web\linkage\config\openshift\template\web"
 
