@@ -2,6 +2,7 @@
 *.yml
 *.yaml
 !docker-compose.yml
+!dev.yml
 #I am not sure why the web/linkage/dev.yml file was committed to begin with.
 #Do we want to remove it from git repo too?
 
