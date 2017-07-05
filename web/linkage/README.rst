@@ -44,56 +44,58 @@ The following environment variables are required for project settings:
 
 Generate Config files
 ----------------------
-    We have a python script called transform.py that takes
-    (1) desired config values (that is going to change based on system of
-    interest like dev/qa/staging/uat/prod) in a file (the file name mentioned
-     after --input in call syntax)
-    (2) a skeleton/template file on which the desired config values will be stashed
-    (3) projectroot where the template file is located and
-    (4) location and name for the output/actual environment/system specific config file
+We have a python script called transform.py that takes
+    - (1) desired config values (that is going to change based on system of
+interest like dev/qa/staging/uat/prod) in a file (the file name mentioned
+after --input in call syntax)
+    - (2) a skeleton/template file on which the desired config values will be stashed
+    - (3) projectroot where the template file is located and
+    - (4) location and name for the output/actual environment/system specific config file
 
-    Inside the input file (as mentioned after the --input args) specify the values
-    as appropriate for your system of interest. And please make sure that in each
-     of the relevant input files (containing input config values) the value for
-     deploymentconfig matches what you are going to specify after --output (have a
-     look at the call syntax below). This is required to make sure that service/routing
-      etc. files as linked to appropriate deployment.
+Inside the input file (as mentioned after the --input args) specify the values
+as appropriate for your system of interest. And please make sure that in each
+of the relevant input files (containing input config values) the value for
+deploymentconfig matches what you are going to specify after --output (have a
+look at the call syntax below). This is required to make sure that service/routing
+etc. files as linked to appropriate deployment.
 
-    Go to data-linking directory then
-    if you want to generate deploymentconfig for django then copy
-    sample input file from
-    data-linking\web\linkage\config\openshift\sampleinput\web\deployment.input.sample
-    into a file called data-linking\web\linkage\config\openshift\sampleinput\web\deployment.input
-     (as for example). You will use this new file after the --input args for the
-     transformation process.  Update the content in this file as appropriate
-    When you are generating config file for postgres, redis etc. go to corresponding
-    directories (data-linking\web\linkage\config\openshift\sampleinput\postgres,
-    data-linking\web\linkage\config\openshift\sampleinput\redis) and use appropriate
-    input files.
+Go to data-linking directory then
+if you want to generate deploymentconfig for django then copy
+sample input file from
+data-linking\\web\\linkage\\config\\openshift\\sampleinput\\web\\deployment.input.sample
+into a file called data-linking\\web\\linkage\\config\\openshift\\sampleinput\\web\\deployment.input
+(as for example). You will use this new file after the --input args for the
+transformation process.  Update the content in this file as appropriate
+When you are generating config file for postgres, redis etc. go to corresponding
+directories (data-linking\\web\\linkage\\config\\openshift\\sampleinput\\postgres,
+data-linking\\web\\linkage\\config\\openshift\\sampleinput\\redis) and use appropriate
+input files.
 
-    The template file for django is in data-linking\web\linkage\config\openshift\template\web;
-    we call this location as projectroot in the following command
-    Use data-linking\web\linkage\config\openshift\template\postgres or
-    data-linking\web\linkage\config\openshift\template\redis for configuration skeleton/
-    template for postgres or redis
+The template file for django is in data-linking\\web\\linkage\\config\\openshift\\template\\web;
+we call this location as projectroot in the following command
+Use data-linking\\web\\linkage\\config\\openshift\\template\\postgres or
+data-linking\\web\\linkage\\config\\openshift\\template\\redis for configuration skeleton/template for postgres or redis
 
-    Call syntax:
+Call syntax:
+
+    .. code:: python
+
     python transform.py  --input "C:\Users\Suraiya\khalegh_linking_latest_2\data-linking\web\linkage\config\openshift\sampleinput\web\deployment.sample.input"   --output djangodeploymentconfig.yml --template deployment.yaml.tpl --projectroot "C:\Users\Suraiya\khalegh_linking_latest_2\data-linking\web\linkage\config\openshift\template\web"
 
-    In the above command transform.py is considering the filename after --input as a file
-    containing desired configuration values for the system where you are going to deploy
-    the app.
+In the above command transform.py is considering the filename after --input as a file
+containing desired configuration values for the system where you are going to deploy
+the app.
 
-    The filename (filename containing both full path and filename) that is appearing
-    after the --output param is the location where the generated config (in this case django
-    deployment config for the openshift env) file will be saved.
+The filename (filename containing both full path and filename) that is appearing
+after the --output param is the location where the generated config (in this case django
+deployment config for the openshift env) file will be saved.
 
-    The path that appears after --projectroot is the location of the template/skeleton
-    file which will be used to generate the actual config file.
+The path that appears after --projectroot is the location of the template/skeleton
+file which will be used to generate the actual config file.
 
-    The value after --template is the file name  (here deployment.yaml.tpl that is
-    available immediately under the project root) and does not contain full path. This is
-    the template file that defines the structure of output config file.
+The value after --template is the file name  (here deployment.yaml.tpl that is
+available immediately under the project root) and does not contain full path. This is
+the template file that defines the structure of output config file.
 
 
 Basic Commands
@@ -161,6 +163,8 @@ Docker Based Deployment
 For docker-compose based solution follow
 use
 
+.. code:: sh
+
 docker-compose up --build --force-recreate
 
 Openshift and Kubernetes Based Deployment
@@ -171,7 +175,7 @@ user is not in sudoers list
 Also pass start-dev.sh to entrypoint.sh
 
 2) Build using Docker-dev-os for solution where the django
- user is in sudoers list
+user is in sudoers list
 
 Also pass start-dev-os.sh to entrypoint.sh
 
