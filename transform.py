@@ -36,7 +36,7 @@ if extension(output_file) == '':
 #the output needs to have a name that has .yaml or .yml as an extension
 #or it needs to be called .env
 if ((extension(input_file) != INPUT_FILE_EXTENSION) or
-    not (((extension(output_file) == '') and (output_file ==  ENV_FILE))
+    not (((extension(output_file) == '') and (os.path.split(output_file)[1] == ENV_FILE))
      or (extension(output_file) in OUTPUT_FILE_EXTENSION))
     or
     (extension(template_file) != TEMPLATE_FILE_EXTENSION)
