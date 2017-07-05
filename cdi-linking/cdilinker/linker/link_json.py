@@ -2,7 +2,7 @@ import os
 import sys
 import json
 import getopt
-# from cdilinker.config.config import config
+
 from cdilinker.linker.commands import execute_project
 
 
@@ -11,14 +11,14 @@ logger = logging.getLogger(__name__)
 
 
 def run_json(project_file):
-    '''
+    """
     Loads and runs a linking project from a json file.
     :param project_file: The json file of the linking project.
     :return: Linking results summary as a pdf file.
-    '''
+    """
 
     if not os.path.exists(project_file):
-        logger.error("The project file {0} was not found.".format(project_file))
+        logger.error("The project file %s was not found.", project_file)
     else:
         with open(project_file) as json_file:
             project = json.load(json_file)

@@ -41,6 +41,8 @@ class LinkBase(object):
         self.right_index = None
         self.left_fields = None
         self.right_fields = None
+        self.left_entity = None
+        self.right_entity = None
         self.left_columns = self.right_columns = []
         self.output_root = self.project['output_root']
         self.temp_path = self.project['temp_path']
@@ -109,15 +111,13 @@ class LinkBase(object):
 
         s1 = pairs[left]
         s2 = pairs[right]
-        logger.info("Applying comparison function : {0}".format(compare_fn))
+        logger.info("Applying comparison function : %s", compare_fn)
 
         logger.debug('<<--- compare_fields ---<<')
         return apply_comparison(s1, s2, compare_fn, **args)
 
     def pair_records(self, left_chunk, right_chunk, left_fields, right_fields, transformations):
-
         logger.debug('>>--- pair_records --->>')
-
         logger.info('Applying blocking rules.')
 
         left_fields = ['LEFT_' + field for field in left_fields]
@@ -164,34 +164,29 @@ class LinkBase(object):
                 chunk_pairs[left_index] < chunk_pairs[right_index]]
 
         chunk_pairs = chunk_pairs.set_index([left_index, right_index])
-
         chunk_pairs.drop(left_on + right_on, axis=1, inplace=True)
 
         logger.debug('<<--- pair_records ---<<')
-
         return chunk_pairs
 
     def match_records(self, pairs, left_fields, right_fields, comparisons_methods):
-
         logger.debug('>>--- match_records --->>')
-
         logger.info('Applying linking rules.')
+
         pairs['matched'] = 1
         for left, right, fn in zip(left_fields, right_fields,
                                    comparisons_methods):
             method = fn.get('name', 'EXACT')
             args = fn.get('args') or {}
-            logger.info("Left : {0}, Right: {1}, Args: {2} ".format(left, right, fn))
+            logger.info("Left : %s, Right: %s, Args: %s", left, right, fn)
             result = self.compare_fields(pairs, left, right, method, **args)
             pairs['matched'] &= result
 
         pairs = pairs.loc[lambda df: df.matched == 1, :]
-
         pairs.drop('matched', axis=1, inplace=True)
-
         pairs = pairs.sort_index()
-        logger.debug('<<--- match_records ---<<')
 
+        logger.debug('<<--- match_records ---<<')
         return pairs
 
     def pair_n_match(self, step, link_method, blocking, linking):
@@ -199,7 +194,7 @@ class LinkBase(object):
              TODO : Throw error if different number of left and right blocking
              variables are given. For each blocking variable there must be a
              corresponding encoding method if encoding_method id not None.
-         """
+        """
 
         logger.debug('>>--- pair_n_match --->>')
         logger.info('Finding records pairs that satisfy blocking and linking rules.')
@@ -253,7 +248,8 @@ class LinkBase(object):
                                        right_block.columns]
                 right_block.index.names = ['RIGHT_' + right_block.index.name]
 
-                logger.info("Finding record pairs for left block {0} and right block {1}".format(i, j))
+                logger.info("Finding record pairs for left block %s and right block %s",
+                            i, j)
                 pairs = self.pair_records(left_block,
                                           right_block,
                                           left_fields, right_fields, transformations)

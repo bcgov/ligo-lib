@@ -28,6 +28,8 @@ class Linker(LinkBase):
         self.right_index = datasets[1]['index_field']
         self.left_entity = datasets[0]['entity_field']
         self.right_entity = datasets[1]['entity_field']
+        self.left_index_type = None
+        self.right_index_type = None
 
     def __str__(self):
 
@@ -50,8 +52,8 @@ class Linker(LinkBase):
 
     def load_data(self):
         logger.debug('>>--- load_data --->>')
-        logger.info('Loading input dataset for project: {0} with task id: {1}.'
-                    .format(self.project['name'], self.project['task_uuid']))
+        logger.info('Loading input dataset for project: %s with task id: %s.',
+                    self.project['name'], self.project['task_uuid'])
 
         super(Linker, self).load_data()
         datasets = self.project['datasets']
@@ -85,9 +87,9 @@ class Linker(LinkBase):
         except KeyError:
             left_usecols = self.left_columns
 
-        logger.debug('Left columns: {0}.'.format(left_usecols))
-        logger.debug('Left index: {0}'.format(self.left_index))
-        logger.debug('Left data types: {0}'.format(left_dtypes))
+        logger.debug('Left columns: %s.', left_usecols)
+        logger.debug('Left index: %s', self.left_index)
+        logger.debug('Left data types: %s', left_dtypes)
         self.left_dataset = pd.read_csv(datasets[0]['url'],
                                         index_col=self.left_index,
                                         usecols=left_usecols,
@@ -99,9 +101,9 @@ class Linker(LinkBase):
         except KeyError:
             right_usecols = self.right_columns
 
-        logger.debug('Right columns: {0}.'.format(right_usecols))
-        logger.debug('Right index: {0}'.format(self.right_index))
-        logger.debug('Right data types: {0}'.format(right_dtypes))
+        logger.debug('Right columns: %s.', right_usecols)
+        logger.debug('Right index: %s', self.right_index)
+        logger.debug('Right data types: %s', right_dtypes)
         self.right_dataset = pd.read_csv(datasets[1]['url'],
                                          index_col=self.right_index,
                                          usecols=right_usecols,
@@ -114,6 +116,7 @@ class Linker(LinkBase):
         """
         Links the matched record based on relationship type.
         Filters all the record pairs that don't agree on the relationship type.
+        :param seq: sequence number
         :param relationship: Relationship type
             '1T1': One-To-One, default
             '1TN': One-To-Many
@@ -168,28 +171,28 @@ class Linker(LinkBase):
         return linked, matched_not_linked
 
     def run(self):
-
         logger.debug('>>--- run --->>')
-
-        logger.info('Executing linking project {0}. Task id: {1}.'
-                    .format(self.project['name'], self.project['task_uuid']))
+        logger.info('Executing linking project %s. Task id: %s.',
+                    self.project['name'], self.project['task_uuid'])
 
         self.steps = {}
         self.total_records_linked = 0
         self.total_entities = 0
-        logger.info('Project steps: {0}'.format(len(self.project['steps'])))
+        logger.info('Project steps: %s', len(self.project['steps']))
 
         LinkBase.reset_id()
         for step in self.project['steps']:
             self.steps[step['seq']] = {}
-            logger.info("Linking Step {0} :".format(step['seq']))
-            logger.info("{0}.1) Finding record pairs satisfying blocking constraints...".format(step['seq']))
+            logger.info("Linking Step %s :", step['seq'])
+            logger.info("%s.1) Finding record pairs satisfying blocking constraints...",
+                        step['seq'])
             self.pair_n_match(step=step['seq'],
                               link_method=step['linking_method'],
                               blocking=step['blocking_schema'],
                               linking=step['linking_schema'])
 
-            logger.info("{0}.2) Identifying the linked records based on the relationship type...".format(step['seq']))
+            logger.info("%s.2) Identifying the linked records based on the relationship type...",
+                        step['seq'])
             step_linked, step_matched_not_linked = self.link(step['seq'], self.project['relationship_type'])
 
             left_index = 'LEFT_' + self.left_index
@@ -271,15 +274,16 @@ class Linker(LinkBase):
                 ~self.right_dataset[self.right_entity].isin(
                     step_linked[right_entity_id])]
 
-            logger.info("Number of records linked at step {0}: {1}".format(step['seq'], len(self.linked)))
+            logger.info("Number of records linked at step %s: %s",
+                        step['seq'], len(self.linked))
 
         temp_match_file_path = self.temp_path + LinkFiles.TEMP_MATCHED_FILE
         # Delete temporary matched file.
         if os.path.isfile(temp_match_file_path):
             os.remove(temp_match_file_path)
 
-        logger.info('Execution of linking project {0} with Task id: {1} is completed.'
-                    .format(self.project['name'], self.project['task_uuid']))
+        logger.info('Execution of linking project %s with Task id: %s is completed.',
+                    self.project['name'], self.project['task_uuid'])
         logger.debug('<<--- run ---<<')
 
     def save(self):
@@ -296,8 +300,8 @@ class Linker(LinkBase):
         self.matched_not_linked = pd.DataFrame(grouped)
 
         # Storing linked data records.
-        logger.info("Preparing output files of the linking project {0} with tsk id {1}."
-                    .format(self.project['name'], self.project['task_uuid']))
+        logger.info("Preparing output files of the linking project %s with tsk id %s.",
+                    self.project['name'], self.project['task_uuid'])
         linked_file_path = self.project['output_root'] + link_config.get('linked_data_file', 'linked_data.csv')
 
         self.linked['STEP'] = self.linked['STEP'].map(
@@ -337,7 +341,8 @@ class Linker(LinkBase):
         self.matched_not_linked.replace(np.nan, '', regex=True)
         self.matched_not_linked.to_csv(matched_file_path)
 
-        logger.info('Linking output files generated: {0},\n {1}.'.format(linked_file_path, matched_file_path))
+        logger.info('Linking output files generated: %s,\n %s.',
+                    linked_file_path, matched_file_path)
 
         # Clean all remaining temp files
         if os.path.exists(self.temp_path):
