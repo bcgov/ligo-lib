@@ -101,6 +101,16 @@ For Docker-compose related .env file generation you would find
 both the file containing env input as well as the template under the
 data-linking\\web\\linkage\\config\\dockercompose directory
 
+To make it difficult for the developer to accidentally commit output configuration
+files or input; in addition to gitignore we enforced a file naming convention. To be
+more specific the transform.py script would not run to completion if the input
+file does not have an extension of .input, and output file is not called .env or
+does not end in .yaml or .yml and the template file needs to have an extension of tpl.
+The user can commit the template file. The restriction on the template file extension
+is there so that someone does not assign .yml extension to a template file (which
+would require deliberately overriding .yml ignore in the .gitignore file) but this
+restriction could be removed. 
+
 
 Basic Commands
 --------------
