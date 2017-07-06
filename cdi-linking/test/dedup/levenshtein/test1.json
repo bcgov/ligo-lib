@@ -6,7 +6,7 @@
     {
       "description": "",
       "format": "CSV",
-      "url": "cdi-linking/test/dedup/levensthein/test1.csv",
+      "url": "cdi-linking/test/dedup/levenshtein/test1.csv",
       "title": "Tets dataset 1",
       "entity_field": "INGESTION_ID",
       "index_field": "INGESTION_ID",
@@ -16,7 +16,7 @@
   "description": "De-Duplication test case 1",
   "linked_url": "",
   "comments": "",
-  "output_root": "cdi-linking/test/dedup/levensthein/",
+  "output_root": "cdi-linking/test/dedup/levenshtein/",
   "temp_path": "temp/",
   "results_file": "test1.pdf",
   "steps": [

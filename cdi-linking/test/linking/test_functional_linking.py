@@ -13,6 +13,7 @@ class TestFunctionalLinking(object):
         'levenshtein'
     ])
     def test_functional_linking(self, directory):
+        """Functional tests for linking"""
         work_path = os.path.join(os.path.dirname(__file__), directory)
         project = Utils.load_json(os.path.join(work_path, 'test1.json'))
         task_uuid = project['task_uuid']

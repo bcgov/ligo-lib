@@ -10,10 +10,11 @@ from test.cdilinker.utils import Utils
 class TestFunctionalDedup(object):
     @pytest.mark.parametrize('directory', [
         'combination',
-        'levensthein',
+        'levenshtein',
         'soundex'
     ])
     def test_functional_dedup(self, directory):
+        """Functional tests for de-duplication"""
         work_path = os.path.join(os.path.dirname(__file__), directory)
         project = Utils.load_json(os.path.join(work_path, 'test1.json'))
         task_uuid = project['task_uuid']
