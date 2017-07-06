@@ -50,9 +50,24 @@ To test the library simply use:
 
     pytest
 
+By default, all tests are configured to run. However, some tests will take considerable amount of time.
+To skip running the time consuming tests in the library, use:
+
+.. code:: sh
+
+    pytest -m "not slow"
+
 
 Docker Environment
 ~~~~~~~~~~~~~~~~~~
+
+If you are on a Windows host, ensure your local repo is saving files in unix format (LF instead of CRLF).
+The functional tests will fail if the test input CSV files are saved in Windows format.
+To set your local repository to that state, do:
+
+.. code:: sh
+
+    git config core.autocrlf input
 
 To run the tests within a docker environment (such as when you are on a Windows host) run the following:
 
@@ -61,7 +76,7 @@ To run the tests within a docker environment (such as when you are on a Windows 
     docker build . -f Dockerfile-dev -t datalinking_test
     docker run --rm -it datalinking_test
 
-To explore the Docker container directly do the following:
+To enter and explore the Docker container directly do the following:
 
 .. code:: sh
 

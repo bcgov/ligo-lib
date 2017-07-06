@@ -13,6 +13,7 @@ class LinkError(Exception):
     FILEPATH_MISSING = 'FILEPATH_MISSING'
     NO_BLOCKING = 'NO_BLOCKING'
     NO_LINKING = 'NO_LINKING'
+    NO_LINKING_METHOD = 'NO_LINKING_METHOD'
     ENTITY_ID_MISSING = 'ENTITY_ID_MISSING'
     INVALID_PATH = 'INVALID_PATH'
     INVALID_INDEX = 'INVALID_INDEX'
@@ -31,6 +32,7 @@ class LinkError(Exception):
         FILEPATH_MISSING: 'Path to dataset file is required.',
         NO_BLOCKING: 'Step blocking variable(s) not provided.',
         NO_LINKING: 'Step linking variable(s) not provided',
+        NO_LINKING_METHOD: 'Step linking_method variable(s) not provided',
         ENTITY_ID_MISSING: 'Dataset entity id field is missing.',
         INVALID_PATH: 'Invalid file path. Dataset file does not exist.',
         INVALID_INDEX: 'Invalid Index Field. Index field does not exist in dataset.',
