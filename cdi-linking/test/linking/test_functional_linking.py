@@ -9,8 +9,8 @@ from test.cdilinker.utils import Utils
 
 class TestFunctionalLinking(object):
     @pytest.mark.parametrize('directory', [
-        # 'combination',
-        'levenshtein'
+        'levenshtein',
+        pytest.param('combination', marks=pytest.mark.slow)
     ])
     def test_functional_linking(self, directory):
         """Functional tests for linking"""
