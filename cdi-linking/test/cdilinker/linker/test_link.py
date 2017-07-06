@@ -11,7 +11,7 @@ class TestLink(object):
     @pytest.fixture(scope="class")
     def project(self):
         """Read test_jtst_educ_linking project configuration"""
-        return Utils.load_project('test_jtst_educ_linking.json')
+        return Utils.load_project_data('test_jtst_educ_linking.json')
 
     @pytest.fixture
     def linker(self, project):

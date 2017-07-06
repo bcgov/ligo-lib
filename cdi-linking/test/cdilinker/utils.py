@@ -14,14 +14,22 @@ class Utils(object):
         return size + 1
 
     @staticmethod
-    def load_project(json_file):
-        """Parses and loads a JSON Project json_file"""
+    def load_json(json_path):
+        """Parses a JSON Project file at json_path"""
         import json
+
+        with open(json_path) as data_file:
+            project = json.load(data_file)
+
+        return project
+
+    @staticmethod
+    def load_project_data(json_filename):
+        """Parses the JSON Project json_filename and applies a task_uuid"""
         import uuid
 
-        with open(os.path.join(os.path.dirname(__file__), 'data', json_file)) \
-                as data_file:
-            project = json.load(data_file)
+        project = Utils.load_json(os.path.join(os.path.dirname(__file__),
+                                               'data', json_filename))
 
         # Add task_uuid to this project
         if 'task_uuid' not in project:

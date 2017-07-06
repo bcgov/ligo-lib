@@ -17,7 +17,7 @@
   "linked_url": "",
   "comments": "",
   "output_root": "cdi-linking/test/dedup/levensthein/",
-  "temp_path": "cdi-linking/test/dedup/levensthein/temp/",
+  "temp_path": "temp/",
   "results_file": "test1.pdf",
   "steps": [
     {

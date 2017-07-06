@@ -11,7 +11,7 @@ class TestDedup(object):
     @pytest.fixture(scope="class")
     def project(self):
         """Read test_jtst_dedup project configuration"""
-        return Utils.load_project('test_jtst_dedup.json')
+        return Utils.load_project_data('test_jtst_dedup.json')
 
     @pytest.fixture
     def ddp(self, project):
