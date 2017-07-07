@@ -38,7 +38,7 @@ FIELD_CATEGORIES = [field_cat() for field_cat in FieldCategory.plugins]
 
 
 def _save_pairs(file_path, data, append=False):
-    data.replace(np.nan, '', regex=True)
+    data = data.replace(np.nan, '', regex=True)
     if not append:
         data.to_csv(file_path)
     else:
@@ -57,7 +57,7 @@ def sort_csv(filename, appendfile, cols, types):
     sort_script = Template(template_script_file.read())
     import csv
     header = []
-    with open(filename, 'r') as in_file:
+    with open(filename, 'r', newline='') as in_file:
         reader = csv.reader(in_file)
         header = next(reader)
 

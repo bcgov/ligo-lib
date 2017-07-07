@@ -135,8 +135,9 @@ class Linker(LinkBase):
                  cols=[group_col, filter_col],
                  types={group_col: 'numeric', filter_col: 'numeric'})
 
-        with open(temp_sorted_file, 'r') as in_file, \
-                open(out_filename, 'w') as out_file, open(not_linked_filename, 'a') as not_linked_file:
+        with open(temp_sorted_file, 'r', newline='') as in_file, \
+                open(out_filename, 'w', newline='') as out_file, \
+                open(not_linked_filename, 'a', newline='') as not_linked_file:
             reader = csv.reader(in_file)
             header = next(reader)
             linked_writer = csv.writer(out_file)
@@ -308,8 +309,10 @@ class Linker(LinkBase):
                  cols=[linked_entity_col, linked_index_col],
                  types={linked_entity_col: 'numeric', linked_index_col: 'numeric'})
 
-        with open(temp_linked_file, 'r') as linked_file, open(data_filename, 'r') as data_file, \
-                open(linked_filename, 'w') as link_out, open(temp_data_file, 'w') as data_out:
+        with open(temp_linked_file, 'r', newline='') as linked_file, \
+                open(data_filename, 'r', newline='') as data_file, \
+                open(linked_filename, 'w', newline='') as link_out, \
+                open(temp_data_file, 'w', newline='') as data_out:
 
             linked_reader = csv.reader(linked_file)
             data_reader = csv.reader(data_file)
