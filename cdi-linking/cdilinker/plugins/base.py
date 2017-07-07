@@ -2,7 +2,7 @@ import logging
 logger = logging.getLogger(__name__)
 
 '''
-Forked from : `A Simple Plugin Framework <http://martyalchin.com/2008/jan/10/simple-plugin-framework/>`__ by
+Copied from : `A Simple Plugin Framework <http://martyalchin.com/2008/jan/10/simple-plugin-framework/>`__ by
 Marty Alchin.
 '''
 

@@ -77,7 +77,9 @@ class Linker(LinkBase):
         logger.debug('Left data columns: %s.', self.left_columns)
         logger.debug('Left data types: %s', self.left_dtypes)
 
-        self.left_file = self.temp_path + LinkFiles.LEFT_FILE
+        self.left_file = self.output_root \
+                        + link_config.get('left_file', 'left_file.csv')
+
         super(Linker, self).import_data(left_data['url'],
                                         columns=usecols,
                                         dest_filename=self.left_file,
@@ -106,7 +108,8 @@ class Linker(LinkBase):
         logger.debug('Right data columns: %s.', self.right_columns)
         logger.debug('Right data types: %s', self.right_dtypes)
 
-        self.right_file = self.temp_path + LinkFiles.RIGHT_FILE
+        self.right_file = self.output_root \
+                        + link_config.get('right_file', 'right_file.csv')
 
         super(Linker, self).import_data(right_data['url'],
                                         usecols,
