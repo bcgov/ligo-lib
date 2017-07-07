@@ -1,5 +1,4 @@
-# Custom Ignore
-.idea
+# Filespace Ignore
 files/
 
 # Byte-compiled / optimized / DLL files
@@ -90,6 +89,15 @@ celerybeat-schedule
 env/
 venv/
 ENV/
+
+# Sensitive Environment Data
+*.input
+*.yml
+*.yaml
+!docker-compose.yml
+
+# PyCharm
+.idea
 
 # Spyder project settings
 .spyderproject

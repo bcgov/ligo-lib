@@ -22,6 +22,7 @@ setup(
     long_description=read('../readme.rst'),
 
     install_requires=[
+        "editdistance>=0.3.1",
         "jellyfish>=0.5.6",
         "numpy>=1.11.2",
         "pandas>=0.19.2",

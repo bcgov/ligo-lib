@@ -18,6 +18,7 @@ The **CDI Linker** library needs to be executed in a Unix environment because it
 - Python (>=3.5)
 - NumPy (>=1.11.2)
 - Pandas (>=0.19.2)
+- editdistance (>=0.3.1)
 - jellyfish (>=0.5.6)
 - xhtml2pdf (>=0.0.6)
 - jinja2 (>=2.8.1)
