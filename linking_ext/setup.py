@@ -22,6 +22,7 @@ setup(
 
     install_requires=[
         "cdilinker>=0.1",
+        "editdistance>=0.3.1"
     ],
     include_package_data=True,
     packages=[

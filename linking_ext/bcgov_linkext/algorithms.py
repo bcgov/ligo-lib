@@ -1,11 +1,17 @@
 import os
 import sys
+import logging
 import pandas as pd
 import numpy as np
+import editdistance
+
 from cdilinker.plugins.base import AlgorithmProvider
 from cdilinker.linker.union_find import UnionFind
 
 from jellyfish import levenshtein_distance, jaro_winkler
+
+logger = logging.getLogger(__name__)
+
 
 
 def utf_encode(col):
@@ -25,16 +31,16 @@ class Levenshtein(AlgorithmProvider):
     def apply(self, s1, s2, max_edits=0):
 
         strings = pd.concat([s1, s2], axis=1, ignore_index=True)
+        strings = strings.replace(np.nan, '', regex=True)
 
         def levenshtein_alg(x, max_edits=0):
             try:
-                d = levenshtein_distance(x[0], x[1])
+                d = editdistance.eval(x[0], x[1])
                 return 1 if d <= max_edits else 0
             except Exception as err:
-                if pd.isnull(x[0]) or pd.isnull(x[1]):
-                    return np.nan
-                else:
-                    raise err
+                logger.error(
+                    'Error in calculating Levenshtein edit distance: {}'
+                    .format(err))
 
         return strings.apply(levenshtein_alg, axis=1, max_edits=max_edits)
 
