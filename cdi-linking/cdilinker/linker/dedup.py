@@ -44,7 +44,7 @@ class DeDeupProject(LinkBase):
         if not append:
             data.to_csv(file_path)
         else:
-            with open(file_path, 'a', newline='') as f:
+            with open(file_path, 'a') as f:
                 data.to_csv(f, header=False)
 
         logger.debug('<<--- save_linked_data ---<<')

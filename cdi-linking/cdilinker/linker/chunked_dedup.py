@@ -172,16 +172,16 @@ class DeDeupProject(LinkBase):
             selected_filename = self.temp_path + LinkFiles.TEMP_DEDUP_STEP_SELECTED
         remained_filename = self.temp_path + LinkFiles.TEMP_STEP_REMAINED
 
-        with open(data_filename, 'r', newline='') as data_file, \
-                open(index_filename, 'r', newline='') as index_file, \
-                open(selected_filename, 'w', newline='') as selected_file, \
-                open(remained_filename, 'w', newline='') as remained_file:
+        with open(data_filename, 'r') as data_file, \
+                open(index_filename, 'r') as index_file, \
+                open(selected_filename, 'w') as selected_file, \
+                open(remained_filename, 'w') as remained_file:
 
             data_reader = csv.reader(data_file)
             index_reader = csv.reader(index_file)
 
-            selected_writer = csv.writer(selected_file)
-            remained_writer = csv.writer(remained_file)
+            selected_writer = csv.writer(selected_file, lineterminator='\n')
+            remained_writer = csv.writer(remained_file, lineterminator='\n')
 
             # Read header rows
             data_header = next(data_reader)
@@ -364,7 +364,7 @@ class DeDeupProject(LinkBase):
         # Assign unique entity id to all remaining records.
         logger.info('Assigning entity id to all remaining records.')
         total_remained = 0
-        with open(deduped_file_path, file_mode, newline='') as out_file:
+        with open(deduped_file_path, file_mode) as out_file:
             for chunk in data_reader:
                 chunk.insert(0, 'ENTITY_ID', np.nan)
                 for rec_id in chunk.index.values:

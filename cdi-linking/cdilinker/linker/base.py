@@ -57,7 +57,7 @@ def sort_csv(filename, appendfile, cols, types):
     sort_script = Template(template_script_file.read())
     import csv
     header = []
-    with open(filename, 'r', newline='') as in_file:
+    with open(filename, 'r') as in_file:
         reader = csv.reader(in_file)
         header = next(reader)
 

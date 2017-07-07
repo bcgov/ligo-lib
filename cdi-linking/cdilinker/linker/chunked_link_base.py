@@ -143,8 +143,8 @@ class LinkBase(object):
         if first_batch:
             os.rename(source_filename, append_filename)
         else:
-            with open(append_filename, 'a', newline='') as append_file, \
-                    open(source_filename, 'r', newline='') as matched_file:
+            with open(append_filename, 'a') as append_file, \
+                    open(source_filename, 'r') as matched_file:
                 for row_no, row in enumerate(matched_file):
                     if row_no > 0:
                         append_file.write(row)
@@ -330,10 +330,10 @@ class LinkBase(object):
                 matched.replace(np.nan, '', regex=True)
 
                 logger.info('Merging chunk result into the matched records file.')
-                with open(matched_file, 'r', newline='') as in_file, \
-                        open(temp_file, 'w', newline='') as merge_file:
+                with open(matched_file, 'r') as in_file, \
+                        open(temp_file, 'w') as merge_file:
                     reader = csv.reader(in_file)
-                    merge_writer = csv.writer(merge_file)
+                    merge_writer = csv.writer(merge_file, lineterminator='\n')
                     matched = matched.reset_index()
                     try:
                         header = next(reader)
@@ -426,7 +426,7 @@ class LinkBase(object):
         open(dest_filename, 'w').close()
         reader = pd.read_csv(src_filename, usecols=columns, skipinitialspace=True, chunksize=CHUNK_SIZE,
                              dtype=data_types)
-        with open(dest_filename, 'a', newline='') as dest_file:
+        with open(dest_filename, 'a') as dest_file:
             first_chunk = True
             for chunk in reader:
                 if front_cols is not None:
