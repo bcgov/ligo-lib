@@ -18,7 +18,6 @@ The **CDI Linker** library needs to be executed in a Unix environment because it
 - Python (>=3.5)
 - NumPy (>=1.11.2)
 - Pandas (>=0.19.2)
-- editdistance (>=0.3.1)
 - jellyfish (>=0.5.6)
 - xhtml2pdf (>=0.0.6)
 - jinja2 (>=2.8.1)
@@ -64,11 +63,6 @@ Docker Environment
 
 If you are on a Windows host, ensure your local repo is saving files in unix format (LF instead of CRLF).
 The functional tests will fail if the test input CSV files are saved in Windows format.
-To set your local repository to that state, do:
-
-.. code:: sh
-
-    git config core.autocrlf input
 
 To run the tests within a docker environment (such as when you are on a Windows host) run the following:
 

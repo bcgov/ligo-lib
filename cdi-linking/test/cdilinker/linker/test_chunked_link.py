@@ -23,10 +23,10 @@ class TestChunkedLink(object):
         if os.path.isfile(project['temp_path'] +
                           LinkFiles.TEMP_MATCHED_FILE):
             os.remove(project['temp_path'] + LinkFiles.TEMP_MATCHED_FILE)
-        if os.path.isfile(project['temp_path'] + 'left_file.csv'):
-            os.remove(project['temp_path'] + 'left_file.csv')
-        if os.path.isfile(project['temp_path'] + 'right_file.csv'):
-            os.remove(project['temp_path'] + 'right_file.csv')
+        if os.path.isfile(project['output_root'] + 'left_file.csv'):
+            os.remove(project['output_root'] + 'left_file.csv')
+        if os.path.isfile(project['output_root'] + 'right_file.csv'):
+            os.remove(project['output_root'] + 'right_file.csv')
         if os.path.isfile(project['temp_path'] +
                           LinkFiles.TEMP_STEP_LINKED_FILE):
             os.remove(project['temp_path'] + LinkFiles.TEMP_STEP_LINKED_FILE)
@@ -86,8 +86,8 @@ class TestChunkedLink(object):
         assert linker.left_index == project['datasets'][0]['index_field']
         assert linker.right_index is not None
         assert linker.right_index == project['datasets'][1]['index_field']
-        assert os.path.isfile(project['temp_path'] + 'left_file.csv')
-        assert os.path.isfile(project['temp_path'] + 'right_file.csv')
+        assert os.path.isfile(project['output_root'] + 'left_file.csv')
+        assert os.path.isfile(project['output_root'] + 'right_file.csv')
 
     def test_groupby_unique_filter(self, project, linker):
         """Checks unique grouping is behaving correctly"""
@@ -146,7 +146,7 @@ class TestChunkedLink(object):
         """Tests if linked records are removed"""
         step = project['steps'][0]
         step_linked = project['temp_path'] + LinkFiles.TEMP_STEP_LINKED_FILE
-        data_filename = project['temp_path'] + 'left_file.csv'
+        data_filename = project['output_root'] + 'left_file.csv'
         matched_file = project['temp_path'] + LinkFiles.MATCHED_RECORDS
         open(matched_file, 'w').close()
 
