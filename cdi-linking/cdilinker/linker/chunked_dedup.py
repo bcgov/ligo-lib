@@ -307,7 +307,8 @@ class DeDeupProject(LinkBase):
                                   index_cols=['ENTITY_ID'])
 
                 sort_csv(selected_filename, appendfile=final_selected_file,
-                         cols=['ENTITY_ID'], types={'ENTITY_ID': 'numeric'})
+                         cols=['ENTITY_ID'], types={'ENTITY_ID': 'numeric'},
+                         work_dir=self.temp_path)
 
                 self.total_records_linked += pairs_count
 
