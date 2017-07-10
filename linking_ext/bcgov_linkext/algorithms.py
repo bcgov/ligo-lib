@@ -3,7 +3,6 @@ import sys
 import logging
 import pandas as pd
 import numpy as np
-import editdistance
 
 from cdilinker.plugins.base import AlgorithmProvider
 from cdilinker.linker.union_find import UnionFind
@@ -12,14 +11,6 @@ from jellyfish import levenshtein_distance, jaro_winkler
 
 logger = logging.getLogger(__name__)
 
-
-
-def utf_encode(col):
-    if sys.version_info[0] == 2:
-        col = col.apply(
-            lambda x: x.decode('utf8', 'strict') if type(x) == bytes else x
-        )
-    return col
 
 
 class Levenshtein(AlgorithmProvider):
@@ -35,7 +26,7 @@ class Levenshtein(AlgorithmProvider):
 
         def levenshtein_alg(x, max_edits=0):
             try:
-                d = editdistance.eval(x[0], x[1])
+                d = levenshtein_distance(x[0], x[1])
                 return 1 if d <= max_edits else 0
             except Exception as err:
                 logger.error(
@@ -53,8 +44,6 @@ class Jaro_Winkler(AlgorithmProvider):
 
     def apply(self, s1, s2, threshold=1.0):
 
-        s1 = utf_encode(s1)
-        s2 = utf_encode(s2)
         strings = pd.concat([s1, s2], axis=1, ignore_index=True)
 
         def jaro_winkler_alg(x, threshold=1.0):
@@ -88,8 +77,6 @@ class LevenshteinSimilarity(AlgorithmProvider):
         :param s2: Pandas Series, Second input sequence of strings
         :return: Pandas Series containing the similarity score
         """
-        s1 = utf_encode(s1)
-        s2 = utf_encode(s2)
         strings = pd.concat([s1, s2], axis=1, ignore_index=True)
 
         def levenshtein_alg(x):
@@ -123,8 +110,6 @@ class JaroWinklerSimilarity(AlgorithmProvider):
         :param s2: Pandas Series, Second input sequence of strings
         :return: Pandas Series containing the similarity score
         """
-        s1 = utf_encode(s1)
-        s2 = utf_encode(s2)
         strings = pd.concat([s1, s2], axis=1, ignore_index=True)
 
         def jaro_winkler_alg(x):

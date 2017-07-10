@@ -13,14 +13,6 @@ import logging
 logger = logging.getLogger(__name__)
 
 
-def utf_encode(col):
-    if sys.version_info[0] == 2:
-        col = col.apply(
-            lambda x: x.decode('utf8', 'strict') if type(x) == bytes else x
-        )
-    return col
-
-
 class NoEncoding(AlgorithmProvider):
     name = 'EXACT'
     title = 'Exact'
@@ -40,7 +32,6 @@ class SoundexEncoding(AlgorithmProvider):
     args = []
 
     def apply(self, s):
-        s = utf_encode(s)
         return s.apply(lambda x: soundex(x) if pd.notnull(x) else np.nan)
 
 
@@ -52,7 +43,6 @@ class NyiisEncoding(AlgorithmProvider):
     args = []
 
     def apply(self, s):
-        s = utf_encode(s)
         return s.apply(lambda x: nysiis(x) if pd.notnull(x) else np.nan)
 
 

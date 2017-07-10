@@ -46,9 +46,12 @@ def _save_pairs(file_path, data, append=False):
             data.to_csv(f, header=False)
 
 
-def sort_csv(filename, appendfile, cols, types):
+def sort_csv(filename, appendfile, cols, types, work_dir=None):
 
-    work_dir = os.path.split(filename)[0]
+    if not work_dir:
+        work_dir = os.path.split(filename)[0]
+
+    # Remove the trailing / at the end of path if it exists
     if work_dir and work_dir[-1] == '/':
         work_dir = work_dir[:-1]
 

@@ -64,7 +64,8 @@ class DeDeupProject(LinkBase):
         logger.debug('Data columns: %s.', self.left_columns)
         logger.debug('Data types: %s', self.left_dtypes)
 
-        self.right_file = self.left_file = self.temp_path + LinkFiles.LEFT_FILE
+        self.right_file = self.left_file = self.output_root \
+                        + link_config.get('left_file', 'left_file.csv')
 
         super(DeDeupProject, self).import_data(dataset['url'],
                                                usecols,
@@ -306,7 +307,8 @@ class DeDeupProject(LinkBase):
                                   index_cols=['ENTITY_ID'])
 
                 sort_csv(selected_filename, appendfile=final_selected_file,
-                         cols=['ENTITY_ID'], types={'ENTITY_ID': 'numeric'})
+                         cols=['ENTITY_ID'], types={'ENTITY_ID': 'numeric'},
+                         work_dir=self.temp_path)
 
                 self.total_records_linked += pairs_count
 

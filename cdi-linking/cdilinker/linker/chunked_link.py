@@ -77,7 +77,9 @@ class Linker(LinkBase):
         logger.debug('Left data columns: %s.', self.left_columns)
         logger.debug('Left data types: %s', self.left_dtypes)
 
-        self.left_file = self.temp_path + LinkFiles.LEFT_FILE
+        self.left_file = self.output_root \
+                        + link_config.get('left_file', 'left_file.csv')
+
         super(Linker, self).import_data(left_data['url'],
                                         columns=usecols,
                                         dest_filename=self.left_file,
@@ -106,7 +108,8 @@ class Linker(LinkBase):
         logger.debug('Right data columns: %s.', self.right_columns)
         logger.debug('Right data types: %s', self.right_dtypes)
 
-        self.right_file = self.temp_path + LinkFiles.RIGHT_FILE
+        self.right_file = self.output_root \
+                        + link_config.get('right_file', 'right_file.csv')
 
         super(Linker, self).import_data(right_data['url'],
                                         usecols,
@@ -133,7 +136,8 @@ class Linker(LinkBase):
         sort_csv(filename,
                  appendfile=temp_sorted_file,
                  cols=[group_col, filter_col],
-                 types={group_col: 'numeric', filter_col: 'numeric'})
+                 types={group_col: 'numeric', filter_col: 'numeric'},
+                 work_dir=self.temp_path)
 
         with open(temp_sorted_file, 'r') as in_file, \
                 open(out_filename, 'w') as out_file, \
@@ -307,7 +311,8 @@ class Linker(LinkBase):
         sort_csv(linked_filename,
                  appendfile=temp_linked_file,
                  cols=[linked_entity_col, linked_index_col],
-                 types={linked_entity_col: 'numeric', linked_index_col: 'numeric'})
+                 types={linked_entity_col: 'numeric', linked_index_col: 'numeric'},
+                 work_dir=self.temp_path)
 
         with open(temp_linked_file, 'r') as linked_file, \
                 open(data_filename, 'r') as data_file, \
@@ -426,14 +431,16 @@ class Linker(LinkBase):
             sort_csv(self.left_file,
                      appendfile=temp_sorted_file,
                      cols=[self.left_index],
-                     types={self.left_index: 'numeric'})
+                     types={self.left_index: 'numeric'},
+                     work_dir=self.temp_path)
 
             os.remove(self.left_file)
             os.rename(temp_sorted_file, self.left_file)
             sort_csv(self.right_file,
                      appendfile=temp_sorted_file,
                      cols=[self.right_index],
-                     types={self.right_index: 'numeric'})
+                     types={self.right_index: 'numeric'},
+                     work_dir=self.temp_path)
             os.remove(self.right_file)
             os.rename(temp_sorted_file, self.right_file)
 
@@ -472,13 +479,15 @@ class Linker(LinkBase):
             sort_csv(self.left_file,
                      appendfile=temp_sorted_file,
                      cols=[self.left_entity, self.left_index],
-                     types={self.left_entity: 'numeric', self.left_index: 'numeric'})
+                     types={self.left_entity: 'numeric', self.left_index: 'numeric'},
+                     work_dir=self.temp_path)
             os.remove(self.left_file)
             os.rename(temp_sorted_file, self.left_file)
             sort_csv(self.right_file,
                      appendfile=temp_sorted_file,
                      cols=[self.right_entity, self.right_index],
-                     types={self.right_entity: 'numeric', self.right_index: 'numeric'})
+                     types={self.right_entity: 'numeric', self.right_index: 'numeric'},
+                     work_dir=self.temp_path)
             os.remove(self.right_file)
             os.rename(temp_sorted_file, self.right_file)
 
@@ -511,7 +520,8 @@ class Linker(LinkBase):
             sort_csv(linked_filename,
                      appendfile=temp_sorted_file,
                      cols=['LINK_ID'],
-                     types={'LINK_ID': 'numeric'})
+                     types={'LINK_ID': 'numeric'},
+                     work_dir=self.temp_path)
             if os.path.isfile(temp_sorted_file):
                 os.rename(temp_sorted_file, linked_file_path)
 
@@ -521,7 +531,8 @@ class Linker(LinkBase):
         sort_csv(self.left_file,
                  appendfile=temp_sorted_file,
                  cols=[self.left_index],
-                 types={self.left_index: 'numeric'})
+                 types={self.left_index: 'numeric'},
+                 work_dir=self.temp_path)
 
         if os.path.isfile(self.left_file):
             os.remove(self.left_file)
@@ -531,7 +542,8 @@ class Linker(LinkBase):
         sort_csv(self.right_file,
                  appendfile=temp_sorted_file,
                  cols=[self.right_index],
-                 types={self.right_index: 'numeric'})
+                 types={self.right_index: 'numeric'},
+                 work_dir=self.temp_path)
 
         if os.path.isfile(self.right_file):
             os.remove(self.right_file)

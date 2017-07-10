@@ -21,8 +21,7 @@ setup(
     long_description=read('readme.rst'),
 
     install_requires=[
-        "cdilinker>=0.1",
-        "editdistance>=0.3.1"
+        "cdilinker>=0.1"
     ],
     include_package_data=True,
     packages=[
