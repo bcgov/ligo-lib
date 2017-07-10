@@ -194,7 +194,7 @@ class Linker(LinkBase):
                     current_filter = True
 
             # Write any remaining buffered records
-            if len(buffer) > 0:
+            if buffer:
                 if not current_filter:
                     if add_link_id:
                         link_id = LinkBase.get_next_id()

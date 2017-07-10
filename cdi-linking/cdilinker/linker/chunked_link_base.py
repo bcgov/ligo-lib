@@ -19,12 +19,6 @@ class LinkBase(object):
     # https://stackoverflow.com/q/20625582
     pd.options.mode.chained_assignment = None  # default='warn'
 
-    LEFT_INDEX = 'LEFT_ID'
-    RIGHT_INDEX = 'RIGHT_ID'
-
-    LEFT_ENTITY_ID = 'LEFT_EID'
-    RIGHT_ENTITY_ID = 'RIGHT_EID'
-
     id = 0
 
     @classmethod
@@ -35,42 +29,6 @@ class LinkBase(object):
     @classmethod
     def reset_id(cls):
         cls.id = 0
-
-    @staticmethod
-    def get_rows_in(data, match_index, level=None):
-        logger.debug('>>--- get_rows_in --->>')
-        if level is None:
-            index = match_index
-        else:
-            index = match_index.get_level_values(level)
-        rows = data.loc[index]
-        rows.index = match_index
-        logger.debug('<<--- get_rows_in ---<<')
-        return rows
-
-    @staticmethod
-    def get_rows_not_in(data, match_index, level=None):
-        logger.debug('>>--- get_rows_not_in --->>')
-        if level is None:
-            index = data.index.difference(match_index)
-        else:
-            index = data.index.difference(match_index.get_level_values(level))
-        rows = data.loc[index]
-        logger.debug('<<--- get_rows_not_in ---<<')
-        return rows
-
-    def select_rows_in(self, data_file, index_col, index):
-        logger.debug('>>--- select_rows_in --->>')
-
-        reader = pd.read_csv(data_file, index_col=index_col, skipinitialspace=True, chunksize=CHUNK_SIZE)
-
-        selected = pd.DataFrame()
-
-        for chunk in reader:
-            selected = selected.append(chunk.loc[index])
-
-        logger.debug('<<--- select_rows_in ---<<')
-        return selected
 
     def __init__(self, project):
 
