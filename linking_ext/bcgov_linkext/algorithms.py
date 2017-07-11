@@ -12,7 +12,6 @@ from jellyfish import levenshtein_distance, jaro_winkler
 logger = logging.getLogger(__name__)
 
 
-
 class Levenshtein(AlgorithmProvider):
     name = 'LEVENSHTEIN'
     title = 'Levenshtein'
@@ -36,7 +35,7 @@ class Levenshtein(AlgorithmProvider):
         return strings.apply(levenshtein_alg, axis=1, max_edits=max_edits)
 
 
-class Jaro_Winkler(AlgorithmProvider):
+class JaroWinkler(AlgorithmProvider):
     name = 'JARO_WINKLER'
     title = 'Jaro-Winkler'
     type = 'DTR'
@@ -153,7 +152,6 @@ class SynonymTable(AlgorithmProvider):
         nicknames['nameA'] = map(lambda x: x.upper(), nicknames['nameA'])
         nicknames['nameB'] = map(lambda x: x.upper(), nicknames['nameB'])
         names = pd.concat([nicknames['nameA'], nicknames['nameB']]).drop_duplicates()
-        # names = names.sort_values()
         names.index = list(range(len(names)))
         names_index = pd.Series(list(range(len(names))), index=names.values)
         name_set = UnionFind(len(names))
