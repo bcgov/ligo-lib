@@ -62,7 +62,7 @@ class ExactComparsion(AlgorithmProvider):
         """
         x = pd.Series(0, index=s1.index)
 
-        x[(s1 == s2) | ((s1 != s1) & (s2 != s2))] = 1
+        x[pd.eval('(s1 == s2) | ((s1 != s1) & (s2 != s2))')] = 1
 
         return x
 

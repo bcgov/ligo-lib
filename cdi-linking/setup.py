@@ -25,6 +25,7 @@ setup(
         "editdistance>=0.3.1",
         "jellyfish>=0.5.6",
         "numpy>=1.11.2",
+        "numexpr>=2.6.2",
         "pandas>=0.19.2",
         "xhtml2pdf>=0.1b2",
         "jinja2>=2.8.1",

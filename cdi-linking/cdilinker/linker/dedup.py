@@ -131,7 +131,7 @@ class DeDeupProject(LinkBase):
 
         self.steps = {}
         self.linked = pd.DataFrame()
-        # total_step_entities = None # Unused
+
         for step in self.project['steps']:
             self.steps[step['seq']] = {}
             logger.info("De-duplication Step %s :", step['seq'])
