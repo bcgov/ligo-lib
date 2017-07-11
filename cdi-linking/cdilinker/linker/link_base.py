@@ -13,9 +13,6 @@ logger = logging.getLogger(__name__)
 
 
 class LinkBase(object):
-    # Suppress SettingWithCopyWarning warnings from Pandas
-    # https://stackoverflow.com/q/20625582
-    pd.options.mode.chained_assignment = None  # default='warn'
 
     id = 0
 
@@ -174,7 +171,7 @@ class LinkBase(object):
             pairs['matched'] &= result
 
         pairs = pairs.loc[lambda df: df.matched == 1, :]
-        pairs.drop('matched', axis=1, inplace=True)
+        pairs = pairs.drop('matched', axis=1)
         pairs = pairs.sort_index()
 
         logger.debug('<<--- match_records ---<<')

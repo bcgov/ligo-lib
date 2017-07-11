@@ -291,10 +291,10 @@ class AbsoluteDifference(AlgorithmProvider):
     def apply(self, s1, s2, threshold=0):
         d = pd.Series.abs(s1 - s2)
 
-        def fn(x, t):
+        def abs_diff(x, t):
             return 1 if x <= t else 0
 
-        return d.apply(fn, args=(threshold,))
+        return d.apply(abs_diff, args=(threshold,))
 
 
 AVAILABLE_ALGORITHMS = [alg() for alg in AlgorithmProvider.plugins]

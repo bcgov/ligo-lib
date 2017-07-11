@@ -66,8 +66,6 @@ def sort_csv(filename, appendfile, cols, types, work_dir=None):
 
     col_index = {key: index + 1 for index, key in enumerate(header)}
 
-    # Unused
-    # bash_str = 'tail -n +2 {0} | split -l 10000 - file_chunk_'.format(filename)
     sort_cols = []
     for col in cols:
         sort_cols.append('-k {0},{0}{1}'.format(col_index[col], 'n' if types[col] == 'numeric' else ''))
