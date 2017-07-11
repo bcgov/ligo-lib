@@ -27,7 +27,7 @@ class Levenshtein(AlgorithmProvider):
             try:
                 d = levenshtein_distance(x[0], x[1])
                 return 1 if d <= max_edits else 0
-            except Exception as err:
+            except TypeError as err:
                 logger.error(
                     'Error in calculating Levenshtein edit distance: {}'
                     .format(err))
@@ -49,79 +49,12 @@ class JaroWinkler(AlgorithmProvider):
             try:
                 t = jaro_winkler(x[0], x[1])
                 return 1 if t >= threshold else 0
-            except Exception as err:
-                if pd.isnull(x[0]) or pd.isnull(x[1]):
-                    return np.nan
-                else:
-                    raise err
+            except TypeError as err:
+                logger.error(
+                    'Error in calculating Jaro-Winkler similarity: {}'
+                    .format(err))
 
         return strings.apply(jaro_winkler_alg, axis=1, threshold=threshold)
-
-
-class LevenshteinSimilarity(AlgorithmProvider):
-    """
-    Levenshtein probabilistic algorithm for calculating the similarity score of string sequences.
-    """
-    name = 'LEVENSHTEIN'
-    title = 'Levenshtein Similarity'
-    type = 'PRB'
-    args = []
-
-    def apply(self, s1, s2):
-        """
-        Calculates the similarity score of corresponding entries in s1 and s2 using Levenshtein algorithm.
-        Similarity score for each value is some float value between 0.0 and 1.0. The higher score is the more similar
-        the strings are.
-        :param s1: Pandas Series, First input sequence of strings
-        :param s2: Pandas Series, Second input sequence of strings
-        :return: Pandas Series containing the similarity score
-        """
-        strings = pd.concat([s1, s2], axis=1, ignore_index=True)
-
-        def levenshtein_alg(x):
-            try:
-                d = levenshtein_distance(x[0], x[1])
-                return 1 - d / np.max([len(x[0]), len(x[1])])
-            except Exception as err:
-                if pd.isnull(x[0]) or pd.isnull(x[1]):
-                    return np.nan
-                else:
-                    raise err
-
-        return strings.apply(levenshtein_alg, axis=1)
-
-
-class JaroWinklerSimilarity(AlgorithmProvider):
-    """
-    Jaro-Winkler probabilistic algorithm for calculating the similarity score of string sequences.
-    """
-    name = 'JARO_WINKLER'
-    title = 'Jaro-Winkler similarity'
-    type = 'PRB'
-    args = []
-
-    def apply(self, s1, s2):
-        """
-        Calculates the similarity score of corresponding entries in s1 and s2 using Jaro-Winkler algorithm.
-        Similarity score for each value is some float value between 0.0 and 1.0. The higher score is the more similar
-        the strings are.
-        :param s1: Pandas Series, First input sequence of strings
-        :param s2: Pandas Series, Second input sequence of strings
-        :return: Pandas Series containing the similarity score
-        """
-        strings = pd.concat([s1, s2], axis=1, ignore_index=True)
-
-        def jaro_winkler_alg(x):
-
-            try:
-                return jaro_winkler(x[0], x[1])
-            except Exception as err:
-                if pd.isnull(x[0]) or pd.isnull(x[1]):
-                    return np.nan
-                else:
-                    raise err
-
-        return strings.apply(jaro_winkler_alg, axis=1)
 
 
 class SynonymTable(AlgorithmProvider):
