@@ -8,13 +8,15 @@ from test.cdilinker.utils import Utils
 
 
 class TestChunkedDedup(object):
+    @staticmethod
     @pytest.fixture(scope="class")
-    def project(self):
+    def project():
         """Read test_jtst_dedup project configuration"""
         return Utils.load_project_data('test_jtst_dedup.json')
 
+    @staticmethod
     @pytest.fixture
-    def ddp(self, project):
+    def ddp(project):
         if not os.path.exists(project['temp_path']):
             os.makedirs(project['temp_path'])
         yield DeDeupProject(project)

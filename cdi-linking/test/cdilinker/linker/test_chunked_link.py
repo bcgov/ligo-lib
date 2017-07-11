@@ -8,13 +8,15 @@ from test.cdilinker.utils import Utils
 
 
 class TestChunkedLink(object):
+    @staticmethod
     @pytest.fixture(scope="class")
-    def project(self):
+    def project():
         """Read test_jtst_educ_linking project configuration"""
         return Utils.load_project_data('test_jtst_educ_linking.json')
 
+    @staticmethod
     @pytest.fixture
-    def linker(self, project):
+    def linker(project):
         if not os.path.exists(project['temp_path']):
             os.makedirs(project['temp_path'])
         yield Linker(project)

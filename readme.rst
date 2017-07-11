@@ -39,7 +39,7 @@ Tests
 
 The **CDI Linker** library tests depend on:
 
-- pytest>=3.0.7
+- pytest>=3.1.3
 - pytest-cov>=2.5.1
 - pytest-allure-adaptor>=1.7.7
 - coverage>=4.3.1
@@ -364,7 +364,7 @@ it also describes the linking step where said entities were linked.
 *   Matched_but_not_linked file. This file contains information about matched entities that were not linked due to
 conflicts on the type-of-relationship.
 
-.. |License| image:: https://img.shields.io/badge/license-MIT-blue.svg
-    :target: https://opensource.org/licenses/MIT
-    :alt: License: MIT
+.. |License| image:: https://img.shields.io/badge/license-Apache%202.0-blue.svg
+    :target: http://www.apache.org/licenses/LICENSE-2.0
+    :alt: License: Apache 2.0
 .. |nbsp| unicode:: 0xA0

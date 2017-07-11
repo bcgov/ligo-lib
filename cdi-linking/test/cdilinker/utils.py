@@ -3,15 +3,22 @@ import os
 
 class Utils(object):
     @staticmethod
+    def _make_gen(reader):
+        """Generator function via reader"""
+        b = reader(1024 * 1024)
+        while b:
+            yield b
+            b = reader(1024 * 1024)
+
+    @staticmethod
     def file_len(fname):
         """Counts number of lines in file fname"""
         if not os.path.isfile(fname):
             return 0
 
-        with open(fname) as f:
-            for size, l in enumerate(f):
-                pass
-        return size + 1
+        f = open(fname, 'rb')
+        f_gen = Utils._make_gen(f.raw.read)
+        return sum(buf.count(b'\n') for buf in f_gen)
 
     @staticmethod
     def load_json(json_path):
