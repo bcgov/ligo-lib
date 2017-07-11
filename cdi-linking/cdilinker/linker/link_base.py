@@ -17,14 +17,6 @@ class LinkBase(object):
     # https://stackoverflow.com/q/20625582
     pd.options.mode.chained_assignment = None  # default='warn'
 
-    LEFT_INDEX = 'LEFT_ID'
-    RIGHT_INDEX = 'RIGHT_ID'
-
-    LEFT_ENTITY_ID = 'LEFT_EID'
-    RIGHT_ENTITY_ID = 'RIGHT_EID'
-
-    BLOCK_SIZE = 1000000
-
     id = 0
 
     @classmethod
@@ -91,21 +83,16 @@ class LinkBase(object):
         return json.dumps(data_dict, indent=4)
 
     @staticmethod
-    def get_rows_in(data, match_index, level=None):
-        if level is None:
-            index = match_index
-        else:
-            index = match_index.get_level_values(level)
-        rows = data.loc[index]
+    def get_rows_in(data, match_index):
+
+        rows = data.loc[match_index]
         rows.index = match_index
         return rows
 
     @staticmethod
-    def get_rows_not_in(data, match_index, level=None):
-        if level is None:
-            index = data.index.difference(match_index)
-        else:
-            index = data.index.difference(match_index.get_level_values(level))
+    def get_rows_not_in(data, match_index):
+
+        index = data.index.difference(match_index)
         rows = data.loc[index]
         return rows
 
@@ -208,9 +195,7 @@ class LinkBase(object):
         left_df = self.left_dataset
 
         left_fields = blocking.get('left')
-        if self.project_type == 'DEDUP' and \
-                (blocking.get('right') is None or
-                    len(blocking.get('right')) == 0):
+        if self.project_type == 'DEDUP' and (not blocking.get('right')):
             right_fields = left_fields
         else:
             right_fields = blocking.get('right')
@@ -218,9 +203,7 @@ class LinkBase(object):
         transformations = blocking.get('transformations')
 
         left_link_fields = linking.get('left')
-        if self.project_type == 'DEDUP' and (
-                linking.get('right') is None or
-                len(linking.get('right')) == 0):
+        if self.project_type == 'DEDUP' and (not linking.get('right')):
             right_link_fields = left_link_fields
         else:
             right_link_fields = linking.get('right')
