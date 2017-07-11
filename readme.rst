@@ -6,14 +6,14 @@ CDI Linker Library
 The **CDI Linker** python library is aimed to identify and link records that belong to the same entity(individual)
 within a single or multiple file. The process is called de-duplication if it is only applied to a single data file.
 
-This library is inspired by `Python Record Linkage Toolkit <https://github.com/J535D165/recordlinkage>`__.
-Some of the algorithms and functions are taken from Python Record Linkage Toolkit and are adapted to our linking model.
-
+Inspired by `Python Record Linkage Toolkit <https://github.com/J535D165/recordlinkage>`__, **CDI Linker** takes
+advantage of `Pandas <http://pandas.pydata.org/>`__ for faster data manipulations.
 
 Dependencies
 ------------
 
-The **CDI Linker** library needs to be executed in a Unix environment because it utilizes some shell scripting. It depends on:
+The **CDI Linker** library needs to be executed in a Unix environment because it utilizes some shell scripting.
+It depends on:
 
 - Python (>=3.5)
 - NumPy (>=1.11.2)
