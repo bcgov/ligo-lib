@@ -18,11 +18,11 @@ from cdilinker.reports.report import generate_linking_summary
 logger = logging.getLogger(__name__)
 
 
-class DeDeupProject(LinkBase):
+class DeDupProject(LinkBase):
     def __init__(self, project):
         if project is None:
             raise TypeError
-        super(DeDeupProject, self).__init__(project)
+        super(DeDupProject, self).__init__(project)
         self.project_type = 'DEDUP'
         dataset = project['datasets'][0]
         self.left_index = self.right_index = dataset['index_field']
@@ -30,7 +30,7 @@ class DeDeupProject(LinkBase):
         self.left_dtypes = self.right_dtypes = None
 
     def __str__(self):
-        descriptor = super(DeDeupProject, self).__str__()
+        descriptor = super(DeDupProject, self).__str__()
 
         data_dict = json.loads(descriptor)
         dataset = self.project['datasets'][0]
@@ -67,7 +67,7 @@ class DeDeupProject(LinkBase):
         self.right_file = self.left_file = self.output_root \
                         + link_config.get('left_file', 'left_file.csv')
 
-        super(DeDeupProject, self).import_data(dataset['url'],
+        super(DeDupProject, self).import_data(dataset['url'],
                                                usecols,
                                                self.left_file,
                                                front_cols=[self.left_index],
