@@ -7,18 +7,18 @@ import shutil
 
 from cdilinker.linker.base import (link_config, COLUMN_TYPES)
 from cdilinker.linker.files import LinkFiles
-from cdilinker.linker.link_base import LinkBase
+from cdilinker.linker.memory_link_base import MemoryLinkBase
 from cdilinker.reports.report import generate_linking_summary
 
 
 logger = logging.getLogger(__name__)
 
 
-class DeDupProject(LinkBase):
+class MemoryDedup(MemoryLinkBase):
     def __init__(self, project):
         if project is None:
             raise TypeError
-        super(DeDupProject, self).__init__(project)
+        super(MemoryDedup, self).__init__(project)
         self.project_type = 'DEDUP'
         dataset = project['datasets'][0]
         self.left_index = self.right_index = dataset['index_field']
@@ -27,7 +27,7 @@ class DeDupProject(LinkBase):
 
     def __str__(self):
 
-        descriptor = super(DeDupProject, self).__str__()
+        descriptor = super(MemoryDedup, self).__str__()
 
         data_dict = json.loads(descriptor)
         dataset = self.project['datasets'][0]
@@ -53,7 +53,7 @@ class DeDupProject(LinkBase):
         logger.debug('>>--- load_data --->>')
         logger.info('Loading input dataset for project: %s with task id: %s.',
                     self.project['name'], self.project['task_uuid'])
-        super(DeDupProject, self).load_data()
+
         if self.project['datasets'] and len(self.project['datasets']) > 0:
             dataset = self.project['datasets'][0]
             self.left_columns.append(dataset['index_field'])
@@ -111,7 +111,7 @@ class DeDupProject(LinkBase):
         # Assign entity id's
         for left_id, right_id in self.matched.index.values:
             entt = entts.find(index_loc[left_id])
-            entity_ids[entt] = entity_ids[entt] or LinkBase.get_next_id()
+            entity_ids[entt] = entity_ids[entt] or MemoryLinkBase.get_next_id()
             self.matched.set_value((left_id, right_id), 'ENTITY_ID',
                                    entity_ids[entt])
             linked.set_value(left_id, 'ENTITY_ID', entity_ids[entt])
@@ -127,7 +127,7 @@ class DeDupProject(LinkBase):
                     self.project['name'], self.project['task_uuid'])
         append = False
 
-        LinkBase.reset_id()
+        MemoryLinkBase.reset_id()
 
         self.steps = {}
         self.linked = pd.DataFrame()
@@ -230,7 +230,7 @@ class DeDupProject(LinkBase):
         logger.info('Assigning entity id to all remaining records.')
         for rec_id in self.left_dataset.index.values:
             self.left_dataset.set_value(rec_id, 'ENTITY_ID',
-                                        LinkBase.get_next_id())
+                                        MemoryLinkBase.get_next_id())
 
         output = self.linked.append(self.left_dataset)
         output = output.sort_values(['ENTITY_ID'])

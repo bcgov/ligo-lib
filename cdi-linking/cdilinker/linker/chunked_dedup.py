@@ -11,18 +11,18 @@ from cdilinker.linker.base import (link_config,
                                    COLUMN_TYPES,
                                    _save_pairs,
                                    sort_csv)
-from cdilinker.linker.chunked_link_base import LinkBase
+from cdilinker.linker.chunked_link_base import ChunkedLinkBase
 from cdilinker.linker.files import LinkFiles
 from cdilinker.reports.report import generate_linking_summary
 
 logger = logging.getLogger(__name__)
 
 
-class DeDupProject(LinkBase):
+class ChunkedDedup(ChunkedLinkBase):
     def __init__(self, project):
         if project is None:
             raise TypeError
-        super(DeDupProject, self).__init__(project)
+        super(ChunkedDedup, self).__init__(project)
         self.project_type = 'DEDUP'
         dataset = project['datasets'][0]
         self.left_index = self.right_index = dataset['index_field']
@@ -30,7 +30,7 @@ class DeDupProject(LinkBase):
         self.left_dtypes = self.right_dtypes = None
 
     def __str__(self):
-        descriptor = super(DeDupProject, self).__str__()
+        descriptor = super(ChunkedDedup, self).__str__()
 
         data_dict = json.loads(descriptor)
         dataset = self.project['datasets'][0]
@@ -65,13 +65,13 @@ class DeDupProject(LinkBase):
         logger.debug('Data types: %s', self.left_dtypes)
 
         self.right_file = self.left_file = self.output_root \
-                        + link_config.get('left_file', 'left_file.csv')
+                                           + link_config.get('left_file', 'left_file.csv')
 
-        super(DeDupProject, self).import_data(dataset['url'],
-                                               usecols,
-                                               self.left_file,
-                                               front_cols=[self.left_index],
-                                               data_types=self.left_dtypes)
+        super(ChunkedDedup, self).import_data(dataset['url'],
+                                              usecols,
+                                              self.left_file,
+                                              front_cols=[self.left_index],
+                                              data_types=self.left_dtypes)
 
         logger.debug('<<--- load_data ---<<')
 
@@ -138,7 +138,7 @@ class DeDupProject(LinkBase):
             chunk.insert(0, 'ENTITY_ID', np.nan)
             for left_id, right_id in chunk.index.values:
                 entt = entts.find(index_loc[left_id])
-                entity_ids[entt] = entity_ids[entt] or LinkBase.get_next_id()
+                entity_ids[entt] = entity_ids[entt] or ChunkedLinkBase.get_next_id()
                 chunk.set_value((left_id, right_id), 'ENTITY_ID',
                                 entity_ids[entt])
                 linked.set_value(left_id, 'ENTITY_ID', entity_ids[entt])
@@ -250,7 +250,7 @@ class DeDupProject(LinkBase):
         logger.info('Executing de-duplication project %s. Task id: %s.',
                     self.project['name'], self.project['task_uuid'])
 
-        LinkBase.reset_id()
+        ChunkedLinkBase.reset_id()
         self.steps = {}
         self.linked = pd.DataFrame()
 
@@ -312,8 +312,8 @@ class DeDupProject(LinkBase):
 
                 self.total_records_linked += pairs_count
 
-                LinkBase.append_rows(dedup_results_file, matched_file,
-                                     first_batch=first_batch)
+                ChunkedLinkBase.append_rows(dedup_results_file, matched_file,
+                                            first_batch=first_batch)
                 first_batch = False
                 open(matched_file, 'w').close()
                 prev_total = 0
@@ -370,7 +370,7 @@ class DeDupProject(LinkBase):
             for chunk in data_reader:
                 chunk.insert(0, 'ENTITY_ID', np.nan)
                 for rec_id in chunk.index.values:
-                    chunk.set_value(rec_id, 'ENTITY_ID', LinkBase.get_next_id())
+                    chunk.set_value(rec_id, 'ENTITY_ID', ChunkedLinkBase.get_next_id())
                     total_remained += 1
                 chunk.replace(np.nan, '', regex=True)
                 chunk.to_csv(out_file, index=False, header=header)

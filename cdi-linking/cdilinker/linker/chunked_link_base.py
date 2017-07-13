@@ -4,9 +4,9 @@ import json
 import pandas as pd
 import numpy as np
 
-from cdilinker.linker.algorithms import apply_encoding, apply_comparison
 from cdilinker.linker.base import (CHUNK_SIZE)
 
+from cdilinker.linker.link_base import LinkBase
 from cdilinker.linker.files import LinkFiles
 
 import logging
@@ -14,85 +14,9 @@ import logging
 logger = logging.getLogger(__name__)
 
 
-class LinkBase(object):
-    # Suppress SettingWithCopyWarning warnings from Pandas
-    # https://stackoverflow.com/q/20625582
-    pd.options.mode.chained_assignment = None  # default='warn'
-
-    id = 0
-
-    @classmethod
-    def get_next_id(cls):
-        cls.id += 1
-        return cls.id
-
-    @classmethod
-    def reset_id(cls):
-        cls.id = 0
-
+class ChunkedLinkBase(LinkBase):
     def __init__(self, project):
-
-        self.project = project
-        self.project_type = project['type']
-        self.left_file = None
-        self.right_file = None
-        self.left_index = None
-        self.right_index = None
-        self.left_fields = None
-        self.right_fields = None
-        self.left_dtypes = None
-        self.right_dtypes = None
-        self.left_columns = self.right_columns = []
-        self.output_root = self.project['output_root']
-        self.temp_path = self.project['temp_path']
-        self.steps = None
-        self.linked = None
-        self.total_records_linked = 0
-        self.total_entities = 0
-        self.total_linked = None
-        self.transformations = None
-        self.comparison_methods = None
-
-        for step in project['steps']:
-            self.left_columns = list(set(self.left_columns +
-                                         step['blocking_schema'].get('left', []) +
-                                         step['linking_schema'].get('left', [])))
-            self.right_columns = list(set(self.right_columns +
-                                          step['blocking_schema'].get('right', []) +
-                                          step['linking_schema'].get('right', [])))
-
-    def __str__(self):
-
-        if self.project is None:
-            return ''
-
-        data_dict = {
-            "Name": self.project['name'],
-            "Description": self.project['description'],
-            "Steps": []
-        }
-
-        for step in self.project['steps']:
-            step_dict = {
-                "Seq": step['seq'],
-                # "Name": step['name'], # Not used
-                "Blocking": step['blocking_schema'],
-                "Linking": step['linking_schema']
-            }
-            data_dict['Steps'].append(step_dict)
-
-        return json.dumps(data_dict, indent=4)
-
-    @staticmethod
-    def compare_fields(pairs, left, right, compare_fn, **args):
-        logger.debug('>>--- compare_fields --->>')
-
-        s1 = pairs[left]
-        s2 = pairs[right]
-
-        logger.info("Compare Function : %s", compare_fn)
-        logger.debug('<<--- compare_fields ---<<')
-        return apply_comparison(s1, s2, compare_fn, **args)
+        super(ChunkedLinkBase, self).__init__(project)
 
     @staticmethod
     def append_rows(append_filename, source_filename, first_batch=True):
@@ -109,85 +33,6 @@ class LinkBase(object):
 
         logger.debug('<<--- append_rows ---<<')
 
-    def pair_records(self, left_chunk, right_chunk, left_fields, right_fields, transformations):
-
-        logger.debug('>>--- pair_records --->>')
-
-        logger.info('Applying blocking rules.')
-
-        left_index = 'LEFT_' + self.left_index
-        right_index = 'RIGHT_' + self.right_index
-
-        # Remove all rows that their blocking columns are empty.
-        left_chunk.replace(r'^\s+$', np.nan, regex=True, inplace=True)
-        left_chunk = left_chunk.dropna(axis=0, how='any', subset=np.unique(left_fields))
-
-        right_chunk.replace(r'^\s+$', np.nan, regex=True, inplace=True)
-        right_chunk = right_chunk.dropna(axis=0, how='any', subset=np.unique(right_fields))
-
-        # Create a copy of blocking columns to apply encoding methods
-        left_on = [field + '_T' for field in left_fields]
-        left_chunk[left_on] = left_chunk[left_fields]
-
-        # Apply blocking variable encodings.
-        for left, method in zip(left_on, transformations):
-            left_chunk.loc[:, left] = apply_encoding(left_chunk[left], method)
-
-        # Create a copy of blocking columns to apply encoding methods
-        right_on = [field + '_T' for field in right_fields]
-        right_chunk[right_on] = right_chunk[right_fields]
-
-        # Apply blocking variable encodings.
-        for right, method in zip(right_on, transformations):
-            right_chunk.loc[:, right] = apply_encoding(right_chunk[right], method)
-
-        # The following too line are required to reset the index names in case if the data frames were emptied
-        # after removing rows that have no values for the blocking variables. Otherwise the merge command will fail.
-        left_chunk.index.names = [left_index]
-        right_chunk.index.names = [right_index]
-
-        chunk_pairs = left_chunk.reset_index().merge(
-            right_chunk.reset_index(),
-            how='inner',
-            left_on=left_on,
-            right_on=right_on,
-        )
-
-        # Skip comparing a record with itself for de-duplication projects
-        if self.project_type == 'DEDUP':
-            chunk_pairs = chunk_pairs.loc[chunk_pairs[left_index] < chunk_pairs[right_index]]
-
-        chunk_pairs = chunk_pairs.set_index([left_index, right_index])
-
-        # Remove temporary columns.
-        chunk_pairs.drop(left_on + right_on, axis=1, inplace=True)
-
-        logger.debug('<<--- pair_records ---<<')
-        return chunk_pairs
-
-    def match_records(self, pairs, left_fields, right_fields, comparisons_methods):
-
-        logger.debug('>>--- match_records --->>')
-        logger.info('Applying linking rules.')
-
-        pairs['matched'] = 1
-        for left, right, fn in zip(left_fields, right_fields, comparisons_methods):
-            method = fn.get('name', 'EXACT')
-            args = fn.get('args') or {}
-            logger.info("Left : %s, Right: %s, Args: %s", left, right, fn)
-            result = self.compare_fields(pairs, left, right, method, **args)
-
-            pairs['matched'] &= result
-
-        pairs = pairs.loc[lambda df: df.matched == 1, :]
-
-        pairs.drop('matched', axis=1, inplace=True)
-
-        pairs = pairs.sort_index()
-
-        logger.debug('<<--- match_records ---<<')
-        return pairs
-
     def pair_n_match(self, step, link_method, blocking, linking, matched_file):
         logger.debug('>>--- pair_n_match --->>')
         logger.info('Finding matched records.')
@@ -201,6 +46,34 @@ class LinkBase(object):
         # Prefix each column in left data with 'LEFT_' and the right data
         # columns with 'RIGHT_' to avoid name conflicts on merging two data
         # chunks.
+
+        # Get left and right blocking variables and rules. We need to add different left and right prefixes
+        # to avoid name conflicts.
+        left_block_fields = blocking.get('left')
+        if self.project_type == 'DEDUP' and (blocking.get('right') is None or len(blocking.get('right')) == 0):
+            right_block_fields = left_block_fields
+        else:
+            right_block_fields = blocking.get('right')
+
+        left_block_fields = ['LEFT_' + field for field in left_block_fields]
+        right_block_fields = ['RIGHT_' + field for field in right_block_fields]
+
+        transformations = blocking.get('transformations')
+
+        # Get left and right linking variables and comparison algorithms.
+        left_fields = linking.get('left')
+        if self.project_type == 'DEDUP' and (linking.get('right') is None or len(linking.get('right')) == 0):
+            right_fields = left_fields
+        else:
+            right_fields = linking.get('right')
+
+        left_fields = ['LEFT_' + field for field in left_fields]
+        right_fields = ['RIGHT_' + field for field in right_fields]
+        comparison_methods = linking.get('comparisons')
+
+        left_index = 'LEFT_' + self.left_index
+        right_index = 'RIGHT_' + self.right_index
+        merge_columns = [left_index, right_index]
 
         logger.info('Readding input data file chunk by chunk')
         left_reader = pd.read_csv(self.left_file,
@@ -240,42 +113,20 @@ class LinkBase(object):
                 left_chunk = left_chunk.sort_index()
                 right_chunk = right_chunk.sort_index()
 
-                left_fields = blocking.get('left')
-                if self.project_type == 'DEDUP' and (blocking.get('right') is None or len(blocking.get('right')) == 0):
-                    right_fields = left_fields
-                else:
-                    right_fields = blocking.get('right')
-
-                left_fields = ['LEFT_' + field for field in left_fields]
-                right_fields = ['RIGHT_' + field for field in right_fields]
-
-                transformations = blocking.get('transformations')
-
                 pairs = self.pair_records(left_chunk,
                                           right_chunk,
-                                          left_fields, right_fields, transformations)
+                                          left_block_fields, right_block_fields, transformations)
 
                 if len(pairs.index) == 0:
                     continue
-                left_fields = linking.get('left')
-                if self.project_type == 'DEDUP' and (linking.get('right') is None or len(linking.get('right')) == 0):
-                    right_fields = left_fields
-                else:
-                    right_fields = linking.get('right')
 
-                left_fields = ['LEFT_' + field for field in left_fields]
-                right_fields = ['RIGHT_' + field for field in right_fields]
-                comparison_methods = linking.get('comparisons')
-                matched = self.match_records(pairs,
-                                             left_fields,
-                                             right_fields,
-                                             comparison_methods)
+                matched = LinkBase.match_records(pairs,
+                                                 left_fields,
+                                                 right_fields,
+                                                 comparison_methods)
+
                 matched[self.project_type + '_STEP'] = step
                 matched = matched.sort_index()
-
-                left_index = 'LEFT_' + self.left_index
-                right_index = 'RIGHT_' + self.right_index
-                merge_columns = [left_index, right_index]
 
                 # Move index columns to the front
                 if self.project_type == 'LINK':
@@ -397,12 +248,3 @@ class LinkBase(object):
 
         logger.info('Datafile %s is imported successfully.', src_filename)
         logger.debug('<<--- import_data ---<<')
-
-    def load_data(self):
-        NotImplemented
-
-    def run(self):
-        NotImplemented
-
-    def save(self):
-        NotImplemented

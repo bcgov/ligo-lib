@@ -9,7 +9,7 @@ from cdilinker.linker.base import (link_config,
                                    COLUMN_TYPES,
                                    LINKING_RELATIONSHIPS,
                                    sort_csv)
-from cdilinker.linker.chunked_link_base import LinkBase
+from cdilinker.linker.chunked_link_base import ChunkedLinkBase
 from cdilinker.linker.files import LinkFiles
 from cdilinker.reports.report import generate_linking_summary
 
@@ -17,11 +17,11 @@ from cdilinker.reports.report import generate_linking_summary
 logger = logging.getLogger(__name__)
 
 
-class Linker(LinkBase):
+class ChunkedLink(ChunkedLinkBase):
     def __init__(self, project):
         if project is None:
             raise TypeError
-        super(Linker, self).__init__(project)
+        super(ChunkedLink, self).__init__(project)
         self.matched_not_linked = None
 
         self.project_type = 'LINK'
@@ -42,7 +42,7 @@ class Linker(LinkBase):
             if rel[0] == self.project['relationship_type']:
                 relationship = rel[1]
 
-        descriptor = super(Linker, self).__str__()
+        descriptor = super(ChunkedLink, self).__str__()
 
         data_dict = json.loads(descriptor)
         data_dict['datasets'] = [dataset['name'] for dataset in self.project['datasets']]
@@ -80,7 +80,7 @@ class Linker(LinkBase):
         self.left_file = self.output_root \
                         + link_config.get('left_file', 'left_file.csv')
 
-        super(Linker, self).import_data(left_data['url'],
+        super(ChunkedLink, self).import_data(left_data['url'],
                                         columns=usecols,
                                         dest_filename=self.left_file,
                                         front_cols=[self.left_index, self.left_entity],
@@ -111,7 +111,7 @@ class Linker(LinkBase):
         self.right_file = self.output_root \
                         + link_config.get('right_file', 'right_file.csv')
 
-        super(Linker, self).import_data(right_data['url'],
+        super(ChunkedLink, self).import_data(right_data['url'],
                                         usecols,
                                         self.right_file,
                                         front_cols=[self.right_index, self.right_entity],
@@ -169,7 +169,7 @@ class Linker(LinkBase):
                 if group_id != current_group_id:
                     if not current_filter:
                         if add_link_id:
-                            link_id = LinkBase.get_next_id()
+                            link_id = ChunkedLinkBase.get_next_id()
                             stats['total_linked'] += 1
                         else:
                             link_id = None
@@ -197,7 +197,7 @@ class Linker(LinkBase):
             if buffer:
                 if not current_filter:
                     if add_link_id:
-                        link_id = LinkBase.get_next_id()
+                        link_id = ChunkedLinkBase.get_next_id()
                         stats['total_linked'] += 1
                     else:
                         link_id = None
@@ -407,7 +407,7 @@ class Linker(LinkBase):
         logger.info('Executing linking project %s. Task id: %s.',
                     self.project['name'], self.project['task_uuid'])
 
-        LinkBase.reset_id()
+        ChunkedLinkBase.reset_id()
         self.steps = {}
         linked_stats = {}
         self.total_entities = 0
@@ -494,7 +494,7 @@ class Linker(LinkBase):
             self.extract_linked_records(linked_filename=step_linked, prefix='LEFT_')
             self.extract_linked_records(linked_filename=step_linked, prefix='RIGHT_')
 
-            LinkBase.append_rows(linked_filename, step_linked, first_batch=first_batch)
+            ChunkedLinkBase.append_rows(linked_filename, step_linked, first_batch=first_batch)
             first_batch = False
 
         if os.path.isfile(step_linked):
