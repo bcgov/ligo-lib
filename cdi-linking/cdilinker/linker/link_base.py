@@ -23,15 +23,15 @@ class LinkBase(metaclass=ABCMeta):
 
     @abstractmethod
     def load_data(self):
-        raise NotImplementedError
+        raise NotImplementedError('Abstract method. No implementation.')
 
     @abstractmethod
     def run(self):
-        raise NotImplementedError
+        raise NotImplementedError('Abstract method. No implementation.')
 
     @abstractmethod
     def save(self):
-        raise NotImplementedError
+        raise NotImplementedError('Abstract method. No implementation.')
 
     @staticmethod
     def compare_fields(pairs, left, right, compare_fn, **args):
