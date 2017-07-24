@@ -1,7 +1,6 @@
 import pandas as pd
 import logging
 
-from cdilinker.config.config import config
 from cdilinker.linker.linker_factory import LinkerFactory
 from cdilinker.linker.validation import LinkError, ValidationError
 
@@ -10,13 +9,11 @@ logger = logging.getLogger(__name__)
 
 def get_fields(file_path):
     df = pd.read_csv(file_path, nrows=1)
-
     return list(df)
 
 
 def validate_dataset(dataset, errors, type='DEDUP'):
     # Validate path to dataset file
-    fields = []
     if 'url' not in dataset:
         errors.append(LinkError.FILEPATH_MISSING)
 

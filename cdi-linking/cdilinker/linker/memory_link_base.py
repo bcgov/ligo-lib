@@ -1,5 +1,3 @@
-import json
-
 import numpy as np
 import pandas as pd
 
@@ -121,4 +119,3 @@ class MemoryLinkBase(LinkBase):
     @abstractmethod
     def link(self):
         raise NotImplementedError("Abstract method")
-

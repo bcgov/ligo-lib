@@ -10,7 +10,7 @@ def get_dataset_size(file_path):
     return sum(1 for row in open(file_path))
 
 
-class LinkerFactory():
+class LinkerFactory:
 
     """
     Creates proper linker/de-duplication instance depending on the project type
@@ -33,6 +33,5 @@ class LinkerFactory():
                 task = ChunkedLink(project)
             else:
                 task = MemoryLink(project)
-
 
         return task

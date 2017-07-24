@@ -64,8 +64,8 @@ class ChunkedDedup(ChunkedLinkBase):
         logger.debug('Data columns: %s.', self.left_columns)
         logger.debug('Data types: %s', self.left_dtypes)
 
-        self.right_file = self.left_file = self.output_root \
-                                           + link_config.get('left_file', 'left_file.csv')
+        self.right_file = self.left_file = \
+            self.output_root + link_config.get('left_file', 'left_file.csv')
 
         super(ChunkedDedup, self).import_data(dataset['url'],
                                               usecols,

@@ -44,7 +44,6 @@ class LinkBase(metaclass=ABCMeta):
         logger.debug('<<--- compare_fields ---<<')
         return apply_comparison(s1, s2, compare_fn, **args)
 
-
     @staticmethod
     def match_records(pairs, left_fields, right_fields, comparisons_methods):
         logger.debug('>>--- match_records --->>')
@@ -97,9 +96,7 @@ class LinkBase(metaclass=ABCMeta):
                                           step['blocking_schema'].get('right', []) +
                                           step['linking_schema'].get('right', [])))
 
-
     def __str__(self):
-
         if self.project is None:
             return ''
 
@@ -120,11 +117,8 @@ class LinkBase(metaclass=ABCMeta):
 
         return json.dumps(data_dict, indent=4)
 
-
     def pair_records(self, left_chunk, right_chunk, left_fields, right_fields, transformations):
-
         logger.debug('>>--- pair_records --->>')
-
         logger.info('Applying blocking rules.')
 
         left_index = 'LEFT_' + self.left_index

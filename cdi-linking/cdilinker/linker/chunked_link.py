@@ -77,14 +77,15 @@ class ChunkedLink(ChunkedLinkBase):
         logger.debug('Left data columns: %s.', self.left_columns)
         logger.debug('Left data types: %s', self.left_dtypes)
 
-        self.left_file = self.output_root \
-                        + link_config.get('left_file', 'left_file.csv')
+        self.left_file = self.output_root + \
+            link_config.get('left_file', 'left_file.csv')
 
         super(ChunkedLink, self).import_data(left_data['url'],
-                                        columns=usecols,
-                                        dest_filename=self.left_file,
-                                        front_cols=[self.left_index, self.left_entity],
-                                        data_types=self.left_dtypes)
+                                             columns=usecols,
+                                             dest_filename=self.left_file,
+                                             front_cols=[self.left_index,
+                                                         self.left_entity],
+                                             data_types=self.left_dtypes)
 
         right_data = self.project['datasets'][1]
         self.right_columns.append(right_data['index_field'])
@@ -108,14 +109,15 @@ class ChunkedLink(ChunkedLinkBase):
         logger.debug('Right data columns: %s.', self.right_columns)
         logger.debug('Right data types: %s', self.right_dtypes)
 
-        self.right_file = self.output_root \
-                        + link_config.get('right_file', 'right_file.csv')
+        self.right_file = self.output_root + \
+            link_config.get('right_file', 'right_file.csv')
 
         super(ChunkedLink, self).import_data(right_data['url'],
-                                        usecols,
-                                        self.right_file,
-                                        front_cols=[self.right_index, self.right_entity],
-                                        data_types=self.right_dtypes)
+                                             usecols,
+                                             self.right_file,
+                                             front_cols=[self.right_index,
+                                                         self.right_entity],
+                                             data_types=self.right_dtypes)
 
         logger.debug('<<--- load_data ---<<')
 
