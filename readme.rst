@@ -68,7 +68,7 @@ To run the tests within a docker environment (such as when you are on a Windows 
 
 .. code:: sh
 
-    docker build . -f Dockerfile-dev -t datalinking_test
+    docker build . -t datalinking_test
     docker run --rm -it datalinking_test
 
 To enter and explore the Docker container directly do the following:
