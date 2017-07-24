@@ -2,7 +2,7 @@ import os
 import pytest
 import shutil
 
-from cdilinker.linker.chunked_link import Linker
+from cdilinker.linker.chunked_link import ChunkedLink
 from cdilinker.linker.files import LinkFiles
 from test.cdilinker.utils import Utils
 
@@ -19,7 +19,7 @@ class TestChunkedLink(object):
     def linker(project):
         if not os.path.exists(project['temp_path']):
             os.makedirs(project['temp_path'])
-        yield Linker(project)
+        yield ChunkedLink(project)
 
         # Teardown and clean up
         if os.path.isfile(project['temp_path'] +
@@ -53,7 +53,7 @@ class TestChunkedLink(object):
     def test_init_none(self):
         """Ensure initialization does not proceed with empty JSON"""
         with pytest.raises(TypeError):
-            Linker(None)
+            ChunkedLink(None)
 
     def test_init(self, project, linker):
         """Ensure initialization sets fields correctly"""

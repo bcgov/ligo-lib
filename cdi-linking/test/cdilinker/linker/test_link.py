@@ -3,7 +3,7 @@ import pytest
 import shutil
 
 from cdilinker.linker.files import LinkFiles
-from cdilinker.linker.link import Linker
+from cdilinker.linker.memory_link import MemoryLink
 from test.cdilinker.utils import Utils
 
 
@@ -19,7 +19,7 @@ class TestLink(object):
     def linker(project):
         if not os.path.exists(project['temp_path']):
             os.makedirs(project['temp_path'])
-        yield Linker(project)
+        yield MemoryLink(project)
 
         # Teardown and clean up
         if os.path.isfile(project['temp_path'] +
@@ -40,7 +40,7 @@ class TestLink(object):
     def test_init_none(self):
         """Ensure initialization does not proceed with empty JSON"""
         with pytest.raises(TypeError):
-            Linker(None)
+            MemoryLink(None)
 
     def test_init(self, project, linker):
         """Ensure initialization sets fields correctly"""

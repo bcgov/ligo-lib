@@ -9,17 +9,18 @@ from cdilinker.linker.base import (link_config,
                                    COLUMN_TYPES,
                                    LINKING_RELATIONSHIPS)
 from cdilinker.linker.files import LinkFiles
-from cdilinker.linker.link_base import LinkBase
+from cdilinker.linker.memory_link_base import MemoryLinkBase
 from cdilinker.reports.report import generate_linking_summary
 
 logger = logging.getLogger(__name__)
 
 
-class Linker(LinkBase):
+class MemoryLink(MemoryLinkBase):
+
     def __init__(self, project):
         if project is None:
             raise TypeError
-        super(Linker, self).__init__(project)
+        super(MemoryLink, self).__init__(project)
         self.matched_not_linked = None
 
         self.project_type = 'LINK'
@@ -41,7 +42,7 @@ class Linker(LinkBase):
             if rel[0] == self.project['relationship_type']:
                 relationship = rel[1]
 
-        descriptor = super(Linker, self).__str__()
+        descriptor = super(MemoryLink, self).__str__()
 
         data_dict = json.loads(descriptor)
         data_dict['datasets'] = [dataset['name'] for dataset in
@@ -55,7 +56,6 @@ class Linker(LinkBase):
         logger.info('Loading input dataset for project: %s with task id: %s.',
                     self.project['name'], self.project['task_uuid'])
 
-        super(Linker, self).load_data()
         datasets = self.project['datasets']
         if datasets and len(datasets) > 1:
 
@@ -155,7 +155,7 @@ class Linker(LinkBase):
             [left_entity_id, right_entity_id]].drop_duplicates()
         link_index = link_index.set_index([left_entity_id, right_entity_id])
         link_index['LINK_ID'] = pd.Series(
-            [LinkBase.get_next_id() for row in link_index.index],
+            [MemoryLinkBase.get_next_id() for row in link_index.index],
             index=link_index.index)
         link_index['LINK_ID'] = link_index['LINK_ID'].map(
             lambda x: '{:.0f}'.format(x)
@@ -180,7 +180,7 @@ class Linker(LinkBase):
         self.total_entities = 0
         logger.info('Project steps: %s', len(self.project['steps']))
 
-        LinkBase.reset_id()
+        MemoryLinkBase.reset_id()
         for step in self.project['steps']:
             self.steps[step['seq']] = {}
             logger.info("Linking Step %s :", step['seq'])

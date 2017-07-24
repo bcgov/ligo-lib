@@ -2,7 +2,7 @@ import os
 import pytest
 import shutil
 
-from cdilinker.linker.dedup import DeDeupProject
+from cdilinker.linker.memory_dedup import MemoryDedup
 from cdilinker.linker.files import LinkFiles
 from test.cdilinker.utils import Utils
 
@@ -19,7 +19,7 @@ class TestDedup(object):
     def ddp(project):
         if not os.path.exists(project['temp_path']):
             os.makedirs(project['temp_path'])
-        yield DeDeupProject(project)
+        yield MemoryDedup(project)
 
         # Teardown and clean up
         if os.path.isfile(project['temp_path'] + 'dedup_matched.csv'):
@@ -36,7 +36,7 @@ class TestDedup(object):
     def test_init_none(self):
         """Ensure initialization does not proceed with empty JSON"""
         with pytest.raises(TypeError):
-            DeDeupProject(None)
+            MemoryDedup(None)
 
     def test_init(self, project, ddp):
         """Ensure initialization sets fields correctly"""

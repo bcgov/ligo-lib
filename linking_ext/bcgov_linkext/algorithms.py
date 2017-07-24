@@ -20,9 +20,6 @@ class Levenshtein(AlgorithmProvider):
 
     def apply(self, s1, s2, max_edits=0):
 
-        strings = pd.concat([s1, s2], axis=1, ignore_index=True)
-        strings = strings.replace(np.nan, '', regex=True)
-
         def levenshtein_alg(x, max_edits=0):
             try:
                 d = levenshtein_distance(x[0], x[1])
@@ -31,6 +28,9 @@ class Levenshtein(AlgorithmProvider):
                 logger.error(
                     'Error in calculating Levenshtein edit distance: {}'
                     .format(err))
+
+        strings = pd.concat([s1, s2], axis=1, ignore_index=True)
+        strings = strings.replace(np.nan, '', regex=True)
 
         return strings.apply(levenshtein_alg, axis=1, max_edits=max_edits)
 
@@ -43,8 +43,6 @@ class JaroWinkler(AlgorithmProvider):
 
     def apply(self, s1, s2, threshold=1.0):
 
-        strings = pd.concat([s1, s2], axis=1, ignore_index=True)
-
         def jaro_winkler_alg(x, threshold=1.0):
             try:
                 t = jaro_winkler(x[0], x[1])
@@ -53,6 +51,9 @@ class JaroWinkler(AlgorithmProvider):
                 logger.error(
                     'Error in calculating Jaro-Winkler similarity: {}'
                     .format(err))
+
+        strings = pd.concat([s1, s2], axis=1, ignore_index=True)
+        strings = strings.replace(np.nan, '', regex=True)
 
         return strings.apply(jaro_winkler_alg, axis=1, threshold=threshold)
 
