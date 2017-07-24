@@ -146,7 +146,7 @@ class MemoryLink(MemoryLinkBase):
             linked = relationship_group.filter(
                 lambda x: len(x[filter_field].unique()) == 1)
 
-        linked['STEP'] = seq
+        linked = linked.assign(STEP=seq)
 
         logger.info('Assigning link id to the selected subset of record pairs.')
         left_entity_id = 'LEFT_' + self.left_entity
