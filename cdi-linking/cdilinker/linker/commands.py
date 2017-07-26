@@ -30,12 +30,13 @@ def validate_dataset(dataset, errors, type='DEDUP'):
         if index_field not in fields:
             errors.append(LinkError.INVALID_INDEX)
 
-    if type == 'LINK' and 'entity_field' not in dataset:
-        errors.append(LinkError.ENTITY_ID_MISSING)
-    else:
-        entity_field = dataset['entity_field']
-        if entity_field not in fields:
-            errors.append(LinkError.INVALID_ENTITY_FIELD)
+    if type == 'LINK':
+        if 'entity_field' not in dataset:
+            errors.append(LinkError.ENTITY_ID_MISSING)
+        else:
+            entity_field = dataset['entity_field']
+            if entity_field not in fields:
+                errors.append(LinkError.INVALID_ENTITY_FIELD)
     return errors
 
 
@@ -80,12 +81,12 @@ def validate(project):
     elif len(project['datasets']) == 0:
         errors.append(LinkError.DATASET_MISSING)
     else:
-        validate_dataset(project['datasets'][0], errors)
+        validate_dataset(project['datasets'][0], errors, type=project['type'])
         if project['type'] == 'LINK':
             if len(project['datasets']) != 2:
                 errors.append(LinkError.DATASET_MISSING)
             else:
-                validate_dataset(project['datasets'][1], errors)
+                validate_dataset(project['datasets'][1], errors, type=project['type'])
 
     for step in project['steps']:
         validate_step(step, errors)

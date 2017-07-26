@@ -21,7 +21,7 @@ setup(
     long_description=read('readme.rst'),
 
     install_requires=[
-        "cdilinker>=0.1"
+        "cdilinker>=0.3"
     ],
     include_package_data=True,
     packages=[
