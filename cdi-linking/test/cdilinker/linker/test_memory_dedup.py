@@ -7,7 +7,7 @@ from cdilinker.linker.files import LinkFiles
 from test.cdilinker.utils import Utils
 
 
-class TestDedup(object):
+class TestMemoryDedup(object):
     @staticmethod
     @pytest.fixture(scope="class")
     def project():

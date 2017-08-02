@@ -7,11 +7,10 @@ from cdilinker.linker.chunked_dedup import ChunkedDedup
 
 
 def get_dataset_size(file_path):
-    return sum(1 for row in open(file_path))
+    return sum(1 for _ in open(file_path))
 
 
 class LinkerFactory:
-
     """
     Creates proper linker/de-duplication instance depending on the project type
     and the size of the input dataset(s).
@@ -19,7 +18,6 @@ class LinkerFactory:
 
     @staticmethod
     def create_linker(project):
-
         left_size = get_dataset_size(project['datasets'][0]['url'])
         if project['type'] == 'DEDUP':
             if left_size > CHUNK_SIZE:

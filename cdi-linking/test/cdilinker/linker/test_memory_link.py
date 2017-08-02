@@ -7,7 +7,7 @@ from cdilinker.linker.memory_link import MemoryLink
 from test.cdilinker.utils import Utils
 
 
-class TestLink(object):
+class TestMemoryLink(object):
     @staticmethod
     @pytest.fixture(scope="class")
     def project():
