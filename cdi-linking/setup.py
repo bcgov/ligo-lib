@@ -22,13 +22,13 @@ setup(
     long_description=read('../readme.rst'),
 
     install_requires=[
-        "jellyfish>=0.5.6",
-        "numpy>=1.11.2",
-        "numexpr>=2.6.2",
-        "pandas>=0.20.3",
-        "xhtml2pdf>=0.1b2",
-        "jinja2>=2.8.1",
-        "html5lib==1.0b10"
+        "jellyfish",
+        "numpy",
+        "numexpr",
+        "pandas",
+        "xhtml2pdf",
+        "jinja2",
+        "html5lib"
     ],
     include_package_data=True,
     packages=[
@@ -38,5 +38,5 @@ setup(
         'cdilinker.reports'
     ],
     package_dir={'cdilinker': 'cdilinker'},
-    license='MIT'
+    license='Apache-2.0'
 )

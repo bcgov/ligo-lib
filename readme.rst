@@ -15,12 +15,12 @@ Dependencies
 The **CDI Linker** library needs to be executed in a Unix environment because it utilizes some shell scripting.
 It depends on:
 
-- Python (>=3.5)
-- NumPy (>=1.11.2)
-- Pandas (>=0.19.2)
+- Python (>=3.6)
+- NumPy (>=1.13.1)
+- Pandas (>=0.20.3)
 - jellyfish (>=0.5.6)
-- xhtml2pdf (>=0.0.6)
-- jinja2 (>=2.8.1)
+- xhtml2pdf (>=0.2b1)
+- jinja2 (>=2.9.6)
 
 
 Installation
@@ -39,10 +39,9 @@ Tests
 
 The **CDI Linker** library tests depend on:
 
-- pytest>=3.1.3
+- pytest>=3.2.0
 - pytest-cov>=2.5.1
-- pytest-allure-adaptor>=1.7.7
-- coverage>=4.3.1
+- coverage>=4.4.1
 
 To test the library simply use:
 
