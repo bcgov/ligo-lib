@@ -22,8 +22,8 @@ class TestMemoryDedup(object):
         yield MemoryDedup(project)
 
         # Teardown and clean up
-        if os.path.isfile(project['temp_path'] + 'dedup_matched.csv'):
-            os.remove(project['temp_path'] + 'dedup_matched.csv')
+        if os.path.isfile(project['output_root'] + 'dedup_matched.csv'):
+            os.remove(project['output_root'] + 'dedup_matched.csv')
         if os.path.isfile(project['output_root'] + 'deduped_data.csv'):
             os.remove(project['output_root'] + 'deduped_data.csv')
         if os.path.isfile(project['output_root'] + project['name'] +

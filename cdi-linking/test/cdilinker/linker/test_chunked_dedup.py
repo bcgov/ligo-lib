@@ -22,12 +22,14 @@ class TestChunkedDedup(object):
         yield ChunkedDedup(project)
 
         # Teardown and clean up
-        if os.path.isfile(project['temp_path'] + 'left_file.csv'):
-            os.remove(project['temp_path'] + 'left_file.csv')
+        if os.path.isfile(project['output_root'] + 'left_file.csv'):
+            os.remove(project['output_root'] + 'left_file.csv')
         if os.path.isfile(project['temp_path'] +
                           LinkFiles.TEMP_DEDUP_ALL_SELECTED):
             os.remove(project['temp_path'] +
                       LinkFiles.TEMP_DEDUP_ALL_SELECTED)
+        if os.path.isfile(project['output_root'] + 'dedup_matched.csv'):
+            os.remove(project['output_root'] + 'dedup_matched.csv')
         if os.path.isfile(project['output_root'] + 'deduped_data.csv'):
             os.remove(project['output_root'] + 'deduped_data.csv')
         if os.path.isfile(project['output_root'] + project['name'] +

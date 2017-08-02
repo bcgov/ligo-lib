@@ -25,9 +25,9 @@ class TestMemoryLink(object):
         if os.path.isfile(project['temp_path'] +
                           LinkFiles.TEMP_MATCHED_FILE):
             os.remove(project['temp_path'] + LinkFiles.TEMP_MATCHED_FILE)
-        if os.path.isfile(project['temp_path'] +
+        if os.path.isfile(project['output_root'] +
                           'matched_not_linked_data.csv'):
-            os.remove(project['temp_path'] + 'matched_not_linked_data.csv')
+            os.remove(project['output_root'] + 'matched_not_linked_data.csv')
         if os.path.isfile(project['output_root'] + 'linked_data.csv'):
             os.remove(project['output_root'] + 'linked_data.csv')
         if os.path.isfile(project['output_root'] + project['name'] +
