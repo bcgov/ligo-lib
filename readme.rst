@@ -74,7 +74,7 @@ To enter and explore the Docker container directly do the following:
 
 .. code:: sh
 
-    docker run --rm -it datalinking_test /bin/bash
+    docker run --rm -it datalinking_test bash
 
 
 How to Use
@@ -98,95 +98,128 @@ Below are samples of de-duplication and linking projects :
 .. code:: JSON
 
     {
-       "matched_url":"",
-       "datasets":[
-          {
-             "description":"Education data file to be de-deplicated.",
-             "format":"CSV",
-             "url":"/projects/cdi/linkage/datasets/educ_for_dedup.csv",
-             "title":"Education raw data for deduplication",
-             "entity_field":"REC_ID",
-             "index_field":"INGESTION_ID",
-             "name":"Educ_For_Dedup"
-          }
-       ],
-       "description":"Deduplication project of Education data",
-       "linked_url":"",
-       "output_root":"/projects/cdi/linkage/linking/",
-       "steps":[
-          {
-             "group":false,
-             "seq":1,
-             "blocking_schema":{
-                "transformations":[
-                   "EXACT",
-                   "SOUNDEX"
-                ],
-                "left":[
-                   "BIRTH_DATE",
-                   "FAMILY_NAME"
-                ]
-             },
-             "linking_schema":{
-                "comparisons":[
-                   {
-                      "name":"SOUNDEX"
-                   },
-                   {
-                      "name":"EXACT"
-                   },
-                   {
-                      "name":"NYSIIS"
-                   }
-                ],
-                "left":[
-                   "FIRST_GIVEN_NAME",
-                   "CANADIAN_POSTAL_CODE",
-                   "PREF_FIRST_GIVEN_NAME"
-                ]
-             }
+      "comments": "",
+      "description": "Education dedup",
+      "datasets": [
+        {
+          "description": "Fake Education data",
+          "format": "CSV",
+          "url": "cdi-linking/test/dedup/combination/test1.csv",
+          "title": "Education data",
+          "entity_field": "REC_ID",
+          "data_types": {
+            "FAMILY_NAME": "VARCHAR",
+            "CANADIAN_POSTAL_CODE": "VARCHAR",
+            "FIRST_GIVEN_NAME": "VARCHAR",
+            "COUNTRY": "VARCHAR",
+            "REC_ID": "VARCHAR",
+            "PREF_FIRST_GIVEN_NAME": "VARCHAR",
+            "STREET_LINE_1": "VARCHAR",
+            "PREF_SECOND_GIVEN_NAME": "VARCHAR",
+            "PROVINCE_OR_STATE": "VARCHAR",
+            "BIRTH_DATE": "VARCHAR",
+            "PREF_FAMILY_NAME": "VARCHAR",
+            "SECOND_GIVEN_NAME": "VARCHAR",
+            "COMMUNITY_OR_LOCATION": "VARCHAR"
           },
-          {
-             "group":true,
-             "seq":2,
-             "blocking_schema":{
-                "transformations":[
-                   "EXACT",
-                   "NYSIIS"
-                ],
-                "left":[
-                   "BIRTH_DATE",
-                   "PREF_FIRST_GIVEN_NAME"
-                ]
-             },
-             "linking_schema":{
-                "comparisons":[
-                   {
-                      "name":"SOUNDEX"
-                   },
-                   {
-                      "name":"NYSIIS"
-                   },
-                   {
-                      "name":"SOUNDEX"
-                   },
-                   {
-                      "name":"SOUNDEX"
-                   }
-                ],
-                "left":[
-                   "FIRST_GIVEN_NAME",
-                   "PREF_FAMILY_NAME",
-                   "SECOND_GIVEN_NAME",
-                   "FAMILY_NAME"
-                ]
-             }
-          }
-       ],
-       "type":"DEDUP",
-       "linking_method":"DTR",
-       "name":"Educ_For_Dedup"
+          "index_field": "REC_ID",
+          "columns": [
+            "CANADIAN_POSTAL_CODE",
+            "FIRST_GIVEN_NAME",
+            "COUNTRY",
+            "PREF_FAMILY_NAME",
+            "PREF_FIRST_GIVEN_NAME",
+            "STREET_LINE_1",
+            "PROVINCE_OR_STATE",
+            "BIRTH_DATE",
+            "FAMILY_NAME",
+            "REC_ID",
+            "PREF_SECOND_GIVEN_NAME",
+            "SECOND_GIVEN_NAME",
+            "COMMUNITY_OR_LOCATION"
+          ],
+          "name": "EDUCATION"
+        }
+      ],
+      "linked_url": "",
+      "name": "test1",
+      "output_root": "cdi-linking/test/dedup/combination/",
+      "temp_path": "temp/",
+      "matched_url": "",
+      "results_file": "educ_dedup_summary.pdf",
+      "status": "READY",
+      "type": "DEDUP",
+      "steps": [
+        {
+          "group": true,
+          "seq": 1,
+          "blocking_schema": {
+            "right": [],
+            "transformations": [
+              "EXACT",
+              "EXACT",
+              "EXACT",
+              "EXACT"
+            ],
+            "left": [
+              "BIRTH_DATE",
+              "FAMILY_NAME",
+              "CANADIAN_POSTAL_CODE",
+              "COMMUNITY_OR_LOCATION"
+            ]
+          },
+          "linking_schema": {
+            "comparisons": [
+              {
+                "name": "NYSIIS"
+              }
+            ],
+            "right": [],
+            "left": [
+              "FIRST_GIVEN_NAME"
+            ]
+          },
+          "linking_method": "DTR"
+        },
+        {
+          "group": true,
+          "seq": 2,
+          "blocking_schema": {
+            "right": [],
+            "transformations": [
+              "EXACT",
+              "EXACT"
+            ],
+            "left": [
+              "BIRTH_DATE",
+              "CANADIAN_POSTAL_CODE"
+            ]
+          },
+          "linking_schema": {
+            "comparisons": [
+              {
+                "args": {
+                  "n": 4
+                },
+                "name": "HEAD_MATCH"
+              },
+              {
+                "args": {
+                  "n": 4
+                },
+                "name": "HEAD_MATCH"
+              }
+            ],
+            "right": [],
+            "left": [
+              "PREF_SECOND_GIVEN_NAME"
+            ]
+          },
+          "linking_method": "DTR"
+        }
+      ]
     }
+
 
 A De-duplication project consists of the input data file and a set of de-duplication steps.
 The input datafile definition includes the path(URL) to data file,
@@ -204,8 +237,7 @@ id and the records will be removed from the input file.
 
 The outputs of a de-duplication project are :
 
-*   De-duplicated output file with the new ENTITY_ID column. All the records that belong to the same entity will be
-assigned same entity id. The file is sorted by entity id.
+*   De-duplicated output file with the new ENTITY_ID column. All the records that belong to the same entity will be assigned same entity id. The file is sorted by entity id.
 
 *   De-duplication summary report as a pdf file.
 
@@ -218,33 +250,94 @@ Linking Project Project
 .. code:: JSON
 
     {
+      "status": "READY",
       "matched_url": "",
       "datasets": [
         {
           "description": "Education de-duplicated dataset",
           "format": "CSV",
-          "url": "/projects/cdi/linkage/datasets/educ_dedup.csv",
+          "url": "cdi-linking/test/linking/combination/educ_deduped.csv",
           "title": "De-deplicated dataset",
           "entity_field": "ENTITY_ID",
-          "index_field": "REC_ID",
-          "name": "Education_Dedup"
+          "data_types": {
+            "INGESTION_ID": "INTEGER",
+            "FAMILY_NAME": "VARCHAR",
+            "ENTITY_ID": "INTEGER",
+            "CANADIAN_POSTAL_CODE": "VARCHAR",
+            "FIRST_GIVEN_NAME": "VARCHAR",
+            "REC_ID": "VARCHAR",
+            "BIRTH_DATE": "VARCHAR",
+            "SECOND_GIVEN_NAME": "VARCHAR"
+          },
+          "index_field": "INGESTION_ID",
+          "columns": [
+            "INGESTION_ID",
+            "FAMILY_NAME",
+            "ENTITY_ID",
+            "CANADIAN_POSTAL_CODE",
+            "FIRST_GIVEN_NAME",
+            "REC_ID",
+            "BIRTH_DATE",
+            "SECOND_GIVEN_NAME"
+          ],
+          "field_cats": {
+            "INGESTION_ID": "",
+            "FAMILY_NAME": "",
+            "ENTITY_ID": "",
+            "CANADIAN_POSTAL_CODE": "",
+            "FIRST_GIVEN_NAME": "",
+            "REC_ID": "",
+            "BIRTH_DATE": "",
+            "SECOND_GIVEN_NAME": ""
+          },
+          "name": "Education_Deduped"
         },
         {
           "description": "JTST Deduped dataset",
           "format": "CSV",
-          "url": "/projects/cdi/linkage/datasets/jtst_dedup.csv",
+          "url": "cdi-linking/test/linking/combination/jtst_deduped.csv",
           "title": "JTST Deduped dataset",
           "entity_field": "ENTITY_ID",
-          "index_field": "REC_ID",
+          "data_types": {
+            "INGESTION_ID": "INTEGER",
+            "ENTITY_ID": "INTEGER",
+            "POSTAL_TXT": "VARCHAR",
+            "FIRST_NAME_TXT": "VARCHAR",
+            "REC_ID": "VARCHAR",
+            "LAST_NAME_TXT": "VARCHAR",
+            "BIRTH_DT": "VARCHAR"
+          },
+          "index_field": "INGESTION_ID",
+          "columns": [
+            "INGESTION_ID",
+            "ENTITY_ID",
+            "FIRST_NAME_TXT",
+            "POSTAL_TXT",
+            "REC_ID",
+            "LAST_NAME_TXT",
+            "BIRTH_DT"
+          ],
+          "field_cats": {
+            "INGESTION_ID": "",
+            "ENTITY_ID": "",
+            "FIRST_NAME_TXT": "",
+            "POSTAL_TXT": "",
+            "REC_ID": "",
+            "LAST_NAME_TXT": "",
+            "BIRTH_DT": ""
+          },
           "name": "JTST_DEDUPED"
         }
       ],
       "description": "Education JTST data linking",
       "linked_url": "",
-      "output_root": "/Projects/cdi/linkage/linking/",
+      "comments": "Integer column has NA values in column 17",
+      "output_root": "cdi-linking/test/linking/combination/",
+      "temp_path": "temp/",
       "results_file": "education_jtst_summary.pdf",
       "steps": [
         {
+          "group": false,
           "seq": 1,
           "blocking_schema": {
             "right": [
@@ -280,9 +373,11 @@ Linking Project Project
               "FAMILY_NAME",
               "CANADIAN_POSTAL_CODE"
             ]
-          }
+          },
+          "linking_method": "DTR"
         },
         {
+          "group": false,
           "seq": 2,
           "blocking_schema": {
             "right": [
@@ -301,28 +396,33 @@ Linking Project Project
           "linking_schema": {
             "comparisons": [
               {
-                "name": "SOUNDEX"
+                "args": {
+                  "max_edits": 2
+                },
+                "name": "LEVENSHTEIN"
               },
               {
-                "name": "NYSIIS"
+                "args": {
+                  "n": 1
+                },
+                "name": "HEAD_MATCH"
               }
             ],
             "right": [
-              "COMMUNITY_TXT",
               "FIRST_NAME_TXT"
             ],
             "left": [
-              "COMMUNITY_OR_LOCATION",
               "FIRST_GIVEN_NAME"
             ]
-          }
+          },
+          "linking_method": "DTR"
         }
       ],
       "relationship_type": "1T1",
       "type": "LINK",
-      "linking_method": "DTR",
       "name": "education_jtst"
     }
+
 
 A linking project is defined by:
 
@@ -357,11 +457,9 @@ The linking process generates the following output files:
 
 *   Linking summary pdf report.
 
-*   Linked output file. This file contains information about linked entities.
-it also describes the linking step where said entities were linked.
+*   Linked output file. This file contains information about linked entities. It also describes the linking step where said entities were linked.
 
-*   Matched_but_not_linked file. This file contains information about matched entities that were not linked due to
-conflicts on the type-of-relationship.
+*   Matched_but_not_linked file. This file contains information about matched entities that were not linked due to conflicts on the type-of-relationship.
 
 .. |License| image:: https://img.shields.io/badge/license-Apache%202.0-blue.svg
     :target: http://www.apache.org/licenses/LICENSE-2.0
