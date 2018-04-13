@@ -469,7 +469,7 @@ The linking process generates the following output files:
     :alt: License: Apache 2.0
 .. |nbsp| unicode:: 0xA0
 
-### License
+.. License
 
     Copyright 2018 Province of British Columbia
 
