@@ -464,12 +464,6 @@ The linking process generates the following output files:
 
 *   Matched_but_not_linked file. This file contains information about matched entities that were not linked due to conflicts on the type-of-relationship.
 
-.. |License| image:: https://img.shields.io/badge/license-Apache%202.0-blue.svg
-    :target: http://www.apache.org/licenses/LICENSE-2.0
-    :alt: License: Apache 2.0
-.. |nbsp| unicode:: 0xA0
-
-.. License
 
     Copyright 2018 Province of British Columbia
 
