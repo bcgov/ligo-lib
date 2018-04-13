@@ -1,19 +1,22 @@
-CDI Linker Library
+Ligo Library (aka ligo-lib )
 ==================
 
 |License|
 
-The **CDI Linker** python library is aimed to identify and link records that belong to the same entity(individual)
-within a single or multiple file. The process is called de-duplication if it is only applied to a single data file.
+**ligo-lib** is a Python library to support the Ligo data linking application ( see [Ligo](https://github.com/bcgov/ligo) ).
 
-Inspired by `Python Record Linkage Toolkit <https://github.com/J535D165/recordlinkage>`__, **CDI Linker** takes
+This library bundles and provides the algorithms necessary to support entity resolution associated with
+deduplication and linking of administrative datasets.
+
+Inspired by `Python Record Linkage Toolkit <https://github.com/J535D165/recordlinkage>`__, **Ligo ** takes
 advantage of `Pandas <http://pandas.pydata.org/>`__ for faster data manipulations.
 
 Dependencies
 ------------
 
-The **CDI Linker** library needs to be executed in a Unix environment because it utilizes some shell scripting.
-It depends on:
+The **ligo-lib** needs to be executed in a Unix environment because it utilizes some shell scripting commands.
+
+Ligo-lib also depends on:
 
 - Python (>=3.6)
 - NumPy (>=1.13.1)
@@ -37,7 +40,7 @@ To install the library simply use:
 Tests
 -----
 
-The **CDI Linker** library tests depend on:
+The **ligo-lib**  tests depend on:
 
 - pytest>=3.2.0
 - pytest-cov>=2.5.1
@@ -257,7 +260,7 @@ Linking Project Project
           "description": "Education de-duplicated dataset",
           "format": "CSV",
           "url": "cdi-linking/test/linking/combination/educ_deduped.csv",
-          "title": "De-deplicated dataset",
+          "title": "De-depulicated dataset",
           "entity_field": "ENTITY_ID",
           "data_types": {
             "INGESTION_ID": "INTEGER",
@@ -431,7 +434,7 @@ A linking project is defined by:
 *   Type of entity relationship. This defines how entities relate to each other:
 
     1. 1T1 : one-to-one
-    2. 1TM: One-to-many
+    2. 1TM: one-to-many
     3. MT1: many-to-one
 
 
@@ -465,3 +468,19 @@ The linking process generates the following output files:
     :target: http://www.apache.org/licenses/LICENSE-2.0
     :alt: License: Apache 2.0
 .. |nbsp| unicode:: 0xA0
+
+### License
+
+    Copyright 2018 Province of British Columbia
+
+    Licensed under the Apache License, Version 2.0 (the "License");
+    you may not use this file except in compliance with the License.
+    You may obtain a copy of the License at
+
+       http://www.apache.org/licenses/LICENSE-2.0
+
+    Unless required by applicable law or agreed to in writing, software
+    distributed under the License is distributed on an "AS IS" BASIS,
+    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+    See the License for the specific language governing permissions and
+    limitations under the License.
