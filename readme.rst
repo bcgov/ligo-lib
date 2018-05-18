@@ -8,7 +8,7 @@ Ligo Library (aka ligo-lib )
 This library bundles and provides the algorithms necessary to support entity resolution associated with
 deduplication and linking of administrative datasets.
 
-Inspired by `Python Record Linkage Toolkit <https://github.com/J535D165/recordlinkage>`__, **Ligo ** takes
+Inspired by `Python Record Linkage Toolkit <https://github.com/J535D165/recordlinkage>`__, **Ligo** takes
 advantage of `Pandas <http://pandas.pydata.org/>`__ for faster data manipulations.
 
 Dependencies
@@ -33,7 +33,7 @@ To install the library simply use:
 
 .. code:: sh
 
-    pip install -e cdi-linking
+    pip install -e ligo-lib
     pip install -e linking_ext
 
 
@@ -88,7 +88,7 @@ Having a json project, you can apply the library by :
 
 .. code:: python
 
-    python -m cdilinker.linker.link_json -p <project-file>
+    python -m ligo.linker.link_json -p <project-file>
 
 
 De-Duplication Project
@@ -96,19 +96,19 @@ De-Duplication Project
 
 The input of the linking code is a linking/de-duplication project which, is defined as a sequence of
 linking/de-duplication steps. De-duplication/Linking projects are defined by json files.
-Below are samples of de-duplication and linking projects :
+Below are samples of de-duplication and linking project files :
 
 .. code:: JSON
 
     {
       "comments": "",
-      "description": "Education dedup",
+      "description": "File for dedup",
       "datasets": [
         {
-          "description": "Fake Education data",
+          "description": "Test1  data",
           "format": "CSV",
-          "url": "cdi-linking/test/dedup/combination/test1.csv",
-          "title": "Education data",
+          "url": "ligo/test/dedup/combination/test1.csv",
+          "title": "Test1 data",
           "entity_field": "REC_ID",
           "data_types": {
             "FAMILY_NAME": "VARCHAR",
@@ -141,15 +141,15 @@ Below are samples of de-duplication and linking projects :
             "SECOND_GIVEN_NAME",
             "COMMUNITY_OR_LOCATION"
           ],
-          "name": "EDUCATION"
+          "name": "FILE1"
         }
       ],
       "linked_url": "",
       "name": "test1",
-      "output_root": "cdi-linking/test/dedup/combination/",
+      "output_root": "ligo/test/dedup/combination/",
       "temp_path": "temp/",
       "matched_url": "",
-      "results_file": "educ_dedup_summary.pdf",
+      "results_file": "test1_dedup_summary.pdf",
       "status": "READY",
       "type": "DEDUP",
       "steps": [
@@ -296,10 +296,10 @@ Linking Project Project
           "name": "Education_Deduped"
         },
         {
-          "description": "JTST Deduped dataset",
+          "description": "TST Deduped dataset",
           "format": "CSV",
-          "url": "cdi-linking/test/linking/combination/jtst_deduped.csv",
-          "title": "JTST Deduped dataset",
+          "url": "ligo/test/linking/combination/tst_deduped.csv",
+          "title": "TST Deduped dataset",
           "entity_field": "ENTITY_ID",
           "data_types": {
             "INGESTION_ID": "INTEGER",
@@ -329,15 +329,15 @@ Linking Project Project
             "LAST_NAME_TXT": "",
             "BIRTH_DT": ""
           },
-          "name": "JTST_DEDUPED"
+          "name": "TST_DEDUPED"
         }
       ],
-      "description": "Education JTST data linking",
+      "description": "TST data linking",
       "linked_url": "",
       "comments": "Integer column has NA values in column 17",
-      "output_root": "cdi-linking/test/linking/combination/",
+      "output_root": "ligo/test/linking/combination/",
       "temp_path": "temp/",
-      "results_file": "education_jtst_summary.pdf",
+      "results_file": "tst_summary.pdf",
       "steps": [
         {
           "group": false,
@@ -423,7 +423,7 @@ Linking Project Project
       ],
       "relationship_type": "1T1",
       "type": "LINK",
-      "name": "education_jtst"
+      "name": "tst"
     }
 
 
