@@ -4,6 +4,6 @@ python:
 install:
   - pip install pytest-cov coveralls
 script:
-  - pytest --cov=heartbeat NovaVic/ligo-lib/cdi-linking/tests
+  - pytest cdi-linking/test
 after_success:
   - coveralls
