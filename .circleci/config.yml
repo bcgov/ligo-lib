@@ -1,0 +1,12 @@
+machine:
+  python:
+    version: 3.6
+
+dependencies:
+  override:
+    - pip install -r  requirements/base.txt
+    - pip install -r  requirements/test.txt
+
+test:
+  override:
+    - nosetests cdi-linking/test/dedup
