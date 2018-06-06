@@ -1,1 +1,9 @@
-language:python
+language: python
+python:
+  - "3.6"
+install:
+  - pip install pytest-cov coveralls
+script:
+  - pytest --cov=heartbeat tests
+after_success:
+  - coveralls
