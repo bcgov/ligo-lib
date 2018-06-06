@@ -11,6 +11,11 @@ deduplication and linking of administrative datasets.
 Inspired by `Python Record Linkage Toolkit <https://github.com/J535D165/recordlinkage>`__, **Ligo** takes
 advantage of `Pandas <http://pandas.pydata.org/>`__ for faster data manipulations.
 
+Build
+-----
+.. mdinclude:: ../readme.md
+
+
 Dependencies
 ------------
 
