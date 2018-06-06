@@ -1,12 +1,18 @@
-machine:
-  python:
-    version: 3.6
-
-dependencies:
-  override:
-    - pip install -r  requirements/base.txt
-    - pip install -r  requirements/test.txt
-
-test:
-  override:
-    - nosetests cdi-linking/test/dedup
+version: 2 # use CircleCI 2.0
+  jobs: # a collection of steps
+    build:
+       working_directory: ~/circleci-demo-ligo-lib
+       docker: # run the steps with Docker
+         - image: circleci/python:3.6 # ...with this image as the primary container; this is where all `steps` will run
+       steps: # a collection of executable commands
+         -checkout
+         - run: # install and activate virtual environment with pip
+          command: |           
+            pip install -r requirements/base.txt
+            pip install -r requirements/test.txt
+         - run:
+             command: |
+               nosetests cdi-linking/test/dedup
+         - store_artifacts: # special step to store test reports as artifacts
+          path: test-reports/
+          destination: tr1
