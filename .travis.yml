@@ -3,6 +3,8 @@ python:
   - "3.6"
 install:
   - pip install pytest-cov coveralls
+  - pip install requirements/base.txt
+  - pip install requirements/test.txt
 script:
   - pytest cdi-linking/test
 after_success:
