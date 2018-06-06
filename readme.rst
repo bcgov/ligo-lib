@@ -34,11 +34,11 @@ Ligo-lib also depends on:
 Installation
 ------------
 
-To install the library simply use:
+To install the library be at the root directory ligo-lib level and simply use:
 
 .. code:: sh
 
-    pip install -e ligo-lib
+    pip install -e ligo-lib (does not work without replacing ligo-lib with cdi-linking; shall fix little later)
     pip install -e linking_ext
 
 
