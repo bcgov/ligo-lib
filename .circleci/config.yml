@@ -13,6 +13,6 @@ version: 2 # use CircleCI 2.0
          - run:
              command: |
                nosetests cdi-linking/test/dedup
-         - store_artifacts: # special step to store test reports as artifacts
-          path: test-reports/
-          destination: tr1
+         #- store_artifacts: # special step to store test reports as artifacts
+         # path: test-reports/
+         # destination: tr1
