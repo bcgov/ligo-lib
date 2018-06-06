@@ -4,6 +4,6 @@ python:
 install:
   - pip install pytest-cov coveralls
 script:
-  - pytest --cov=heartbeat tests
+  - pytest --cov=heartbeat cdi-linking/tests
 after_success:
   - coveralls
