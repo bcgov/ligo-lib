@@ -4,6 +4,7 @@ python:
 install:
   - pip install -r requirements/base.txt
   - pip install -r requirements/test.txt
+  - pip install -e linking_ext 
 script:
   - pytest cdi-linking/test
 after_success:
