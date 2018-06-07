@@ -13,7 +13,9 @@ advantage of `Pandas <http://pandas.pydata.org/>`__ for faster data manipulation
 
 Build
 -----
-.. mdinclude:: ../readme.md
+
+.. image:: https://travis-ci.org/NovaVic/ligo-lib.svg?branch=master
+    :target: https://travis-ci.org/NovaVic/ligo-lib
 
 
 Dependencies
