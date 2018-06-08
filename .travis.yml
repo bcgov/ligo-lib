@@ -7,9 +7,12 @@ install:
 - pip install -e linking_ext
 script:
 - pytest cdi-linking/test
-after_script: cd ~
-after_success:
-- coveralls
+
+#after_script: cd ~
+
+#after_success:
+#- coveralls
+
 deploy:
   provider: pypi
   user: novavic
