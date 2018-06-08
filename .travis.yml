@@ -1,11 +1,18 @@
 language: python
 python:
-  - "3.6"
+- '3.6'
 install:
-  - pip install -r requirements/test.txt
-  - pip install -e cdi-linking
-  - pip install -e linking_ext 
+- pip install -r requirements/test.txt
+- pip install -e cdi-linking
+- pip install -e linking_ext
 script:
-  - pytest cdi-linking/test
+- pytest cdi-linking/test
+after_script: cd ~
 after_success:
-  - coveralls
+- coveralls
+deploy:
+  provider: pypi
+  user: novavic
+  server: https://testpypi.python.org/pypi
+  password:
+    secure: caQlEe4mKF4rASy1q5qXF+sc/H0dTBJ2P3VX4WbiIuxhqpzrf1d/N0IFBQ+TTeCYqyG4jyuZOQSFy7R3XH8DLj0R5zJ/C4T9zdUzx6g+PEOou4Q7LK+RhR24QOA5l8VMY2YZzrFLCxmry7Lkb+hMOAbO6FWil8zeblce84RBsmI3kaWxZ3nIXWrRkZGz7Ra+pq6TGICo4Gd9n7STZvKvbuu5j5+G6ntLY60S4L3ozPKdMaAKi4hFkUywieqndm3AYO7NRWOmnEXGd22JbURhWY7SSdNv4dQBIa0sfSu4erx+tvkDdNRuocHoYNf6gysypFsaRfpe0BH8RNxIF6GmLY7AJJ7lLrHo5mO8NqSDQ9BYptDr/tsYRaH47ykyDnVnbQlMKgor0/Uoq7WGzqWzsL6WnThyYiRPnYPCFOZ5I5H5ujrBYezYttXF+D1NHwY7aExNGzAblq4jfbQSpWMEYh7SHXR2apdjkp32f4kI8xoPOIxx18c+LrVNV3hm6vOQiuM7xpAewRnD/+/TE1El5zMpz6VM9hcNaxvmASGnXELuU8vyDv0g6vaqF48+ly7gZCJQqSwCgI2EBSzoq2bZ8NmnANbMjI6H1geTERJhetaXLmOlyr8om9bTyk+n/m0BfvKlOs8VKwZJTUnFka6+UtVTYokmEBAFNhxT84eWT+k=
