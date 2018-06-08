@@ -1,7 +1,7 @@
 from distutils.core import setup
 setup(
   name = 'LigoLib',
-  packages = ['LigoLib'], # this must be the same as the name above
+  packages = ['cdi-linking','linking_ext'], 
   version = '0.1.0',
   description = 'PyPi pkg for Linking Library Ligo-lib',
   author = 'Suraiya Khan',
