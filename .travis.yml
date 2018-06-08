@@ -2,10 +2,10 @@ language: python
 python:
   - '3.6'
 install:
-  - pip install -r requirements/test.txt
-  - pip install -e cdi-linking
-  - pip install -e linking_ext
-  - pip install wheel
+  - pip3 install -r requirements/test.txt
+  - pip3 install -e cdi-linking
+  - pip3 install -e linking_ext
+  - pip3 install wheel
 script:
   - pytest cdi-linking/test
 #after_script: cd ~
