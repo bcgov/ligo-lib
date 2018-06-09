@@ -3,7 +3,7 @@ from distutils.core import setup
 setup(
   name = 'LigoLib',
   packages = ['cdi-linking','linking_ext'], 
-  version = '0.1.0',
+  version = '0.1.1',
   description = 'PyPi pkg for Linking Library Ligo-lib',
   author = 'Suraiya Khan',
   author_email = 'suraiya.uvic@gmail.com',
