@@ -9,9 +9,6 @@ setup(
   author_email = 'suraiya.uvic@gmail.com',
   url = 'https://github.com/NovaVic/ligo-lib', # use the URL to the github repo
   keywords = ['Linking', 'Deduplication', 'Record Linkage'], # arbitrary keywords
-  install_requires=[
-    "python>=3.6", 
-  ],
   classifiers = [
     "Programming Language :: Python :: 3.6",
     "Topic :: Software Development :: Libraries :: Python Modules",
