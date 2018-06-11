@@ -1,0 +1,1000 @@
+REC_ID,GENDER_CD,FIRST_NAME_TXT,MIDDLE_NAME_TXT,LAST_NAME_TXT,BIRTH_DT,CITY_GEO_AREA_ID,POSTAL_TXT,COMMUNITY_TXT,EMAIL_TXT,LABEL,INGESTION_ID
+REC-989889-ORG ,F,SANDRA     ,STEPHANIE ,REYNARD   ,19210506,350,V8V3X6,VICTORIA                      ,                                 ,10,1
+REC-663398-ORG , ,JOHN       ,JUDITH    ,HYSELL    ,19820820,333,V0N1T0,SQUAMISH - GARABLADI HIGHLANDS,JOHN@YAHOO.CA                    ,19820820,2
+REC-73898-ORG  ,F,YOUNG      ,WILLIAM   ,          ,19370520,347,V5S1G7,VANCOUVER                     ,                                 ,20,3
+REC-37532-ORG  , ,TABATHA    ,AARON     ,MCSORLEY  ,19800727,544,V0N2H1,MADEIRA PARK                  ,                                 ,19800727,4
+REC-812998-ORG ,F,ISABELLE   ,ANNALISE  ,ESTERS    ,19930528,320,V0G1Z0,SALMO                         ,                                 ,19930528,5
+REC-211453-ORG ,F,BRYAN      ,          ,BARHAM    ,19300426,               ,      ,ZOGHT                         ,BRYAN@SHAW.CA                    ,19300426,6
+REC-488476-ORG ,F,BLANCH     ,ROLAND    ,BURANDT   ,19151018,336,V3S9V2,SURREY                        ,                                 ,19151018,7
+REC-124849-ORG ,F,VINCENT    ,LESTER    ,CLARKE    ,19330711,598,V0C1J0,CANOE CREEK                   ,VINCENT@GMAIL.COM                ,19330711,8
+REC-989889-ORG ,F,SANDRA     ,STEPHANIE ,REYNARD   ,19210506,350,V8V3X6,VICTORIA                      ,                                 ,10,9
+REC-337593-ORG ,F,ROBERT     ,MICHELLE  ,THOMAS    ,19311007,243,V0N1V9,GIBSONS                       ,                                 ,30,10
+REC-89482-ORG  ,F,GRAYCE     ,MALCOLM   ,HUGHES    ,19690209,240,V0J1S0,FRASER LAKE                   ,                                 ,19690209,11
+REC-282492-ORG , ,JOSHUA     ,COLLEEN   ,EPIFANO   ,19251103,267,V1M2H5,                              ,                                 ,19251103,12
+REC-63138-ORG  ,M,LEDA       ,DERRICK   ,GEORGE    ,19480401,329,V0J2N0,SMITHERS                      ,                                 ,19480401,13
+REC-726050-ORG ,F,TAREN      ,          ,ELROD     ,19971028,347,      ,VANCOUVER                     ,                                 ,19971028,14
+REC-771191-ORG ,F,GERMAN     ,          ,OLIVEIRA  ,,336,V3W0P8,SURREY                        ,                                 ,,15
+REC-562410-ORG ,M,LELIA      ,MACEY     ,FODE      ,19600703,350,V9A3Z4,                              ,                                 ,19600703,16
+REC-694835-ORG ,F,MARTI      ,MALCOLM   ,MELTON    ,19230420,213,V9W2E3,CAMPBELL RIVER                ,                                 ,19230420,17
+REC-322186-ORG ,F,YAEKO      ,HOWE      ,BROWNE    ,19170224,238,V0J1P0,TL'AZT'EN                     ,YAEKO@YAHOO.CA                   ,19170224,18
+REC-244397-ORG ,F,MARLEEN    ,          ,BOXHALL   ,19270414,280,V2V6X6,MISSION                       ,MARLEEN@YAHOO.CA                 ,19270414,19
+REC-447060-ORG ,M,"LORNA , Jr.     ",          ,WITTUM    ,,284,      ,NELSON                        ,                                 ,,20
+REC-658894-ORG ,F,HIEDI      ,JENNIFER  ,MEADOWS   ,19870217,349,V1H1P3,VERNON                        ,                                 ,19870217,21
+REC-519376-ORG ,F,STACIE     ,PHILLIS   ,GASKIN    ,19190208,224,V3C5V8,COQUITLAM                     ,STACIE@GMAIL.COM                 ,19190208,22
+REC-252259-ORG ,F,JIM        ,          ,SOSTER    ,19510220,229,V1G5A1,DAWSON CREEK                  ,                                 ,19510220,23
+REC-3814-ORG   ,F,EVANGELIA  ,EUNICE    ,"PEN , Test      ",19970117,323,V0N3A7,SECHELT                       ,                                 ,19970117,24
+REC-699316-ORG ,F,DEWEY      ,VINCENT   ,MILLER    ,19301223,216,V0E1M0,                              ,DEWEY@TELUS.NET                  ,19301223,25
+REC-2965-ORG   ,F,AMANDA     ,JEREMY    ,DIPPOLD   ,19090710,231,      ,DELTA                         ,                                 ,19090710,26
+REC-176602-ORG ,F,DANIELLE   ,          ,JOHNSON   ,19701015,210,V5G2H6,BURNABY                       ,DANIELLE@YAHOO.COM               ,19701015,27
+REC-234794-ORG ,F,GERALD     ,ELTON     ,WINKLER   ,19610520,238,      ,TACHE                         ,                                 ,19610520,28
+REC-825698-ORG ,F,           ,JENNIFER  ,DELGADO   ,19640223,524,V0N1V0,ROBERTS CREEK                 ,                                 ,19640223,29
+REC-834194-ORG ,M,PHYLLIS    ,KEELEY    ,MANIK     ,19981013,238,V0J1P0,TACHIE VILLAGE                ,PHYLLIS@GMAIL.COM                ,19981013,30
+REC-572905-ORG ,F,HILDRED    ,CARMEL    ,MOLL      ,19061107,353,      ,WARFIELD                      ,                                 ,19061107,31
+REC-492838-ORG ,F,JENNIFER   ,BRETT     ,SCOURAS   ,19470919,336,V3S7L1,SURREY                        ,                                 ,19470919,32
+REC-498715-ORG ,F,MICHELLE   ,DESTYNII  ,SEGURA    ,19031228,280,V2V6S5,MISSION                       ,                                 ,19031228,33
+REC-98336-ORG  , ,YOLANDA    ,DAYNA     ,BANGASH   ,19800709,226,V1C6M2,CRANBROOK                     ,                                 ,19800709,34
+REC-147554-ORG ,F,CATHERINE  ,GAIL      ,MACKRELL  ,19600618,273,V0J2C0,DAWSON CREEK                  ,                                 ,19600618,35
+REC-509243-ORG ,F,LAUREN     ,JULIA     ,PENDLETON ,19140331,268,V0K1V0,PRINCE GEORGE                 ,                                 ,19140331,36
+REC-73892-ORG  ,F,SHIRELY    ,          ,CANEZ     ,19480303,225,V9N8S8,COURTENAY                     ,                                 ,19480303,37
+REC-830752-ORG ,F,LUKE       ,          ,"HILL, Lucky     ",19940318,218,V2R5L7,CHILLIWACK                    ,LUKE@TELUS.NET                   ,19940318,38
+REC-270549-ORG ,F,VINCENZO   ,          ,          ,19770304,316,V0E2S0,REVELSTOKE                    ,                                 ,19770304,39
+REC-116211-ORG ,F,AMALIA     ,VIRGINIA  ,WALZ      ,,340,      ,TELKWA                        ,AMALIA@DMADISCS.COM              ,,40
+REC-891717-ORG ,M,SHERRYL    ,ROLAND    ,PARDUE    ,19821015,398,V0R1L0,MILL BAY                      ,                                 ,19821015,41
+REC-930296-ORG ,F,JAMES      ,HANNA     ,ECHENIQUE ,19420124,210,V3N2M8,BURNABY                       ,JAMES@GMAIL.COM                  ,19420124,42
+REC-711797-ORG ,F,SHALONDA   ,          ,FURRH     ,19170612,274,V4R2E6,MAPLE RIDGE                   ,SHALONDA@SFRS.CA                 ,19170612,43
+REC-275814-ORG ,F,BRIAN      ,          ,SHURMAN   ,19020710,405,V0R1N1,NANAIMO                       ,                                 ,19020710,44
+REC-737298-ORG ,F,"PAGE, Dr.       ",          ,STACHEL   ,19771115,349,V1T6L2,VERNON                        ,PAGE@HOTMAIL.COM                 ,19771115,45
+REC-909742-ORG , ,VERNELL    ,SARAH     ,SPAETH    ,19920726,268,V0K1V0,T'IT'Q'ET                     ,                                 ,19920726,46
+REC-104985-ORG ,M,LORIA      ,KYLIE     ,MERCURIO  ,19191021,205,V0E1B4,ARMSTRONG                     ,LORIA@HOTMAIL.COM                ,19191021,47
+REC-393590-ORG ,M,THOMAS     ,PRUDENCE  ,FISHER    ,19501016,               ,V3R5R5,SURREY                        ,                                 ,19501016,48
+REC-86454-ORG  ,F,MAFALDA    ,THEODORE  ,GURTOWSKI ,19060102,202,V2S2W8,ABBOTSFORD                    ,MAFALDA@YAHOO.COM                ,19060102,49
+REC-453473-ORG ,F,CHARLES    ,          ,KOCH      ,,346,V0E2Z0,VALEMOUNT                     ,                                 ,,50
+REC-567063-ORG ,F,MARGARET   ,CAIN      ,WILLIAMS  ,19681105,368,V0P1H0,QUATHIASKI COVE               ,MARGARET@HOTMAIL.COM             ,19681105,51
+REC-1004312-ORG,F,ANNIE      ,          ,LIEBERSON ,19030926,608,V0J1P0,SOUTHBANK                     ,                                 ,19030926,52
+REC-290350-ORG ,F,MARY       ,          ,MOURO     ,19580731,210,V5H2K7,BURNABY                       ,                                 ,19580731,53
+REC-710700-ORG ,F,MIA        ,ILIYA     ,STAVISH   ,,463,V0N2K0,BAPISTE SMITH                 ,MIA@YAHOO.CA                     ,,54
+REC-247400-ORG ,F,ONIE       ,AARON     ,JOHNSON   ,19920619,               ,V2M6N2,PRINCE GEORGE                 ,ONIE@HOTMAIL.COM                 ,19920619,55
+REC-653002-ORG ,F,LAWRENCE   ,BRIDGET   ,MANOR     ,19330109,293,V0H1T0,1100 386 AVENUE               ,                                 ,19330109,56
+REC-663209-ORG , ,AUDREY     ,ARNOLD    ,          ,19031030,267,V3A7A5,LANGLEY                       ,AUDREY@GMAIL.COM                 ,19031030,57
+REC-718795-ORG ,M,GIORGIA    ,          ,ARMOR     ,19720512,375,V0K1A0,LONE BUTTE                    ,                                 ,19720512,58
+REC-877441-ORG ,F,ALEJANDRINA,          ,SANDERS   ,19660505,               ,V6T2E9,VANCOUVER                     ,                                 ,19660505,59
+REC-337097-ORG ,F,REFUGIA    ,STANLEY   ,MCFARLAND ,19960206,217,V0C1X0,CHETWYND                      ,                                 ,19960206,60
+REC-949657-ORG ,F,ABBEY      ,PRUDENCE  ,ROSS      ,19321020,336,V3W0V7,SURREY                        ,                                 ,19321020,61
+REC-653395-ORG ,M,RAYMUNDO   ,FREDERICK ,BOUTELLE  ,19731026,317,V7C2K1,RICHMOND                      ,                                 ,19731026,62
+REC-259911-ORG ,F,SHIRLEY    ,          ,MUKES     ,19500429,288,V3M7A7,NEW WESTMINSTER               ,SHIRLEY@HOTMAIL.COM              ,19500429,63
+REC-731224-ORG ,F,AMELIA     ,LEROY     ,MANNING   ,19201005,573,V0E1W0,FALKLAND                      ,AMELIA@GMAIL.COM                 ,19201005,64
+REC-32551-ORG  ,F,MARY       ,CARMEN    ,HOPE      ,19690113,473,V0H1K0,KALEDEN                       ,                                 ,19690113,65
+REC-128683-ORG ,F,NOAH       ,          ,LENIO     ,19800506,               ,V3Y2T9,PITT MEADOWS                  ,NOAH@GMAL.COM                    ,19800506,66
+REC-541479-ORG ,F,OSCAR      ,EVELYN    ,PARKER    ,19611002,224,V3E2Z9,COQUITLAM                     ,                                 ,19611002,67
+REC-174117-ORG ,F,KENNETH    ,RHONDA    ,LARSON    ,19880815,               ,V0H1T0,OSOYOOS                       ,                                 ,19880815,68
+REC-988023-ORG ,F,CARMELLA   ,          ,COCROFT   ,19980404,310,V2N2E4,                              ,CARMELLA@COMMUNITY-CONNECTIONS.CA,19980404,69
+REC-173944-ORG ,F,DIANE      ,          ,JARDINE   ,19470205,457,V0K2E0,SAVONA                        ,DIANE@HOTMAIL.COM                ,19470205,70
+REC-24953-ORG  ,F,WILLIAM    ,          ,PEREZ     ,19140921,250,V0J1Y0,                              ,                                 ,19140921,71
+REC-591443-ORG ,M,HERTA      ,WILLIAM   ,GAINES    ,19890204,               ,V0H1V1,FORT ST. JOHN                 ,                                 ,19890204,72
+REC-624403-ORG ,F,CARSON     ,CASEY     ,SNOW      ,19560521,216,V0E1M0,KAMLOOPS                      ,                                 ,19560521,73
+REC-646671-ORG ,F,HAL        ,MERLE     ,          ,19510921,225,V9N9E8,COURTENAY                     ,HAL@HOTMAIL.COM                  ,19510921,74
+REC-946502-ORG ,F,NAOMA      ,LESLIE    ,SAWER     ,19530728,227,V0B1G2,LOWER KOOTNEY                 ,                                 ,19530728,75
+REC-825137-ORG , ,ARLA       ,          ,MATTHEWS  ,19630802,336,V3S8W6,SURREY                        ,ARLA@GMAIL.COM                   ,19630802,76
+REC-566691-ORG ,F,BAILEY     ,CHRISTIAN ,MILES     ,19000222,224,V3B7H9,COQUITLAM                     ,BAILEY@HORTONVENTURES.COM        ,19000222,77
+REC-54386-ORG  ,F,MEREDITH   ,LETITIA   ,COGBURN   ,19601101,268,V0K1V0,XAXLIP                        ,                                 ,19601101,78
+REC-261389-ORG ,F,EDWARD     ,BASIL     ,SHAW      ,,280,V2V6Z8,MISSION                       ,EDWARD@TELUS.NET                 ,,79
+REC-878113-ORG ,F,LARISSA    ,ISABEL    ,THRONDSON ,,309,V0K2E0,POWELL RIVER                  ,LARISSA@HOTMAIL.COM              ,,80
+REC-501695-ORG ,M,RILEY      ,CHARLES   ,LEID      ,19350930,317,V6Y3A3,RICHMOND                      ,                                 ,19350930,81
+REC-54923-ORG  ,F,JILL       ,FELICITY  ,CASTRILLON,19410812,350,V8S4X3,VICTORIA                      ,                                 ,19410812,82
+REC-815492-ORG ,F,LACHLAN    ,SIDNEY    ,ALLEN     ,19550318,216,V0E1M0,KAMLOOPS                      ,LACHLAN@GMAIL.COM                ,19550318,83
+REC-940317-ORG , ,SHARELL    ,WILHELMINA,BEDNARZ   ,19580303,527,V0J1Y0,KISPIOX                       ,                                 ,19580303,84
+REC-68201-ORG  ,F,SUSAN      ,          ,SELLNER   ,19170809,477,V0N1T0,GARIBALDI HIGHLANDS           ,                                 ,19170809,85
+REC-504193-ORG ,F,DONA       ,          ,STANLEY   ,19170405,256,V2B1R5,KAMLOOPS                      ,DONA@HOTMAIL.CA                  ,19170405,86
+REC-120964-ORG ,F,TOMMYE     ,TERRENCE  ,PASCOE    ,19240715,297,V0N2L0,SKATIN                        ,                                 ,19240715,87
+REC-307727-ORG ,F,TRACI      ,          ,CILIBERTI ,19370830,347,V6N1Y3,VANCOUVER                     ,TRACI@GMAIL.COM                  ,19370830,88
+REC-611472-ORG ,F,NIKI       ,SIMONA    ,NEDINA    ,19391113,412,V0R1V0,COOMBS                        ,                                 ,19391113,89
+REC-671751-ORG , ,LATOYA     ,BARRY     ,KIRGAN    ,19111209,               ,      ,                              ,LATOYA@GMAIL.COM                 ,19111209,90
+REC-38296-ORG  ,F,           ,MARIUS    ,PRESSLEY  ,19800507,283,      ,NANAIMO                       ,                                 ,19800507,91
+REC-284272-ORG ,F,NOVA       ,          ,SCARPELLI ,19310717,               ,V0N3G0,GARABALDI HIGHLANDS           ,                                 ,19310717,92
+REC-834445-ORG ,F,SIMONE     ,SHARON    ,DEAN      ,19651213,267,V4W1J5,LANGLEY                       ,                                 ,19651213,93
+REC-203072-ORG ,F,JENNIE     ,ERICA     ,MALONE    ,19690614,624,V0C2R0,BLUEBERRY RIVER FIRST NATION  ,JENNIE@HOTMAIL.COM               ,19690614,94
+REC-663694-ORG ,F,JACK       ,          ,BELL      ,,256,V2B8L9,KAMLOOPS                      ,                                 ,,95
+REC-957309-ORG ,F,CAMILA     ,EUPHEMIA  ,BOGDAN    ,19670902,               ,V2T5B5,ABBOTSFORD                    ,                                 ,19670902,96
+REC-485551-ORG ,F,GENESIS    ,MAXWELL   ,GERJETS   ,19070514,281,V0G1P0,BEAVERFALLS                   ,GENESIS@HOTMAIL.COM              ,19070514,97
+REC-50378-ORG  ,M,TYLER      ,          ,ZIMMERMAN ,19430312,450,V0E2W0,WHITE LAKE                    ,                                 ,19430312,98
+REC-226052-ORG ,F,ROMAN      ,          ,IRWIN     ,19471118,224,V3K3M6,COQUITLAM                     ,ROMAN@HOTMAIL.COM                ,19471118,99
+REC-523065-ORG ,F,ZOE        ,          ,PATEL     ,19830718,277,V1K1B8,ZOGHT                         ,                                 ,19830718,100
+REC-765646-ORG ,F,TAYLAH     ,          ,SMITH     ,19171106,223,V9M3S7,COMOX                         ,                                 ,19171106,101
+REC-988313-ORG ,F,BRODY      ,SIEGFRIED ,PRIVITT   ,19830221,256,V0K1V0,KAMLOOPS                      ,                                 ,19830221,102
+REC-682399-ORG ,M,HANNAH     ,          ,ZIMERMAN  ,19570112,295,V9P1K1,                              ,                                 ,19570112,103
+REC-208157-ORG ,F,JASMINE    ,THERESA   ,VENEY     ,19370517,460,V0K1Y0,LOWER NICOLA                  ,JASMINE@HOTMAIL.COM              ,19370517,104
+REC-383409-ORG ,F,ETHAN      ,ALEESHA   ,ZIPPERER  ,19451225,232,V9L5M1,DUNCAN                        ,                                 ,19451225,105
+REC-309640-ORG ,F,MATISSE    ,          ,NOBLE     ,19081205,314,V2J4M9,                              ,                                 ,19081205,106
+REC-292488-ORG ,F,DONETTA    ,          ,ASHFAQ    ,19470215,               ,V5V3N2,VANCOUVER                     ,                                 ,19470215,107
+REC-527084-ORG ,M,STEVEN     ,ALFRED    ,VELARDE   ,19160527,231,V4E1H6,DELTA                         ,                                 ,19160527,108
+REC-395409-ORG ,M,SACHA      ,CURTIS    ,HEATLY    ,19450313,267,V4W1T6,LANGLEY                       ,                                 ,19450313,109
+REC-170554-ORG ,M,CRAIG      ,          ,PERES     ,19690107,336,V3W0T9,SURREY                        ,                                 ,19690107,110
+REC-263373-ORG ,M,           ,OLIVIA    ,MENDES    ,19750326,430,V9K2N3,                              ,                                 ,19750326,111
+REC-748927-ORG ,F,SUSAN      ,LAZARUS   ,BACON     ,19860625,244,V0P1G0,                              ,SUSAN@TELUS.NET                  ,19860625,112
+REC-169673-ORG ,M,MACHELLE   ,NATASHA   ,RENON     ,,347,      ,VANCOUVER                     ,                                 ,,113
+REC-186924-ORG ,F,BENJAMIN   ,          ,DONNELLY  ,,305,V0N2P0,PORT HARDY                    ,BENJAMIN@COUNTINGONUS.COM        ,,114
+REC-733735-ORG ,F,SALLY      ,          ,FUHLENDORF,19800305,297,V0N2L0,                              ,                                 ,19800305,115
+REC-747858-ORG ,F,BERNARDINA ,          ,MCCARTHY  ,19000729,274,V2X0J6,                              ,                                 ,19000729,116
+REC-699047-ORG ,F,LUELLA     ,          ,MADAY     ,19190414,274,V2X8B9,MAPLE RIDGE                   ,LUELLA@YAHOO.CA                  ,19190414,117
+REC-482574-ORG , ,DARIN      ,MAKENZIE  ,BENTLEY   ,19120218,202,V2S7B1,ABBOTSFORD                    ,DARIN@YAHOO.CA                   ,19120218,118
+REC-754339-ORG ,F,NICHOLAS   ,NATASHA   ,SUKUMAR   ,,317,V7E2C8,RICHMOND                      ,NICHOLAS@HOTMAIL.COM             ,,119
+REC-664537-ORG ,M,GABRIELLE  ,FYYNLAY   ,JACKSON   ,,350,V8R5N9,VICTORIA                      ,GABRIELLE@NBCCA.BC.CA            ,,120
+REC-269583-ORG ,F,VIVIAN     ,NICHOLAS  ,          ,19050730,255,V0A1K0,INVERMERE                     ,                                 ,19050730,121
+REC-408088-ORG ,F,MAGARET    ,JANA      ,THIESSEN  ,19601007,317,V7C5J6,RICHMOND                      ,                                 ,19601007,122
+REC-679657-ORG ,F,WARREN     ,JEREMY    ,RUSSELL   ,19410929,293,V0H1T0,OSOYOOS                       ,WARREN@YAHOO.CA                  ,19410929,123
+REC-624158-ORG ,M,FLETA      ,          ,SCHALL    ,19411015,               ,V4T2S6,WEST KELOWNA                  ,FLETA@YAHOO.CA                   ,19411015,124
+REC-442199-ORG ,F,DENNY      ,CARINA    ,SCHILDER  ,19580526,211,V0J1E0,PRINCE GEORGE                 ,                                 ,19580526,125
+REC-654378-ORG ,F,MARYANNE   ,JOYCE     ,WRIGLESWOR,19350116,256,V0E2N0,MONTY LAKE                    ,                                 ,19350116,126
+REC-363436-ORG ,M,PEGGY      ,          ,          ,19730906,298,V2A8L1,NARAMATA                      ,PEGGY@HOTMAIL.COM                ,19730906,127
+REC-487416-ORG ,F,WILLENE    ,BRETT     ,SANCHEZ   ,19610707,256,      ,KAMLOOPS                      ,                                 ,19610707,128
+REC-184942-ORG ,F,TAD        ,EARL      ,          ,19830612,234,V0E1V2,ENDERBY                       ,                                 ,19830612,129
+REC-738216-ORG ,M,ARLA       ,MARIUS    ,JIANG     ,19450720,350,V8N6K8,VICTORIA                      ,                                 ,19450720,130
+REC-75034-ORG  ,F,HERMAN     ,          ,          ,19360731,350,V8M1X6,VICTORIA                      ,HERMAN@GMAIL.COM                 ,19360731,131
+REC-309770-ORG ,F,MELODY     ,ALASTAIR  ,DIAMOND   ,19240903,281,V0G1P0,BEAVER FALLS                  ,                                 ,19240903,132
+REC-476948-ORG ,F,MISTY      ,HAYDEN    ,          ,19690831,232,V0R2G0,                              ,MISTY@HOTMAIL.COM                ,19690831,133
+REC-701946-ORG ,F,JOHN       ,IDA       ,ANDRIANI  ,19290223,295,V9P1X2,PARKSVILLE                    ,                                 ,19290223,134
+REC-244015-ORG ,F,LINCOLN    ,SIENNA    ,CLECKLER  ,19911022,598,V0C1J0,CANOE CREEK                   ,LINCOLN@HOTMAIL.COM              ,19911022,135
+REC-576271-ORG ,F,JASON      ,VALERIAN  ,TANDEL    ,19811105,283,V9T5B9,NANAIMO                       ,JASON@SHAW.CA                    ,19811105,136
+REC-327106-ORG ,F,MOZELLE    ,          ,BOCK      ,,               ,V0K2G0,BIG LAKE                      ,                                 ,,137
+REC-581541-ORG ,F,KEVIN      ,CEDRIC    ,CLOPP     ,19620924,268,V0K1V0,SETON                         ,                                 ,19620924,138
+REC-180431-ORG ,F,QIANA      ,ALICE     ,ROMAGOSA  ,19460307,295,V9P1E9,PARKSVILLE                    ,                                 ,19460307,139
+REC-379848-ORG ,F,GREGORY    ,          ,JARRETT   ,19031026,463,V0N2K0,BAPISTE SMITH                 ,                                 ,19031026,140
+REC-349758-ORG ,F,OLIVIA     ,DESIRE    ,COLEMAN   ,19060313,329,V0J2N0,302 B RUSS AVE MORICETOWN     ,OLIVIA@HOTMAIL.COM               ,19060313,141
+REC-747414-ORG ,F,JEANNE     ,IDA       ,GRAM      ,19090503,347,V6L1G3,VANCOUVER                     ,                                 ,19090503,142
+REC-290031-ORG ,F,ROBERT     ,          ,JANETZKE  ,19051117,219,V0E1N0,CLEARWATER                    ,ROBERT@HOTMAIL.COM               ,19051117,143
+REC-887013-ORG ,M,BARBARA    ,IDA       ,UMEMOTO   ,19461120,210,V3N2B5,BURNABY                       ,BARBARA@HOTMAIL.COM              ,19461120,144
+REC-857010-ORG ,F,LOGAN      ,          ,BROOM     ,19901005,350,V9B0J6,VICTORIA                      ,LOGAN@SHAW.CA                    ,19901005,145
+REC-550666-ORG ,F,JANET      ,          ,SANTAROSA ,19451111,358,V2G4E4,WILLIAMS LAKE                 ,JANET@INFOWINFIELDDENTALCENTRE.CA,19451111,146
+REC-448292-ORG ,F,MARIN      ,          ,ACEVEDO   ,19851219,287,V0J2A0,NEW HAZELTON                  ,                                 ,19851219,147
+REC-409946-ORG , ,ALLINE     ,          ,TURNER    ,19080409,518,V0X1X1,ROSEDALE                      ,                                 ,19080409,148
+REC-751750-ORG ,F,ISA        ,KIERAN    ,SAILORS   ,19920730,298,V0H1T0,PENTICTON                     ,ISA@HOTMAIL.COM                  ,19920730,149
+REC-326305-ORG ,F,BILLI      ,          ,EDEL      ,,350,V8X2W9,VICTORIA                      ,                                 ,,150
+REC-725811-ORG ,F,SASCHA     ,HERMAN    ,LUKOSIUS  ,19530522,396,V0J2N0,KITWANGA                      ,                                 ,19530522,151
+REC-28092-ORG  ,F,SHAUNNA    ,MEREDITH  ,PIZANIAS  ,19890811,210,V5C3M5,                              ,                                 ,19890811,152
+REC-498893-ORG ,M,MITCHELL   ,SIDNEY    ,LOCK      ,,               ,V0A1H7,GOLDEN                        ,MITCHELL@YAHOO.CA                ,,153
+REC-658509-ORG ,F,REMONA     ,          ,WORLD     ,,310,V0J1P0,PRINCE GEORGE                 ,REMONA@GMAIL.COM                 ,,154
+REC-209036-ORG ,F,DEBORAH    ,JOSELYN   ,GONZALEZ  ,19010817,336,V3S7L6,SURREY                        ,                                 ,19010817,155
+REC-925846-ORG ,F,MARTHA     ,VICTOR    ,FERGUSON  ,19860523,300,V9Y8E6,PORT ALBERNI                  ,                                 ,19860523,156
+REC-225107-ORG , ,SHU        ,ANGUS     ,MYLES     ,19801107,527,V0J1Y4,KISPIOX                       ,                                 ,19801107,157
+REC-512334-ORG ,F,SHANELLE   ,BREANA    ,LOONEY    ,,               ,V4R2C3,MAPLE RIDGE                   ,SHANELLE@GMAIL.COM               ,,158
+REC-126894-ORG , ,KYONG      ,WESLEY    ,MENDOZA   ,19570918,329,V0J2N0,KITIMAT                       ,                                 ,19570918,159
+REC-911654-ORG , ,FRANCES    ,          ,BENETATOS ,19640528,326,V8L2T6,SIDNEY                        ,                                 ,19640528,160
+REC-215050-ORG ,F,PRINCESS   ,BARNABAS  ,EGAMI     ,19091023,305,V0N2P0,                              ,PRINCESS@HOTMAIL.COM             ,19091023,161
+REC-369587-ORG ,F,DOROTHY    ,BASIL     ,CHAMBERLIN,19731119,               ,V0C1R0,DAWSON CREEK                  ,                                 ,19731119,162
+REC-993979-ORG , ,JACKSON    ,JONATHON  ,          ,19170126,               ,V3E2W4,COQUITLAM                     ,                                 ,19170126,163
+REC-294083-ORG , ,           ,STEPHEN   ,EDDIS     ,19620119,234,V0E1V4,SPALTSIN                      ,MARIE@YAHOO.CA                   ,19620119,164
+REC-587732-ORG ,F,JOSLYN     ,BERNARD   ,SLEATH    ,19070825,237,V0C1R0,DEASE LAKE                    ,                                 ,19070825,165
+REC-485934-ORG ,F,HYE        ,FELICITY  ,KOMEN     ,19840318,281,V0G1P0,FRUITVALE                     ,                                 ,19840318,166
+REC-53329-ORG  ,F,MARVA      ,MARINA    ,WARBLE    ,19491115,               ,V2V6W1,MISSION                       ,                                 ,19491115,167
+REC-931785-ORG ,M,FELICITY   ,TYRON     ,HIGGINS   ,19950425,210,V5C2L3,BURNABY                       ,FELICITY@REPXOTIC.COM            ,19950425,168
+REC-262129-ORG ,F,KENA       ,          ,JEROME    ,,232,V0R2P4,DUNCAN                        ,KENA@SHAW.CA                     ,,169
+REC-470810-ORG ,M,JADA       ,          ,NUNN      ,19530531,260,V0X1N2,KEREMEOS                      ,                                 ,19530531,170
+REC-265945-ORG ,F,XANI       ,          ,SOMMER    ,19260518,398,V0R1L0,MILL BAY                      ,XANI@HOTMAIL.COM                 ,19260518,171
+REC-173182-ORG ,M,EMERALD    ,GARY      ,BAMBAS    ,19850217,238,V0J1P0,NAK ASDLI                     ,                                 ,19850217,172
+REC-974155-ORG ,F,NORA       ,ALEXANDRA ,SMITH     ,19670918,280,V2V6W9,MISSION                       ,                                 ,19670918,173
+REC-912185-ORG ,F,RITA       ,TARNEE    ,          ,19701123,347,V5X1E9,VANCOUVER                     ,                                 ,19701123,174
+REC-42214-ORG  ,F,ERIK       ,NICOLE    ,BEALE     ,19521116,293,V0H1T0,1100 386 AVENUE               ,                                 ,19521116,175
+REC-296810-ORG ,F,           ,NATALIE   ,REID      ,19551115,340,V0J2N0,TELKWA                        ,SEBASTIAN@72GMAIL.COM            ,19551115,176
+REC-706610-ORG ,F,           ,LUCIA     ,DIBLASIO  ,19130725,210,V5B4T6,BURNABY                       ,TRAVIS@SHAW.CA                   ,19130725,177
+REC-737874-ORG ,F,CHEVONNE   ,          ,RACHAL    ,19570403,234,V0E1V2,RUTLAND                       ,CHEVONNE@GMAIL.COM               ,19570403,178
+REC-415242-ORG ,F,EARLIE     ,FERGUS    ,EALY      ,19350501,336,V4A8L5,SURREY                        ,EARLIE@GMAIL.COM                 ,19350501,179
+REC-808853-ORG ,F,KELLY      ,ERIC      ,MOSIMANN  ,19871220,349,V1T7S1,VERNON                        ,KELLY@HOTMAIL.COM                ,19871220,180
+REC-322694-ORG ,F,SIMA       ,          ,MOUGH     ,19840506,268,V0K1V0,LILLOOET                      ,                                 ,19840506,181
+REC-676591-ORG ,F,ELODIA     ,BRIDGET   ,STECKBAUER,19490410,350,V0R1L6,VICTORIA                      ,                                 ,19490410,182
+REC-845843-ORG ,F,JANETT     ,          ,KINCANNON ,19570430,390,V0C1J0,CHETWYND                      ,                                 ,19570430,183
+REC-748827-ORG ,M,MATILDA    ,MARY      ,BURFORD   ,19110513,213,V9H1P6,CAMPBELL RIVER                ,                                 ,19110513,184
+REC-258192-ORG ,M,JAMES      ,          ,CHIN      ,19050406,               ,V2R5Z1,CHILLIWACK                    ,JAMES@SHAWLINK.CA                ,19050406,185
+REC-196331-ORG ,F,WILBER     ,WILHELMINA,          ,19520815,202,V2S6R3,ABBOTSFORD                    ,WILBER@GMAIL.COM                 ,19520815,186
+REC-505203-ORG ,F,GLENN      ,TAMARA    ,MARLER    ,19200907,206,V0K1A0,VENERABLES VALLEY             ,                                 ,19200907,187
+REC-998488-ORG ,F,SHARLENE   ,          ,PERRY     ,19500927,218,V0M1A2,CHILLIWACK                    ,                                 ,19500927,188
+REC-966468-ORG ,F,DAVID      ,RONALD    ,WALTERMAN ,,271,V0E2G5,LUMBY                         ,DAVID@HOTMAIL.COM                ,,189
+REC-820502-ORG , ,MAHALIA    ,WILLIAM   ,KIELING   ,19570726,237,V0C1R0,PROPHET RIVER                 ,                                 ,19570726,190
+REC-752484-ORG ,F,JANAY      ,MAUREEN   ,GUETHLEIN ,19450113,288,V3M2G5,NEW WESTMINSTER               ,JANAY@TELUS.NET                  ,19450113,191
+REC-287541-ORG ,F,ELANOR     ,          ,COSTON    ,,               ,V0X1L2,HOPE                          ,ELANOR@GMAIL.COM                 ,,192
+REC-363894-ORG , ,MARIETTE   ,GYTHA     ,ROGERS    ,19951016,336,V3R3W4,SURREY                        ,                                 ,19951016,193
+REC-586049-ORG ,F,DREAMA     ,          ,BRAUN     ,19341105,210,V5G1T8,BURNABY                       ,                                 ,19341105,194
+REC-828556-ORG , ,LUCAS      ,          ,PATTERSON ,19810801,238,V0J1P0,TACHIE                        ,LUCAS@RECOMBO.COM                ,19810801,195
+REC-12615-ORG  ,F,EVITA      ,LANCELOT  ,SUELZLE   ,19570216,               ,V0E1V4,SPALTSIN                      ,EVITA@HOTMAIL.COM                ,19570216,196
+REC-564918-ORG ,F,JARED      ,DARBY     ,          ,19080930,               ,V0G1Y0,ROSSLAND                      ,JARED@GMAIL.COM                  ,19080930,197
+REC-747153-ORG ,F,BULA       ,          ,NOTI      ,19870628,336,V3V5C1,SURREY                        ,                                 ,19870628,198
+REC-950495-ORG ,F,ERIC       ,GILLIAN   ,          ,19691128,274,V2W1X8,SURREY                        ,                                 ,19691128,199
+REC-679248-ORG ,M,ABBIE      ,OLIVER    ,LARKIN    ,,291,V7H2Z1,NORTH VANCOUVER               ,                                 ,,200
+REC-346581-ORG ,F,LIEN       ,TENILLE   ,ESTEB     ,19051102,336,V3V7H5,SURREY                        ,                                 ,19051102,201
+REC-415827-ORG ,F,SYLVIA     ,          ,ALVES     ,19011029,               ,V3V4X5,SURREY                        ,SYLVIA@CNC.BC.CA                 ,19011029,202
+REC-59859-ORG  ,F,MARGET     ,MELINDA   ,TEKELL    ,19420314,277,V1K1B8,MERRITT                       ,                                 ,19420314,203
+REC-23633-ORG  ,F,SHARELL    ,          ,FIELDS    ,,350,V9C4B4,VICTORIA                      ,SHARELL@HOTMAIL.COM              ,,204
+REC-705713-ORG ,F,ISABELLA   ,TARNEE    ,OLSON     ,19591216,256,V0K1V0,KAMLOOPS                      ,                                 ,19591216,205
+REC-904117-ORG ,F,ELANA      ,THOR      ,ELLIOTT   ,19640530,457,V0K2E0,SAVONA                        ,                                 ,19640530,206
+REC-279707-ORG ,F,WILBER     ,BEATRICE  ,VINCENT   ,19080106,350,V9C2W3,VICTORIA                      ,WILBER@HOTMAIL.COM               ,19080106,207
+REC-391317-ORG ,F,PATRICIA   ,YOUSEF    ,LINDEMAN  ,19201022,305,      ,FORT RUPERT                   ,                                 ,19201022,208
+REC-534533-ORG ,F,CHLOE      ,ALISA     ,          ,19690415,477,V0N1T0,GARIBALDI HIGHLANDS           ,                                 ,19690415,209
+REC-747341-ORG , ,BENITO     ,AALIYAH   ,EPPLEY    ,19800928,336,      ,                              ,                                 ,19800928,210
+REC-25033-ORG  , ,MARCELINE  ,ROLAND    ,GARRISON  ,19810410,238,V0J1P0,BINCHE VILLAGE                ,                                 ,19810410,211
+REC-770562-ORG ,F,ZULMA      ,          ,CEBALLOS  ,,336,V3V1C2,SURREY                        ,                                 ,,212
+REC-991300-ORG ,F,BRYAN      ,EUNICE    ,SEVERSON  ,19120721,213,V9W6V3,                              ,                                 ,19120721,213
+REC-271631-ORG , ,ARNITA     ,MOLLY     ,ROLAND    ,,268,V0K1V0,SHALALTH                      ,ARNITA@HOTMAIL.COM               ,,214
+REC-522053-ORG ,F,CHRISTOPHER,          ,LIST      ,,598,V0C1J0,CANOE CREEK                   ,                                 ,,215
+REC-399202-ORG ,F,KIA        ,          ,KIMBROUGH ,19581018,238,V0J1P0,BINCHE VILLAGE                ,                                 ,19581018,216
+REC-574327-ORG ,M,ILANA      ,          ,GARALDE   ,19030327,347,V5N4J2,VANCOUVER                     ,                                 ,19030327,217
+REC-408572-ORG , ,NORENE     ,COREY     ,DOCKRAY   ,19350818,350,V8T1M3,VICTORIA                      ,                                 ,19350818,218
+REC-359865-ORG ,F,ELLI       ,CAMILLE   ,JOHNSON   ,19731229,202,V2S6Z3,ABBOTSFORD                    ,ELLI@YAHOO.COM                   ,19731229,219
+REC-424628-ORG ,F,JOYCE      ,          ,SINGH     ,19890725,338,V0C2K0,TAYLOR                        ,                                 ,19890725,220
+REC-168815-ORG ,F,ALFREDA    ,WINIFRED  ,KLEKAMP   ,19010806,347,V5R1K1,VANCOUVER                     ,ALFREDA@SMARTEVENTS.CA           ,19010806,221
+REC-250546-ORG ,F,JASLYN     ,          ,DEMIENTIEF,19730813,323,      ,GIBSONS                       ,JASLYN@HOTMAIL.COM               ,19730813,222
+REC-433890-ORG ,F,EMIILY     ,ALANA     ,LYNCH     ,19120715,336,V3S3T1,SURREY                        ,                                 ,19120715,223
+REC-176071-ORG , ,ABRAM      ,EVERETT   ,CRATES    ,19691003,               ,V0G1L1,FRUITVALE                     ,                                 ,19691003,224
+REC-778219-ORG ,F,MATTHEW    ,VIVIAN    ,ARNOLD    ,19220516,598,V0C1J0,DOG CREEK                     ,                                 ,19220516,225
+REC-743158-ORG ,F,BRIAN      ,          ,DULMAINE  ,19330418,307,V3E3A6,PORT MOODY                    ,BRIAN@SHAW.CA                    ,19330418,226
+REC-100360-ORG ,M,RHEBA      ,SHARON    ,WILLIAMS  ,19891208,366,V9J1H8,BLACK CREEK                   ,                                 ,19891208,227
+REC-499460-ORG ,F,MONIQUE    ,          ,FLETCHER  ,19830406,               ,V8A4G3,POWELL RIVER                  ,MONIQUE@YAHOO.CA                 ,19830406,228
+REC-695445-ORG ,F,MARKO      ,JEREMY    ,ECKERSLEY-,19800311,346,V0E2Z0,VALEMOUNT                     ,MARKO@GMAIL.COM                  ,19800311,229
+REC-732679-ORG ,F,MELANIE    ,          ,WEBER     ,19310410,630,V0J2R0,PRINCE GEORGE                 ,                                 ,19310410,230
+REC-887459-ORG ,M,           ,          ,CRIDER    ,19740411,202,V2S6Z6,                              ,                                 ,19740411,231
+REC-891018-ORG , ,KIEREN     ,SIDNEY    ,MITCHELL  ,19530901,456,V0P1N0,QUATHIASKI COVE               ,                                 ,19530901,232
+REC-366454-ORG ,M,CONCHA     ,DEMIE     ,TEVEPAUGH ,19191221,270,V0K1A0,LOGAN LAKE                    ,                                 ,19191221,233
+REC-573869-ORG ,M,BILL       ,SKYE      ,SWEET     ,19100701,211,V0J2N0,BURNS LAKE                    ,                                 ,19100701,234
+REC-180061-ORG ,F,NORMA      ,          ,ROBINSON  ,19320102,347,V6A3B8,VANCOUVER                     ,NORMA@HOTMAIL.COM                ,19320102,235
+REC-494344-ORG ,F,SHAYNE     ,BRENDAN   ,VONFRICKEN,19481010,238,V0J3A0,FORT ST. JAMES                ,SHAYNE@SHAW.CA                   ,19481010,236
+REC-311113-ORG ,F,RINA       ,          ,BARRERA   ,19920520,231,V4C5X1,DELTA                         ,RINA@OUTLOOK.COM                 ,19920520,237
+REC-54527-ORG  ,F,ADELLA     ,SIDNEY    ,ALICK     ,19781010,294,V0H1V4,OSOYOOS                       ,                                 ,19781010,238
+REC-459031-ORG ,F,BERNIE     ,KEELEY    ,MORALES   ,19590211,294,V0H1T0,OSOYOOS                       ,BERNIE@HOTMAIL.CA                ,19590211,239
+REC-878622-ORG , ,GARRY      ,YOUSEF    ,          ,19280407,273,V0J2C0,DAWSON CREEK                  ,                                 ,19280407,240
+REC-660104-ORG ,F,ERIN       ,          ,LARSON    ,19630114,350,V8R2R2,VICTORIA                      ,ERIN@HOTMAIL.COM                 ,19630114,241
+REC-840748-ORG ,F,JANIS      ,CLEMENT   ,ZIATS     ,19080814,310,V2L2H3,PRINCE GEORGE                 ,JANIS@GMAIL.COM                  ,19080814,242
+REC-765696-ORG ,F,AALIYAH    ,ALFRED    ,DZWONCZYK ,,312,V0X1W0,PRINCETON                     ,                                 ,,243
+REC-236605-ORG ,F,LALA       ,ALEXANDER ,COLEMAN   ,19361226,341,V8G4A2,TERRACE                       ,                                 ,19361226,244
+REC-373046-ORG ,M,THOMAS     ,          ,SISE      ,19641022,241,V0G1L0,FRUITVALE                     ,THOMAS@HOTMAIL.COM               ,19641022,245
+REC-896077-ORG ,F,MISTY      ,HERMAN    ,WILLBURN  ,19161012,211,V0J1S0,BURNS LAKE                    ,                                 ,19161012,246
+REC-764357-ORG ,F,ANGELICA   ,CHESTER   ,MESSER    ,19730316,               ,V3W2E3,SURREY                        ,ANGELICA@YAHOO.COM               ,19730316,247
+REC-271146-ORG ,F,JEFFREY    ,          ,JUNGER    ,19030102,297,V0N2L0,SKATIN                        ,                                 ,19030102,248
+REC-200527-ORG ,F,TREY       ,TROY      ,JACKSON   ,19670509,               ,V0J1P0,TZ'AZT'EN NATION              ,                                 ,19670509,249
+REC-155968-ORG ,F,           ,FERGUS    ,CARTER    ,19300615,274,V2X8Z3,MAPLE RIDGE                   ,                                 ,19300615,250
+REC-777620-ORG ,F,           ,MARY      ,WEAVER    ,19010210,253,V0J1E0,HOUSTON                       ,                                 ,19010210,251
+REC-443878-ORG ,F,LUCY       ,MAUDE     ,SMADES    ,19800211,419,V0R2H0,VICTORIA                      ,                                 ,19800211,252
+REC-808585-ORG ,F,BERNARDINA ,          ,KUHNKE    ,19231221,310,V2N6T1,PRINCE GEORGE                 ,                                 ,19231221,253
+REC-788556-ORG ,M,MIA        ,ELLOUISE  ,TOLBERT   ,19340123,218,V2P8B4,CHILLIWACK                    ,MIA@GMAIL.COM                    ,19340123,254
+REC-845170-ORG ,M,MELODEE    ,ANNA      ,AUSMAN    ,19501031,347,V5L2J2,VANCOUVER                     ,                                 ,19501031,255
+REC-934516-ORG ,F,JEAN-CLAUDE,          ,CUTLER    ,19550417,283,V0R2H0,NANAIMO                       ,                                 ,19550417,256
+REC-871490-ORG , ,SHARMAINE  ,          ,MILES     ,19381104,268,V0K1V0,TSK WAY LAXW                  ,SHARMAINE@HOTMAIL.COM            ,19381104,257
+REC-320969-ORG ,F,MATTHEW    ,BRIAN     ,REID      ,19140916,262,V8C1P3,KITIMAT                       ,                                 ,19140916,258
+REC-390780-ORG ,M,ALESSANDRA ,SHANA     ,PAVLIDIS  ,19330213,258,V1W3L7,KELOWNA                       ,                                 ,19330213,259
+REC-30089-ORG  ,F,HENRY      ,ADRIAN    ,VILLEDA   ,19220426,368,      ,HERIOT BAY                    ,HENRY@HOTMAIL.COM                ,19220426,260
+REC-459560-ORG ,F,SHIRLEY    ,SIEGFRIED ,DEBON     ,19800712,348,V0J3A0,SAIK'UZ FIRST NATION          ,                                 ,19800712,261
+REC-755087-ORG ,F,NICHOLAS   ,TORI      ,HICKMAN   ,19010809,291,V7P3K4,NORTH VANCOUVER               ,NICHOLAS@GMAIL.COM               ,19010809,262
+REC-303213-ORG ,M,FRITZ      ,ELSA      ,FEENEY    ,19910618,306,V0N2P0,PORT MCNEILL                  ,                                 ,19910618,263
+REC-189184-ORG ,F,VALERIE    ,WALENTIN  ,SILVEUS   ,19010515,231,V4L1K6,DELTA                         ,                                 ,19010515,264
+REC-315647-ORG ,F,HAYDEN     ,          ,MCCORD    ,19210919,297,V0N2L0,SKATIN LOT 10                 ,HAYDEN@VANISLEMARINA.COM         ,19210919,265
+REC-992942-ORG ,F,JOHN       ,          ,GARCIA    ,19481229,317,V7C5M7,RICHMOND                      ,                                 ,19481229,266
+REC-518272-ORG ,F,MARGENE    ,HILDA     ,          ,19150418,398,      ,MILL BAY                      ,                                 ,19150418,267
+REC-572983-ORG ,F,COURTNEY   ,TAYLOR    ,WOLFE     ,19590109,258,V1Y3S4,KELOWNA                       ,                                 ,19590109,268
+REC-286087-ORG ,M,REMA       ,ROGER     ,FERRELL   ,19540906,231,V4C5Y4,DELTA                         ,REMA@LIVE.CA                     ,19540906,269
+REC-671723-ORG , ,PURA       ,JULIAN    ,BROOKER   ,19140615,350,V8T5A1,VICTORIA                      ,PURA@BIGBROTHERSVANCOUVER.COM    ,19140615,270
+REC-170667-ORG ,F,MYRL       ,VALERIE   ,BROWN     ,19391206,348,V0J3A0,SAIKUZ                        ,MYRL@HOTMAIL.COM                 ,19391206,271
+REC-668470-ORG ,F,KIYOKO     ,RILEY     ,YANTZER   ,19930811,               ,V3L5L1,PORT MOODY                    ,                                 ,19930811,272
+REC-816955-ORG ,F,ANGELIQUE  ,          ,WRIGHT    ,19720918,               ,V2X3T6,MAPLE RIDGE                   ,ANGELIQUE@POINTFOUR.COM          ,19720918,273
+REC-233611-ORG ,F,TIMMY      ,          ,WILLIAMS  ,19611224,400,V0R1K5,                              ,TIMMY@YAHOO.COM                  ,19611224,274
+REC-770638-ORG , ,SAMANTHA   ,CONSTANTIN,BULLOCK   ,,399,V8K1P4,SALT SPRING ISLAND            ,SAMANTHA@HOTMAIL.COM             ,,275
+REC-136548-ORG ,F,BOB        ,DARCIE    ,ARTIS     ,19031021,277,V1K1B8,COLDWATER                     ,BOB@GMAIL.COM                    ,19031021,276
+REC-767549-ORG ,F,RICH       ,BARBARA   ,REID      ,19431010,               ,V0J3A0,SAIK'UZ FIRST NATION          ,RICH@LIVE.NK                     ,19431010,277
+REC-218178-ORG ,F,CHARLES    ,JENNIFER  ,PRIEST    ,19931008,               ,V0J1P0,BINCHE VILLAGE                ,CHARLES@HOTMAIL.CA               ,19931008,278
+REC-287987-ORG ,F,EMMY       ,          ,GILL      ,19670531,350,V9A7B2,VICTORIA                      ,                                 ,19670531,279
+REC-978889-ORG ,F,FRANCES    ,          ,CHIALASTRI,19361013,316,V0E2S1,REVELSTOKE                    ,                                 ,19361013,280
+REC-690860-ORG ,M,MONIQUE    ,DELLA     ,POCHE     ,19471215,250,V0J1Y0,GITANMAAX                     ,                                 ,19471215,281
+REC-600345-ORG ,F,ANTON      ,MAY       ,          ,19361216,336,V3T0B2,SURREY                        ,ANTON@GMAIL.COM                  ,19361216,282
+REC-58030-ORG  ,F,FLORINDA   ,SHIRLEY   ,NYESTE    ,,214,V1N4L1,CASTLEGAR                     ,                                 ,,283
+REC-644694-ORG ,F,MARK       ,JORDAN    ,WALLACE   ,19490801,310,V2M3M5,PRINCE GEORGE                 ,                                 ,19490801,284
+REC-367543-ORG ,F,MEG        ,          ,ZILM      ,19280430,350,V8Z7J1,VICTORIA                      ,                                 ,19280430,285
+REC-298989-ORG ,M,ERIC       ,TAYLOR    ,OCEPEK    ,,368,V0P1N0,HERIOT BAY                    ,                                 ,,286
+REC-454596-ORG ,F,MARCHELLE  ,JOSELYN   ,STROPES   ,,237,V0C1R0,FORT NELSON                   ,MARCHELLE@HOTMAIL.COM            ,,287
+REC-246249-ORG ,F,CHARLES    ,FREDERICA ,PELTON    ,,350,V9C1V9,VICTORIA                      ,                                 ,,288
+REC-291486-ORG ,F,CLAUDINE   ,SAMANTHA  ,ROBSON    ,19640717,314,V2J6R4,QUESNEL                       ,CLAUDINE@GMAIL.COM               ,19640717,289
+REC-742826-ORG ,F,           ,MACKENZIE ,EGLINTON  ,19321217,693,V0C2C0,TOMSLAKE                      ,                                 ,19321217,290
+REC-379083-ORG ,F,GEORGEANN  ,MEREDITH  ,JENNINGS  ,19850830,347,V5K1K4,VANCOUVER                     ,GEORGEANN@YAHOO.CA               ,19850830,291
+REC-229391-ORG , ,RETHA      ,BREONY    ,JUAREZ    ,19870320,258,V1X7V9,KELOWNA                       ,                                 ,19870320,292
+REC-230832-ORG , ,           ,MARILYN   ,GIRARD    ,19950301,347,V6R2N5,VANCOUVER                     ,SUELLEN@SHAW.CA                  ,19950301,293
+REC-417744-ORG ,F,MICHAEL    ,WINIFRED  ,TIERNEY   ,19080221,299,V3Y1E5,PITT MEADOWS                  ,MICHAEL@GMAIL.COM                ,19080221,294
+REC-590501-ORG ,F,MICHAEL    ,          ,DALLMAN   ,19680104,223,V9M3V2,COMOX                         ,                                 ,19680104,295
+REC-308943-ORG ,F,CURTIS     ,ABRAHAM   ,MAMOLA    ,19170417,291,V7H2Y2,NORTH VANCOUVER               ,                                 ,19170417,296
+REC-650638-ORG ,M,ELLA       ,JARVIS    ,ARIAS     ,19681128,282,V0G1R0,                              ,                                 ,19681128,297
+REC-218240-ORG ,F,MYONG      ,          ,GORROSTIET,,232,V9L6G9,DUNCAN                        ,MYONG@YAHOO.COM                  ,,298
+REC-20490-ORG  ,F,PHYLISS    ,KEVIN     ,          ,19920614,224,V3K1W2,COQUITLAM                     ,PHYLISS@HOTMAIL.COM              ,19920614,299
+REC-788598-ORG ,F,SANTO      ,SHANE     ,SIMON     ,19770903,262,V8C1V7,                              ,                                 ,19770903,300
+REC-485052-ORG ,F,HALINA     ,          ,          ,19090625,238,V0J1P0,                              ,HALINA@HOTMAIL.COM               ,19090625,301
+REC-898772-ORG ,F,CRYSTAL    ,ARKI      ,BINKLEY   ,19331102,               ,V1K1B8,SALMON ARM                    ,CRYSTAL@GMAIL.COM                ,19331102,302
+REC-800993-ORG ,F,OLIVIA     ,          ,HEIDRICH  ,19820812,227,V0B2P0,CRESTON                       ,                                 ,19820812,303
+REC-727208-ORG ,F,LARISSA    ,ROBERTA   ,MANN      ,19991223,329,V0J2N0,KITIMAT                       ,                                 ,19991223,304
+REC-155581-ORG ,F,ROBYN      ,GERARD    ,HENSEY    ,19261219,               ,V0K1V0,XAXLIP                        ,ROBYN@GMAIL.COM                  ,19261219,305
+REC-749163-ORG ,F,ROBERT     ,          ,SHAFFER   ,19050630,341,V8G2G3,TERRACE                       ,                                 ,19050630,306
+REC-169929-ORG ,F,ROSE       ,HILDA     ,LAWSON    ,19690514,341,V8G3X4,TERRACE                       ,ROSE@YAHOO.COM                   ,19690514,307
+REC-311024-ORG ,F,NICHOLAS   ,          ,JONES     ,19200619,               ,V0R1S0,BOWSER                        ,                                 ,19200619,308
+REC-215464-ORG ,F,KIANDRA    ,ALAN      ,SMITH     ,19030220,329,V0J2N0,HOUSTON                       ,KIANDRA@GMAIL.COM                ,19030220,309
+REC-224219-ORG ,F,WANDA      ,ROLAND    ,SCHIFFELBE,19900115,341,V8G4B1,TERRACE                       ,WANDA@HOTMAIL.COM                ,19900115,310
+REC-284162-ORG ,F,ELISHA     ,GWENDOLYN ,ESCUE     ,19411122,               ,      ,PRINCE GEORGE                 ,                                 ,19411122,311
+REC-183451-ORG ,F,MARY       ,JURGEN    ,BYRT      ,19570620,210,V5J3Y8,BURNABY                       ,MARY@HOMEINSTEAD.COM             ,19570620,312
+REC-457028-ORG ,F,KRISTEN    ,MACEY     ,VITRANO   ,19620301,234,V0E1E0,ENDERBY                       ,KRISTEN@GMAIL.COM                ,19620301,313
+REC-353108-ORG ,M,AMAYA      ,KEVIN     ,ALLEN     ,19711105,317,V6X1L3,RICHMOND                      ,                                 ,19711105,314
+REC-38766-ORG  ,F,AUDRIE     ,ESTELLE   ,CRAWLEY   ,19520626,525,      ,EDGEWATER                     ,                                 ,19520626,315
+REC-468795-ORG ,F,DYLAN      ,JEREMY    ,JOHNSON   ,19240214,268,V0K1V0,PRINCE GEORGE                 ,DYLAN@GMAIL.COM                  ,19240214,316
+REC-401930-ORG ,F,JYE        ,LUCY      ,          ,19220624,358,V2G4Y1,WILLIAMS LAKE                 ,                                 ,19220624,317
+REC-588114-ORG ,F,BAILLEY    ,MATTHEW   ,VALLE     ,19610806,348,      ,STONEY CREEK                  ,                                 ,19610806,318
+REC-934888-ORG ,M,CANDICE    ,GILBERT   ,ALEMAN    ,19260313,350,V8Z7G4,VICTORIA                      ,                                 ,19260313,319
+REC-611107-ORG ,F,SIAN       ,BRICE     ,CARMICHAEL,19910831,308,      ,TUPPER                        ,                                 ,19910831,320
+REC-550992-ORG , ,RUFUS      ,RICHARD   ,MORRILL   ,,210,V5J1W8,BURNABY                       ,                                 ,,321
+REC-297746-ORG ,F,ALIZA      ,BLAKE     ,PERRONI   ,19920601,218,V2R4K1,CHILLIWACK                    ,ALIZA@WWSS.COM                   ,19920601,322
+REC-376764-ORG ,F,JULIETTA   ,MACEY     ,AFFORD    ,19091104,314,V2J6X8,                              ,                                 ,19091104,323
+REC-632706-ORG ,M,LETTIE     ,AUGUSTINE ,WARNER    ,19950404,655,V0N1V1,LANGDALE                      ,LETTIE@CITYWEST.CA               ,19950404,324
+REC-294251-ORG ,F,KENDRICK   ,ANGUS     ,TU        ,19651222,268,V0K1V0,BRIDGE RIVER BAND             ,                                 ,19651222,325
+REC-175809-ORG ,F,OSCAR      ,MATHILDA  ,STOTLAR   ,19870218,283,V9T6P5,NANAIMO                       ,OSCAR@HOTMAIL.COM                ,19870218,326
+REC-84036-ORG  ,M,JEFFIE     ,          ,TARANTINO ,19580519,373,V0K1T0,                              ,                                 ,19580519,327
+REC-367494-ORG ,F,MARIE      ,TYRON     ,ELLIS     ,19011128,442,V0T1S0,QUEEN CHARLOTTE CITY          ,                                 ,19011128,328
+REC-659774-ORG ,F,MARY       ,          ,SMITH     ,19020109,355,V7M1J1,WEST VANCOUVER                ,                                 ,19020109,329
+REC-495085-ORG ,F,JESSENIA   ,CEDRIC    ,THIESSEN  ,19640505,               ,V0P1G0,TSXANA                        ,JESSENIA@YAHOO.COM               ,19640505,330
+REC-196317-ORG ,M,GARY       ,ADOLPH    ,MARTINEZ  ,19320629,238,V0J1P0,VANDERHOOF                    ,                                 ,19320629,331
+REC-434256-ORG ,F,FRASER     ,          ,DOUGLAS   ,,348,      ,VANDERHOOF                    ,FRASER@SHAW.CA                   ,,332
+REC-897642-ORG ,F,BROOK      ,          ,FONTENOT  ,19760703,247,V0J1N0,                              ,BROOK@HOTMAIL.COM                ,19760703,333
+REC-93743-ORG  ,F,CINDI      ,          ,KISSMAN   ,19491026,               ,V5B2X4,BURNABY                       ,CINDI@LIVE.CA                    ,19491026,334
+REC-194347-ORG ,F,JEWEL      ,          ,THOMAS    ,19030210,313,V9K1R7,QUALICUM BEACH                ,                                 ,19030210,335
+REC-559542-ORG ,F,MACK       ,          ,CLARKE    ,,258,V1X6M2,KELOWNA                       ,MACK@GMAIL.COM                   ,,336
+REC-60498-ORG  ,F,MARTIN     ,NICOLE    ,BLAISE    ,19850619,257,V0G1M0,COOPER CREEK                  ,                                 ,19850619,337
+REC-573081-ORG ,F,MAUDE      ,          ,HENRY     ,19980111,291,V7J3K5,NORTH VANCOUVER               ,MAUDE@LIVE.CA                    ,19980111,338
+REC-882163-ORG , ,DORENE     ,ADELAIDE  ,          ,19731016,415,V4T1G7,WEST KELOWNA                  ,DORENE@HOTMAIL.COM               ,19731016,339
+REC-897814-ORG ,F,MICHALE    ,ALEXIS    ,RHEY      ,,564,V0N1T0,                              ,                                 ,,340
+REC-509686-ORG ,F,KATHERINA  ,HERMAN    ,LINZIE    ,19130407,               ,V9B3Y2,VICTORIA                      ,KATHERINA@GMAIL.COM              ,19130407,341
+REC-278116-ORG ,F,NICKY      ,MATHILDA  ,GRIPPO    ,19400118,472,V0M1A1,CHEHALIS                      ,NICKY@HOTMAIL.COM                ,19400118,342
+REC-463739-ORG ,F,           ,EMMANUEL  ,BRITT     ,19370225,267,V2Y2M2,LANGLEY                       ,GAY@SYSTEMATIC.BC.CA             ,19370225,343
+REC-426988-ORG ,F,DAWN       ,KELLY     ,LILYQUIST ,19650718,203,V0N1A0,3/3/2011,                                 ,19650718,344
+REC-64066-ORG  , ,SID        ,          ,MCCLEAN   ,19130904,238,V0J1P0,NAKADZLI                      ,                                 ,19130904,345
+REC-826956-ORG ,M,BILLY      ,LEROY     ,BROCKMAN  ,19480804,238,V0J1P0,TZ'AZT'EN NATION              ,BILLY@GMAIL.COM                  ,19480804,346
+REC-711904-ORG ,M,JANISE     ,TIAHANA   ,LILL      ,19760905,201,      ,                              ,                                 ,19760905,347
+REC-70106-ORG  ,F,SHANAYE    ,GLADYS    ,BRYANT    ,19840710,               ,V0J3A0,FORT ST. JAMES                ,                                 ,19840710,348
+REC-343751-ORG ,F,ELIZABETH  ,          ,COLBY     ,19550809,347,V5T2J8,VANCOUVER                     ,                                 ,19550809,349
+REC-419658-ORG ,M,LILLIAM    ,          ,MATTHEWS  ,19710611,227,      ,CRESTON                       ,                                 ,19710611,350
+REC-965820-ORG ,F,VALERIE    ,RUTH      ,HARTJE    ,19850929,375,V0K1X3,LONE BUTTE                    ,VALERIE@HOTMAIL.COM              ,19850929,351
+REC-226732-ORG ,M,LOLA       ,JANA      ,HUYNH     ,19970124,               ,V6A1M9,                              ,LOLA@GMAIL.COM                   ,19970124,352
+REC-370307-ORG ,F,CHERISH    ,          ,CASSIDY   ,19480313,224,V3B8G2,COQUITLAM                     ,CHERISH@TRUEKEYRESORTS.COM       ,19480313,353
+REC-95035-ORG  , ,VALENTINA  ,          ,MIRANDA   ,19220104,341,V0J1Z0,TERRACE                       ,                                 ,19220104,354
+REC-672990-ORG , ,RYAN       ,          ,PAUL      ,19370527,329,V0J2X0,SMITHERS                      ,RYAN@GMAIL.COM                   ,19370527,355
+REC-541169-ORG ,M,KERRY      ,GRIFFIN   ,MISIR     ,19170919,293,V0H1T0,                              ,                                 ,19170919,356
+REC-327947-ORG ,M,KRISTLE    ,          ,          ,,               ,V7P3K4,                              ,                                 ,,357
+REC-67788-ORG  ,M,MARCOS     ,PATRICIA  ,CHAGAS    ,19470806,241,V0G1L0,SALMO                         ,                                 ,19470806,358
+REC-134979-ORG ,F,FRIEDA     ,JACQUELINE,SAPYTA    ,19780202,268,      ,TITQET RESERVE                ,                                 ,19780202,359
+REC-214571-ORG ,F,ASHLEA     ,PRUDENCE  ,RIDDLE    ,19771106,504,V0L1A0,WILLIAMS LAKE                 ,ASHLEA@GMAIL.COM                 ,19771106,360
+REC-792083-ORG ,F,YU         ,          ,ZIERSCH   ,19910820,405,V0R1N2,COWICHAN BAY                  ,                                 ,19910820,361
+REC-757470-ORG ,F,TIJUANA    ,DAVID     ,CHRISTENSE,19200520,283,V9R6T2,NANAIMO                       ,                                 ,19200520,362
+REC-717379-ORG , ,PHILLIS    ,          ,MARQUARDT ,19780405,416,V0J2N0,MORICETOWN                    ,                                 ,19780405,363
+REC-67083-ORG  ,F,           ,ALEXANDER ,MABEY     ,19281122,239,V0C1N0,FORT ST. JOHN                 ,JEFFEREY@GMAIL.COM               ,19281122,364
+REC-758501-ORG ,F,EMIILY     ,LESLIE    ,APONTE    ,19740222,313,      ,                              ,                                 ,19740222,365
+REC-44688-ORG  ,F,RONDA      ,VIOLET    ,KIRWAN    ,19591212,310,V2K4B5,PRINCE GEORGE                 ,                                 ,19591212,366
+REC-515565-ORG ,M,TIMOTHY    ,JED       ,HEWSON    ,19011206,398,V0R1L0,MILL BAY                      ,                                 ,19011206,367
+REC-197018-ORG ,M,JULIETA    ,          ,FINK      ,19620614,206,      ,VENABLES VALLEY               ,JULIETA@HOTMAIL.COM              ,19620614,368
+REC-48876-ORG  ,F,ALLYSON    ,          ,KUHARIK   ,19741230,336,V3W4P3,SURREY                        ,ALLYSON@HOTMAIL.COM              ,19741230,369
+REC-118311-ORG , ,NAOMI      ,VICTOR    ,ESPOSITO  ,19500418,316,V0E2S0,                              ,                                 ,19500418,370
+REC-873354-ORG ,F,SHIRLEY    ,GLENICE   ,VILLEGAS  ,19140521,238,V0J1P0,TAKLA LANDING                 ,SHIRLEY@SYLVANDISTRIBUTION.COM   ,19140521,371
+REC-283230-ORG ,M,JASMYN     ,YVAN      ,VALDIVIEZO,19980411,477,V0N1T0,GARIBALDI HIGHLANDS           ,                                 ,19980411,372
+REC-983933-ORG ,F,           ,MIRA      ,REID      ,19500515,231,V4C5E3,DELTA                         ,                                 ,19500515,373
+REC-24792-ORG  ,M,CECIL      ,          ,HARTT     ,,336,V3W6X6,SURREY                        ,                                 ,,374
+REC-305672-ORG ,F,RYAN       ,BRONWYN   ,          ,19741129,489,V0E3A0,VAVENBY                       ,                                 ,19741129,375
+REC-227528-ORG ,F,MYUNG      ,          ,PRESS     ,19310920,211,V0J1E1,BURNS LAKE                    ,                                 ,19310920,376
+REC-855334-ORG ,F,THU        ,          ,MASIAS    ,19380611,396,V0J2N0,KITWANGA                      ,                                 ,19380611,377
+REC-895780-ORG ,F,           ,JARVIS    ,          ,,255,V0K1K0,INVERMERE                     ,ADELIA@YAHOO.CA                  ,,378
+REC-823530-ORG ,M,YEN        ,          ,          ,19200614,267,V4W1V6,LANGLEY                       ,                                 ,19200614,379
+REC-177338-ORG ,F,MERVIN     ,REILLEY   ,MCVICAR   ,19940903,               ,      ,VICTORIA                      ,                                 ,19940903,380
+REC-576137-ORG , ,PATRICIA   ,          ,SCARCE    ,19360202,231,V4K4E2,DELTA                         ,PATRICIA@NATIONALSURGERY.COM     ,19360202,381
+REC-397734-ORG ,F,SHAWNNA    ,          ,          ,19800515,261,V1A2Y6,KIMBERLEY                     ,SHAWNNA@SHAW.CA                  ,19800515,382
+REC-646702-ORG ,F,GAYLORD    ,JONATHON  ,GUIFFRIDA ,19420823,419,V0R2H0,VICTORIA                      ,GAYLORD@YAHOO.COM                ,19420823,383
+REC-587176-ORG , ,CHARLOTTE  ,          ,ROOT      ,19500315,347,V6J2E6,VANCOUVER                     ,                                 ,19500315,384
+REC-147975-ORG ,M,BAILEY     ,ANNABELLA ,MADDEN    ,19170506,224,V3E3K9,COQUITLAM                     ,                                 ,19170506,385
+REC-281618-ORG ,M,ZACHARY    ,SUSAN     ,DEWOLFE   ,19881203,412,V0R1V0,COOMBS                        ,                                 ,19881203,386
+REC-916819-ORG ,F,           ,          ,SIN       ,19030809,238,V0J1P0,                              ,                                 ,19030809,387
+REC-180664-ORG ,F,SACHIN     ,ALVIN     ,LODGE     ,19410709,323,V0N3A1,GIBSONS                       ,                                 ,19410709,388
+REC-508773-ORG ,F,LILI       ,          ,MIDDAUGH  ,19830604,219,V0E1N0,CLEARWATER                    ,                                 ,19830604,389
+REC-660074-ORG ,M,JOSEPHINE  ,          ,          ,19980611,477,V0N1T0,                              ,                                 ,19980611,390
+REC-496981-ORG ,F,BILL       ,HAYLEY    ,GRIMWADE  ,19340921,218,V2P6C5,CHILLIWACK                    ,                                 ,19340921,391
+REC-159813-ORG ,M,ERIN       ,          ,HOPKINS   ,,293,V0H1T0,OSOYOOS                       ,ERIN@MSN.COM                     ,,392
+REC-926827-ORG ,F,ASHLEY     ,ANITA     ,WEBB      ,19000521,317,V7A3S9,RICHMOND                      ,                                 ,19000521,393
+REC-113394-ORG ,F,JENICE     ,KIRA      ,          ,19831024,336,V3S8L9,CLOVERDALE                    ,                                 ,19831024,394
+REC-997458-ORG ,F,NOAH       ,CLAUDE    ,PORTER    ,,               ,V6T2K7,VANCOUVER                     ,NOAH@MSN.COM                     ,,395
+REC-755448-ORG ,F,HUBERT     ,          ,SEGER     ,19171204,241,V0G1L0,SALMO                         ,                                 ,19171204,396
+REC-539385-ORG ,F,SEPTEMBER  ,CORALIE   ,BURNELL   ,19780808,415,V4T3G7,WEST KELOWNA                  ,                                 ,19780808,397
+REC-694923-ORG ,F,ISIDRO     ,CARMEN    ,HAMMRICH  ,19701126,268,V0K1V0,XAXLIIP                       ,ISIDRO@XPLORNET.COM              ,19701126,398
+REC-250548-ORG , ,GOLDA      ,BONITA    ,LEWIS     ,19771201,241,V0G1L0,SALMO                         ,                                 ,19771201,399
+REC-47320-ORG  ,F,IZETTA     ,KAITLIN   ,LEVINE    ,19850415,310,V2N5B8,                              ,                                 ,19850415,400
+REC-826229-ORG ,F,GEORGIANNE ,MACKINLEY ,LITTLE    ,19820826,224,V3E2W2,COQUITLAM                     ,                                 ,19820826,401
+REC-534282-ORG ,F,CHRISTOPHER,BAYLEY    ,GARRETT   ,19180312,462,V0C2W0,WONOWON                       ,CHRISTOPHER@HOTMAIL.COM          ,19180312,402
+REC-991316-ORG ,M,FELECIA    ,          ,JOHNSON   ,19250120,277,V1K1G2,                              ,                                 ,19250120,403
+REC-810090-ORG ,F,GORDON     ,DEAN      ,VANTIMMERE,19510903,390,      ,ABBOTSFORD                    ,                                 ,19510903,404
+REC-272600-ORG , ,RICKI      ,CORA      ,          ,19230601,349,V1B3B1,VERNON                        ,                                 ,19230601,405
+REC-126272-ORG ,F,ELMO       ,          ,SEAM      ,19341123,283,V9X1C3,NANAIMO                       ,ELMO@SHAW.CA                     ,19341123,406
+REC-32485-ORG  ,M,LAVONA     ,ALEESHA   ,SPURLOCK  ,19510704,463,V0N2K0,MOUNT CURRIE                  ,                                 ,19510704,407
+REC-521082-ORG ,F,ALEXANDRA  ,          ,GRESENS   ,19931217,244,V0P1G0,TSXANA                        ,ALEXANDRA@HOTMAIL.COM            ,19931217,408
+REC-362278-ORG ,F,KATHEY     ,BARRY     ,          ,19070909,753,V0K2E1,105 MILE POST                 ,                                 ,19070909,409
+REC-346845-ORG ,F,CARLA      ,          ,ZOLA      ,19651213,238,V0J1P0,TACHIE VILLAGE                ,                                 ,19651213,410
+REC-561100-ORG ,M,SARAH      ,          ,DEBLOIS   ,19160922,               ,V8J1V4,PRINCE RUPERT                 ,SARAH@HOTMAIL.COM                ,19160922,411
+REC-634328-ORG ,F,JOEL       ,ZACHARY   ,          ,19451115,291,V8B0C2,NORTH VANCOUVER               ,                                 ,19451115,412
+REC-737054-ORG ,F,DORIE      ,ELBERT    ,GISCHEL   ,19141027,210,V5H4M9,                              ,DORIE@HOTMAIL.COM                ,19141027,413
+REC-769258-ORG ,F,JAMIE      ,          ,          ,19010122,317,V6Y4B9,RICHMOND                      ,JAMIE@HOTMAIL.COM                ,19010122,414
+REC-299360-ORG , ,LEILA      ,WESLEY    ,SASIN     ,19990411,336,V3W0N7,SURREY                        ,                                 ,19990411,415
+REC-880898-ORG ,F,DOMENIQUE  ,          ,COOPER    ,19140301,241,V0G1L0,SALMO                         ,                                 ,19140301,416
+REC-296257-ORG ,F,TROY       ,ASHLEY    ,TROY      ,19840209,336,V3R1W1,SURREY                        ,TROY@CSLI.COM                    ,19840209,417
+REC-653463-ORG ,F,BRANDY     ,KAITLIN   ,GEOGHAGAN ,19250401,564,      ,SQUAMISH                      ,BRANDY@HOTMAIL.COM               ,19250401,418
+REC-448526-ORG ,F,EUNICE     ,PAUL      ,CHING     ,19730915,               ,V3W0N1,                              ,                                 ,19730915,419
+REC-15579-ORG  ,F,SHARON     ,VINCENT   ,CONTRERAS ,19160916,484,V0R1X7,GABRIOLA ISLAND               ,                                 ,19160916,420
+REC-418203-ORG ,F,LORINA     ,DARCIE    ,BARBER    ,19780907,283,V9X1C9,NANAIMO                       ,                                 ,19780907,421
+REC-472268-ORG ,M,ADAM       ,DONALD    ,SANCHEZ   ,19851022,340,V0J2X1,DAWSON CREEK                  ,ADAM@GMAIL.COM                   ,19851022,422
+REC-464023-ORG ,M,NATHANIEL  ,BRIAN     ,PACHMAYER ,19381207,               ,      ,NANAIMO                       ,                                 ,19381207,423
+REC-520720-ORG ,F,JAYDEN     ,          ,KIBBLER   ,19080209,218,V2P2V2,                              ,                                 ,19080209,424
+REC-832292-ORG ,F,KEVIN      ,          ,LIDDELL   ,,365,V0N2K0,TIPELLA                       ,KEVIN@YAHOO.COM                  ,,425
+REC-413055-ORG , ,KATHYRN    ,JARED     ,PHILLIPS  ,19950207,336,V4A4W5,SURREY                        ,                                 ,19950207,426
+REC-988101-ORG ,F,ELBERT     ,GERARD    ,PHILLIPS  ,19540620,246,V0H1H2,GRAND FORKS                   ,                                 ,19540620,427
+REC-542634-ORG ,M,SAM        ,ROBIN     ,GOU       ,19480612,               ,V3E3E4,COQUITLAM                     ,                                 ,19480612,428
+REC-616907-ORG ,F,CARIDAD    ,          ,POLASEK   ,19010501,378,V4T1P4,WESTBANK                      ,                                 ,19010501,429
+REC-234253-ORG ,F,LUCAS      ,NEAL      ,PIASECKI  ,19840314,               ,V0N2P0,QUATSINO                      ,                                 ,19840314,430
+REC-393345-ORG ,F,DAVID      ,EUPHEMIA  ,MIELS     ,19341218,               ,      ,BINCHE KEYOH                  ,DAVID@YAHOO.COM                  ,19341218,431
+REC-400940-ORG , ,           ,          ,CAUGHORN  ,19160107,               ,V9P2R6,PARKSVILLE                    ,                                 ,19160107,432
+REC-84987-ORG  ,F,HOYT       ,BRUCE     ,CARTER    ,19100708,268,V0N1V0,LILLOOET                      ,HOYT@SHAW.CA                     ,19100708,433
+REC-971097-ORG ,F,           ,DARCIE    ,MOORE     ,19680413,305,V0N2P0,QUATSINO FIRST NATION         ,RENETTA@HOTMAIL.COM              ,19680413,434
+REC-385163-ORG ,F,ANTONETTE  ,          ,          ,19351128,               ,V0J2N1,MORICETOWN                    ,                                 ,19351128,435
+REC-720332-ORG ,F,MORGAN     ,HAYDEN    ,BRADSHAW  ,19540729,239,V0J1P0,FORT ST. JOHN                 ,                                 ,19540729,436
+REC-565655-ORG ,M,REGENA     ,BARRY     ,RECORD    ,19410207,378,V4T2H4,WESTBANK                      ,REGENA@GMAIL.COM                 ,19410207,437
+REC-235425-ORG ,F,NICHOLAS   ,          ,STEWART   ,19770525,336,      ,SURREY                        ,                                 ,19770525,438
+REC-531628-ORG ,F,JOEL       ,TRISTAN   ,MANNSCHREC,19091001,201,V0K2Z0,100 MILE HOUSE                ,                                 ,19091001,439
+REC-305830-ORG ,F,DAISEY     ,RAELENE   ,GREBEL    ,19770329,202,V2S8H3,ABBOTSFORD                    ,                                 ,19770329,440
+REC-633208-ORG ,F,SHEMIKA    ,GREGORY   ,DESIMINI  ,19230905,237,V0G1R0,FORT NELSON                   ,                                 ,19230905,441
+REC-212144-ORG ,F,ASH        ,PASCALE   ,CHECCHI   ,19770809,336,V4A9W2,SURREY                        ,                                 ,19770809,442
+REC-589275-ORG ,M,HAMISH     ,GWENNETH  ,KARANJA   ,19021120,396,V0J2N0,KITWANGA                      ,HAMISH@ROGERS.COM                ,19021120,443
+REC-908839-ORG ,M,JOEL       ,KRISTO    ,WHISSON   ,19680107,330,V0S1N0,SOOKE                         ,JOEL@HOTMAIL.COM                 ,19680107,444
+REC-332890-ORG ,F,           ,          ,BEHBAHANI ,19801205,310,V2N4R7,PRINCE GEORGE                 ,                                 ,19801205,445
+REC-82427-ORG  ,F,           ,RAELENE   ,GROSSER   ,,341,V8G2P2,TERRACE                       ,                                 ,,446
+REC-657612-ORG ,F,LAKITA     ,          ,BEAVER    ,19410815,258,V1W4B8,KELOWNA                       ,                                 ,19410815,447
+REC-718579-ORG ,F,HANNAH     ,          ,GLANZ     ,19171028,459,      ,CASTLEGAR                     ,                                 ,19171028,448
+REC-870040-ORG ,F,DENISHA    ,          ,BOOKER    ,19530907,329,V0J2N0,SMITHERS                      ,DENISHA@LIVE.CA                  ,19530907,449
+REC-44402-ORG  ,M,BARBARA    ,GERARD    ,PRIEHS    ,19510524,314,V2J4B2,QUESNEL                       ,                                 ,19510524,450
+REC-658562-ORG ,M,BOYD       ,FRANCE    ,LEO       ,19650407,305,V0N2P0,DUNCAN                        ,BOYD@GMAIL.COM                   ,19650407,451
+REC-578282-ORG ,M,ROGELIO    ,          ,GRAY      ,19320929,457,V0K2J0,                              ,                                 ,19320929,452
+REC-312782-ORG , ,THELMA     ,JOSEPH    ,BAZELAIS  ,19430718,544,V0N2H0,MADEIRA PARK                  ,                                 ,19430718,453
+REC-656123-ORG ,F,STEPHAINE  ,SHAKIRA   ,FELLENBAUM,19280824,463,V0N2K0,                              ,STEPHAINE@HOTMAIL.COM            ,19280824,454
+REC-575389-ORG , ,HOLLY      ,BREANA    ,HADCOCK   ,19770123,350,      ,VICTORIA                      ,HOLLY@WESTCOASTDIGITAL.COM       ,19770123,455
+REC-866794-ORG ,F,RACHEL     ,          ,WOFFORD   ,19211210,294,V0H1T0,OSOYOOS                       ,                                 ,19211210,456
+REC-61939-ORG  ,F,DONALD     ,GLADYS    ,WEBB      ,19450628,320,V0G1Z0,                              ,DONALD@2DIE4.COM                 ,19450628,457
+REC-968086-ORG ,F,ROMANA     ,MARK      ,BANUELOS  ,19700917,206,V0K1A0,VENERABLES VALLEY             ,                                 ,19700917,458
+REC-426206-ORG , ,OLIVIA     ,MARIUS    ,KISER     ,19150410,273,V0J2C0,MACKENZIE                     ,                                 ,19150410,459
+REC-376999-ORG ,M,MADELINE   ,KAI       ,          ,,               ,V0J1P0,                              ,MADELINE@HOTMAIL.COM             ,,460
+REC-563344-ORG ,F,JENNIFER   ,ERIC      ,CAAMAL    ,19560706,350,V9B5M7,                              ,                                 ,19560706,461
+REC-43747-ORG  ,M,CALEB      ,SHERYL    ,SCHIERER  ,19190904,377,V0K2E0,108 MILE RANCH                ,CALEB@GMAIL.COM                  ,19190904,462
+REC-940984-ORG ,M,STEFAN     ,CHRISTINE ,BIELICKI  ,19520521,210,V5H2Y5,BURNABY                       ,                                 ,19520521,463
+REC-247099-ORG ,F,GERALD     ,          ,DINKENS   ,,305,V0N2P0,                              ,GERALD@GMAIL.COM                 ,,464
+REC-979491-ORG ,F,WILLIE     ,          ,PRICHARD  ,19240623,211,V0J1E0,SOUTHSIDE                     ,                                 ,19240623,465
+REC-158145-ORG , ,BLANCA     ,          ,RILEY     ,19651231,308,V1G4L1,POUCE COUPE                   ,                                 ,19651231,466
+REC-921055-ORG ,F,JENNIFER   ,          ,          ,19530811,275,V0K1M0,MASSET                        ,JENNIFER@YAHOO.CA                ,19530811,467
+REC-179862-ORG ,F,           ,AGNES     ,GRONSKY   ,19360219,564,      ,GARABALDI HIGHLANDS           ,                                 ,19360219,468
+REC-108342-ORG ,F,ALEXANDRA  ,CALVIN    ,JENNINGS  ,19361022,280,V2V4X7,MISSION                       ,ALEXANDRA@HOTMAIL.COM            ,19361022,469
+REC-534601-ORG ,F,           ,GWENDOLYN ,FUMERO    ,,224,V3K6B8,COQUITLAM                     ,                                 ,,470
+REC-230076-ORG ,F,ZARA       ,          ,WILLIAMS  ,19101207,303,V3B1N2,PORT COQUITLAM                ,ZARA@GMAIL.COM                   ,19101207,471
+REC-846047-ORG ,M,EZEQUIEL   ,FLORIAN   ,KISNER    ,19021102,232,V0R3C0,DUNCAN                        ,                                 ,19021102,472
+REC-403895-ORG ,F,SANDRA     ,TRINITY   ,GARDNER   ,19810529,               ,V0B1G2,LISTER                        ,                                 ,19810529,473
+REC-707450-ORG ,F,GERALYN    ,TAYLOR    ,KASSUBA   ,19230216,268,V0K1V0,LILOOET                       ,GERALYN@HOTMAIL.COM              ,19230216,474
+REC-396567-ORG ,F,           ,KALE      ,BAILEY    ,19270518,396,V0J2A0,GITWANGAK                     ,                                 ,19270518,475
+REC-246051-ORG ,F,ANGEL      ,          ,PIRES     ,19730212,332,V0B2G2,                              ,ANGEL@TELUS.NET                  ,19730212,476
+REC-202834-ORG ,F,RUTH       ,CARMEL    ,BRADSHAW  ,19261216,217,V0C1J0,PRINCE GEORGE                 ,                                 ,19261216,477
+REC-632700-ORG ,F,           ,EUSTACIA  ,DEWITT    ,19870623,307,V3C4J6,PORT MOODY                    ,JONE@GMAIL.COM                   ,19870623,478
+REC-416345-ORG ,F,VIRGINIA   ,CATHERINE ,RAWSON    ,19710119,252,V0X1L0,ABBOTSFORD                    ,VIRGINIA@HOTMAIL.COM             ,19710119,479
+REC-39274-ORG  , ,EULA       ,LANCELOT  ,ROBLES    ,19050902,323,V0N3A7,SECHELT                       ,EULA@GMAIL.COM                   ,19050902,480
+REC-915147-ORG ,F,SOPHIE     ,RUSSELL   ,COOK      ,19890816,347,V3B7G6,VANCOUVER                     ,SOPHIE@YAHOO.COM                 ,19890816,481
+REC-177584-ORG ,M,           ,SKYE      ,ANDERSON  ,19160527,350,V8T2N5,VICTORIA                      ,                                 ,19160527,482
+REC-633660-ORG ,M,HAN        ,          ,BENNELL   ,19920827,202,V3G1M2,                              ,                                 ,19920827,483
+REC-838171-ORG ,F,HANNAH     ,ROSEMARY  ,ADDISON   ,19641009,355,V7V1Z3,                              ,HANNAH@GMAIL.COM                 ,19641009,484
+REC-636784-ORG , ,CONNOR     ,ANDREW    ,WILKINS   ,19530618,258,V1V1S9,KELOWNA                       ,CONNOR@GMAIL.COM                 ,19530618,485
+REC-715064-ORG , ,DANNIE     ,          ,MCGREGOR  ,19010701,598,V0C1J0,DOG CREEK                     ,DANNIE@HOTMAIL.COM               ,19010701,486
+REC-661757-ORG ,F,SOPHIE     ,          ,HAINES    ,19491007,               ,      ,SETON                         ,SOPHIE@HOTMAIL.COM               ,19491007,487
+REC-94495-ORG  ,F,KYLE       ,          ,BARROZO   ,19860622,217,V0C1J0,MOBERLY LAKE                  ,KYLE@HOTMAIL.COM                 ,19860622,488
+REC-168397-ORG ,M,KRYSTIN    ,CLAUDE    ,KAPPES    ,19011212,376,V0K1M0,CANIM LAKE                    ,                                 ,19011212,489
+REC-392457-ORG ,F,MICHELLE   ,ANNABELLA ,LASHINSKY ,,238,V0J3A0,FORT ST. JAMES                ,MICHELLE@HOTMAIL.COM             ,,490
+REC-999272-ORG ,F,HOYT       ,          ,RODRIGUEZ ,19370612,               ,V9R6X8,NANAIMO                       ,HOYT@GMAIL.COM                   ,19370612,491
+REC-30074-ORG  ,F,           ,          ,SCANLAN   ,19661023,               ,V8T2J4,VICTORIA                      ,                                 ,19661023,492
+REC-818856-ORG ,F,DEON       ,MEREDITH  ,WRIGHT    ,19460524,238,V0J1P0,TACHIE                        ,DEON@YAHOO.CA                    ,19460524,493
+REC-276076-ORG ,F,HANNAH     ,PAIGE     ,GRAINGER  ,19371003,336,V4N0R2,SURREY                        ,HANNAH@GMAIL.COM                 ,19371003,494
+REC-175039-ORG , ,JOSHUA     ,DOLORES   ,MERCADO   ,19731124,297,      ,SKATIN LOT 10                 ,                                 ,19731124,495
+REC-509829-ORG ,F,JOSEPH     ,SHELBY    ,DEVINE    ,19021017,263,V9G1B1,LADYSMITH                     ,JOSEPH@SUSTAINABLEBUILDINGCENTRE.,19021017,496
+REC-552989-ORG ,M,POLLY      ,WINIFRED  ,LEINS     ,19370314,467,V0E1E0,BARRIERE                      ,POLLY@HOTMAIL.COM                ,19370314,497
+REC-850419-ORG ,F,EMIILY     ,          ,MANGINI   ,19560314,603,V0E1E0,BARRIERE                      ,                                 ,19560314,498
+REC-346530-ORG ,F,           ,ANITA     ,TOK       ,19150111,277,V1K1B8,                              ,                                 ,19150111,499
+REC-737861-ORG ,F,LEONA      ,LUCY      ,GARRISON  ,19791113,329,V0J2N0,HOUSTON                       ,                                 ,19791113,500
+REC-642845-ORG ,F,SHA        ,          ,BERANEK   ,19000508,211,V0J1E0,BURNS LAKE                    ,                                 ,19000508,501
+REC-733384-ORG ,F,SAMUEL     ,SYBELLA   ,SMITH     ,19370509,267,V2Z1B1,LANGLEY                       ,                                 ,19370509,502
+REC-591742-ORG ,F,GABRIELA   ,          ,PASQUAROSA,19940219,202,V2S8A9,ABBOTSFORD                    ,                                 ,19940219,503
+REC-947465-ORG ,F,HANH       ,CLEMENT   ,SPANOVICH ,19830402,253,V0J1E0,HOUSTON                       ,                                 ,19830402,504
+REC-849342-ORG ,F,           ,GEORGIA   ,OLDHAM    ,19980308,336,V4N5B7,SURREY                        ,                                 ,19980308,505
+REC-379821-ORG ,M,SANDI      ,CAMPBELL  ,YOUNG     ,19311223,307,V3H3T1,                              ,                                 ,19311223,506
+REC-65577-ORG  , ,           ,EDWARD    ,CHAPMAN   ,19460616,348,V0J3A0,VANDERHOOF                    ,                                 ,19460616,507
+REC-468408-ORG ,F,PANSY      ,STUART    ,ADAM      ,19020704,214,V1N4T2,                              ,                                 ,19020704,508
+REC-468585-ORG ,F,NA         ,          ,          ,19890817,416,      ,MORICETOWN                    ,                                 ,19890817,509
+REC-673016-ORG ,M,NELLE      ,TODD      ,RICHIEZ   ,19550402,439,V0H1R0,OKANAGAN FALLS                ,                                 ,19550402,510
+REC-395876-ORG , ,DONNIE     ,FLORENCE  ,VERNON    ,,224,V3K6T2,COQUITLAM                     ,                                 ,,511
+REC-144302-ORG , ,KATRICE    ,GOLDA     ,MAIN      ,,               ,V0T1S1,QUEEN CHARLOTTE               ,KATRICE@LIVE.CA                  ,,512
+REC-321899-ORG ,F,ELANOR     ,GWENDOLYN ,PURKEY    ,19100516,               ,V4R1C8,                              ,                                 ,19100516,513
+REC-644537-ORG ,F,OLIVER     ,JAMES     ,FLEMING   ,19830615,210,V5H3J9,                              ,OLIVER@YAHOO.COM                 ,19830615,514
+REC-974268-ORG ,F,KELLY      ,          ,SCARANGELL,19230908,239,V1J4M7,FORT ST. JOHN                 ,                                 ,19230908,515
+REC-629813-ORG , ,TAWNYA     ,REGINALD  ,LIEUX     ,19360628,367,V0P1N0,QUADRA ISLAND                 ,                                 ,19360628,516
+REC-1001182-ORG,F,RILEY      ,CARMEL    ,MITCHELL  ,,456,V0P1N0,QUATHIASKI COVE               ,RILEY@HOTMAIL.COM                ,,517
+REC-616156-ORG ,M,JANET      ,JACINTA   ,TRAVINO   ,19880327,564,V0N3G0,GARABALDI HIGHLANDS           ,                                 ,19880327,518
+REC-266786-ORG ,F,           ,AALIYAH   ,DESIMONE  ,,309,V8A4Z2,POWELL RIVER                  ,                                 ,,519
+REC-939937-ORG ,F,KESHIA     ,RAELENE   ,PILESKI   ,19090805,231,V4V1Y9,DELTA                         ,KESHIA@HOTMAIL.COM               ,19090805,520
+REC-638536-ORG ,F,MARCELO    ,          ,LIPTON    ,19660609,329,V0J2N0,MORICETOWN                    ,MARCELO@GMAIL.COM                ,19660609,521
+REC-736619-ORG ,F,CARMINA    ,BRUCE     ,CONEWAY   ,19090926,293,V0H1T0,OLIVER                        ,CARMINA@GMAIL.COM                ,19090926,522
+REC-93505-ORG  ,F,QUYEN      ,SHAKIRA   ,DUBE      ,19260728,283,V9T6B1,NANAIMO                       ,QUYEN@GMAIL.COM                  ,19260728,523
+REC-409481-ORG ,F,LORRETTA   ,YOUSEF    ,MCCUTCHEN ,19721106,               ,V2T3A6,ABBOTSFORD                    ,                                 ,19721106,524
+REC-504591-ORG ,F,PATRICIA   ,BRODIE    ,GOLDSWORTH,19091025,295,V9P1T2,                              ,PATRICIA@YAHOO.CA                ,19091025,525
+REC-415511-ORG ,M,CARLEE     ,ANNABELLA ,PYLES     ,19681112,284,V1L6Y1,NELSON                        ,CARLEE@YAHOO.CA                  ,19681112,526
+REC-684689-ORG ,F,MICHELE    ,BREANA    ,          ,,               ,V7A4X7,RICHMOND                      ,MICHELE@HOTMAIL.COM              ,,527
+REC-21779-ORG  ,F,TAMBRA     ,MIA       ,PYLE      ,19710120,357,      ,WHITE ROCK                    ,TAMBRA@HOTMAIL.COM               ,19710120,528
+REC-506530-ORG ,F,TRAN       ,ANDREA    ,VERNER    ,19290622,283,      ,NANAIMO                       ,                                 ,19290622,529
+REC-282349-ORG ,F,MAFALDA    ,SASCHA    ,FARRINGTON,19020520,               ,V2R5L1,CHILLIWACK                    ,MAFALDA@HOTMAIL.COM              ,19020520,530
+REC-505335-ORG ,F,CALLIE     ,          ,COOK      ,,265,V0R2G0,                              ,                                 ,,531
+REC-505666-ORG ,F,SIOBHAN    ,ELBERT    ,ALEXANDER ,19531102,238,V0J1P0,YEKOOCHE                      ,SIOBHAN@OCSS.CA                  ,19531102,532
+REC-784002-ORG ,F,BERNIECE   ,RILEY     ,KOLE      ,19651018,368,V0A1H0,HERIOT BAY                    ,                                 ,19651018,533
+REC-979751-ORG ,F,LACHLAN    ,HERMAN    ,FRAHN     ,19130423,212,V0K1A0,CACHE CREEK                   ,                                 ,19130423,534
+REC-999952-ORG ,F,MAN        ,EUSTACIA  ,JOLLY     ,19660723,350,V9A5Z3,VICTORIA                      ,MAN@YAHOO.CA                     ,19660723,535
+REC-438069-ORG , ,LILY       ,ALICE     ,ROGAN     ,19530502,431,V4C4T6,                              ,LILY@GMAIL.COM                   ,19530502,536
+REC-133725-ORG ,M,MARY       ,          ,FERGUSON  ,19490526,293,V0H1T0,1100 386 AVENUE               ,                                 ,19490526,537
+REC-655437-ORG ,F,ROSAURA    ,RUBY      ,BLOOMFIELD,19060724,317,V3V2T7,RICHMOND                      ,ROSAURA@HOTMAIL.COM              ,19060724,538
+REC-421239-ORG ,F,TYNAN      ,          ,BERGEON   ,19761110,256,V2H1L8,KAMLOOPS                      ,TYNAN@SWFOREST.COM               ,19761110,539
+REC-442760-ORG ,M,           ,EMMANUEL  ,DIDION    ,19430917,238,V0J1P0,TL'AZT'EN NATION              ,                                 ,19430917,540
+REC-702419-ORG ,F,LILY       ,MALCOLM   ,BLACKWELL ,,210,V5E4N7,BURNABY                       ,                                 ,,541
+REC-560038-ORG ,F,JESSENIA   ,MERLE     ,THOMPSON  ,19190830,375,V0K1K0,LONE BUTTE                    ,                                 ,19190830,542
+REC-342297-ORG ,F,ALBERTHA   ,MARY      ,GUEVARA   ,19610629,311,V8A4Z3,PRINCE RUPERT                 ,ALBERTHA@GMAIL.COM               ,19610629,543
+REC-447948-ORG ,M,THELMA     ,          ,KNOEDLER  ,19440814,423,V0E1H1,BLIND BAY                     ,                                 ,19440814,544
+REC-96554-ORG  ,F,CHARLIE    ,MADDISON  ,PARSONS   ,,347,V5R3X6,VANCOUVER                     ,                                 ,,545
+REC-160317-ORG ,F,BRODY      ,TIFFANY   ,SANDIFER  ,19460427,243,V0N1V0,GIBSONS                       ,                                 ,19460427,546
+REC-828632-ORG ,F,TORY       ,MADELINE  ,          ,,258,V1W1G1,KELOWNA                       ,                                 ,,547
+REC-236753-ORG ,F,MARTHA     ,          ,BENTON    ,19020906,224,V3B6C2,6048339394,MARTHA@ROCKETMAIL.COM            ,19020906,548
+REC-459442-ORG ,F,SOLOMON    ,BRODIE    ,NICHOLSON ,19360123,               ,      ,                              ,SOLOMON@DROPDESIGNS.COM          ,19360123,549
+REC-766586-ORG ,F,RICHARD    ,SHELBY    ,HUNTER    ,19440813,               ,V5B2J4,VANCOUVER                     ,                                 ,19440813,550
+REC-181867-ORG ,F,GENOVEVA   ,LINDSEY   ,          ,,233,V0B1H0,ELKFORD                       ,                                 ,,551
+REC-626188-ORG ,F,JEN        ,MARIUS    ,FULGHUM   ,19881214,323,V8A4Z3,SECHELT                       ,JEN@LIVE.COM                     ,19881214,552
+REC-40070-ORG  ,M,           ,LINDSEY   ,WEINANDT  ,19520707,               ,V7M2N2,NORTH VANCOUVER               ,                                 ,19520707,553
+REC-267458-ORG ,F,EMIILY     ,GILLIAN   ,SEACHRIST ,19251010,268,V0K1V0,BURNABY                       ,                                 ,19251010,554
+REC-626085-ORG ,F,LASHAWNA   ,          ,CLARKE    ,19181009,298,V0H1T0,PENTICTON                     ,                                 ,19181009,555
+REC-689461-ORG ,F,DIVINA     ,DARRYL    ,SMITH     ,19371207,335,V0H1Z1,SUMMERLAND                    ,                                 ,19371207,556
+REC-660975-ORG , ,KISHA      ,          ,          ,19660410,268,V0K1V0,BRIDGE RIVER                  ,                                 ,19660410,557
+REC-716555-ORG ,F,ALECIA     ,KERRY     ,HEALY     ,19350318,213,V9H1K2,CAMPBELL RIVER                ,                                 ,19350318,558
+REC-715254-ORG ,M,HANNAH     ,ELEANOR   ,          ,19870922,357,V4A8C8,VANCOUVER                     ,HANNAH@TELUS.NET                 ,19870922,559
+REC-993975-ORG ,M,ALIVIA     ,CLIFFORD  ,JANAC     ,19300924,267,V3A8R5,LANGLEY                       ,                                 ,19300924,560
+REC-660417-ORG ,F,JUDY       ,GRAHAM    ,          ,19980401,202,V2S1L6,ABBOTSFORD                    ,JUDY@YMAIL.COM                   ,19980401,561
+REC-758441-ORG ,M,WILLIAM    ,RAYMOND   ,          ,19240202,201,V0K2G0,100 MILE HOUSE                ,                                 ,19240202,562
+REC-138355-ORG ,F,           ,FLYNN     ,PADILLA   ,19321102,336,V3T5S2,SURREY                        ,ZANE@LIVE.CA                     ,19321102,563
+REC-699066-ORG ,F,ELVIS      ,WALENTIN  ,FIZZ      ,19761122,406,V4W3B7,ALDERGROVE                    ,                                 ,19761122,564
+REC-441581-ORG , ,STANLEY    ,PETER     ,ELVIRA    ,19961102,               ,V0G1L0,MONTROSE                      ,                                 ,19961102,565
+REC-988454-ORG ,F,BENJAMIN   ,          ,NORGATE   ,19640217,548,V0E1E0,BARRIE                        ,BENJAMIN@OUTLOOK.COM             ,19640217,566
+REC-253515-ORG ,F,WENDOLYN   ,          ,SCHROEDER ,19401221,270,V0K1W0,CLEARWATER                    ,WENDOLYN@HOTMAIL.COM             ,19401221,567
+REC-904689-ORG ,F,JETT       ,MARILYN   ,NUCKOLS   ,19830331,377,      ,100 MILE HOUSE                ,                                 ,19830331,568
+REC-433046-ORG ,M,           ,WANDA     ,DAY       ,19660906,               ,V2C4G6,KAMLOOPS                      ,FARAH@LIVE.COM                   ,19660906,569
+REC-113275-ORG ,F,ELISSA     ,HAYDEN    ,HART      ,19040716,317,V7C5M8,RICHMOND                      ,                                 ,19040716,570
+REC-596464-ORG ,F,CONNOR     ,WINIFRED  ,WITTMAN   ,19861201,               ,V5C1C1,BURNABY                       ,CONNOR@GMAIL.COM                 ,19861201,571
+REC-286022-ORG ,F,FRANCIS    ,GWENNETH  ,SHORT     ,,257,V0G1M0,CASTLEGAR                     ,FRANCIS@HOTMAIL.COM              ,,572
+REC-369422-ORG ,M,GEORGE     ,          ,RUNDLE    ,,336,V3S8A6,SURREY                        ,                                 ,,573
+REC-360531-ORG ,M,DERICK     ,LEROY     ,          ,19460914,               ,V0N1V3,3530 HAIDA DR BURNABY  BC V5M ,                                 ,19460914,574
+REC-248206-ORG ,F,EMILY      ,SEBASTIAN ,NEUDORFER ,19980511,               ,V0R1L0,COBBLE HILL                   ,                                 ,19980511,575
+REC-665269-ORG ,F,BEATA      ,CORALIE   ,BROOKS    ,19220605,310,V2N3N6,PRINCE GEORGE                 ,BEATA@LIVE.COM                   ,19220605,576
+REC-965182-ORG ,F,ALISA      ,REUBEN    ,BROWN     ,19270707,210,V5C1L4,BURNABY                       ,ALISA@SHAW.CA                    ,19270707,577
+REC-978418-ORG ,F,ERICH      ,          ,CAMPBELL  ,19850210,348,V0J3A0,                              ,                                 ,19850210,578
+REC-205626-ORG ,F,REGENIA    ,SAMUEL    ,FERRIS    ,19450901,283,V9R4T5,NANAIMO                       ,                                 ,19450901,579
+REC-945137-ORG ,F,MITCHELL   ,ALASTAIR  ,FOORD     ,19420704,457,V0K2K0,SAVONA                        ,MITCHELL@SHAW.CA                 ,19420704,580
+REC-21865-ORG  ,F,LASHAWN    ,BEVERLY   ,GUMBY     ,19710608,350,V8X3Z1,VICTORIA                      ,LASHAWN@HOTMAIL.COM              ,19710608,581
+REC-993805-ORG ,F,ETHAN      ,CARMEL    ,ARGOTT    ,19291009,218,V2R2Z3,CHILLIWACK                    ,                                 ,19291009,582
+REC-164354-ORG ,M,MARYBETH   ,KIERAN    ,ESCUE     ,19420227,333,V0N1T0,SQUAMISH - GARABLADI HIGHLANDS,MARYBETH@HOTMAIL.COM             ,19420227,583
+REC-576729-ORG ,M,EDGARDO    ,          ,EICHLER   ,19380621,282,V0G1R0,FAUQUIER                      ,                                 ,19380621,584
+REC-125413-ORG ,F,JACK       ,JESSICA   ,DELUCA    ,19260209,256,V2B5B6,KAMLOOPS                      ,                                 ,19260209,585
+REC-43176-ORG  ,F,DONNA      ,          ,ELVERUD   ,19000430,281,V0G1P0,BEAVER FALLS                  ,                                 ,19000430,586
+REC-862084-ORG ,F,THOMASENA  ,          ,DENT      ,19251112,306,V0N2R0,PORT MCNEILL                  ,THOMASENA@HOTMAIL.COM            ,19251112,587
+REC-677231-ORG ,F,CHARLES    ,          ,OLSZEWSKI ,19170804,202,V2S6H4,ABBOTSFORD                    ,CHARLES@HOTMAIL.COM              ,19170804,588
+REC-790449-ORG ,F,JULIET     ,ADAM      ,EDWARDS   ,,224,V3J5E7,COQUITLAM                     ,                                 ,,589
+REC-668528-ORG ,F,CHLOE      ,FINLAY    ,GUENTHER  ,19890918,479,V1M2S4,FORT LANGLEY                  ,                                 ,19890918,590
+REC-984141-ORG ,F,TAMESHA    ,PEARL     ,          ,19531011,564,V0N1T0,SQUAMIS                       ,TAMESHA@HOTMAIL.COM              ,19531011,591
+REC-641671-ORG ,M,RAMONA     ,TAMARA    ,GUMP      ,19991126,230,V0C1C0,DEASE LAKE                    ,RAMONA@HOTMAIL.COM               ,19991126,592
+REC-206463-ORG ,F,JOSEPH     ,JEREMY    ,SHERRIFF  ,19950919,336,V3R3R6,SURREY                        ,                                 ,19950919,593
+REC-161789-ORG ,F,LAVONNA    ,PENELOPE  ,VALOS     ,19191010,231,V4M2B9,                              ,LAVONNA@HOTMAIL.COM              ,19191010,594
+REC-293788-ORG ,F,SELENE     ,ELBERT    ,MILLER    ,19880802,350,V9B2S9,VICTORIA                      ,                                 ,19880802,595
+REC-11715-ORG  ,F,           ,JAIDEN    ,LIEBERMAN ,19560606,               ,      ,PROPHET RIVER                 ,MARGARET@YAHOO.CA                ,19560606,596
+REC-263557-ORG ,F,JASMINE    ,GEORGE    ,HILTON    ,,577,V0C1J0,MOBERLY LAKE                  ,JASMINE@HOTMAIL.COM              ,,597
+REC-360201-ORG ,F,OLIVIA     ,CLARK     ,ALLOY     ,19740417,300,V9Y7M8,MALACHAN                      ,OLIVIA@SHAW.CA                   ,19740417,598
+REC-900799-ORG ,F,HARRISON   ,GRIFFIN   ,GAMLIN    ,19711004,255,V0E1K0,INVERMERE                     ,                                 ,19711004,599
+REC-36102-ORG  ,F,HELENE     ,ALASTAIR  ,PATTERSON ,19871123,317,V7C5R9,RICHMOND                      ,HELENE@HOTMAIL.COM               ,19871123,600
+REC-822439-ORG ,F,ZINA       ,          ,FERRAR    ,19551007,246,V0H1H0,GRAND FORKS                   ,                                 ,19551007,601
+REC-27906-ORG  ,F,HIROKO     ,          ,BOWLING   ,19661031,312,V0X1W0,PRINCETON                     ,                                 ,19661031,602
+REC-173599-ORG ,F,MONTY      ,PEARL     ,ADAME     ,,274,V2W1H1,MAPLE RIDGE                   ,MONTY@GMAIL.COM                  ,,603
+REC-159499-ORG ,M,GARRY      ,          ,GOLDEN    ,,202,V2T5Y3,ABBOTSFORD                    ,                                 ,,604
+REC-433875-ORG ,F,JOHN       ,TORI      ,FELICI    ,19760305,238,V0J1P0,NAK ASDLI                     ,JOHN@HOTMAIL.COM                 ,19760305,605
+REC-348709-ORG , ,MELAINE    ,PHILLIS   ,GILBERTSON,19850811,               ,V0K1M0,CAMIN LAKE                    ,MELAINE@HOTMAIL.COM              ,19850811,606
+REC-567266-ORG ,F,MARK       ,          ,WILBURN   ,19421114,205,V0E1B2,ARMSTRONG                     ,                                 ,19421114,607
+REC-195600-ORG , ,GENA       ,LEE       ,LADD      ,19580715,564,V0N1T0,SQUAMIS                       ,GENA@GMAIL.COM                   ,19580715,608
+REC-25133-ORG  ,F,BLYTHE     ,          ,THIBO     ,19010113,231,V4M3N5,DELTA                         ,                                 ,19010113,609
+REC-583793-ORG , ,KELSEY     ,          ,HEUSTED   ,19270701,261,V1A3G6,KIMBERLEY                     ,                                 ,19270701,610
+REC-730386-ORG , ,SHILA      ,SYLVIA    ,          ,19590325,243,V0N1V0,GIBSONS                       ,SHILA@GMAIL.COM                  ,19590325,611
+REC-640750-ORG ,F,ELLAN      ,          ,DILLON    ,19271210,232,V9L6V1,                              ,                                 ,19271210,612
+REC-340225-ORG ,F,           ,ANNA      ,MATA      ,19450303,338,      ,TAYLOR                        ,                                 ,19450303,613
+REC-120454-ORG ,F,MELISSA    ,ARNOLD    ,          ,19120412,               ,V0K2G0,WILLIAMS LAKE                 ,                                 ,19120412,614
+REC-859331-ORG ,F,CORY       ,JULIA     ,CAHOW     ,19670808,210,V5C1P5,BURNABY                       ,                                 ,19670808,615
+REC-539840-ORG , ,           ,FLORIAN   ,FERGUSON  ,19970909,347,V6P2E1,VANCOUVER                     ,DARCY@WEBACOM.COM                ,19970909,616
+REC-622972-ORG ,F,KATHY      ,          ,MEYER     ,19040510,284,V1L6V5,NELSON                        ,                                 ,19040510,617
+REC-703485-ORG , ,MARY       ,ALEESHA   ,MARZETTI  ,19820121,336,V3R3W4,SURREY                        ,MARY@HOTMAIL.COM                 ,19820121,618
+REC-955296-ORG ,F,KYLE       ,PASCALE   ,THOMPSON  ,19950715,213,V9H1B5,CAMPBELL RIVER                ,KYLE@YAHOO.CA                    ,19950715,619
+REC-657512-ORG ,F,COURTNEY   ,CONSTANCE ,VANKEMPEN ,19820824,298,V2A2Y3,PENTICTON                     ,                                 ,19820824,620
+REC-32374-ORG  ,F,GLORY      ,REBECCA   ,PITTS     ,19200507,237,V0C1R0,DEASE LAKE                    ,                                 ,19200507,621
+REC-49798-ORG  ,M,KAYNE      ,DEBORAH   ,SHEPHERD  ,19200827,277,V1K1B8,DOUGLAS LAKE                  ,                                 ,19200827,622
+REC-421446-ORG ,F,MIRELLA    ,          ,KETTERER  ,19270501,277,      ,COLDWATER RES                 ,MIRELLA@TELUS.NET                ,19270501,623
+REC-285989-ORG ,F,KIMBERLY   ,JUDITH    ,CHAE      ,19441205,330,V9X1C2,SOOKE                         ,                                 ,19441205,624
+REC-786100-ORG ,F,JUDSON     ,          ,ALONSO    ,19870808,221,      ,COLDSTREAM                    ,                                 ,19870808,625
+REC-934951-ORG ,F,VERENA     ,          ,ORSAG     ,19370308,336,      ,SURREY                        ,                                 ,19370308,626
+REC-139659-ORG ,F,HERBERT    ,REBECCA   ,BILAL     ,,257,      ,                              ,                                 ,,627
+REC-208440-ORG ,M,MITTIE     ,BAILEY    ,          ,19740308,               ,V3E2V8,COQUITLAM                     ,MITTIE@GMAIL.COM                 ,19740308,628
+REC-270863-ORG ,F,JORDAN     ,DEBORAH   ,TROWSE    ,19080430,375,      ,LONE BUTTE                    ,                                 ,19080430,629
+REC-473437-ORG ,F,RHODA      ,FAITH     ,          ,19090824,218,V2P5H6,CHILLIWACK                    ,RHODA@YAHOO.CA                   ,19090824,630
+REC-620412-ORG ,F,THOMAS     ,SAVANNAH  ,CARDUFF   ,19950112,415,V4T1V9,WEST KELOWNA                  ,THOMAS@HOTMAIL.COM               ,19950112,631
+REC-176670-ORG ,F,VONDA      ,NOEL      ,BURGIS    ,19741211,336,V3S4Y5,SURREY                        ,                                 ,19741211,632
+REC-404864-ORG ,F,MARINA     ,PEARL     ,SMITH     ,19581221,283,V9R4J5,NANAIMO                       ,                                 ,19581221,633
+REC-494558-ORG ,F,TAISHA     ,ELLOUISE  ,MADDEN    ,19280225,531,V0J1N0,FORT FRASER                   ,TAISHA@GMAIL.COM                 ,19280225,634
+REC-483623-ORG ,F,BRYCE      ,AIDAN     ,SCATTERGOO,19691230,298,V0H1T0,PENTICTON                     ,BRYCE@SHAW.CA                    ,19691230,635
+REC-155914-ORG ,F,VANNA      ,RAYMOND   ,CERCONE   ,19310718,238,      ,TL'AZT'EN NATION              ,                                 ,19310718,636
+REC-604393-ORG , ,DINA       ,BARNABAS  ,ESTRADA   ,19810529,350,V8Z3P9,VICTORIA                      ,                                 ,19810529,637
+REC-735646-ORG ,M,ALEXA-ROSE ,HOWE      ,POPLAWSKI ,19290813,347,V5S3T1,VANCOUVER                     ,                                 ,19290813,638
+REC-609422-ORG , ,BRANDON    ,MARCELLA  ,DELLAVEDOV,,310,V2K4Z9,                              ,                                 ,,639
+REC-60678-ORG  ,F,IRVING     ,BRIDGET   ,          ,19240203,258,V1W5A1,KELOWNA                       ,                                 ,19240203,640
+REC-870571-ORG ,F,RANEE      ,          ,ROTSTEIN  ,,213,V9H1K9,CAMPBELL RIVER                ,                                 ,,641
+REC-327173-ORG , ,MATTHEW    ,EBONIE    ,          ,19251025,               ,V0J1P0,VANDERHOOF                    ,MATTHEW@HOTMAIL.COM              ,19251025,642
+REC-734613-ORG , ,BARRY      ,          ,KELLY     ,19970702,347,V5S3S8,VANCOUVER                     ,                                 ,19970702,643
+REC-359398-ORG ,F,DIANNE     ,RHONDA    ,          ,19340419,477,V0N1T0,GARABALDI HIGHLANDS           ,                                 ,19340419,644
+REC-976274-ORG ,F,LATORIA    ,CONRAD    ,BURRIS    ,19520217,336,V4A5J8,SURREY                        ,LATORIA@TELUS.NET                ,19520217,645
+REC-151042-ORG ,F,SARAH      ,EARL      ,SNYDER    ,19020911,               ,V5A4R2,BURNABY                       ,                                 ,19020911,646
+REC-300506-ORG ,F,MACKENZI   ,CALVIN    ,TRIEZENBER,19731208,625,      ,MONTNEY                       ,                                 ,19731208,647
+REC-737064-ORG ,M,TRUMAN     ,          ,PETERSEN  ,19180611,               ,V8T4H8,VICTORIA                      ,                                 ,19180611,648
+REC-918538-ORG ,M,GLORIA     ,ANDREW    ,CROSSMAN  ,19210606,250,V0J1Z0,                              ,GLORIA@GMAIL.COM                 ,19210606,649
+REC-68122-ORG  ,F,PEGGY      ,          ,DOLORES   ,,               ,V0J2N1,SMITHERS                      ,PEGGY@SHAW.CA                    ,,650
+REC-585286-ORG ,F,KAITLYN    ,NATASHA   ,SIMPSON   ,19051111,275,V0K1M0,MASSET                        ,KAITLYN@GMAIL.COM                ,19051111,651
+REC-674693-ORG ,F,KYOKO      ,ABRAHAM   ,FRADY     ,19660815,307,V3H5A5,PORT MOODY                    ,                                 ,19660815,652
+REC-826320-ORG ,F,SHEREE     ,COLLEEN   ,DEJESUS   ,19820506,419,      ,LANTZVILLE                    ,SHEREE@SHAW.CA                   ,19820506,653
+REC-24880-ORG  , ,SANDRA     ,          ,COCHRANE  ,19461204,211,V0J1E0,BURNS LAKE                    ,                                 ,19461204,654
+REC-836553-ORG ,F,SHANIKA    ,KELSEA    ,STUVER    ,19140623,238,V0J3A0,FORT ST. JAMES                ,                                 ,19140623,655
+REC-678981-ORG ,F,WILLIE     ,          ,BURDIN    ,19780401,256,V1S2A1,                              ,                                 ,19780401,656
+REC-426642-ORG ,F,JOANA      ,          ,TIPPINS   ,19680901,347,V6J2Y2,                              ,                                 ,19680901,657
+REC-55476-ORG  , ,DOVIE      ,EUPHEMIA  ,GOLDEN    ,19100831,275,V0T1M0,VANCOUVER                     ,                                 ,19100831,658
+REC-186870-ORG ,F,JAMES      ,TIMOTHY   ,MIGLIACCIO,19580325,358,V0K2G0,WILLIAMS LAKE                 ,JAMES@LIVE.CA                    ,19580325,659
+REC-807558-ORG ,F,SHARIKA    ,          ,GARCIA    ,,459,V0G2J0,WINLAW                        ,                                 ,,660
+REC-996802-ORG ,F,ARON       ,          ,KEYES     ,19030416,241,V0G1L0,FRUITVALE                     ,ARON@HOTMAIL.COM                 ,19030416,661
+REC-859556-ORG ,F,LACHLAN    ,          ,WHITELEY  ,19580816,296,V0H1X6,PEACHLAND                     ,                                 ,19580816,662
+REC-166055-ORG ,F,ELLE       ,          ,COLES     ,19050203,485,V0R2M0,MERVILLE                      ,                                 ,19050203,663
+REC-943583-ORG ,M,MARGARET   ,SHAE      ,BLANCHARD ,19110228,               ,V0N2K0,BAPISTE SMITH                 ,MARGARET@HOTMAIL.COM             ,19110228,664
+REC-518969-ORG ,F,CLAY       ,HOLLY     ,BREWER    ,19580503,350,V0R2L0,VICTORIA                      ,CLAY@YAHOO.COM                   ,19580503,665
+REC-610556-ORG ,F,LENNIE     ,MAYA      ,MERICK    ,19770915,374,V0K2G0,WILLIAMS LAKE                 ,                                 ,19770915,666
+REC-508216-ORG ,M,LOURA      ,BJORN     ,GILES     ,19850830,350,V8V2J2,VICTORIA                      ,LOURA@HOTMAIL.COM                ,19850830,667
+REC-395577-ORG ,F,ERASMO     ,JOANNA    ,          ,19090403,317,V7A4W5,RICHMOND                      ,                                 ,19090403,668
+REC-175847-ORG ,F,KATHYRN    ,          ,CLARKE    ,19090716,245,V0A1H0,GOLDEN                        ,KATHYRN@YMAIL.COM                ,19090716,669
+REC-955084-ORG ,M,EARL       ,ROSEMARY  ,CANTAVE   ,19760627,336,V4N4S5,                              ,EARL@HOTMAIL.COM                 ,19760627,670
+REC-561858-ORG ,F,SAMANTHA   ,CRYSTAL   ,WILSON    ,19981008,457,V0K2J0,WALHACHIN                     ,                                 ,19981008,671
+REC-887057-ORG ,F,JULEE      ,ALVIN     ,SINDY     ,19900601,293,V0H1T0,                              ,                                 ,19900601,672
+REC-896448-ORG ,F,GARRY      ,          ,DIECKMANN ,19721129,               ,V4A5X3,SURREY                        ,                                 ,19721129,673
+REC-242781-ORG ,F,ADAM       ,          ,SPEARS    ,19561116,347,V5X3J1,VANCOUVER                     ,                                 ,19561116,674
+REC-265624-ORG , ,LASHUNDA   ,          ,CATALONE  ,19221001,310,V2K4X3,PRINCE GEORGE                 ,LASHUNDA@HOTMAIL.COM             ,19221001,675
+REC-434932-ORG ,F,ZENIA      ,SYLVIA    ,SPINATO   ,19331018,256,V2B4L9,KAMLOOPS                      ,                                 ,19331018,676
+REC-576398-ORG ,F,WILLENA    ,          ,FINLAY    ,19070622,               ,V0C1R0,DAWSON CREEK                  ,                                 ,19070622,677
+REC-596949-ORG ,F,MAGDALENE  ,TAHNEE    ,COHEN     ,19391117,303,V3B7V9,PORT COQUITLAM                ,                                 ,19391117,678
+REC-530271-ORG , ,EARLEAN    ,ROBERTA   ,NGUYEN    ,19081020,462,V0C2W0,WONOWON                       ,                                 ,19081020,679
+REC-816462-ORG ,F,NENITA     ,BREONY    ,          ,19330220,274,V2W1X3,MAPLE RIDGE                   ,NENITA@GMAIL.COM                 ,19330220,680
+REC-626691-ORG ,F,DEAKIN     ,          ,GATEWOOD  ,19180512,792,V0E1N2,CLEARBROOK                    ,DEAKIN@LIVE.CA                   ,19180512,681
+REC-318591-ORG ,F,XAVIER     ,          ,WOOD      ,19010304,317,V6V1G4,RICHMOND                      ,XAVIER@TELUS.NET                 ,19010304,682
+REC-280291-ORG ,F,ARCELIA    ,GARTH     ,GEGAN     ,19710316,377,V0K2K0,108 MILE RANCH                ,                                 ,19710316,683
+REC-459773-ORG ,F,HAROLD     ,ALANA     ,TRENERRY  ,19200525,317,V7C1K3,RICHMOND                      ,HAROLD@HOTMIAL.COM               ,19200525,684
+REC-494560-ORG ,F,TINA       ,          ,STARK     ,19770311,274,V2W1H7,                              ,                                 ,19770311,685
+REC-547241-ORG ,F,MERRILEE   ,SHAE      ,BENGER    ,19180717,268,V0K1V0,LILLOOET                      ,MERRILEE@GMAIL.COM               ,19180717,686
+REC-479613-ORG ,F,LEONILA    ,KAITLIN   ,BAYLARK   ,19830420,472,V0M1A1,CHEHALIS                      ,LEONILA@HOTMAIL.COM              ,19830420,687
+REC-444344-ORG ,F,CHARMAINE  ,JACQUELINE,WIRTZ     ,19440112,400,V0R1K0,PENELAKUT ISLAND              ,                                 ,19440112,688
+REC-129149-ORG ,F,KEIRA      ,EVAN      ,SUISSA    ,19450723,277,V1K1B8,LOWER NICOLA INDIAN BAND      ,KEIRA@GMAIL.COM                  ,19450723,689
+REC-676240-ORG ,F,TOBY       ,          ,EDENFIELD ,,348,V0J3A0,SAIK'UZ FIRST NATION          ,TOBY@HOTMAIL.COM                 ,,690
+REC-885729-ORG ,F,           ,TARA      ,PYCIOR    ,19240519,277,      ,LOWER NICOLA INDIAN BAND      ,                                 ,19240519,691
+REC-959867-ORG ,F,INOCENCIA  ,KARLA     ,MUSSER    ,19970611,238,V0J1P0,TACHE                         ,                                 ,19970611,692
+REC-72665-ORG  , ,           ,JULIA     ,LAMBERT   ,19300930,347,V6A4B6,VANCOUVER                     ,                                 ,19300930,693
+REC-913875-ORG ,M,DORETTA    ,KELLY     ,CAMPBELL  ,19591004,300,V9Y1Z6,PORT ALBERNI                  ,                                 ,19591004,694
+REC-776483-ORG ,F,ANDRE      ,ROBIN     ,THOMAS    ,19000717,229,V0C1R0,DAWSON CREEK                  ,                                 ,19000717,695
+REC-276138-ORG ,F,TREY       ,          ,          ,19880513,216,V0E1M0,NESKUNLITH#2                  ,                                 ,19880513,696
+REC-711394-ORG ,M,LYMAN      ,          ,STROTHERS ,19181211,210,V5E3G6,BURNABY                       ,                                 ,19181211,697
+REC-283519-ORG ,F,JACOB      ,REBECCA   ,RARDON    ,,350,V9C4B5,                              ,JACOB@LIVE.CA                    ,,698
+REC-369790-ORG ,F,SIMONE     ,SOPHIE    ,EPPARD    ,19541015,336,V4N4R1,SURREY                        ,SIMONE@HOTMAIL.COM               ,19541015,699
+REC-95771-ORG  ,F,MELINDA    ,          ,MARINELLI ,19700729,477,V0N1T0,BRACKENDALE                   ,MELINDA@YAHOO.CA                 ,19700729,700
+REC-400727-ORG ,F,LASHAWNA   ,BRENDAN   ,          ,19721026,347,V6Y1Z5,VANCOUVER                     ,                                 ,19721026,701
+REC-993585-ORG ,M,MATTHEW    ,          ,GINLEY    ,19540121,274,V2X8Z4,MAPLE RIDGE                   ,                                 ,19540121,702
+REC-856786-ORG ,M,SUE        ,IVES      ,TAPHOUSE  ,19260227,268,V0K1V0,PRINCE GEORGE                 ,SUE@HOTMAIL.COM                  ,19260227,703
+REC-259495-ORG ,F,ROBIN      ,ANDREW    ,HONAKER   ,19131204,               ,V1T7V5,VERNON                        ,                                 ,19131204,704
+REC-474978-ORG ,F,JEANNIE    ,JAZZ      ,GEMPLER   ,19420523,258,V1X5V4,KELOWNA                       ,                                 ,19420523,705
+REC-37573-ORG  , ,GWENDOLYN  ,CHARLES   ,BLACKSTON ,19520604,253,V0J1E0,HOUSTON                       ,                                 ,19520604,706
+REC-364067-ORG ,F,FRANCINE   ,JOANNA    ,BRADFORD  ,19840421,               ,V2R3J5,                              ,                                 ,19840421,707
+REC-657242-ORG ,F,MALORIE    ,          ,MENKIN    ,19090222,307,V3H5C1,PORT MOODY                    ,                                 ,19090222,708
+REC-96654-ORG  ,F,ARLEN      ,BEVERLY   ,SUSZYNSKI ,19911219,283,V0R1K2,CHEMAINUS                     ,                                 ,19911219,709
+REC-507149-ORG ,F,ANDRES     ,VALENTIN  ,CROFTS    ,19150810,441,V0E2P0,PRITCHARD                     ,ANDRES@SHAW.CA                   ,19150810,710
+REC-572061-ORG ,F,JOI        ,          ,LAURIANO  ,19740304,213,V9W7H9,                              ,JOI@HOTMAIL.COM                  ,19740304,711
+REC-363174-ORG ,F,BERNICE    ,BRETT     ,          ,19200528,764,      ,BAKER CREEK                   ,                                 ,19200528,712
+REC-134320-ORG ,F,CARRIE     ,DENISE    ,MARTIN    ,19600305,274,V4R2V2,MAPLE RIDGE                   ,CARRIE@GMAIL.COM                 ,19600305,713
+REC-542651-ORG ,M,ANNABEL    ,RONDA     ,BARSH     ,19460723,219,V0E1N0,BIRCH ISLAND                  ,                                 ,19460723,714
+REC-351447-ORG ,F,KATELYN    ,          ,SHANEBROOK,19320512,336,V3W2S7,SURREY                        ,                                 ,19320512,715
+REC-164772-ORG ,M,FLORENCE   ,          ,HERNANDES ,19460715,283,V0R2H0,NANAIMO                       ,                                 ,19460715,716
+REC-14841-ORG  , ,LILY       ,          ,DELACEY   ,,               ,V0H1V0,DAWSON CREEK                  ,LILY@GMAIL.COM                   ,,717
+REC-229247-ORG ,F,GEORGIA    ,MOLLY     ,ELLIS     ,19881009,267,V2Y2V3,LANGLEY                       ,GEORGIA@GMAIL.COM                ,19881009,718
+REC-120881-ORG ,F,LIAM       ,BEATRICE  ,BORCHELT  ,19890924,               ,V0M1A2,SEABIRD                       ,                                 ,19890924,719
+REC-96631-ORG  ,F,TAYLOR     ,KEVIN     ,SEKULICH  ,19551104,270,V0K1A0,LOGAN LAKE                    ,                                 ,19551104,720
+REC-855402-ORG ,F,ANNA       ,          ,          ,19750318,336,V3S0V1,SURREY                        ,ANNA@GMAIL.COM                   ,19750318,721
+REC-948204-ORG ,F,ROSAMARIA  ,          ,SIMMS     ,19410524,671,V0C2H0,DOG RIVER                     ,                                 ,19410524,722
+REC-20661-ORG  ,F,EMMANUEL   ,CASSANDRA ,MARTINEZ  ,19680722,202,V2T4L2,ABBOTSFORD                    ,EMMANUEL@MYWAY.COM               ,19680722,723
+REC-348924-ORG ,F,CALEB      ,NANCY     ,CAMP      ,19170525,231,V4E3A7,DELTA                         ,                                 ,19170525,724
+REC-212805-ORG ,M,RAYMOND    ,DOUGLAS   ,HALL      ,,274,V2X2G1,MAPLE RIDGE                   ,                                 ,,725
+REC-385015-ORG ,M,HOLLEY     ,          ,FREITAS   ,19961225,336,V3S3X9,SURREY                        ,HOLLEY@GMAIL.COM                 ,19961225,726
+REC-6037-ORG   ,F,DEEANNA    ,LAZARUS   ,ARNWINE   ,19990125,223,V9M3X4,COMOX                         ,                                 ,19990125,727
+REC-634655-ORG ,F,KAZUKI     ,THOMAS    ,NAZARYAN  ,19251127,               ,V0N1V8,GIBSONS                       ,                                 ,19251127,728
+REC-70560-ORG  ,F,MEAGAN     ,CHELSEA   ,          ,19130813,350,V8X1H5,VICTORIA                      ,MEAGAN@HOTMAIL.COM               ,19130813,729
+REC-112621-ORG ,F,           ,ALISA     ,BAYNES    ,19210330,256,V2C2Z2,KAMLOOPS                      ,REMA@GMAIL.COM                   ,19210330,730
+REC-988232-ORG ,F,           ,RUBY      ,BUTLER    ,19960223,348,V0J3A3,VANDERHOOF                    ,ALISE@DTM.CA                     ,19960223,731
+REC-873280-ORG ,F,SETSUKO    ,ERWIN     ,REYNA     ,19050222,223,V9M3W3,COMOX                         ,SETSUKO@HOTMAIL.COM              ,19050222,732
+REC-755972-ORG ,F,FERN       ,SIDNEY    ,BISTON    ,19980623,               ,V0C2W0,TUMBLER RIDGE                 ,FERN@GMAIL.COM                   ,19980623,733
+REC-304106-ORG ,F,FEDERICO   ,          ,LOWE      ,19501007,435,V9P9B4,NANOOSE BAY                   ,                                 ,19501007,734
+REC-83616-ORG  ,F,ANTONIO    ,DEMIE     ,MOSLEY    ,19890402,293,V0H1T0,1100 386 AVENUE               ,ANTONIO@GMAIL.COM                ,19890402,735
+REC-52206-ORG  ,F,ROBERT     ,JOANNA    ,KENNEDY   ,19230803,310,V2N1L2,PRINCE GEORGE                 ,ROBERT@HOTMAIL.COM               ,19230803,736
+REC-197006-ORG ,F,RALPH      ,DARCIE    ,SNIADECKI ,19030807,218,V0X1X2,                              ,                                 ,19030807,737
+REC-121209-ORG ,F,HERBERT    ,MERLE     ,DORSEY    ,19350404,238,V0J1P0,TL'AZT'EN NATION              ,                                 ,19350404,738
+REC-133042-ORG ,M,HUMBERTO   ,          ,REID      ,19110801,               ,V6Y1L1,RICHMOND                      ,                                 ,19110801,739
+REC-706340-ORG ,F,MISHA      ,          ,SOBERS    ,19970611,250,V0J1Y0,KISPIOX                       ,MISHA@HOTMAIL.COM                ,19970611,740
+REC-80669-ORG  ,M,LUSHIA     ,ALPHONSO  ,HYLAND    ,19421118,280,V2V6M9,MISSION                       ,LUSHIA@HOTMAIL.COM               ,19421118,741
+REC-949987-ORG ,F,LIESELOTTE ,ALEXIS    ,PURNELL   ,19891022,336,V3T5S6,SURREY                        ,                                 ,19891022,742
+REC-986689-ORG ,F,RYAN       ,ELTON     ,CLOWES    ,19021120,224,V3J2S1,COQUITLAM                     ,                                 ,19021120,743
+REC-290013-ORG ,F,CRYSTA     ,BRENDAN   ,MANSELL   ,19380522,450,V0E2W0,SORRENTO                      ,CRYSTA@HOTMAIL.CA                ,19380522,744
+REC-462652-ORG ,F,RENA       ,DOLORES   ,          ,19250517,247,V0J1W0,TACHET                        ,RENA@HOTMAIL.COM                 ,19250517,745
+REC-560130-ORG ,F,TOMIKA     ,PAULA     ,FAIOLA    ,19360429,643,V0E2E0,                              ,                                 ,19360429,746
+REC-704967-ORG ,F,GAYLENE    ,GEORGE    ,TREADO    ,19410328,350,V8Z3T5,VICTORIA                      ,                                 ,19410328,747
+REC-150156-ORG ,F,ARNOLD     ,TROY      ,RICHMOND  ,19921231,307,      ,PORT MOODY                    ,ARNOLD@YAHOO.COM                 ,19921231,748
+REC-759466-ORG ,F,SOPHIE     ,KYLIE     ,          ,19231113,267,V3A8M9,LANGLEY                       ,                                 ,19231113,749
+REC-249325-ORG ,F,LAURINDA   ,          ,PROCTER   ,19260828,398,V0R1L0,MILL BAY                      ,LAURINDA@HOTMAIL.COM             ,19260828,750
+REC-40908-ORG  ,F,FELICA     ,ARKI      ,WHITE     ,19830309,274,V2X3V1,MAPLE RIDGE                   ,                                 ,19830309,751
+REC-93074-ORG  ,F,OLGA       ,          ,GUPTON    ,19610507,280,V2V3E8,MISSION                       ,                                 ,19610507,752
+REC-30153-ORG  ,F,ERWIN      ,          ,STEWART   ,19020522,477,      ,GARABALDI HIGHLANDS           ,ERWIN@HOTMAIL.COM                ,19020522,753
+REC-923094-ORG ,F,JOHANA     ,KALE      ,VIDAL     ,19300426,225,V9N8Z3,COURTENAY                     ,JOHANA@MSN.COM                   ,19300426,754
+REC-250991-ORG ,F,MARIS      ,          ,STROEH    ,,               ,      ,BURNABY                       ,MARIS@MSN.COM                    ,,755
+REC-22208-ORG  ,F,JORDAN     ,KEELEY    ,PETTY     ,19330622,225,      ,COURTENAY                     ,                                 ,19330622,756
+REC-690168-ORG , ,ALEESHA    ,YVAN      ,HERNANDEZ ,19650523,452,V4V2E9,OYAMA                         ,ALEESHA@GMAIL.COM                ,19650523,757
+REC-883724-ORG ,F,KIRSTEN    ,SASCHA    ,STATEN    ,19451022,213,V9W1X8,CAMPBELL RIVER                ,                                 ,19451022,758
+REC-974373-ORG ,F,BLAKE      ,ALICE     ,VERSTEEG  ,19890210,336,V3R1Z7,SURREY                        ,BLAKE@GMAIL.COM                  ,19890210,759
+REC-491069-ORG ,F,HENRY      ,BEATRICE  ,MCLEOD    ,19430525,227,V0B1G6,                              ,                                 ,19430525,760
+REC-598501-ORG ,F,DARBY      ,TARNEE    ,ZELINSKI  ,19380816,548,V0E1E0,BARRIE                        ,                                 ,19380816,761
+REC-16979-ORG  ,F,JAIMEE     ,BRICE     ,NOEL      ,19411104,               ,V0G1P0,MONTROSE                      ,                                 ,19411104,762
+REC-880227-ORG ,F,RILEY      ,SAMANTHA  ,RANEY     ,19110228,218,V2R4M4,CHILLIWACK                    ,RILEY@HOTMAIL.COM                ,19110228,763
+REC-536381-ORG ,F,LUE        ,          ,HOWELL    ,19190601,340,V0J2N0,TELKWA                        ,                                 ,19190601,764
+REC-130035-ORG ,F,LAUREN     ,KELSEA    ,DAMORE    ,19080820,347,V5N2W5,VANCOUVER                     ,                                 ,19080820,765
+REC-630416-ORG ,F,MEE        ,          ,PONCE     ,19560520,477,V0N1T0,GARIBALDI HIGHLANDS           ,                                 ,19560520,766
+REC-832399-ORG ,F,EMIILY     ,          ,SAUERS    ,19620309,336,V3S7K9,SURREY                        ,EMIILY@MSM.COM                   ,19620309,767
+REC-816978-ORG , ,JESUS      ,          ,WHITELEY  ,19780224,472,V0M1A2,AGASSIZ                       ,JESUS@HOTMAIL.COM                ,19780224,768
+REC-348383-ORG ,M,PATIENCE   ,          ,LUSSO     ,19170609,340,V0J2N0,TELKWA                        ,PATIENCE@GMAIL.COM               ,19170609,769
+REC-1000901-ORG,F,JOHN       ,VIRGINIA  ,BOWZER    ,19210605,859,V0J1K0,ISKUT                         ,                                 ,19210605,770
+REC-611726-ORG ,M,ZAC        ,CARINA    ,NGUYEN    ,19500616,236,      ,FERNIE                        ,                                 ,19500616,771
+REC-560002-ORG ,M,PATSY      ,ERWIN     ,CAPECI    ,19051025,336,      ,                              ,PATSY@MSN.COM                    ,19051025,772
+REC-510530-ORG ,F,NISHA      ,REUBEN    ,MCFALL    ,19851019,308,V0C2C0,POUCE COUPE                   ,                                 ,19851019,773
+REC-1004883-ORG,M,HILLARY    ,RONDA     ,JACQUES   ,,347,V5X2L3,VANCOUVER                     ,                                 ,,774
+REC-1966-ORG   ,F,ARMINDA    ,JAMES     ,WALDROUP  ,19121002,               ,V3W0T8,                              ,                                 ,19121002,775
+REC-733618-ORG ,M,AIDAN      ,NICHOLAS  ,REID      ,19180530,252,V0X1L2,HOPE                          ,                                 ,19180530,776
+REC-956632-ORG ,M,BILLYE     ,KERRY     ,BOYACK    ,19371125,256,V2C2V5,KAMLOOPS                      ,BILLYE@HOTMAIL.COM               ,19371125,777
+REC-226471-ORG ,M,HANNAH     ,EVERETT   ,ANGULO    ,,336,V3W0Z9,SURREY                        ,                                 ,,778
+REC-682250-ORG ,M,VINCE      ,LESTER    ,BROOKS    ,19210504,               ,V0K2G0,100 MILE HOUSE                ,                                 ,19210504,779
+REC-364337-ORG ,F,           ,          ,FERRARI   ,19321206,202,V2T5K3,ABBOTSFORD                    ,                                 ,19321206,780
+REC-761195-ORG ,F,DOUGLAS    ,NATALIE   ,          ,,270,V0K1W0,LOGAN LAKE                    ,DOUGLAS@HOTMAIL.COM              ,,781
+REC-682789-ORG ,M,CORETTA    ,WALTER    ,WHEELINGTO,19970107,288,V3K6M9,NEW WESTMINSTER               ,CORETTA@NETCOMSUPPORT.CA         ,19970107,782
+REC-664292-ORG ,F,VALERIA    ,ALASTAIR  ,HELVIG    ,19000120,224,V3E3C9,COQUITLAM                     ,VALERIA@HOTMAIL.COM              ,19000120,783
+REC-522640-ORG ,F,GLADIS     ,CLEMENT   ,MORALES   ,19271207,291,V0N1T0,NORTH VANCOUVER               ,                                 ,19271207,784
+REC-581165-ORG ,F,DAVID      ,          ,PRZYBYLSKI,19421127,227,V0B1G2,BOUNTIFUL                     ,                                 ,19421127,785
+REC-89372-ORG  ,F,CHRISTINA  ,          ,ROBINSON  ,,337,V0P1X0,TAHSIS                        ,                                 ,,786
+REC-367347-ORG , ,SHANNON    ,CONNOR    ,SWANSON   ,19730929,355,V7P3R1,WEST VANCOUVER                ,                                 ,19730929,787
+REC-658312-ORG ,M,ILENE      ,EDWARD    ,WENSMAN   ,19490203,               ,V6M1R8,VANCOUVER                     ,                                 ,19490203,788
+REC-490669-ORG , ,KIANA      ,JOHN      ,BAKER     ,19790217,267,V2Y0L2,LANGLEY                       ,                                 ,19790217,789
+REC-978066-ORG ,F,TAJUANA    ,THERESA   ,          ,19620903,462,V0C2W0,WONOWON                       ,                                 ,19620903,790
+REC-173126-ORG ,F,CHRISTIA   ,AGNES     ,TYSON     ,19820520,297,V0N2L0,SKATIN ANTION                 ,                                 ,19820520,791
+REC-451171-ORG ,F,MILDRED    ,GWENNETH  ,SOBCZAK   ,19600809,348,V0J3A0,SAIK'UZ FIRST NATION          ,MILDRED@HOTMAIL.COM              ,19600809,792
+REC-952018-ORG ,F,DALILA     ,SALLY     ,          ,19091118,325,V0H1V0,SICAMOUS                      ,DALILA@HOTMAIL.COM               ,19091118,793
+REC-737163-ORG ,F,ANNA       ,VICTORIA  ,AKIU      ,19680507,350,V8R4N2,VICTORIA                      ,                                 ,19680507,794
+REC-767080-ORG ,F,MAVIS      ,MAYA      ,BIFANO    ,19300505,258,V1X1H6,KELOWNA                       ,                                 ,19300505,795
+REC-735827-ORG ,F,BEVERLY    ,          ,GAITAN    ,,320,      ,CASTLEGAR                     ,                                 ,,796
+REC-626220-ORG ,F,BELLA      ,THOMAS    ,RICH      ,19750102,294,V0H1T0,OSOYOOS                       ,                                 ,19750102,797
+REC-302394-ORG , ,MAYNARD    ,RICHARD   ,DAVIDSON  ,19440719,387,V8M1M4,SAANICHTON                    ,MAYNARD@TELUS.NET                ,19440719,798
+REC-520041-ORG ,F,TWANNA     ,          ,HASETTE   ,19860805,336,V4N2P3,SURREY                        ,                                 ,19860805,799
+REC-75418-ORG  ,F,CAITLIN    ,CLAIRE    ,BONECUTTER,19480816,234,V0E1V2,ENDERBY                       ,                                 ,19480816,800
+REC-684214-ORG ,F,LEVI       ,BRAIDEN   ,          ,19540731,239,V0C1H0,                              ,LEVI@HOTMAIL.COM                 ,19540731,801
+REC-493480-ORG ,F,LINDA      ,JARVIS    ,YANG      ,,               ,V0J3A0,SAIK'UZ FIRST NATION          ,LINDA@GMAIL.COM                  ,,802
+REC-464636-ORG ,M,MARIANNA   ,REGINALD  ,WHITE     ,19820927,305,      ,DUNCAN                        ,                                 ,19820927,803
+REC-698553-ORG ,F,MUOI       ,GAIL      ,RUTLEDGE  ,,214,V0G1X0,CASTLEGAR                     ,                                 ,,804
+REC-357196-ORG ,F,JOIE       ,GLADYS    ,COOLMAN   ,19160716,250,V0J1Y0,HAZELTON                      ,                                 ,19160716,805
+REC-171242-ORG ,F,DAVID      ,NEAL      ,GOIN      ,19350331,205,V0E1B4,ARMSTRONG                     ,DAVID@GMAIL.COM                  ,19350331,806
+REC-464899-ORG , ,ELLA       ,SARAH     ,THOMAS    ,19280526,227,V0B1G1,                              ,                                 ,19280526,807
+REC-129819-ORG ,F,BRAIDEN    ,          ,ROBINSON  ,19990524,329,V0J2N0,SMITHERS                      ,                                 ,19990524,808
+REC-935358-ORG , ,MARIA      ,MERLE     ,          ,19810825,317,V6Y1K2,RICHMOND                      ,                                 ,19810825,809
+REC-503792-ORG ,M,KELVIN     ,YVAN      ,MCCARTY   ,19650606,229,V1G4H9,FELLERS HEIGHTS               ,KELVIN@GMAIL.COM                 ,19650606,810
+REC-289456-ORG ,F,MICHAEL    ,JOANNA    ,DODSON    ,19760608,224,V3E2R8,COQUITLAM                     ,                                 ,19760608,811
+REC-514618-ORG ,F,MACONAL    ,IDA       ,WELLS     ,19970528,239,V0J1P0,FORT ST. JOHN                 ,MACONAL@LIVE.CA                  ,19970528,812
+REC-522323-ORG ,F,ALEXANDRA  ,IAN       ,MARTINEZ  ,19621231,268,V0K1V0,T'IT'Q'ET                     ,                                 ,19621231,813
+REC-797537-ORG ,M,ALANA      ,ISABEL    ,KLEMZ     ,19130605,368,V0A1H0,HERIOT BAY                    ,ALANA@HOTMAIL.COM                ,19130605,814
+REC-67973-ORG  ,F,GARTH      ,FYYNLAY   ,HOWIE     ,19770926,463,      ,TIPELLA                       ,GARTH@HOTMAIL.COM                ,19770926,815
+REC-771868-ORG ,F,DARCY      ,HOLLY     ,DEROSAS   ,19921214,               ,V0J2N0,                              ,DARCY@YAHOO.COM                  ,19921214,816
+REC-829099-ORG ,M,DONNA      ,THERESA   ,WAGSCHAL  ,19180331,258,V1P1C7,KELOWNA                       ,                                 ,19180331,817
+REC-286456-ORG ,M,JOHN       ,CHRISTINE ,DILLON    ,19510205,246,V0H1H5,GRAND FORKS                   ,                                 ,19510205,818
+REC-175844-ORG ,M,SIGRID     ,MEREDITH  ,          ,19890823,336,V3T4M4,                              ,SIGRID@HOTMAIL.COM               ,19890823,819
+REC-577224-ORG ,F,WARD       ,SOPHIE    ,          ,19580826,               ,V0R1L0,COBBLE HILL                   ,                                 ,19580826,820
+REC-128872-ORG , ,KAREN      ,PAUL      ,BENSON    ,19340820,435,V9P9H9,NANOOSE BAY                   ,KAREN@HOTMAIL.COM                ,19340820,821
+REC-88166-ORG  ,F,DELILA     ,SHARON    ,MEGGINSON ,19240127,293,V0H1T0,OLIVER                        ,                                 ,19240127,822
+REC-637055-ORG ,F,CASSAUNDRA ,ELLOUISE  ,ADKINS    ,19640720,201,V0K2E0,LONE BUTTE                    ,CASSAUNDRA@HOTMAIL.COM           ,19640720,823
+REC-960935-ORG ,F,PAULINE    ,ALICE     ,WELLS     ,19390221,239,V0C1H0,CHARLIE LAKE                  ,PAULINE@MSN.COM                  ,19390221,824
+REC-771864-ORG , ,MEREDITH   ,GORDON    ,BURPEE    ,,417,V4V1Z7,WINFIELD                      ,                                 ,,825
+REC-358829-ORG ,F,EMIILY     ,          ,DITTY     ,19490910,329,V0J2X0,SMITHERS                      ,EMIILY@GMAIL.COM                 ,19490910,826
+REC-875657-ORG ,F,MYRIAM     ,KAI       ,MESSINA   ,19651209,350,V9A2X3,VICTORIA                      ,MYRIAM@SHAW.CA                   ,19651209,827
+REC-828160-ORG ,F,SHAVON     ,MERLE     ,BROWN     ,19091105,272,V0K1Z0,LYTTON                        ,                                 ,19091105,828
+REC-58453-ORG  ,F,KAELA      ,          ,ELLIS     ,19830512,336,V3W3V6,                              ,                                 ,19830512,829
+REC-337578-ORG ,F,LINDA      ,BREONY    ,          ,,236,V0B1M0,BAYNES LAKE                   ,                                 ,,830
+REC-246333-ORG ,F,AIDAN      ,DANIKA    ,HILT      ,,350,V8Z5L6,                              ,                                 ,,831
+REC-501999-ORG ,F,MARY       ,PHILLIP   ,GOWAN     ,19350711,329,V0J2N0,KITIMAT                       ,                                 ,19350711,832
+REC-40622-ORG  ,F,MARLYS     ,          ,LOWE      ,19400829,603,V0E1E0,CHU CHUA                      ,                                 ,19400829,833
+REC-561111-ORG ,F,ADELE      ,CASSANDRA ,FUDALI    ,19121213,274,V2X7R8,MAPLE RIDGE                   ,                                 ,19121213,834
+REC-586165-ORG , ,MATTHEW    ,PERCY     ,LILLY     ,19331103,231,      ,DELTA                         ,                                 ,19331103,835
+REC-769083-ORG ,F,ELAINE     ,EUGENE    ,STATTON   ,19740821,350,V9A1W6,VICTORIA                      ,ELAINE@YAHOO.COM                 ,19740821,836
+REC-304397-ORG ,F,THERESA    ,SYBELLA   ,ROZMIAREK ,19500817,299,      ,PITT MEADOWS                  ,                                 ,19500817,837
+REC-657948-ORG ,F,           ,ELIZABETH ,WASCOM    ,19390115,347,V6Z1P5,VANCOUVER                     ,                                 ,19390115,838
+REC-360732-ORG ,F,RUSSEL     ,          ,SHIMMEL   ,19610328,288,V3M0B3,NEW WESTMINSTER               ,                                 ,19610328,839
+REC-854179-ORG ,F,RASHIDA    ,SHAE      ,RYAN      ,19930825,581,      ,BINCHE                        ,RASHIDA@HOTMAIL.COM              ,19930825,840
+REC-243916-ORG ,F,LEENA      ,          ,DINELLO   ,19861018,338,V0C2K0,TAYLOR                        ,                                 ,19861018,841
+REC-111800-ORG ,F,CHRISTI    ,          ,WELLER    ,19990224,               ,V2A8S5,PENTICTON                     ,CHRISTI@MSN.COM                  ,19990224,842
+REC-422564-ORG ,F,HARRIETTE  ,          ,DISKEY    ,19250317,625,V0C1X0,MONTNEY                       ,                                 ,19250317,843
+REC-973313-ORG ,M,DAVID      ,RUBY      ,          ,19270614,258,V1W3A7,KELOWNA                       ,                                 ,19270614,844
+REC-501696-ORG ,F,PAOLA      ,          ,HUYEN     ,19351124,348,V0J3A0,STONEY CREEK                  ,                                 ,19351124,845
+REC-268105-ORG ,F,AMEE       ,          ,REIMER    ,19591026,390,V0C1J0,CHETWYND                      ,                                 ,19591026,846
+REC-902707-ORG ,F,CAMERON    ,AALIYAH   ,WELSH     ,19061102,               ,V0J1P0,NAK'AZDLI                     ,CAMERON@GMAIL.COM                ,19061102,847
+REC-337172-ORG ,F,DAMIEN     ,          ,          ,19250305,329,V0J2N0,MORICETOWN                    ,                                 ,19250305,848
+REC-846868-ORG ,M,MARIANNA   ,RAYMOND   ,BASABE    ,19891001,238,V0J1P0,NAK ASDLI                     ,MARIANNA@TELUS.NET               ,19891001,849
+REC-203424-ORG ,F,DOROTHY    ,          ,          ,19290120,305,V0N2P0,PORT RUPERT                   ,DOROTHY@HOTMAIL.COM              ,19290120,850
+REC-75896-ORG  ,F,MARGORIE   ,          ,LEVEE     ,19991108,231,V4K3E7,DELTA                         ,MARGORIE@GMAIL.COM               ,19991108,851
+REC-939657-ORG ,F,RENE       ,          ,REYES     ,19690420,210,V3N4R1,BURNABY                       ,RENE@GMAIL.COM                   ,19690420,852
+REC-940841-ORG , ,MARY       ,REGINALD  ,KAMMERMAN ,19420908,347,V6P3V1,VANCOUVER                     ,                                 ,19420908,853
+REC-540915-ORG ,F,MARIANELA  ,          ,BROWN     ,19480904,227,V0B1G0,CRESTON                       ,MARIANELA@HOTMAIL.COM            ,19480904,854
+REC-507598-ORG ,F,ADRIANNA   ,          ,RECORDS   ,19181027,205,V0E1B1,ARMSTRONG                     ,ADRIANNA@GMAIL.COM               ,19181027,855
+REC-670372-ORG , ,BRIAN      ,          ,AUCOIN    ,19250506,624,V0C2K0,BUICK CREEK                   ,                                 ,19250506,856
+REC-560136-ORG ,F,EMILEE     ,AYLA      ,          ,19900719,341,V0J1Y0,TERRACE                       ,EMILEE@GMAIL.COM                 ,19900719,857
+REC-498714-ORG ,F,DELPHIA    ,ALEXIS    ,          ,19850221,238,V0J1P0,TACHIE                        ,DELPHIA@HOTMAIL.COM              ,19850221,858
+REC-12802-ORG  ,F,REIKO      ,ROLAND    ,HUME      ,19080425,348,V0J3A1,                              ,                                 ,19080425,859
+REC-93411-ORG  ,F,FELICITY   ,BRADLEY   ,VANDRUFF  ,19391217,336,V3W0T8,SURREY                        ,FELICITY@GMAIL.COM               ,19391217,860
+REC-891311-ORG ,F,CHELSEA    ,TENILLE   ,SUL       ,19220902,329,V0J2N0,KITIMAT                       ,CHELSEA@YAHOO.CA                 ,19220902,861
+REC-105724-ORG ,F,MAGDALEN   ,          ,SURETTE   ,19681220,202,V2T5N3,ABBOTSFORD                    ,                                 ,19681220,862
+REC-247026-ORG ,F,FLORENCE   ,LORRAINE  ,LEE       ,19300103,343,V1R1G6,TRAIL                         ,                                 ,19300103,863
+REC-147175-ORG ,F,ERNEST     ,          ,RULE      ,19620128,216,V0E1M0,CHASE                         ,                                 ,19620128,864
+REC-174348-ORG , ,           ,          ,VALENCIA  ,19220205,388,V8M1J6,                              ,SONIA@GMAIL.COM                  ,19220205,865
+REC-992330-ORG ,M,KARLA      ,BRAMBLEY  ,ERSKIN    ,19120926,202,      ,ABBOTSFORD                    ,                                 ,19120926,866
+REC-482150-ORG ,F,NORA       ,          ,HUERKAMP  ,,               ,V6Y2S9,RICHMOND                      ,                                 ,,867
+REC-162626-ORG ,F,ANNABELLE  ,VIVIAN    ,BROOKS    ,19210103,347,      ,VANCOUVER                     ,ANNABELLE@SFU.CA                 ,19210103,868
+REC-976413-ORG ,F,BRIAN      ,CAIN      ,GILLUM    ,,               ,V9N9N2,                              ,                                 ,,869
+REC-724868-ORG ,F,DEXTER     ,RAPHAEL   ,ITAGAKI   ,19300310,333,V0N1T0,SQUAMISH                      ,                                 ,19300310,870
+REC-882382-ORG ,M,SHIZUE     ,          ,REMSTER   ,19550421,355,V7T1M7,WEST VANCOUVER                ,                                 ,19550421,871
+REC-650709-ORG ,M,NELIDA     ,ANEKA     ,          ,19121219,283,V9S2K1,NANAIMO                       ,                                 ,19121219,872
+REC-732969-ORG ,F,           ,ZACHARY   ,DUGGAN    ,19371226,250,V0J1Y0,GLEN VOWELL                   ,                                 ,19371226,873
+REC-168676-ORG ,M,HELEN      ,          ,MAYTUBBY  ,19761025,               ,V0E1M0,KAMLOOPS                      ,HELEN@GMAIL.COM                  ,19761025,874
+REC-495444-ORG ,M,JOSEPH     ,DIMITRI   ,BERRY     ,19060429,252,V0X1L0,CHILLIWACK                    ,                                 ,19060429,875
+REC-458671-ORG , ,RENALDO    ,VALERIAN  ,HAVICAN   ,19820515,224,V3B7G1,COQUITLAM                     ,RENALDO@HOTMAIL.COM              ,19820515,876
+REC-727231-ORG ,F,ABBEY      ,MACEY     ,STARK     ,19150802,336,V3S8Z6,SURREY                        ,                                 ,19150802,877
+REC-996744-ORG ,F,LAJUANA    ,WILLIAM   ,PERALES   ,19020622,329,V0J2N0,SMITHERS                      ,LAJUANA@VECTORGROUP.COM          ,19020622,878
+REC-973598-ORG ,F,BRODIE     ,ROBERTA   ,RHODES    ,19210426,243,V0N1V0,GIBSONS                       ,                                 ,19210426,879
+REC-620669-ORG ,F,DEAKYN     ,AILEEN    ,HEISERMAN ,,268,V0K1V0,LILLOOET                      ,                                 ,,880
+REC-267802-ORG ,M,JUNITA     ,KRISTO    ,SCHLAK    ,19990407,416,V0J2N0,MORICETOWN                    ,JUNITA@YAHOO.CA                  ,19990407,881
+REC-8874-ORG   ,F,LOCHLAN    ,BARRY     ,KLINEDINST,,358,V2G2W2,WILLIAMS LAKE                 ,LOCHLAN@LIVE.COM                 ,,882
+REC-500733-ORG ,F,MAJOR      ,NEVILLE   ,RENFREY   ,,               ,V7J2R3,NORTH VANCOUVER               ,                                 ,,883
+REC-810356-ORG ,F,CRISTI     ,MADDISON  ,DASCHBACH ,19640814,218,V0X1X2,CHILLIWACK                    ,                                 ,19640814,884
+REC-490054-ORG ,F,JADEN      ,          ,LAKDAWALA ,19230717,344,V0C2W0,TUMBLER RIDGE                 ,JADEN@HOTMAIL.COM                ,19230717,885
+REC-121628-ORG ,F,FRANCES    ,JACINTA   ,SALGADO   ,19230320,317,V7E6A2,RICHMOND                      ,FRANCES@GMAIL.COM                ,19230320,886
+REC-225599-ORG ,F,FLOYD      ,          ,          ,19540323,350,      ,VICTORIA                      ,                                 ,19540323,887
+REC-578588-ORG ,F,           ,FINLAY    ,ANDERSON  ,19510108,252,V0X1L0,SEABIRD ISLAND                ,                                 ,19510108,888
+REC-154397-ORG ,F,ALEXANDRA  ,JANA      ,GEORGE    ,19111105,218,V2K4K1,CHILLIWACK                    ,                                 ,19111105,889
+REC-711067-ORG ,M,LILLIAM    ,VIANCA    ,RONEY     ,19910520,               ,V0E1E0,CHU-CHUA                      ,                                 ,19910520,890
+REC-555448-ORG ,F,CONNOR     ,          ,BEDDING   ,19721025,347,V6K4V2,VANCOUVER                     ,CONNOR@HOTMAIL.COM               ,19721025,891
+REC-677079-ORG , ,STORMY     ,LAURA     ,COULSON   ,19161013,283,V9T2W4,NANAIMO                       ,STORMY@HANMAIL.NET               ,19161013,892
+REC-773589-ORG ,F,CHRISTOPHER,BJORN     ,MCELWEE   ,19791117,238,V0J3A0,FORT ST. JAMES                ,CHRISTOPHER@HOTMAIL.COM          ,19791117,893
+REC-738463-ORG ,F,AURORE     ,GABRIEL   ,MORRISON  ,19470320,227,V0B1G0,CRESTON                       ,                                 ,19470320,894
+REC-16030-ORG  ,F,JAMISON    ,STANLEY   ,VANRYN    ,19151114,319,      ,SAANICH                       ,JAMISON@HOTMAIL.COM              ,19151114,895
+REC-870050-ORG ,F,MARYLYNN   ,KIMBERLY  ,LEAVINGS  ,19630422,347,V5R6C5,JOYCE COLLINGWOOD             ,MARYLYNN@SHAW.CA                 ,19630422,896
+REC-567528-ORG , ,DARRYL     ,          ,HUEMANN   ,19850922,234,V0E1V0,                              ,DARRYL@HOTMAIL.COM               ,19850922,897
+REC-286368-ORG ,F,ALOYSIUS   ,EMIL      ,STATHAM   ,19310701,317,V7C3H1,RICHMOND                      ,                                 ,19310701,898
+REC-481294-ORG ,F,THOMAS     ,BRIAN     ,EFLAND    ,19081227,268,V0K1V0,TIT'GET                       ,                                 ,19081227,899
+REC-32799-ORG  , ,LARAE      ,RUDOLPH   ,PELLERIN  ,19141113,238,      ,FORT ST. JAMES                ,LARAE@YAHOO.COM.MX               ,19141113,900
+REC-457358-ORG ,M,ALEXANDER  ,TAYLOR    ,LAURY     ,19861124,252,      ,SEABIRD ISLAND                ,ALEXANDER@HOTMAIL.COM            ,19861124,901
+REC-558479-ORG ,F,LACHLAN    ,          ,BERRY     ,19870206,284,      ,NELSON                        ,LACHLAN@AIRBASECANADA.COM        ,19870206,902
+REC-144458-ORG ,F,JOSE       ,DELLA     ,DOSS      ,19510804,297,V0N2L0,PEMBERTON                     ,                                 ,19510804,903
+REC-31568-ORG  , ,GLORIA     ,LAZARUS   ,BISSETT   ,19910703,378,V4T1X6,VANCOUVER                     ,                                 ,19910703,904
+REC-474533-ORG ,F,           ,CURTIS    ,VANSTEENKI,19231122,541,V0B1E0,CRAWFORD BAY                  ,DION@HOTMAIL.COM                 ,19231122,905
+REC-965936-ORG ,F,SHARON     ,HOLLY     ,LABARBERA ,19380513,323,V8A4Z3,SECHELT                       ,SHARON@YAHOO.CA                  ,19380513,906
+REC-887465-ORG ,F,BRYON      ,TEGAN     ,MABRY     ,19640720,202,V3G0A9,ABBOTSFORD                    ,BRYON@HOTMAIL.COM                ,19640720,907
+REC-193703-ORG ,F,YOLANDA    ,FYYNLAY   ,STRICKLAND,,               ,V6G2H9,VANCOUVER                     ,                                 ,,908
+REC-20337-ORG  , ,STANFORD   ,BRIDGET   ,PATT      ,19480730,267,V3A6C6,LANGLEY                       ,                                 ,19480730,909
+REC-941286-ORG ,F,ILSE       ,          ,JOHNSON   ,19671108,238,V0J1P0,FORT ST JAMES                 ,                                 ,19671108,910
+REC-812789-ORG ,F,JOELLEN    ,CALVIN    ,MILLAR    ,19551104,268,V0K1V0,BRIDGE RIVER                  ,                                 ,19551104,911
+REC-933567-ORG ,F,JASON      ,          ,BROWNING  ,19130106,238,V0J3A0,FORT ST. JAMES                ,                                 ,19130106,912
+REC-833162-ORG ,F,SHANTAE    ,MARK      ,CARUANA   ,19610201,267,V2Y2N6,                              ,SHANTAE@GMAIL.COM                ,19610201,913
+REC-288308-ORG ,F,CYNTHIA    ,BENEDICT  ,MORRISON  ,19171118,303,V3B2T3,PORT COQUITLAM                ,CYNTHIA@SHAW.CA                  ,19171118,914
+REC-329380-ORG ,F,MORRIS     ,          ,FLEET     ,19160815,               ,V9T5R3,NANAIMO                       ,                                 ,19160815,915
+REC-107080-ORG ,F,HARRY      ,MARIAN    ,CHOSE     ,19840730,238,      ,TL'AZT'EN                     ,HARRY@163.COM                    ,19840730,916
+REC-920696-ORG ,F,SHARIKA    ,AINSLEY   ,          ,19441007,274,V4R1M6,MAPLE RIDGE                   ,                                 ,19441007,917
+REC-456490-ORG ,M,MAXWELL    ,DANIEL    ,          ,19430214,417,V4V1E6,WINFIELD                      ,MAXWELL@YAHOO.CA                 ,19430214,918
+REC-874552-ORG ,M,MABLE      ,          ,FLOYD     ,19210802,347,      ,VANCOUVER                     ,MABLE@HOTMAIL.COM                ,19210802,919
+REC-710341-ORG ,F,BENJAMIN   ,          ,MAMAKOS   ,19771004,233,V0B1H0,ELKFORD                       ,BENJAMIN@TELUS.NET               ,19771004,920
+REC-749891-ORG ,F,ANH        ,LYNETTE   ,JACKSON   ,19801022,               ,V0C1J0,                              ,ANH@HOTMAIL.COM                  ,19801022,921
+REC-619045-ORG ,F,WESTON     ,IRENE     ,GRIFFIN   ,19370501,               ,      ,NANAIMO                       ,                                 ,19370501,922
+REC-839724-ORG ,F,CHARLES    ,SASCHA    ,SRINIVAS  ,19901023,310,V0J2N0,PRINCE GEORGE                 ,CHARLES@GMAIL.COM                ,19901023,923
+REC-206843-ORG ,F,JESENIA    ,MAXWELL   ,          ,19711107,295,V9P1G7,PARKSVILLE                    ,                                 ,19711107,924
+REC-56699-ORG  ,F,GREGORIA   ,GILLIAN   ,          ,19301010,460,V0K1V0,                              ,                                 ,19301010,925
+REC-85775-ORG  ,F,CURT       ,          ,RYAN      ,19420430,336,V3W7X9,SURREY                        ,                                 ,19420430,926
+REC-619202-ORG , ,           ,MICHAELA  ,NESTER    ,,508,V0R1V0,ERRINGTON                     ,                                 ,,927
+REC-397893-ORG ,F,TRISTAN    ,WINIFRED  ,STRICKER  ,19560413,450,V0E2W0,                              ,TRISTAN@LIVE.CA                  ,19560413,928
+REC-866557-ORG ,F,JACYNTA    ,PHILLIP   ,BEATTIE   ,19600523,298,V2A4H2,PENTICTON                     ,                                 ,19600523,929
+REC-423576-ORG ,M,BAILEY     ,TIAHANA   ,CHAPMAN   ,19831225,238,V0J1P0,                              ,                                 ,19831225,930
+REC-406756-ORG ,M,ELLEN      ,ELIZABETH ,FOSTER    ,19610724,347,V6S2J8,VANCOUVER                     ,                                 ,19610724,931
+REC-832073-ORG ,M,NOE        ,DEAN      ,VOLKMAN   ,,238,V0J1P0,FORT ST JAMES                 ,                                 ,,932
+REC-349211-ORG ,F,KING       ,SIEGFRIED ,HAGE      ,19820507,408,V0E2X0,SALMON ARM                    ,                                 ,19820507,933
+REC-369769-ORG ,M,TANEKA     ,LYNETTE   ,HUNTER    ,19551115,329,V0J2N0,KITIMAT                       ,                                 ,19551115,934
+REC-793667-ORG , ,CHARLES    ,PATRICIA  ,HODGE     ,19271219,256,V2C4L5,KAMLOOPS                      ,CHARLES@HOTMAIL.COM              ,19271219,935
+REC-181158-ORG ,F,GEORGIA    ,NEAL      ,          ,19730410,               ,V4V2N9,WINFIELD                      ,GEORGIA@FACEBOOK.COM             ,19730410,936
+REC-30526-ORG  ,M,ARNOLDO    ,GRAHAM    ,CARTER    ,19490310,238,V0J1P0,NAK'AZDLI                     ,ARNOLDO@HOTMAIL.COM              ,19490310,937
+REC-636912-ORG ,F,EMIILY     ,SHAKIRA   ,WALLER    ,19420323,336,V4N2Y3,SURREY                        ,                                 ,19420323,938
+REC-879293-ORG ,F,CHARLES    ,RANDOLPH  ,LINGEN    ,19610423,248,V0H1H0,GREENWOOD                     ,                                 ,19610423,939
+REC-609646-ORG , ,LENA       ,RONALD    ,TALIAFERRO,19690925,463,V0N2K0,PORT DOUGLAS                  ,                                 ,19690925,940
+REC-482216-ORG ,M,BRADFORD   ,RAPHAEL   ,PEAL      ,19231011,305,      ,PORT HARDY                    ,BRADFORD@MARLINTRAVEL.CA         ,19231011,941
+REC-636193-ORG ,M,DANNIE     ,BRICE     ,HEUBEL    ,,228,V0R1S0,CUMBERLAND                    ,                                 ,,942
+REC-564019-ORG ,F,CAIN       ,          ,GLATZEL   ,19521105,306,V0N2P0,PORT MCNEILL                  ,CAIN@NAVER.COM                   ,19521105,943
+REC-928127-ORG ,F,MIA        ,          ,BOERUM    ,19080403,291,V7J3P7,NORTH VANCOUVER               ,                                 ,19080403,944
+REC-114949-ORG ,F,           ,CHANTELLE ,TERRY     ,19600731,202,      ,ABBOTSFORD                    ,JACQUELINE@HOTMAIL.COM           ,19600731,945
+REC-760027-ORG ,M,JAIDEN     ,CHELSEA   ,MORRIS    ,19240816,274,V2X3G8,MAPLE RIDGE                   ,                                 ,19240816,946
+REC-398163-ORG ,M,STEPHANIE  ,MICHAEL   ,NG        ,19611114,               ,V0J1W0,GRANISLE                      ,                                 ,19611114,947
+REC-707437-ORG ,F,DEAN       ,          ,RIOS      ,19120503,350,V8T1X1,VICTORIA                      ,DEAN@HOTMAIL.COM                 ,19120503,948
+REC-461213-ORG ,M,CARMELINA  ,MEAGAN    ,SHEPHERD  ,19761010,256,V2C1N6,KAMLOOPS                      ,CARMELINA@GMAIL.COM              ,19761010,949
+REC-20920-ORG  ,F,ROGER      ,ERIC      ,NEAULT    ,19890120,298,V2A1E8,PENTICTON                     ,                                 ,19890120,950
+REC-638005-ORG ,F,EMERALD    ,AARON     ,SPITLER   ,,238,V0J1P0,TACHE                         ,                                 ,,951
+REC-445207-ORG , ,           ,SUSAN     ,MELO      ,19281203,226,      ,CRANBROOK                     ,                                 ,19281203,952
+REC-196004-ORG ,M,ELSIE      ,NEAL      ,HOWINGTON ,19600304,277,V1K1B8,ZOGHT                         ,ELSIE@GMAIL.COM                  ,19600304,953
+REC-672229-ORG ,M,DELISA     ,ANITA     ,DEAN      ,19390416,267,V1M2N2,LANGLEY                       ,                                 ,19390416,954
+REC-757450-ORG ,F,MADISON    ,EUSTACIA  ,DENNISON  ,,548,V0E1E0,BARRIE                        ,                                 ,,955
+REC-712716-ORG ,F,AARON      ,AIKATERINA,BOOK      ,,267,V1M2H4,LANGLEY                       ,                                 ,,956
+REC-79112-ORG  ,F,BRAIN      ,ARTHUR    ,          ,,206,      ,VENABLES VALLEY               ,                                 ,,957
+REC-809257-ORG ,F,JAMES      ,JAIME     ,EYLES     ,19720127,294,V0H1V3,OSOYOOS                       ,                                 ,19720127,958
+REC-95904-ORG  ,M,SUSAN      ,ERWIN     ,MIETUS    ,19950430,356,V0N1B7,WHISTLER                      ,                                 ,19950430,959
+REC-198701-ORG ,F,TANISHA    ,ALVIN     ,TOP       ,19951230,252,V0X1L0,CHILLIWACK                    ,                                 ,19951230,960
+REC-136054-ORG ,F,SHEILA     ,          ,MORGAN    ,19770505,598,V0C1J0,CANOE CREEK                   ,SHEILA@GMAIL.CA                  ,19770505,961
+REC-240071-ORG ,M,MONICA     ,AALIYAH   ,DAVIS     ,19260416,202,      ,ABBOTSFORD                    ,MONICA@HOTMAIL.COM               ,19260416,962
+REC-564271-ORG ,F,ARLEAN     ,PATRICIA  ,DICKENSON ,19671119,               ,V0H1T0,                              ,                                 ,19671119,963
+REC-59042-ORG  ,F,LILY       ,LAZARUS   ,JENKINS   ,19550215,336,V3T3C5,SURREY                        ,                                 ,19550215,964
+REC-643586-ORG , ,TAM        ,          ,JOHNSON   ,19580407,255,V0A1E0,INVERMERE                     ,                                 ,19580407,965
+REC-840450-ORG ,F,MEGAN      ,          ,ANDREWS   ,19850225,303,V3C5H2,PORT COQUITLAM                ,                                 ,19850225,966
+REC-586640-ORG ,M,HAYDEN     ,          ,FANNIN    ,19130404,283,      ,                              ,                                 ,19130404,967
+REC-919665-ORG ,F,ELINORE    ,HENRIETTA ,GURIEL    ,19250615,336,V4N0R6,SURREY                        ,                                 ,19250615,968
+REC-345207-ORG ,F,TONI       ,          ,MCGREGOR  ,19050730,350,V8Z6T3,                              ,                                 ,19050730,969
+REC-31451-ORG  ,F,FRANKLIN   ,BEATRICE  ,FULTON    ,19851227,396,V0J2A0,GITWANGAK                     ,                                 ,19851227,970
+REC-811929-ORG ,M,LILA       ,          ,GREEN     ,19970830,239,V0C1Y0,FORT ST. JOHN                 ,LILA@HOTMAIL.COM                 ,19970830,971
+REC-65419-ORG  ,M,IRWIN      ,          ,HOLBERT   ,19880916,467,      ,CHUCHUA                       ,                                 ,19880916,972
+REC-151533-ORG ,F,ELMER      ,          ,HAMAN     ,19710117,306,      ,PORT MCNEILL                  ,ELMER@ANMSTUDIOS.COM             ,19710117,973
+REC-29450-ORG  ,F,KYLE       ,FELICITY  ,TROCK     ,19140101,217,V0C1J0,CHETWYND                      ,KYLE@YAHOO.CA                    ,19140101,974
+REC-484308-ORG ,F,SAMUEL     ,MAY       ,WATSON    ,,268,V0K1V0,TITQET RESERVE                ,                                 ,,975
+REC-943548-ORG , ,JOSHUA     ,OSCAR     ,FRANCIS   ,19790809,347,V5W2C2,VANCOUVER                     ,JOSHUA@HOTMAIL.COM               ,19790809,976
+REC-686626-ORG ,M,ROXANNA    ,CEDRIC    ,ADAMIC    ,19360727,               ,V2C6P8,KAMLOOPS                      ,ROXANNA@HOTMAIL.COM              ,19360727,977
+REC-610243-ORG , ,VANNESA    ,          ,SIEFERT   ,19911219,210,V5H3P5,BURNABY                       ,                                 ,19911219,978
+REC-478798-ORG ,F,DILLON     ,CORALIE   ,SABOVIC   ,19290122,305,V0N2P0,QUATSINO                      ,                                 ,19290122,979
+REC-207543-ORG ,M,EMMALINE   ,PENELOPE  ,EDWARDS   ,19641116,232,V2Z2Z2,DUNCAN                        ,EMMALINE@GMAIL.COM               ,19641116,980
+REC-53172-ORG  ,F,ERNESTO    ,          ,WHITE     ,19860111,305,      ,QUATSINO                      ,ERNESTO@HOTMAIL.COM              ,19860111,981
+REC-15348-ORG  ,M,MASON      ,ALICE     ,CAUSOR    ,19210910,376,V0K1M0,100 MILE HOUSE                ,                                 ,19210910,982
+REC-886826-ORG ,F,NORENE     ,RUBY      ,LOWE      ,19250813,347,V6G1P2,VANCOUVER                     ,NORENE@GMAIL.COM                 ,19250813,983
+REC-100753-ORG ,F,DRUSILLA   ,          ,CHILINGARY,,439,V0H1R0,OKANAGAN FALLS                ,                                 ,,984
+REC-990754-ORG ,F,TINY       ,          ,TRENERRY  ,19381209,310,V0J2N0,PRINCE GEORGE                 ,TINY@NUFLOORSLANGLEY.COM         ,19381209,985
+REC-844356-ORG ,F,NORINE     ,MARCUS    ,HUEHN     ,19830726,               ,V3C5B3,COQUITLAM                     ,NORINE@HOTMAIL.COM               ,19830726,986
+REC-808082-ORG ,F,JUDITH     ,          ,YOON      ,19780809,317,V7C5R9,RICHMOND                      ,                                 ,19780809,987
+REC-829291-ORG ,F,MARY       ,COLIN     ,RECHENBERG,19410426,268,V0K1W0,TI'Q'ET                       ,                                 ,19410426,988
+REC-24589-ORG  ,M,MIRIAM     ,          ,HECKENDORF,19230311,314,V2J6V6,QUESNEL                       ,MIRIAM@HOTMAIL.COM               ,19230311,989
+REC-145163-ORG , ,HARRY      ,VIANCA    ,HAMMER    ,19101112,245,V0A1H3,GOLDEN                        ,                                 ,19101112,990
+REC-422150-ORG ,F,RODGER     ,ALASTAIR  ,HERNANDEZ ,,307,V3H4Y8,PORT MOODY                    ,RODGER@HOTMAIL.COM               ,,991
+REC-499815-ORG ,F,SARA       ,          ,BROOKS    ,19620212,268,      ,BRIDGE RIVER BAND             ,                                 ,19620212,992
+REC-799843-ORG ,F,AMOS       ,RANDOLPH  ,DOLBIN    ,19681201,256,V2E1M5,KAMLOOPS                      ,                                 ,19681201,993
+REC-672046-ORG ,M,DONALD     ,GAIL      ,PAULIN    ,,399,V8K2B5,SALT SPRING ISLAND            ,DONALD@GMAIL.COM                 ,,994
+REC-79428-ORG  ,M,JOHN       ,          ,RUIZ      ,19570902,               ,V3S8Y2,SURREY                        ,                                 ,19570902,995
+REC-239142-ORG ,F,PAMELIA    ,          ,WINTERTON ,19990626,227,V0B1G1,CRESTON                       ,                                 ,19990626,996
+REC-893012-ORG ,M,KATIE      ,          ,BELOTE    ,19470423,216,      ,CHASE                         ,                                 ,19470423,997
+REC-232575-ORG ,F,STEPHAINE  ,THOR      ,CURRY     ,19440613,356,V0N1B2,WHISTLER                      ,STEPHAINE@YAHOO.CA               ,19440613,998
+REC-18753-ORG  , ,ALDA       ,          ,STONE     ,,416,V0J2N0,MORICETOWN                    ,                                 ,,999

@@ -1,0 +1,138 @@
+{
+  "comments": "",
+  "description": "JTST De-Duplication",
+  "datasets": [
+    {
+      "title": "JTST Dedup",
+      "description": "",
+      "data_types": {
+        "LAST_NAME_TXT": "VARCHAR",
+        "INGESTION_ID": "INTEGER",
+        "BIRTH_DT": "VARCHAR",
+        "REC_ID": "VARCHAR",
+        "FIRST_NAME_TXT": "VARCHAR",
+        "MIDDLE_NAME_TXT": "VARCHAR",
+        "CITY_GEO_AREA_ID": "REAL"
+      },
+      "url": "cdi-linking/test/cdilinker/data/test_jtst_dedup.csv",
+      "format": "CSV",
+      "index_field": "INGESTION_ID",
+      "field_cats": {
+        "LAST_NAME_TXT": "",
+        "INGESTION_ID": "",
+        "BIRTH_DT": "",
+        "REC_ID": "",
+        "FIRST_NAME_TXT": "",
+        "MIDDLE_NAME_TXT": "",
+        "CITY_GEO_AREA_ID": ""
+      },
+      "name": "jtst_for_dedup",
+      "entity_field": "REC_ID",
+      "columns": [
+        "BIRTH_DT",
+        "FIRST_NAME_TXT",
+        "LAST_NAME_TXT",
+        "CITY_GEO_AREA_ID",
+        "MIDDLE_NAME_TXT",
+        "INGESTION_ID",
+        "REC_ID"
+      ]
+    }
+  ],
+  "linked_url": "",
+  "name": "jtst_dedup",
+  "output_root": "cdi-linking/test/cdilinker/data/",
+  "temp_path": "temp/",
+  "matched_url": "",
+  "results_file": "jtst_dedup_summary.pdf",
+  "status": "COMPLETED",
+  "type": "DEDUP",
+  "steps": [
+    {
+      "blocking_schema": {
+        "transformations": [
+          "EXACT"
+        ],
+        "right": [
+          "BIRTH_DT"
+        ],
+        "left": [
+          "BIRTH_DT"
+        ]
+      },
+      "group": false,
+      "seq": 1,
+      "linking_schema": {
+        "right": [
+          "FIRST_NAME_TXT",
+          "LAST_NAME_TXT"
+        ],
+        "comparisons": [
+          {
+            "name": "JARO_WINKLER",
+            "args": {
+              "threshold": 0.8
+            }
+          },
+          {
+            "name": "LEVENSHTEIN",
+            "args": {
+              "max_edits": 2
+            }
+          }
+        ],
+        "left": [
+          "FIRST_NAME_TXT",
+          "LAST_NAME_TXT"
+        ]
+      },
+      "linking_method": "DTR"
+    },
+    {
+      "blocking_schema": {
+        "transformations": [
+          "EXACT"
+        ],
+        "right": [
+          "BIRTH_DT"
+        ],
+        "left": [
+          "BIRTH_DT"
+        ]
+      },
+      "group": true,
+      "seq": 2,
+      "linking_schema": {
+        "right": [
+          "CITY_GEO_AREA_ID",
+          "MIDDLE_NAME_TXT",
+          "LAST_NAME_TXT"
+        ],
+        "comparisons": [
+          {
+            "name": "FIXED_VAL",
+            "args": {
+              "value": 310
+            }
+          },
+          {
+            "name": "HEAD_MATCH",
+            "args": {
+              "n": 2
+            }
+          },
+          {
+            "name": "SOUNDEX",
+            "args": {}
+          }
+        ],
+        "left": [
+          "CITY_GEO_AREA_ID",
+          "MIDDLE_NAME_TXT",
+          "LAST_NAME_TXT"
+        ]
+      },
+      "linking_method": "DTR"
+    }
+  ]
+}

@@ -1,0 +1,104 @@
+CREATE FUNCTION compare_lev (name1 text, name2 text, max_edit integer) 	RETURNS integer
+LANGUAGE plpythonu
+AS $$
+import jellyfish
+
+d = jellyfish.levenshtein_distance(unicode(name1), unicode(name2))
+if d <= max_edit:
+	return 1
+else:
+	return 0
+$$;
+
+
+CREATE FUNCTION jaro_winkler (name1 text, name2 text, threshold real) 	RETURNS integer
+LANGUAGE plpythonu
+AS $$
+import jellyfish
+
+t = jellyfish.jaro_winkler(unicode(name1), unicode(name2))
+if t >= threshold:
+	return 1
+else:
+	return 0
+$$;
+
+
+CREATE FUNCTION soundex_encode (x text) 	RETURNS text
+LANGUAGE plpythonu
+AS $$
+import jellyfish
+
+if x is not None:
+  return jellyfish.soundex(unicode(x))
+return x
+$$;
+
+CREATE FUNCTION nysiis_encode (x text) 	RETURNS text
+LANGUAGE plpythonu
+AS $$
+import jellyfish
+
+if x is not None:
+  return jellyfish.nysiis(unicode(x))
+return x
+$$;
+
+
+CREATE FUNCTION match_slice (x text, y text, start_index integer, end_index integer) 	RETURNS integer
+LANGUAGE plpythonu
+AS $$
+
+n = end_index - start_index
+if x is not None && len(x) >= n:
+  x = x[start_index:end_index]
+
+if y is not None && len(y) >= n:
+  y = y[start_index:end_index]
+
+return 1 if x == y else 0
+$$;
+
+
+
+/*
+Sample blocking and linking query
+*/
+Select L.rec_id, L.pref_first_given_name, L.pref_family_name, R.rec_id, R.pref_first_given_name, R.pref_family_name
+FROM public.left_data L inner join public.left_data R
+On L.birth_date = R.birth_date
+AND L.canadian_postal_code = R.canadian_postal_code
+AND L.rec_id > R.rec_id
+WHERE compare_lev(L.pref_first_given_name, R.pref_first_given_name, 1) > 0
+AND jaro_winkler(L.pref_family_name, R.pref_family_name, 0.85) > 0;
+
+
+CREATE TABLE matched_records AS
+Select L.rec_id as left_id, R.rec_id AS right_id
+FROM public.left_data L inner join public.left_data R
+On L.birth_date = R.birth_date
+AND L.canadian_postal_code = R.canadian_postal_code
+AND L.rec_id > R.rec_id
+AND soundex_encode(L.first_given_name) = soundex_encode(R.first_given_name)
+WHERE jaro_winkler(L.pref_family_name, R.pref_family_name, 0.85) > 0
+AND match_slice(L.pref_second_given_name, R.pref_second_given_name, 0, 2) > 0;
+
+
+with recursive entities(id, left_id, right_id, path, cycle, egrp) AS (
+    SELECT mr.id, mr.left_id, mr.right_id, ARRAY[mr.id], false, mr.id AS egrp
+    FROM public.matched_records mr
+    UNION ALL
+    SELECT m.id, m.left_id, m.right_id, path || m.id, m.id = ANY(path), e.egrp
+    FROM public.matched_records m
+    JOIN entities e
+    ON (e.left_id = m.left_id OR
+        e.right_id = m.right_id OR
+        e.left_id = m.right_id or
+        e.right_id = m.left_id) AND
+    NOT (e.left_id = m.left_id AND e.right_id = m.right_id) AND
+    NOT cycle
+)
+SELECT id, left_id, right_id, min(egrp) AS grp
+FROM entities
+GROUP BY id, left_id, right_id
+order by grp;
