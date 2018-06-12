@@ -9,7 +9,7 @@ setup(
   name = 'LigoLib',
 
   packages = ['cdilinker_ext','cdilinker','test','cdilinker.linker', 'cdilinker.plugins','cdilinker.reports'],
-  version = '0.1.4',
+  version = '0.1.5',
   description = 'PyPi pkg for Linking Library Ligo-lib',
   author = 'Suraiya Khan',
   author_email = 'suraiya.uvic@gmail.com',
