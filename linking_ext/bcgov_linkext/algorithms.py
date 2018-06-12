@@ -4,8 +4,8 @@ import logging
 import pandas as pd
 import numpy as np
 
-from cdilinker.plugins.base import AlgorithmProvider
-from cdilinker.linker.union_find import UnionFind
+from cdilinking.cdilinker.plugins.base import AlgorithmProvider
+from cdilinking.cdilinker.linker.union_find import UnionFind
 
 from jellyfish import levenshtein_distance, jaro_winkler
 
