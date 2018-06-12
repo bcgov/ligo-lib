@@ -14,7 +14,7 @@
         "MIDDLE_NAME_TXT": "VARCHAR",
         "CITY_GEO_AREA_ID": "REAL"
       },
-      "url": "cdi-linking/test/cdilinker/data/test_jtst_dedup.csv",
+      "url": "cdilinking/test/cdilinker/data/test_jtst_dedup.csv",
       "format": "CSV",
       "index_field": "INGESTION_ID",
       "field_cats": {
@@ -41,7 +41,7 @@
   ],
   "linked_url": "",
   "name": "jtst_dedup",
-  "output_root": "cdi-linking/test/cdilinker/data/",
+  "output_root": "cdilinking/test/cdilinker/data/",
   "temp_path": "temp/",
   "matched_url": "",
   "results_file": "jtst_dedup_summary.pdf",

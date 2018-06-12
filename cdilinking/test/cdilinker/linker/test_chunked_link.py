@@ -2,9 +2,9 @@ import os
 import pytest
 import shutil
 
-from cdilinker.linker.chunked_link import ChunkedLink
-from cdilinker.linker.files import LinkFiles
-from test.cdilinker.utils import Utils
+from cdilinking.cdilinker.linker.chunked_link import ChunkedLink
+from cdilinking.cdilinker.linker.files import LinkFiles
+from cdilinking.test.cdilinker.utils import Utils
 
 
 @pytest.fixture(scope="module")

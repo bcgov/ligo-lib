@@ -3,8 +3,8 @@ import os
 import pytest
 import shutil
 
-import cdilinker.linker.link_json as lj
-from test.cdilinker.utils import Utils
+import cdilinking.cdilinker.linker.link_json as lj
+from cdilinking.test.cdilinker.utils import Utils
 
 
 @pytest.fixture(params=[

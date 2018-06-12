@@ -2,7 +2,7 @@
   "linked_url": "",
   "comments": "",
   "matched_url": "",
-  "output_root": "cdi-linking/test/cdilinker/data/",
+  "output_root": "cdilinking/test/cdilinker/data/",
   "temp_path": "temp/",
   "status": "COMPLETED",
   "name": "jtst_educ",
@@ -94,7 +94,7 @@
   "datasets": [
     {
       "entity_field": "ENTITY_ID",
-      "url": "cdi-linking/test/cdilinker/data/jtst_deduped.csv",
+      "url": "cdilinking/test/cdilinker/data/jtst_deduped.csv",
       "format": "CSV",
       "name": "jtst_deduped",
       "columns": [
@@ -127,7 +127,7 @@
     },
     {
       "entity_field": "ENTITY_ID",
-      "url": "cdi-linking/test/cdilinker/data/educ_deduped.csv",
+      "url": "cdilinking/test/cdilinker/data/educ_deduped.csv",
       "format": "CSV",
       "name": "educ_deduped",
       "columns": [

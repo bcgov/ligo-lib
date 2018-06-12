@@ -6,7 +6,7 @@
     {
       "description": "",
       "format": "CSV",
-      "url": "cdi-linking/test/linking/levenshtein/input_1.csv",
+      "url": "cdilinking/test/linking/levenshtein/input_1.csv",
       "title": "Input 1 file for linking levenshtein test",
       "entity_field": "ENTITY_ID",
       "data_types": {
@@ -26,7 +26,7 @@
     {
       "description": "",
       "format": "CSV",
-      "url": "cdi-linking/test/linking/levenshtein/input_2.csv",
+      "url": "cdilinking/test/linking/levenshtein/input_2.csv",
       "title": "Input 2 file for linking levenshtein test",
       "entity_field": "ENTITY_ID",
       "data_types": {
@@ -47,7 +47,7 @@
   "description": "",
   "linked_url": "",
   "comments": "cannot insert LEFT_EID, already exists",
-  "output_root": "cdi-linking/test/linking/levenshtein/",
+  "output_root": "cdilinking/test/linking/levenshtein/",
   "temp_path": "temp/",
   "results_file": "results",
   "steps": [

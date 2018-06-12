@@ -1,5 +1,5 @@
 from jinja2 import Environment, PackageLoader
-from cdilinker.linker.base import LINKING_RELATIONSHIPS, LINKING_METHODS
+from cdilinking.cdilinker.linker.base import LINKING_RELATIONSHIPS, LINKING_METHODS
 
 from xhtml2pdf import pisa
 import logging
@@ -13,7 +13,7 @@ def generate_linking_summary(data, dest_dir):
     logger.info("Generating summary report of project %s with task UUID: %s.",
                 project['name'], project['task_uuid'])
 
-    jenv = Environment(loader=PackageLoader('cdilinker.reports', 'templates'))
+    jenv = Environment(loader=PackageLoader('cdilinking.cdilinker.reports', 'templates'))
 
     template = jenv.get_template("linking_summary.html")
 

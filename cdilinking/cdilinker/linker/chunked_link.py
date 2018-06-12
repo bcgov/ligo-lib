@@ -5,13 +5,13 @@ import logging
 import shutil
 
 
-from cdilinker.linker.base import (link_config,
+from cdilinking.cdilinker.linker.base import (link_config,
                                    COLUMN_TYPES,
                                    LINKING_RELATIONSHIPS,
                                    sort_csv)
-from cdilinker.linker.chunked_link_base import ChunkedLinkBase
-from cdilinker.linker.files import LinkFiles
-from cdilinker.reports.report import generate_linking_summary
+from cdilinking.cdilinker.linker.chunked_link_base import ChunkedLinkBase
+from cdilinking.cdilinker.linker.files import LinkFiles
+from cdilinking.cdilinker.reports.report import generate_linking_summary
 
 
 logger = logging.getLogger(__name__)

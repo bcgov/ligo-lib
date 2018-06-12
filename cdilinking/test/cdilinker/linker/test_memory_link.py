@@ -2,9 +2,9 @@ import os
 import pytest
 import shutil
 
-from cdilinker.linker.files import LinkFiles
-from cdilinker.linker.memory_link import MemoryLink
-from test.cdilinker.utils import Utils
+from cdilinking.cdilinker.linker.files import LinkFiles
+from cdilinking.cdilinker.linker.memory_link import MemoryLink
+from cdilinking.test.cdilinker.utils import Utils
 
 
 @pytest.fixture(scope="module")

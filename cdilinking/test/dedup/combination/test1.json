@@ -6,7 +6,7 @@
     {
       "description": "Fake Education data",
       "format": "CSV",
-      "url": "cdi-linking/test/dedup/combination/test1.csv",
+      "url": "cdilinking/test/dedup/combination/test1.csv",
       "title": "Education data",
       "entity_field": "REC_ID",
       "data_types": {
@@ -45,7 +45,7 @@
   ],
   "linked_url": "",
   "name": "test1",
-  "output_root": "cdi-linking/test/dedup/combination/",
+  "output_root": "cdilinking/test/dedup/combination/",
   "temp_path": "temp/",
   "matched_url": "",
   "results_file": "educ_dedup_summary.pdf",

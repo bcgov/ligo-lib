@@ -1,8 +1,8 @@
 import csv
 from collections import Counter
 
-from cdilinker.plugins.base import PluginMount
-from cdilinker.config.config import config
+from cdilinking.cdilinker.plugins.base import PluginMount
+from cdilinking.cdilinker.config.config import config
 link_config = config.get_section('LINKER')
 CHUNK_SIZE = int(link_config.get('chunk_size') or '100000')
 

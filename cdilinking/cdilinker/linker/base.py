@@ -4,8 +4,8 @@ import numpy as np
 import logging
 
 from string import Template
-from cdilinker.config.config import config
-from cdilinker.plugins.field_category import FieldCategory
+from cdilinking.cdilinker.config.config import config
+from cdilinking.cdilinker.plugins.field_category import FieldCategory
 
 logger = logging.getLogger(__name__)
 

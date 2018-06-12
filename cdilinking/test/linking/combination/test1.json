@@ -6,7 +6,7 @@
     {
       "description": "Education de-duplicated dataset",
       "format": "CSV",
-      "url": "cdi-linking/test/linking/combination/educ_deduped.csv",
+      "url": "cdilinking/test/linking/combination/educ_deduped.csv",
       "title": "De-deplicated dataset",
       "entity_field": "ENTITY_ID",
       "data_types": {
@@ -45,7 +45,7 @@
     {
       "description": "JTST Deduped dataset",
       "format": "CSV",
-      "url": "cdi-linking/test/linking/combination/jtst_deduped.csv",
+      "url": "cdilinking/test/linking/combination/jtst_deduped.csv",
       "title": "JTST Deduped dataset",
       "entity_field": "ENTITY_ID",
       "data_types": {
@@ -82,7 +82,7 @@
   "description": "Education JTST data linking",
   "linked_url": "",
   "comments": "Integer column has NA values in column 17",
-  "output_root": "cdi-linking/test/linking/combination/",
+  "output_root": "cdilinking/test/linking/combination/",
   "temp_path": "temp/",
   "results_file": "education_jtst_summary.pdf",
   "steps": [

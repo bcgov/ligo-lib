@@ -1,8 +1,8 @@
 import pandas as pd
 import logging
 
-from cdilinker.linker.linker_factory import LinkerFactory
-from cdilinker.linker.validation import LinkError, ValidationError
+from cdilinking.cdilinker.linker.linker_factory import LinkerFactory
+from cdilinking.cdilinker.linker.validation import LinkError, ValidationError
 
 logger = logging.getLogger(__name__)
 

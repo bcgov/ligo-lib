@@ -1,9 +1,9 @@
-from cdilinker.linker.base import CHUNK_SIZE
+from cdilinking.cdilinker.linker.base import CHUNK_SIZE
 
-from cdilinker.linker.memory_link import MemoryLink
-from cdilinker.linker.memory_dedup import MemoryDedup
-from cdilinker.linker.chunked_link import ChunkedLink
-from cdilinker.linker.chunked_dedup import ChunkedDedup
+from cdilinking.cdilinker.linker.memory_link import MemoryLink
+from cdilinking.cdilinker.linker.memory_dedup import MemoryDedup
+from cdilinking.cdilinker.linker.chunked_link import ChunkedLink
+from cdilinking.cdilinker.linker.chunked_dedup import ChunkedDedup
 
 
 def get_dataset_size(file_path):
