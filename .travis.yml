@@ -3,8 +3,8 @@ python:
   - '3.6'
 install:
   - pip3 install wheel
-script:
-  - pytest cdilinking/test
+#script:
+#  - pytest cdilinking/test
 #after_script: cd ~
 
 #after_success:
