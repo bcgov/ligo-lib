@@ -13,6 +13,8 @@ script:
 #after_success:
 #- coveralls
 
+before_deploy: pip3 install dist/*
+
 deploy:
   provider: pypi
   user: novavic
