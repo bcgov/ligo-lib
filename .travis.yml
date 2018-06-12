@@ -13,7 +13,7 @@ script:
 #after_success:
 #- coveralls
 
-before_deploy: pip3 install dist/*
+before_deploy: python3 setup.py install
 
 deploy:
   provider: pypi
