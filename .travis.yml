@@ -1,11 +1,8 @@
 language: python
 python:
   - '3.6'
-#install:
-#  - pip3 install -r requirements/test.txt
-#  - pip3 install -e cdilinking
-#  - pip3 install -e linking_ext
-#  - pip3 install wheel
+install:
+  - pip3 install wheel
 script:
   - pytest cdilinking/test
 #after_script: cd ~
