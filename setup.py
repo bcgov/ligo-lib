@@ -8,7 +8,7 @@ import setuptools.command.test
 setup(
   name = 'LigoLib',
 
-  packages = ['cdilinker_ext','cdilinker','test','cdilinker.linker', 'cdilinker.plugins','cdilinker.reports'],
+  packages = ['cdilinker_ext','cdilinker','test','cdilinker.linker', 'cdilinker.plugins','cdilinker.reports','cdilinker.config'],
   version = '0.1.8',
   description = 'PyPi pkg for Linking Library Ligo-lib',
   author = 'Suraiya Khan',
@@ -43,7 +43,8 @@ setup(
                 'cdilinker.plugins':'cdilinking/cdilinker/plugins',
                 'cdilinker.reports':'cdilinking/cdilinker/reports',
                 'cdilinker_ext':'linking_ext/bcgov_linkext',
-                'test':'cdilinking/test'
+                'test':'cdilinking/test',
+                'cdilinker.config':'cdilinking/cdilinker/config' 
   },
   setup_requires=['pytest-runner'],
   tests_require=['pytest'],
