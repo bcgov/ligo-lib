@@ -3,9 +3,9 @@ import pandas as pd
 
 from abc import abstractmethod
 
-from cdilinking.cdilinker.linker.base import (CHUNK_SIZE, _save_pairs)
-from cdilinking.cdilinker.linker.files import LinkFiles
-from cdilinking.cdilinker.linker.link_base import LinkBase
+from .base import (CHUNK_SIZE, _save_pairs)
+from .files import LinkFiles
+from .link_base import LinkBase
 
 import logging
 

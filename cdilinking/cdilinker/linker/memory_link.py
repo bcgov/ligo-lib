@@ -5,12 +5,12 @@ import numpy as np
 import logging
 import shutil
 
-from cdilinking.cdilinker.linker.base import (link_config,
+from .base import (link_config,
                                    COLUMN_TYPES,
                                    LINKING_RELATIONSHIPS)
-from cdilinking.cdilinker.linker.files import LinkFiles
-from cdilinking.cdilinker.linker.memory_link_base import MemoryLinkBase
-from cdilinking.cdilinker.reports.report import generate_linking_summary
+from .files import LinkFiles
+from .memory_link_base import MemoryLinkBase
+from ..reports.report import generate_linking_summary
 
 logger = logging.getLogger(__name__)
 
