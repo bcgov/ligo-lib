@@ -4,6 +4,7 @@ The config file name can be provided through the PROOF_CFG environment variable
 or it can be specified on creating the configuration object.
 """
 import os
+from os import path
 import configparser
 
 import logging
@@ -38,10 +39,10 @@ class Configuration:
 
 def load_config():
 
-    logging.config.fileConfig(os.path.dirname(__file__) + '/proof.ini')
+    logging.config.fileConfig(os.path.dirname(path.abspath(__file__)) + '/proof.ini')
 
     logger.info('Loading config options.')
-    config = Configuration(os.path.dirname(__file__) + '/proof.ini')
+    config = Configuration(os.path.dirname(path.abspath(__file__)) + '/proof.ini')
     config.load_config()
     logger.info('Config is loaded.')
 
