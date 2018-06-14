@@ -4,7 +4,7 @@ import pytest
 import shutil
 
 import cdilinker.linker.link_json as lj
-from test.cdilinker.utils import Utils
+from cdilinking.test.cdilinker.utils import Utils
 
 
 @pytest.fixture(params=[

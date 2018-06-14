@@ -4,7 +4,7 @@ import shutil
 
 from cdilinker.linker.memory_dedup import MemoryDedup
 from cdilinker.linker.files import LinkFiles
-from test.cdilinker.utils import Utils
+from cdilinking.test.cdilinker.utils import Utils
 
 
 @pytest.fixture(scope="module")
