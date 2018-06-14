@@ -1,7 +1,8 @@
 import pandas as pd
 import numpy as np
 
-from ..plugins.base import AlgorithmProvider
+from cdilinker.plugins.base import AlgorithmProvider
+#from ..plugins.base import AlgorithmProvider
 from jellyfish import (
     soundex,
     nysiis

@@ -3,7 +3,7 @@ import sys
 import json
 import getopt
 
-from .commands import execute_project
+from cdilinker.linker.commands import execute_project
 
 
 import logging

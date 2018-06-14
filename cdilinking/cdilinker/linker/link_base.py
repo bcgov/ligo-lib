@@ -3,7 +3,7 @@ import logging
 import numpy as np
 
 from abc import ABCMeta, abstractmethod
-from .algorithms import apply_encoding, apply_comparison
+from cdilinker.linker.algorithms import apply_encoding, apply_comparison
 
 logger = logging.getLogger(__name__)
 

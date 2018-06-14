@@ -3,10 +3,10 @@ import csv
 import pandas as pd
 import numpy as np
 
-from .base import (CHUNK_SIZE)
+from cdilinker.linker.base import (CHUNK_SIZE)
 
-from .link_base import LinkBase
-from .files import LinkFiles
+from cdilinker.linker.link_base import LinkBase
+from cdilinker.linker.files import LinkFiles
 
 import logging
 
