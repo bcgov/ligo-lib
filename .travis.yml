@@ -7,7 +7,7 @@ install:
   - pip3 install -e linking_ext
   - pip3 install wheel
 script:
-  - pytest cdilinking
+  - pytest cdilinking/test
 #after_script: cd ~
 
 #after_success:

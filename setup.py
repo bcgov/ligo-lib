@@ -8,7 +8,7 @@ from cdilinking.cdilinker.version import version
 setup(
   name = 'LigoLib',
 
-  packages = ['linking_ext','linking_ext.bcgov_linkext','cdilinker','test','test.cdilinker','cdilinker.linker', 'cdilinker.plugins','cdilinker.reports','cdilinker.config'],
+  packages = ['linking_ext','linking_ext.bcgov_linkext','cdilinker','cdilinking.test','cdilinking.test.cdilinker','cdilinker.linker', 'cdilinker.plugins','cdilinker.reports','cdilinker.config'],
   version = version,
   description = 'PyPi pkg for Linking Library Ligo-lib',
   author = 'Suraiya Khan',
@@ -43,8 +43,8 @@ setup(
                 'cdilinker.reports':'cdilinking/cdilinker/reports',
                 'linking_ext': 'linking_ext',
                 'linking_ext.bcgov_linkext':'linking_ext/bcgov_linkext',
-                'test':'cdilinking/test',
-                'test.cdilinker':'cdilinking/test/cdilinker',
+                'cdilinking.test':'cdilinking/test',
+                'cdilinking.test.cdilinker':'cdilinking/test/cdilinker',
                 'cdilinker.config':'cdilinking/cdilinker/config'
   },
 
