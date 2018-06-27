@@ -10,8 +10,7 @@ install:
   
 script:
   # - pytest test
-   - python3  setup.py test
-
+  - python3 setup.py bdist_wheel install test
 #after_script: cd ~
 
 #after_success:
