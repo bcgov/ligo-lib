@@ -3,12 +3,14 @@ python:
   - '3.6'
 install:
   - pip3 install -r requirements/test.txt
-  - pip3 install -e cdilinking
-  - pip3 install -e linking_ext
+  #- pip3 install -e linker
+  #- pip3 install -e linking_ext
   - pip3 install wheel
+  #- python3 setup.py install test
+  
 script:
-  #- pytest cdilinking/test
-   -  python3 setup.py test
+  # - pytest test
+   - python3 ~/ligo-lib/setup.py test
 
 #after_script: cd ~
 
