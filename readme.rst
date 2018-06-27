@@ -36,16 +36,27 @@ Ligo-lib also depends on:
 Installation
 ------------
 
-To install the library be at the root directory ligo-lib level and simply use:
+To install the latest version of library from Test PyPI simply use:
 
 .. code:: sh
 
-    pip install -e ligo-lib (does not work without replacing ligo-lib with cdi-linking; shall fix little later)
-    pip install -e linking_ext
+    pip3 install --no-cache-dir --upgrade --extra-index-url https://testpypi.python.org/pypi LigoLib 
+
+This one would try to get a specific version of LigoLib 
+
+.. code:: sh
+
+    pip3 install --no-cache-dir --extra-index-url https://testpypi.python.org/pypi LigoLib==0.5 
 
 
-Tests
------
+This one would not always try to see beyond what is previously cached    
+
+.. code:: sh
+    pip3 install --extra-index-url https://testpypi.python.org/pypi LigoLib   
+ 
+
+Tests 
+---------------
 
 The **ligo-lib**  tests depend on:
 
@@ -53,23 +64,25 @@ The **ligo-lib**  tests depend on:
 - pytest-cov>=2.5.1
 - coverage>=4.4.1
 
-To test the library simply use:
+To test the source code of the library as a contributing developer go to the root directory level where you did git pull and  simply use:
 
 .. code:: sh
 
-    pytest
+    python3 setup.py test  
+
+test is set as an alias to pytest ( as specified in the setup.cfg file)
+
 
 By default, all tests are configured to run. However, some tests will take considerable amount of time.
-To skip running the time consuming tests in the library, use:
+To skip running the time consuming tests in the library, open the pytest.ini file then remove the comment symbol (#) from  the add options block with
+ -m not slow option specified and comment out the options block that does not have the "-m not slow" option specified.  Save the ini file and then execute 
+the above (python3 setup.py test) command:
 
-.. code:: sh
-
-    pytest -m "not slow"
 
 
 Docker Environment
 ~~~~~~~~~~~~~~~~~~
-
+#<FIXME: this section should be updated>
 If you are on a Windows host, ensure your local repo is saving files in unix format (LF instead of CRLF).
 The functional tests will fail if the test input CSV files are saved in Windows format.
 

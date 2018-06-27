@@ -3,12 +3,11 @@
 from setuptools import setup, find_packages
 
 import setuptools.command.test
-from cdilinking.cdilinker.version import version
+from linker.version import version
 
 setup(
   name = 'LigoLib',
-
-  packages = ['linking_ext','linking_ext.bcgov_linkext','cdilinker','cdilinking.test','cdilinking.test.cdilinker','cdilinker.linker', 'cdilinker.plugins','cdilinker.reports','cdilinker.config'],
+  packages = ['linking_ext',  'linker','test','test.linker','test.linking' ,'linker.linker_core', 'linker.plugins','linker.reports','linker.config'],
   version = version,
   description = 'PyPi pkg for Linking Library Ligo-lib',
   author = 'Suraiya Khan',
@@ -37,21 +36,21 @@ setup(
   ],
  
   include_package_data=True,
-  package_dir={'cdilinker': 'cdilinking/cdilinker',
-                'cdilinker.linker':'cdilinking/cdilinker/linker',
-                'cdilinker.plugins':'cdilinking/cdilinker/plugins',
-                'cdilinker.reports':'cdilinking/cdilinker/reports',
+  package_dir={'linker': 'linker',
+                'linker.linker_core':'linker/linker_core',
+                'linker.plugins':'linker/plugins',
+                'linker.reports':'linker/reports',
                 'linking_ext': 'linking_ext',
-                'linking_ext.bcgov_linkext':'linking_ext/bcgov_linkext',
-                'cdilinking.test':'cdilinking/test',
-                'cdilinking.test.cdilinker':'cdilinking/test/cdilinker',
-                'cdilinker.config':'cdilinking/cdilinker/config'
+                'test':'test',
+                'test.linker':'test/linker',
+                'test.linking': 'test/linking',
+                'linker.config':'linker/config'
   },
 
   entry_points="""
-        [bcgov.linking.plugins]
-        lev_alg = linking_ext.bcgov_linkext.algorithms:Levenshtein
-        jaro_alg = linking_ext.bcgov_linkext.algorithms:JaroWinkler
+        [linking.plugins]
+        lev_alg = linking_ext.algorithms:Levenshtein
+        jaro_alg =  linking_ext.algorithms:JaroWinkler
   """,
 
 
