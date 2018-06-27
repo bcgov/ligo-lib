@@ -10,7 +10,7 @@ install:
   
 script:
   # - pytest test
-   - python3 ~/ligo-lib/setup.py test
+   - python3  NovaVic/ligo-lib/setup.py test
 
 #after_script: cd ~
 
