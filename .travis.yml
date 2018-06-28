@@ -1,32 +1,18 @@
 sudo: required
 services:
-  - docker
+- docker
 language: python
 python:
-  - '3.6'
-
+- '3.6'
 install:
-  - pip3 install -r requirements/test.txt
-  - pip3 install wheel
+- pip3 install -r requirements/test.txt
+- pip3 install wheel
 script:
-  - python3 setup.py test
-#deploy:
-#  provider: pypi
-#  user: novavic
-#  server: https://test.pypi.org/legacy/
-#  distributions: bdist_wheel
-#  dist: python
-#  package_glob: dist/*.whl
-#  password:
-#    secure:YxQNqaSjDW5F0fa+yymSGMEaN7avlh4X4nyH6glPNxpQVOtW4UQUMdQ+TAc2qAoXaFTp2uMcGubSaxeZzEkzCd2Orj5s9mTHBGlgWl47a7oM6zI1MSkCl0yzXBszLWs7IbAjhb6/0dHxH5aqbWFdk5LkvnE//p99DUYL2GPlkhJUHKa/ER7W0W4Xv97AXWfJzDjHfsToqP6FrjkeXB1cccd9UwigG48cl6rw8YLl2bEBt5EG5BLbtrU1v4XPHeiCYnkbFCEVL4NM8MyTuESTXdfgnJvVpipYFTy3bqQj/2I3l84WWOh7ank+VtTblNXBjJXEVcOaHlLmXGqlN7jOC9cY07+fAGbB5xJCgN2fLJL5zlaW3+catf/LuX7RA0cG1vBCSmZHV6xlnbbaS8/rnbaqfh1gF1NlRaD/lzySibM9qhhmJI0adJUdW+gus6d1U1mX+u6X1sMi4+Jx0ka+EKrhR21gaCfKv9rXhEJMpr7bys/np7cCW7IDTdUuR2tnV1c0CftuDOrn9fnFCeQzs5gsUtERg6ymSz6QyNHXQUSRfI8W49LqsNH1TkH80HPwJjH2hAzcjB0aR6wEmM89xmFO1F+CIF26b5kM0y5c4CwxUUWyKsBwAiTtRLWa4py3NbH8lLWW7n2qZ6KzVWLS4uAGRfJlaGC+sD74o6qItD4=
-#  on:
-#  #  tags: true
+- python3 setup.py test
 env:
   DOCKERHUB_USERNAME:novavic
   global:
-    secure:mFfSty6Iu9vAmCu+23lwDfN4Keaij5+DWpFf18E/HGhRfTUmsQXRGs2zQXMyXE31bcixpQ2utyfKLsfVnGdYx4lW4TJbO8uXEZhWL57pQoUObp4qsDbhkCuNjcvilY4DJ8jcwLsjRD+2lrwEqxxumKHngTdCgcRmoizK18JsUXXEAm8vslA/N8DQW77R9lRmTkpRB0DprHseAHOe53Z+/c9zqz4+6lPEWV2cdjkL0VN7z2vX50VW01JEHzhlUhX3RTTvXyv60lYoSt67u0Xb24QJIFgcbf0SZZjawb1urY9lauLhiN67YiaTVIwgtXbxo3VQe9QXYau2kYrKI+cB++7h7rBfOClN4lMvZlhwcBIbEMykyiflZtAvHvq6XlOj+cXjwTJkCCIzCnfhQs0WFlBtDnkRvT+inXlU7Fv9HSKCjgMu1CZCobG7H7wpaC4g0zQ79qJqOmtOMkKejauxEEAgnwZEBsJrwzVWQgC1OCXg05nrGCZM7UuCCfwIhni+h1uYC2AGFKLpkm8kaUkeJw0qEtaWO3QPqXTDNxIVxtmDD81x94ZoAKIbXQF1PDNKh1GC2CW/lcfbG79jWQ8FH3+Qe3zaFbamnni/WbrE99wGTUDbasMIEJ6KzIz8wcpgWUhGUWpLwrWSM936conawTnKWRvv3Ph5WU8naYml73o=
-#after_deploy:
-#trying to track down dockerhub push related issue
+    secure: KGp962uHImld/E+h0KJBrv3xMpNrcf12jpSsr9Cq+Q7WGIxkTdQlr6Tk8EgW0S/YeMXa23WnbBUdXOxeAWKyopO0SyAcV2FX+dbuTP2CUn3a4Opl//uL9/1Xuip9zfbRWPANajxSxWLXEiFrkwyShxJ1a44O4m6J+RHcOyQ5q8W2Tc1nQIosua/7PbOvezY9Wzr4XJ0TBExrrg8GRsdU6NbsN+vPCIvNb2wk4gxdfuDmvv4p+nrKJ0HUCfTXHRxsrgCE2Y9pWm643e/huXwv2uTFNBXdmXrt9tXHgVH4HS1XkF12/vTs0UM2ropxYlphL+Jxjr7ThdNfzvSxtgn04mWJQargSzDlVj5oLjjQ4CysL0lFGGnAWiDzevCdf/VJQJAEf2g395WxOtsQWstDCQDDvSNqFBTGSNBad6JdPvpJG7/07N3dCClXetm3bi2Ijbl2Wz9fK93N8bjkjK5gFRKksyGa88WakptYbZANWBowov71aPFgW0QERB4LhKJIeas6ERT5H2l8XGZFbfApkuGkfKKJjQ/rMLV4AcrQPn2pKc/4cXmcvpZGxtwvKOqQse8TkRDIVaEt+DrvCeH4EbjEgN/WwtrxP3pjwITbl7Yr+B1CSKlFWM5n5Qh17b9tkcWf2w1sDJRhLcgRCIOvAiGc2w4d4svKAxPAHV+9Ng4=
 deploy:
   provider: script
   script: bash linkage-worker/after_deploy.sh
