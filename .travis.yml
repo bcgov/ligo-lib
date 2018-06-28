@@ -1,17 +1,23 @@
-services:
-- docker
 language: python
 python:
-- '3.6'
+  - '3.6'
+
+services:
+  - docker
+
+
 install:
-- pip3 install -r requirements/test.txt
-- pip3 install wheel
+  - pip3 install -r requirements/test.txt
+  - pip3 install wheel
+
 script:
-- python3 setup.py test
+  - python3 setup.py test
+
 deploy:
   provider: script
   script: bash linkage-worker/after_deploy.sh
+
 env:
-  DOCKERHUB_USERNAME:novavic
+  DOCKERHUB_USERNAME: novavic
   global:
     secure: dJ6+rinT4utGBFWFiCCQ7dQHPO70VdzVLCXDC6yN/NXHAyl8RAWzCDxufVepjqKxDgkEI5YdWUs8w3J7tUCsgeorTkfZXZkgNwhdzlAbhCl3s/wanWwEoteGeNjxE4HrosrXrn5NmeYdVOb3+GK7Ptt8oWlpdeDp2ty4r4j4TQ9xPsT4NWwZOmradDg/VzokNIerFUkgprwxyw5fbmlnb66fj48LfbV+w77vRMgp6oHMHO4IKynT3l3e1HjVbNhuE5yKokLMrTOMaEHvESs5EAtwNXKA4+VKLPWsv3DyuM/dYtBU/Ow5q/Ej6iLyRd9y/fxYSuWRUuzsOX16cb9oBo93hLkud3b4HmBDVdZSNYWi5e2GqlCxScJ1dRARn2gEZyT7ejB+JeWsQV2BuPIpbjOR0YCeQdPfZQJzEUGWwd8b6kHPSt+NoPwOWrpnudgeEknO9uf9R+NJg5lqgOH78FziiSTAiBa6+I+VP9Q6xKuQky17/0PcGlBa+k6gNLuLIbJszqXja8+V+/9dPgBBXAAedXl8I9fh28n/Yq7/zAtDECTgdtBPdVzjti6kACqsmJ/SIqXU2b2dFCxHmXY5cGb0xdpnbJBJ7GT+8cW/3IRx1tfMyAygEIviU4trgUz4LLD/SKbFop/SpZCU4O5L56wCfnDhzuVweePr44bIek0=
