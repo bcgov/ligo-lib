@@ -1,23 +1,18 @@
+sudo: required
 language: python
 python:
-  - '3.6'
-
+- '3.6'
 services:
-  - docker
-
-
+- docker
 install:
-  - pip3 install -r requirements/test.txt
-  - pip3 install wheel
-
+- pip3 install -r requirements/test.txt
+- pip3 install wheel
 script:
-  - python3 setup.py test
-
+- python3 setup.py test
 deploy:
   provider: script
   script: bash linkage-worker/after_deploy.sh
-
 env:
-  DOCKERHUB_USERNAME: novavic
   global:
-    secure: dJ6+rinT4utGBFWFiCCQ7dQHPO70VdzVLCXDC6yN/NXHAyl8RAWzCDxufVepjqKxDgkEI5YdWUs8w3J7tUCsgeorTkfZXZkgNwhdzlAbhCl3s/wanWwEoteGeNjxE4HrosrXrn5NmeYdVOb3+GK7Ptt8oWlpdeDp2ty4r4j4TQ9xPsT4NWwZOmradDg/VzokNIerFUkgprwxyw5fbmlnb66fj48LfbV+w77vRMgp6oHMHO4IKynT3l3e1HjVbNhuE5yKokLMrTOMaEHvESs5EAtwNXKA4+VKLPWsv3DyuM/dYtBU/Ow5q/Ej6iLyRd9y/fxYSuWRUuzsOX16cb9oBo93hLkud3b4HmBDVdZSNYWi5e2GqlCxScJ1dRARn2gEZyT7ejB+JeWsQV2BuPIpbjOR0YCeQdPfZQJzEUGWwd8b6kHPSt+NoPwOWrpnudgeEknO9uf9R+NJg5lqgOH78FziiSTAiBa6+I+VP9Q6xKuQky17/0PcGlBa+k6gNLuLIbJszqXja8+V+/9dPgBBXAAedXl8I9fh28n/Yq7/zAtDECTgdtBPdVzjti6kACqsmJ/SIqXU2b2dFCxHmXY5cGb0xdpnbJBJ7GT+8cW/3IRx1tfMyAygEIviU4trgUz4LLD/SKbFop/SpZCU4O5L56wCfnDhzuVweePr44bIek0=
+  - secure: zbVjEhh/E4Yp3Fmd4+4SAVhoLE4ht6Q8/9VAjzgYSXneCuJHgzLWBlZ4u6ERHTjChqqMyI/r7Bs5hP7EVl2M8Z6cfcHdSyednIswge1f3sR4pUwJpQnhlOHrzjkGJG3C1C2gptHDxAWW/gxnvPtQ67nUTPaYqXgm2m92l6W39xP1cWrJuHWEYFiFZEASk1rGwOu+H+zDOdvFxGJmoK0gTWUOnHITD6wB68lcgck8U0dJY0WdksEA2qKioT2f2JLkZrIkwaOgy16DLQ30XuXHYyAtP0ZFGVxPiV460Q01aDqpwEVPxfHuoH+yak/HI0XJ20zaudduhW8Wgmdh/djhVwhoUqt8TB9IX2QLsHF5RgRMHuLFkJWwRa2xdMElOI3BgPCiGXGIssLp+wr0JDPUEdK6fGqnAbNEO9UjcjjPZvO9tQkp9raZ12joOyvxUpb0uq5JpMA4/4uwarDkk5TLiHyAzFb0zNZukXwvgzqrszYICdzXTZG9aQL+/D+VW1JHk6TpqKz60zDuqySbO5SrNqFjKvWHMU+nJP2A4m/NCZELxhJ5vk+0Ut7/Y6qCwl1C19iB7aDwXJ/ZMsogC16eil7qcwydcrZSoCheFOLdqFyAaEG9Zpl/ZfCHBdX/EWxMPbQVkxWN8D3I9MGyMA0CRIbzDueS+1RlscG1/Bg/6LE=
+  - secure: EthD2ijr2iKw+9isDzsnBOlpB6KoI7hIm8BDegkVb/cHqtGo+/y+xiKRDpg1Ssi+1PPiicWvkQVDRRqAeRriM0aKH9Ka46hpDAjH/Xa3QYfOj1kXy+/FpwdIVfiCkZeEtvHh9/iubCT+w3p1i/CopiozOQWYwnTmzX1yxXKeGYQqggUer0Ek82vm0bP/jMNcE4exuMJdQamOVPV7iVKnfax9w7btmObh4WSuDolqLWIghale53A95UmNJtiKYl0JwuiQ3/i2vM1UpzhpOdK1kk/HA+0QRdYKesKxf0xp62mX6rt3c1Gx92G/hEs68eE2YWuxaWQL2Oo/yPn+o2PAQUF3RwLh3ci4cKVInDJmfpmYINcE4Dfmy4yiufiHdPUo1pHYwKiespE/fVyGTuMXutwzy41GX0RHw/d4RFm6LoybDcyB4f9/dJW/swBTStpKUbPwjwE3VvzAlsh7dvjDPud2lqjCmzF2hyQpLT2znp8T+1RSoAC9RldDQJJYvAtQ/oi9H7yc3bF6mp8Hh2gZ4gKShs/AjZVRScGf0EKduVqOQa8LEqUYTNVC8i9kLQGCDZ6Ul3N/aw+bM4fzw6q6UQaCKZwxH2sXK2EYBJjJKiTu4bsBu0kcQCH8RpqUaF10pJIS8Oi1e8E7NnJ+b/owk5kR5/UOA1ol2CH/DWkoGnU=
