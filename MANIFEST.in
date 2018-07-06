@@ -1,7 +1,7 @@
 include *.rst
-include linking_ext/readme.rst
+include ext/readme.rst
 include *.txt
-include linker/linker_core/sort_script_template.txt
+include linker/core/sort_script_template.txt
 
 include requirements/base.txt
 include requirements/test.txt
@@ -34,7 +34,7 @@ include test/dedup/levenshtein/results1.csv
 include test/linker/data/jtst_deduped.csv
 include test/linker/data/test_jtst_dedup.csv
 include test/linker/data/educ_deduped.csv
-include linking_ext/nicknames.csv
+include ext/nicknames.csv
 include test/linking/combination/test1.json
 include test/linking/levenshtein/test1.json
 include test/dedup/combination/test1.json
