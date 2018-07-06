@@ -4,12 +4,12 @@ from celery import Celery
 from linker.core.commands import execute_project
 from linker.core.algorithms import get_algorithms
 from linker.core.base import FIELD_CATEGORIES
-import linker.version as link_version
+#import linker.version as link_version
 
 logger = logging.getLogger(__name__)
 
-
 env = os.environ
+version = env.get("APP_VERSION","")
 
 BROKER_URL = env.get('CELERY_BROKER_URL', 'redis://redis:6379/0')
 RESULT_BACKEND = env.get('CELERY_BROKER_URL', 'redis://redis:6379/0')
@@ -68,7 +68,7 @@ def linkage_linklib_info():
 
     data_dict = dict()
 
-    data_dict['version'] = link_version.version
+    data_dict['version'] = version #link_version.version
 
     # ToDo: Add other useful info about data linking library to data_dict
 
