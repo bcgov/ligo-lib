@@ -3,7 +3,7 @@ import os
 import pytest
 import shutil
 
-import linker.linker_core.link_json as lj
+import linker.core.link_json as lj
 from test.linker.utils import Utils
 
 
