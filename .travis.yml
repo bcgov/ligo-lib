@@ -9,7 +9,8 @@ install:
   - pip3 install wheel
 script:
   - python3 setup.py test
-  - export APP_VERSION=$(git describe --always) 
+  - export APP_VERSION=$(git describe --always)
+  - echo $APP_VERSION   
 deploy:
   provider: pypi
   user: novavic
