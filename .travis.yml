@@ -9,6 +9,7 @@ install:
   - pip3 install wheel
 script:
   - python3 setup.py test
+  - export APP_VERSION=$(git describe --always) 
 deploy:
   provider: pypi
   user: novavic
@@ -24,6 +25,5 @@ after_deploy:
   - bash worker/after_deploy.sh
 env:
   global:
-  - APP_VERSION:$(git describe --always) 
   - secure: zbVjEhh/E4Yp3Fmd4+4SAVhoLE4ht6Q8/9VAjzgYSXneCuJHgzLWBlZ4u6ERHTjChqqMyI/r7Bs5hP7EVl2M8Z6cfcHdSyednIswge1f3sR4pUwJpQnhlOHrzjkGJG3C1C2gptHDxAWW/gxnvPtQ67nUTPaYqXgm2m92l6W39xP1cWrJuHWEYFiFZEASk1rGwOu+H+zDOdvFxGJmoK0gTWUOnHITD6wB68lcgck8U0dJY0WdksEA2qKioT2f2JLkZrIkwaOgy16DLQ30XuXHYyAtP0ZFGVxPiV460Q01aDqpwEVPxfHuoH+yak/HI0XJ20zaudduhW8Wgmdh/djhVwhoUqt8TB9IX2QLsHF5RgRMHuLFkJWwRa2xdMElOI3BgPCiGXGIssLp+wr0JDPUEdK6fGqnAbNEO9UjcjjPZvO9tQkp9raZ12joOyvxUpb0uq5JpMA4/4uwarDkk5TLiHyAzFb0zNZukXwvgzqrszYICdzXTZG9aQL+/D+VW1JHk6TpqKz60zDuqySbO5SrNqFjKvWHMU+nJP2A4m/NCZELxhJ5vk+0Ut7/Y6qCwl1C19iB7aDwXJ/ZMsogC16eil7qcwydcrZSoCheFOLdqFyAaEG9Zpl/ZfCHBdX/EWxMPbQVkxWN8D3I9MGyMA0CRIbzDueS+1RlscG1/Bg/6LE=
   - secure: EthD2ijr2iKw+9isDzsnBOlpB6KoI7hIm8BDegkVb/cHqtGo+/y+xiKRDpg1Ssi+1PPiicWvkQVDRRqAeRriM0aKH9Ka46hpDAjH/Xa3QYfOj1kXy+/FpwdIVfiCkZeEtvHh9/iubCT+w3p1i/CopiozOQWYwnTmzX1yxXKeGYQqggUer0Ek82vm0bP/jMNcE4exuMJdQamOVPV7iVKnfax9w7btmObh4WSuDolqLWIghale53A95UmNJtiKYl0JwuiQ3/i2vM1UpzhpOdK1kk/HA+0QRdYKesKxf0xp62mX6rt3c1Gx92G/hEs68eE2YWuxaWQL2Oo/yPn+o2PAQUF3RwLh3ci4cKVInDJmfpmYINcE4Dfmy4yiufiHdPUo1pHYwKiespE/fVyGTuMXutwzy41GX0RHw/d4RFm6LoybDcyB4f9/dJW/swBTStpKUbPwjwE3VvzAlsh7dvjDPud2lqjCmzF2hyQpLT2znp8T+1RSoAC9RldDQJJYvAtQ/oi9H7yc3bF6mp8Hh2gZ4gKShs/AjZVRScGf0EKduVqOQa8LEqUYTNVC8i9kLQGCDZ6Ul3N/aw+bM4fzw6q6UQaCKZwxH2sXK2EYBJjJKiTu4bsBu0kcQCH8RpqUaF10pJIS8Oi1e8E7NnJ+b/owk5kR5/UOA1ol2CH/DWkoGnU=
