@@ -1,0 +1,18 @@
+#!/bin/sh
+tail -n +2 $filename | split -l $chunksize - ${work_dir}/file_chunk_
+for i in ${work_dir}/file_chunk_*;
+do
+    file_name=$$(basename $$i)
+    sort -t',' $sort_cols $$i > ${work_dir}/sorted_chunk_$${file_name};
+done
+sort -m -t',' $sort_cols ${work_dir}/sorted_chunk_* > ${work_dir}/final_sorted_file.csv
+rm ${work_dir}/file_chunk_*
+rm ${work_dir}/sorted_chunk_*
+if [ -f $appendfile ]
+then
+    cat ${work_dir}/final_sorted_file.csv >> $appendfile
+else
+    head -n 1 $filename | cat - ${work_dir}/final_sorted_file.csv > $appendfile
+fi
+
+rm ${work_dir}/final_sorted_file.csv
