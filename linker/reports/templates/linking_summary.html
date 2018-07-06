@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title>{% block title %}Ligo Linking Summary{% endblock title %}</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <style>
+        h1 {
+            font-size: 12px;
+            text-align: center;
+        }
+        .summary-info {
+            border : 1px solid #154360;
+            border-collapse: collapse;
+        }
+        .summary-info th {
+            color: white;
+            background-color: #154360;
+        }
+        .summary-info td, th {
+            padding: 10px;
+            text-align: left;
+        }
+
+        .step-info {
+            border : 1px solid #154360;
+            border-collapse: collapse;
+        }
+        .step-info th {
+            color: black;
+            background-color: #D4E6F1;
+        }
+        .step-info td, th {
+            padding: 10px;
+            text-align: left;
+        }
+    </style>
+  </head>
+
+  <body>
+    <h1>Linking Project summary</h1>
+    <table class="summary-info">
+        <thead>
+            <tr>
+                <th>Project Name</th>
+                <th>Project Type</th>
+                <th>Linked Files</th>
+                {% if type == 'Linking' %}<th>Entity relationship Type</th> {% endif %}
+                <th>Total record pairs linked </th>
+                {%  if type == 'Linking' %}
+                    <th>Total entity pairs linked</th>
+                {%  else %}
+                    <th>Total entities</th>
+                {% endif %}
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>{{ name }}</td>
+                <td>{{ type }}</td>
+                <td>{{ datasets }}</td>
+                {% if type == 'Linking' %}<td>{{ relationship_type }}</td>{% endif %}
+                <td>{{ total_records_linked }}</td>
+                <td>{{ total_entities }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <p><strong>Total Steps: </strong>{{ steps|length }}</p>
+
+  {% for step in steps %}
+      <table class="step-info">
+        <tbody>
+            <tr>
+                <th>Sequence</th><td>{{ step.seq }}</td>
+            </tr>
+            <tr>
+                <th rowspan="3">Blocking</th>
+                <td><strong>Left Variables:</strong>
+                    {% for column in step.blocking_schema.left %}
+                        {% if loop.index > 1 %},
+                        {% endif %}
+                        {{ column }}
+                    {% endfor %}
+                </td>
+            </tr>
+            <tr>
+                <td><strong>Right Variables:</strong>
+                    {% for column in step.blocking_schema.right %}
+                        {% if loop.index > 1 %},
+                        {% endif %}
+                        {{ column }}
+                    {% endfor %}</td>
+            </tr>
+            <tr>
+                <td><strong>transformations:</strong>
+                    {% for alg in step.blocking_schema.transformations %}
+                        {% if loop.index > 1 %},
+                        {% endif %}
+                        {{ alg }}
+                    {% endfor %}</td>
+            </tr>
+            <tr>
+                <th rowspan="3">Linking</th>
+                <td><strong>Left Variables:</strong>
+                    {% for column in step.linking_schema.left %}
+                        {% if loop.index > 1 %},
+                        {% endif %}
+                        {{ column }}
+                    {% endfor %}</td>
+            </tr>
+            <tr>
+                <td><strong>Right Variables:</strong>
+                    {% for column in step.linking_schema.right %}
+                        {% if loop.index > 1 %},
+                        {% endif %}
+                        {{ column }}
+                    {% endfor %}</td>
+            </tr>
+            <tr>
+                <td><strong>Comparison Methods:</strong>
+                    {% for alg in step.linking_schema.comparisons %}
+                        {% if loop.index > 1 %},
+                        {% endif %}
+                        {{ alg.name }}
+                        {% if alg.args is defined %}
+                            {% for item in alg.args %}
+                                <strong>{{ item }}</strong> = {{ alg.args[item] }}
+                            {% endfor %}
+                        {% endif %}
+                    {% endfor %}
+                </td>
+            </tr>
+            <tr>
+                <th>Total pairs of linked records</th>
+                <td>{{ step.total_records_linked }}</td>
+            </tr>
+            {%  if type == 'Linking' %}
+                <tr>
+                    <th>Total pairs of linked entities</th>
+                    <td>{{ step.total_entities }}</td>
+                </tr>
+                <tr>
+                    <th>Total pairs of matched but not linked records</th>
+                    <td>{{ step.total_matched_not_linked }}</td>
+                </tr>
+            {%  endif %}
+        </tbody>
+      </table>
+      <br/>
+  {% endfor %}
+  </body>
+</html>

@@ -1,25 +1,22 @@
-# Dockerfile for providing a test environment for Windows developers
+# Dockerfile for providing a test environment for Windows developers or contributing
+#developers so that they can modify source code of Ligo-lib, build docker image from
+#source code and test correctness
+
 FROM python:3.6
 ENV PYTHONUNBUFFERED 1
 
-# Requirements have to be pulled and installed here, otherwise caching won't work
-COPY ./requirements /usr/src/app/requirements
-RUN pip install -r /usr/src/app/requirements/test.txt
+## Requirements have to be pulled and installed here, otherwise caching won't work
+#COPY ./requirements /usr/src/app/requirements
+#RUN pip install -r /usr/src/app/requirements/test.txt
 
-# Install cdi-linking
-COPY ./cdi-linking /usr/src/app/cdi-linking
-# The cdi-linking requires the readme.rst file to be one directory above itself
-COPY ./readme.rst /usr/src/app/readme.rst
-RUN pip install -e /usr/src/app/cdi-linking
-
-# Install linking_ext
-COPY ./linking_ext /usr/src/app/linking_ext
-RUN pip install -e /usr/src/app/linking_ext
-
-# Set up Test environment
-COPY ./pytest.ini /usr/src/app/pytest.ini
-COPY ./pylintrc /usr/src/app/pylintrc
+COPY  . /usr/src/app/
 WORKDIR /usr/src/app
 
+RUN pip install -r /usr/src/app/requirements/test.txt
+
+CMD chmod 755 /usr/src/app/setup.py
+
+
 # Default container action - run Pytest tests
-CMD ["pytest"]
+#the following would run the pytest
+CMD ["python3", "setup.py", "test"]

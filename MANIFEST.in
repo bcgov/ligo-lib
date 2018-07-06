@@ -1,0 +1,44 @@
+include *.rst
+include ext/readme.rst
+include *.txt
+include linker/core/sort_script_template.txt
+
+include requirements/base.txt
+include requirements/test.txt
+
+include linker.egg-info/top_level.txt
+include test/linking/levenshtein/readme.txt
+include test/dedup/combination/readme.txt
+include test/dedup/soundex/readme.txt
+
+include *.json
+include *.ini
+include *.csv
+
+include linker/config/proof.ini
+
+include test/linking/combination/jtst_deduped.csv
+include test/linking/combination/educ_deduped.csv
+include test/linking/combination/results1_linked_data.csv
+include test/linking/combination/results1_matched_not_linked.csv
+include test/linking/levenshtein/input_1.csv
+include test/linking/levenshtein/input_2.csv
+include test/linking/levenshtein/results1_linked_data.csv
+include test/linking/levenshtein/results1_matched_not_linked.csv
+include test/dedup/combination/test1.csv
+include test/dedup/combination/results1.csv
+include test/dedup/soundex/test1.csv
+include test/dedup/soundex/results1.csv
+include test/dedup/levenshtein/test1.csv
+include test/dedup/levenshtein/results1.csv
+include test/linker/data/jtst_deduped.csv
+include test/linker/data/test_jtst_dedup.csv
+include test/linker/data/educ_deduped.csv
+include ext/nicknames.csv
+include test/linking/combination/test1.json
+include test/linking/levenshtein/test1.json
+include test/dedup/combination/test1.json
+include test/dedup/soundex/test1.json
+include test/dedup/levenshtein/test1.json
+include test/linker/data/test_jtst_educ_linking.json
+include test/linker/data/test_jtst_dedup.json
