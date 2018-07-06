@@ -3,8 +3,10 @@
 from setuptools import setup, find_packages
 
 import setuptools.command.test
-from linker.version import version
+#from linker.version import version
+import os
 
+version = os.environ.get("APP_VERSION",'')
 setup(
   name = 'LigoLib',
   packages = ['ext',  'linker','test','test.linker','test.linking' ,'linker.core', 'linker.plugins','linker.reports','linker.config'],
