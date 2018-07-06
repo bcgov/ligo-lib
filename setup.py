@@ -7,7 +7,7 @@ from linker.version import version
 
 setup(
   name = 'LigoLib',
-  packages = ['linking_ext',  'linker','test','test.linker','test.linking' ,'linker.linker_core', 'linker.plugins','linker.reports','linker.config'],
+  packages = ['ext',  'linker','test','test.linker','test.linking' ,'linker.core', 'linker.plugins','linker.reports','linker.config'],
   version = version,
   description = 'PyPi pkg for Linking Library Ligo-lib',
   author = 'Suraiya Khan',
@@ -34,13 +34,13 @@ setup(
      'pep8==1.7.0',
      'pylint==1.7.2',
   ],
- 
+
   include_package_data=True,
   package_dir={'linker': 'linker',
-                'linker.linker_core':'linker/linker_core',
+                'linker.core':'linker/core',
                 'linker.plugins':'linker/plugins',
                 'linker.reports':'linker/reports',
-                'linking_ext': 'linking_ext',
+                'ext': 'ext',
                 'test':'test',
                 'test.linker':'test/linker',
                 'test.linking': 'test/linking',
@@ -49,8 +49,8 @@ setup(
 
   entry_points="""
         [linking.plugins]
-        lev_alg = linking_ext.algorithms:Levenshtein
-        jaro_alg =  linking_ext.algorithms:JaroWinkler
+        lev_alg = ext.algorithms:Levenshtein
+        jaro_alg =  ext.algorithms:JaroWinkler
   """,
 
 
@@ -58,4 +58,3 @@ setup(
   tests_require=['pytest'],
 
 )
-

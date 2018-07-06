@@ -1,5 +1,5 @@
 from jinja2 import Environment, PackageLoader
-from linker.linker_core.base import LINKING_RELATIONSHIPS, LINKING_METHODS
+from linker.core.base import LINKING_RELATIONSHIPS, LINKING_METHODS
 
 from xhtml2pdf import pisa
 import logging
