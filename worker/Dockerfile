@@ -20,10 +20,13 @@ RUN pip install -r /worker/requirements.txt
 #RUN pip install --extra-index-url https://testpypi.python.org/pypi LigoLib
 
 #this one would try to get the latest (does not always work consistently from all env)
-#RUN pip3 install --no-cache-dir --upgrade --index-url https://testpypi.python.org/pypi LigoLib
+#RUN pip3 install --no-cache-dir --upgrade --extra-index-url https://testpypi.python.org/pypi LigoLib
+
 
 #this one would try to get a specific version of LigoLib
-RUN pip3 install --no-cache-dir  --extra-index-url https://testpypi.python.org/pypi  LigoLib==3.1.3
+#experimental
+RUN pip3 install --no-cache-dir --upgrade --extra-index-url https://testpypi.python.org/pypi LigoLib==$(git describe --tags)
+#RUN pip3 install --no-cache-dir  --extra-index-url https://testpypi.python.org/pypi  LigoLib==3.1.3
 
 RUN echo 'django:x:999:999:django:/:/bin/sh' >> /etc/passwd
 
