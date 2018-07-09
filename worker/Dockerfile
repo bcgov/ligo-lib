@@ -21,11 +21,12 @@ RUN echo $LIB_VERSION
 
 #this one would try to get the latest (does not always work consistently from all env)
 #RUN pip3 install --no-cache-dir --upgrade --extra-index-url https://testpypi.python.org/pypi LigoLib
+#RUN pip3 install --no-cache-dir --upgrade   --index-url https://test.pypi.org/simple/ --extra-index-url https://pypi.org/simple  LigoLib
 
 
 #this one would try to get a specific version of LigoLib
 #experimental
-RUN pip3 install --no-cache-dir --upgrade --extra-index-url https://testpypi.python.org/pypi LigoLib==${LIB_VERSION}
+RUN pip3 install   --index-url https://test.pypi.org/simple/ --extra-index-url https://pypi.org/simple  LigoLib==${LIB_VERSION}
 
 
 RUN echo 'django:x:999:999:django:/:/bin/sh' >> /etc/passwd
