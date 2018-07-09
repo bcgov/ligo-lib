@@ -9,7 +9,7 @@ from linker.core.base import FIELD_CATEGORIES
 logger = logging.getLogger(__name__)
 
 env = os.environ
-version = env.get("APP_VERSION","")
+version = env.get("LIB_VERSION","")
 
 BROKER_URL = env.get('CELERY_BROKER_URL', 'redis://redis:6379/0')
 RESULT_BACKEND = env.get('CELERY_BROKER_URL', 'redis://redis:6379/0')
