@@ -4,6 +4,9 @@ ARG LIB_VERSION
 #Docker file that pulls LigoLib package from PyPI (instead of copying source code) and
 #build docker image for celery worker(s)
 
+
+ENV LIB_VERSION=${LIB_VERSION}
+
 # Docker file for forming local/dev Django container
 RUN mkdir -p /user_data/media/datasets /user_data/media/linking
 RUN mkdir /tmp/django-email-dev
