@@ -4,7 +4,7 @@ echo "$DOCKERHUB_PASSWORD" | docker login https://index.docker.io/v1/ -u "$DOCKE
 
 #experimental passing of environment variable from travis env
 #if that does not work then we can go for traditional ways of retrieving it using git describe
-docker build   --build-arg LIB_VERSION=$LIB_VERSION    ./worker -t  novavic/ligo_celeryworker:$(git describe --tags)
+docker build --build-arg LIB_VERSION=$LIB_VERSION ./worker -t  novavic/ligo_celeryworker:$(git describe --tags)
 
 #docker tag ligo_celeryworker novavic/ligo_celeryworker:$(git describe --always)
 docker push novavic/ligo_celeryworker:$(git describe --tags)

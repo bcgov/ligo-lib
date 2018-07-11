@@ -4,7 +4,6 @@ ARG LIB_VERSION
 #Docker file that pulls LigoLib package from PyPI (instead of copying source code) and
 #build docker image for celery worker(s)
 
-
 ENV LIB_VERSION=${LIB_VERSION}
 
 # Docker file for forming local/dev Django container
@@ -15,8 +14,8 @@ RUN chmod -R 0777 /user_data
 
 # Install Celery Requirements
 COPY ./link-server /worker
-RUN pip install -r /worker/requirements.txt
-RUN echo $LIB_VERSION
+RUN pip install -r /worker/requirements.txt \
+ && echo $LIB_VERSION
 # Install Data Linking Packages
 
 #this one would not always try to see beyond what is previously cached
@@ -29,7 +28,7 @@ RUN echo $LIB_VERSION
 
 #this one would try to get a specific version of LigoLib
 #experimental
-RUN pip3 install   --index-url https://test.pypi.org/simple/ --extra-index-url https://pypi.org/simple  LigoLib==${LIB_VERSION}
+RUN pip3 install --index-url https://test.pypi.org/simple/ --extra-index-url https://pypi.org/simple LigoLib==${LIB_VERSION}
 
 
 RUN echo 'django:x:999:999:django:/:/bin/sh' >> /etc/passwd
