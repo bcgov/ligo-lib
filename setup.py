@@ -6,7 +6,7 @@ import setuptools.command.test
 #from linker.version import version
 import os
 
-version = os.environ.get("APP_VERSION",'')
+version = os.environ.get("LIB_VERSION",'')
 setup(
   name = 'LigoLib',
   packages = ['ext',  'linker','test','test.linker','test.linking' ,'linker.core', 'linker.plugins','linker.reports','linker.config'],
