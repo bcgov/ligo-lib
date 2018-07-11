@@ -9,7 +9,7 @@ install:
   - pip3 install wheel
 script:
   - python3 setup.py test
-  - export LIB_VERSION=$(git describe --always)
+  - export LIB_VERSION=$(git describe --tags)
   - echo $LIB_VERSION
 deploy:
   provider: pypi
