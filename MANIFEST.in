@@ -16,6 +16,7 @@ include *.ini
 include *.csv
 
 include linker/config/proof.ini
+include linker/reports/templates/linking_summary.html
 
 include test/linking/combination/jtst_deduped.csv
 include test/linking/combination/educ_deduped.csv
