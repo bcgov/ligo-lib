@@ -1,4 +1,7 @@
 #!/bin/bash
+
+sleep 180
+
 #to build docker image from PyPI package, tagging it and then pushing it to dockerhub
 echo "$DOCKERHUB_PASSWORD" | docker login https://index.docker.io/v1/ -u "$DOCKERHUB_USERNAME" --password-stdin
 
