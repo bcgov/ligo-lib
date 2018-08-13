@@ -74,9 +74,8 @@ test is set as an alias to pytest ( as specified in the setup.cfg file)
 
 
 By default, all tests are configured to run. However, some tests will take considerable amount of time.
-To skip running the time consuming tests in the library, open the pytest.ini file then remove the comment symbol (#) from  the add options block with
- -m not slow option specified and comment out the options block that does not have the "-m not slow" option specified.  Save the ini file and then execute 
-the above (python3 setup.py test) command:
+To skip running the time consuming tests in the library, open the pytest.ini file then remove the comment symbol (#) from  the add options block with "-m not slow" option specified and comment out the other options block (that does not have the "-m not slow" option).
+Save the ini file and then execute the above (python3 setup.py test) command.
 
 
 
