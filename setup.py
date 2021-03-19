@@ -27,7 +27,7 @@ setup(
      'numexpr==2.6.2',
      'pandas==0.20.3',
      'xhtml2pdf==0.2b1',
-     'jinja2==2.9.6',
+     'jinja2==2.11.3',
      'html5lib==1.0b10',
      'coveralls',
      'pytest==3.2.0',
