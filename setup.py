@@ -23,7 +23,7 @@ setup(
 
    install_requires = [
      'jellyfish==0.5.6',
-     'numpy==1.13.1',
+     'numpy==1.22.0',
      'numexpr==2.6.2',
      'pandas==0.20.3',
      'xhtml2pdf==0.2b1',
